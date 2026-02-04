@@ -1,0 +1,112 @@
+# LaTeX auxiliary files
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# LaTeX intermediate files
+*.dvi
+*.xdv
+*-converted-to.*
+
+# BibTeX
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+*.brf
+
+# Build tool auxiliary files
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+# Glossaries
+*.acn
+*.acr
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.lzo
+*.lzs
+*.alg
+*.ist
+
+# Hyperref
+*.brf
+
+# Knitr
+*-concordance.tex
+
+# Listings
+*.lol
+
+# Math
+*.thm
+
+# Nomencl
+*.nlg
+*.nlo
+*.nls
+
+# Page layout
+*.sav
+
+# Theorem packages
+*.thm
+
+# todonotes
+*.tdo
+
+# xindy
+*.xdy
+
+# WinEdt
+*.bak
+*.sav
+
+# Latexmk
+*.fdb_latexmk
+
+# MiKTeX
+*.maf
+*.mtc
+*.mtc[0-9]*
+*.slf[0-9]*
+*.slt[0-9]*
+*.stc[0-9]*
+
+# PDF output
+tfg.pdf
+
+# Operating System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor directories and files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.idea/
+*.sublime-project
+*.sublime-workspace
