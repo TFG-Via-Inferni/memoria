@@ -1,3 +1,6 @@
+# Build directory with temporary files
+build/
+
 # LaTeX auxiliary files
 *.aux
 *.lof
