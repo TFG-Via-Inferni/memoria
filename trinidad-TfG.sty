@@ -383,11 +383,23 @@ fill=#2]
 }
 }
 
+%%
+%% Authors management (similar to supervisors)
+%%
+\newcounter{authorsCounter}
+\newcounter{drawauthorsCounter}
+
 \renewcommand{\author}[4]{
-\def\dissertationAuthor{#1}
-\def\dissertationAuthorEducation{#2}
-\def\dissertationAuthorTitle{#3}
-\def\dissertationAuthorID{#4}
+	\csdef{authorName\theauthorsCounter}{#1}	
+	\csdef{authorEducation\theauthorsCounter}{#2}
+	\csdef{authorTitle\theauthorsCounter}{#3}
+	\csdef{authorID\theauthorsCounter}{#4}
+	\stepcounter{authorsCounter}
+}
+
+\newcommand{\drawAuthors}{\setcounter{drawauthorsCounter}{0}\@whilenum \value{drawauthorsCounter} < \value{authorsCounter} \do
+{\csuse{authorName\thedrawauthorsCounter}\stepcounter{drawauthorsCounter}\ifnum\value{drawauthorsCounter} < \value{authorsCounter}{\\[0.5cm]}\fi
+}
 }
 \newcommand{\setTitle}[1]{
 \def\dissertationTitle{#1}
@@ -424,7 +436,7 @@ fill=#2]
 %          \ifthenelse{\equal{#2}{}}{}{
 %         		 {\parbox{0.7\paperwidth}{\centering \color{ThemeColor1} \normalfont\large\bfseries\scshape #2}};
 %	}
-          \node  [anchor=north,yshift=0.3\paperheight-2.5cm-20pt-20pt,inner sep=11pt] (author) at (current page.center)  {\color{ThemeColor1} \textbf{\LARGE\scshape \dissertationAuthor}};
+          \node  [anchor=north,yshift=0.3\paperheight-2.5cm-20pt-20pt,inner sep=11pt,text width=0.8\paperwidth,text centered] (author) at (current page.center)  {\parbox{0.7\paperwidth}{\centering\color{ThemeColor1} \textbf{\LARGE\scshape \drawAuthors}}};
           % Supervisor node
            \node  [anchor=north,yshift=-40pt,inner sep=11pt] (dissertation) at (author)
           {\color{ThemeColor1} \textbf{\Large Trabajo fin de Grado}};
@@ -452,7 +464,7 @@ fill=#2]
 \thispagestyle{title}
 \begin{flushleft}
 \noindent Publicado en \monthYear\today ~ por\\
-\dissertationAuthor\\
+\drawAuthors\\
 Copyright \copyright ~ \uppercase\expandafter{\romannumeral \THEYEAR}\\
 
 %Author URL if it exists
@@ -488,7 +500,9 @@ Copyright \copyright ~ \uppercase\expandafter{\romannumeral \THEYEAR}\\
 	{\indent\textbf{HACE CONSTAR}}
 	{\indent\textbf{HACEN CONSTAR}}
 
-que \dissertationAuthorTitle\dissertationAuthor, \dissertationAuthorEducation, ha realizado bajo
+que \ifthenelse{\equal{\theauthorsCounter}{1}}
+	{\csuse{authorTitle0}\csuse{authorName0}, \csuse{authorEducation0}, ha}
+	{\csuse{authorTitle0}\csuse{authorName0} y \csuse{authorTitle1}\csuse{authorName1}, \csuse{authorEducation0}, han} realizado bajo
 \ifthenelse{\equal{\thesupervisorsCounter}{1}}
 	{mi\relax}
 	{nuestra\relax}
@@ -510,9 +524,10 @@ en la \university\\
 }
 
 \newcommand{\authorDeclare}{
-\thispagestyle{title}
+\setcounter{drawauthorsCounter}{0}\@whilenum \value{drawauthorsCounter} < \value{authorsCounter} \do
+{\thispagestyle{title}
 
-\indent Yo, \dissertationAuthorTitle\dissertationAuthor~con NIF n\'umero \dissertationAuthorID,\\\\
+\indent Yo, \csuse{authorTitle\thedrawauthorsCounter}\csuse{authorName\thedrawauthorsCounter}~con NIF n\'umero \csuse{authorID\thedrawauthorsCounter},\\\\
 \indent\textbf{DECLARO}\\\\
 \indent mi autoría del trabajo que se presenta en la memoria de este trabajo fin de grado que tiene por título:\\
 
@@ -527,10 +542,15 @@ en la \university\\
 \indent Lo cual firmo,\\
 \vfill
 \begin{flushright}
-Fdo. \dissertationAuthorTitle\dissertationAuthor\\
+Fdo. \csuse{authorTitle\thedrawauthorsCounter}\csuse{authorName\thedrawauthorsCounter}\\
 en la \university\\
 \ddmmyyyydate\today\\
 \end{flushright}
+\stepcounter{drawauthorsCounter}
+\ifnum\value{drawauthorsCounter} < \value{authorsCounter}
+\clearpage
+\fi
+}
 }
 
 %%
