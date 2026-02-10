@@ -6,13 +6,57 @@ The good parts of a book may be only something a writer is lucky enough to overh
 \end{quotation}
 
 \begin{abstract}
-Resumen de lo que va a ocurrir en el capítulo. ¿Cuál es el objetivo que tenemos con este capítulo?
+En este capítulo se describe el marco de trabajo seleccionado para la ejecución del proyecto. Se detalla la estructura organizativa del equipo, el reparto de responsabilidades entre sus integrantes y la metodología ágil empleada. El objetivo es justificar cómo la combinación de técnicas de gestión (Kanban/Scrum) y herramientas de control de versiones garantiza un desarrollo ordenado, eficiente y capaz de adaptarse a los cambios técnicos surgidos durante la creación de Vía Inferni.
 \end{abstract}
 
 \section{Estructura organizacional del proyecto}
 
-¿Se hace en grupo? En caso afirmativo, ¿cuál va a ser la responsabilidad de cada uno?
+El proyecto ha sido desarrollado de forma conjunta por un equipo de dos integrantes, bajo un modelo de responsabilidad compartida y trabajo colaborativo. A diferencia de una estructura jerárquica rígida, se ha optado por un sistema de desarrollo transversal, donde ambos perfiles intervienen en todas las capas del software (arquitectura, gameplay y diseño) para garantizar la coherencia del producto y un aprendizaje integral de todas las áreas de la Ingeniería del Software.
+
+Para organizar el trabajo de forma eficiente y evitar conflictos técnicos, las tareas se han distribuido siguiendo un esquema de especialización operativa, pero manteniendo una supervisión cruzada y constante:
+
+\begin{itemize}
+    \item \textbf{Co-desarrollo de Sistemas Críticos:} Ambos integrantes han participado activamente en la definición de la arquitectura base (patrones de diseño y sistemas de eventos) y en el núcleo del gameplay. Esto asegura que cualquier cambio en el motor de combate o en la generación procedural sea conocido y validado por ambas partes, facilitando la integración de nuevos contenidos.
+    
+    \item \textbf{Gestión de Infraestructura Lógica y Datos (Integrante A):} Lidera la implementación de la arquitectura desacoplada, el sistema de generación procedural de salas y la gestión de datos mediante \textit{ScriptableObjects}. Para ello, cuenta con el apoyo constante del Integrante B en la integración de los elementos visuales y el diseño de niveles dentro de estos sistemas lógicos.
+    
+    \item \textbf{Diseño de Comportamiento e Interfaz (Integrante B):} Coordina el desarrollo de la inteligencia artificial de los enemigos y la lógica de la interfaz de usuario (HUD y menús). En esta tarea, cuenta con el apoyo del Integrante A para asegurar que dichos subsistemas se acoplen correctamente a la arquitectura global y a los sistemas de eventos del juego.
+    
+    \item \textbf{Validación y Pruebas:} Ambos integrantes comparten la responsabilidad de las pruebas de integración y la corrección de errores críticos para asegurar que los módulos individuales funcionen correctamente como un todo, garantizando la estabilidad de la demo técnica.
+\end{itemize}
+
+Ambos integrantes comparten la responsabilidad de las pruebas de integración y la corrección de errores críticos para asegurar que los módulos individuales funcionen correctamente como un todo, cumpliendo así con los estándares de calidad exigidos en un proyecto de Ingeniería del Software.
 
 \section{Metodología de desarrollo}
 
-Indicar en qué metodología nos basamos, explicarla brevemente y luego adaptarla a nuestras necesidades. Cada una de estas cuestiones debe ser una subsección.
+Para el desarrollo de Vía Inferni se ha optado por una Metodología Ágil, específicamente un modelo híbrido entre Kanban y ceremonias ligeras de Scrum. Esta elección se debe a la necesidad de flexibilidad en un proyecto creativo donde las mecánicas de juego requieren iteración constante.
+
+\subsection{Gestión de tareas con Kanban}
+
+Dado que nuestro equipo es de dos personas, el uso de Git es crítico para evitar conflictos en los binarios de Unity:
+\begin{itemize}
+\item \textbf{Adaptación:} A diferencia de proyectos industriales con ciclos cerrados, nuestra adaptación de Kanban permite una gestión granular de tareas. Esto facilita que ambos integrantes puedan trabajar en módulos complementarios (por ejemplo, uno en la lógica de daño y otro en el HUD que la visualiza) sin bloquearse mutuamente, ajustando la prioridad de las tareas según las necesidades de la "build" actual.
+\end{itemize}
+
+\subsection{Sincronización y Comunicación (Scrum Ligero)}
+
+Dado que nuestro equipo es de dos personas, el uso de Git es crítico para evitar conflictos en los binarios de Unity:
+\begin{itemize}
+\item \textbf{Sincronización diaria (Daily):} Reuniones breves de 15 minutos para poner en común el trabajo realizado, los objetivos de la jornada y, fundamentalmente, identificar bloqueos técnicos.
+\item \textbf{Hitos de Sprint:} El calendario se ha dividido en fases críticas (Prototipado, Core Loop, Contenido y Pulido). Al final de cada fase, se realiza una evaluación del producto para decidir si una mecánica (como el cambio dual de Dante/Virgilio) funciona como se esperaba o requiere un rediseño antes de avanzar.
+\end{itemize}
+
+\subsection{Control de versiones y flujo de trabajo (GitFlow)}
+
+Dado que nuestro equipo es de dos personas, el uso de Git es crítico para evitar conflictos en los binarios de Unity:
+\begin{itemize}
+\item \textbf{Ramas de funcionalidad (Feature Branches):} Se utiliza una rama independiente para cada nueva mecánica (ej: feature/generacion-procedural). Esto permite trabajar en paralelo en el sistema de niveles y en la IA sin riesgo de corromper la versión estable del juego.
+\item \textbf{Revisión de Código:} Antes de fusionar cualquier funcionalidad en la rama de desarrollo (develop), el otro integrante debe revisar el código. Este proceso no solo actúa como filtro de calidad, sino que asegura que ambos comprendamos la lógica del compañero, manteniendo la transversalidad del equipo.
+\end{itemize}
+
+\subsection{Gestión de riesgos}
+
+Se han identificado riesgos específicos del trabajo en equipo, como los conflictos en los prefabs de Unity o la posible desincronización de tareas. 
+\begin{itemize}
+\item \textbf{Mitigación:} Para mitigarlos, se ha establecido que las partes más complejas del código se traten mediante sesiones de Pair Programming (programación en pareja), asegurando que el conocimiento técnico sea compartido y no dependa de un solo integrante.
+\end{itemize}
