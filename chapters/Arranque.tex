@@ -1,4 +1,4 @@
-%!TEX root =  tfg.tex
+%!TEX root =  tfg.tex
 \chapter{Arranque}
 
 \begin{quotation}[Novelist]{Ernest Hemingway (1899--1961)}
@@ -6,13 +6,155 @@ The good parts of a book may be only something a writer is lucky enough to overh
 \end{quotation}
 
 \begin{abstract}
-Resumen de lo que va a ocurrir en el capítulo. ¿Cuál es el objetivo que tenemos con este capítulo?
+En este capítulo se formaliza el alcance del proyecto y se 
+establecen las bases técnicas para su desarrollo. El objetivo es 
+traducir la visión conceptual de Via Inferni en una lista estructurada de 
+requisitos funcionales, aplicando una primera iteración de la metodología Feature 
+Driven Development (FDD). Asimismo, se define la arquitectura de software que soportará
+dichas funcionalidades, detallando los entornos de producción, las herramientas de 
+diseño de datos (preproducción) y la estrategia de pruebas necesaria para asegurar 
+la calidad del software.
 \end{abstract}
 
 \section{Lista de características}
 
-Aplicar aquí la primera iteración de Feature Driven Development.
+Siguiendo la metodología \textit{Feature Driven Development} (FDD), 
+se ha descompuesto la visión global del videojuego en conjuntos de características 
+agrupados por dominio funcional. Esta lista representa el alcance del 
+Producto Mínimo Viable (MVP) y prioriza las mecánicas 
+centrales que definen la experiencia \textit{roguelike} en la ambientación de 
+la Divina Comedia.
+
+\subsection{Dominio: Jugador y Mecánicas Core}
+Este conjunto abarca las funcionalidades críticas relacionadas con el control, 
+el combate y el ciclo de vida del avatar.
+\begin{itemize}
+    \item \textbf{Gestión de Personajes:} Implementación del sistema dual.
+    \begin{itemize}
+        \item x
+    \end{itemize}
+    \item \textbf{Sistema de Combate:}
+    \begin{itemize}
+        \item x
+    \end{itemize}
+    \item \textbf{Ciclo de Vida (Run):}
+    \begin{itemize}
+        \item Gestionar la salud actual y el estado de muerte (Game Over).
+        \item Reiniciar el progreso del mundo al morir (Muerte permanente).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Dominio: Generación Procedural y Mundo}
+Funcionalidades encargadas de la construcción dinámica de los nueve círculos del infierno.
+\begin{itemize}
+    \item \textbf{Algoritmo de Generación:}
+    \begin{itemize}
+        \item Generar estructura de cuadrícula de A a B salas aleatorias (cambiar valores).
+        \item Seleccionar \textit{layouts} prediseñados de salas (combate, tesoro, tienda, 
+        descanso).
+        \item Aumentar la complejidad del mapa según la profundidad del círculo.
+    \end{itemize}
+    \item \textbf{Navegación:}
+    \begin{itemize}
+        \item Gestionar el estado de las puertas (bloqueo por enemigos vivos).
+        \item Transicionar entre niveles (círculos) al derrotar al jefe.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Dominio: Entidades y Comportamiento}
+Definición de los agentes hostiles que pueblan el juego.
+\begin{itemize}
+    \item \textbf{Arquetipos de Enemigos (10-15 variantes):}
+    \begin{itemize}
+        \item \textit{Chaser:} Navegación directa hacia el jugador (Pathfinding).
+        \item \textit{Ranged:} Cálculo de trayectoria y disparo de proyectiles.
+        \item \textit{Tank:} Comportamiento defensivo y alta resistencia.
+        \item \textit{Flying:} Movimiento ignorando obstáculos del terreno.
+    \end{itemize}
+    \item \textbf{Jefes Finales:}
+    \begin{itemize}
+        \item X
+    \end{itemize}
+\end{itemize}
+
+\subsection{Dominio: Economía y Progresión}
+Sistemas que otorgan profundidad estratégica a la partida.
+\begin{itemize}
+    \item \textbf{Sistema de Ítems:}
+    \begin{itemize}
+        \item Aplicar modificadores de estadísticas (ítems pasivos).
+        \item Ejecutar efectos de un solo uso (consumibles).
+    \end{itemize}
+    \item \textbf{Economía:}
+    \begin{itemize}
+        \item Generar y recolectar monedas (\textit{drops}) de enemigos.
+        \item Transaccionar compra de mejoras en la sala de tienda.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Dominio: Interfaz y Feedback (UI/UX)}
+\begin{itemize}
+    \item \textbf{HUD (Heads-Up Display):} Visualizar vida, personaje activo, 
+    minimapa y \textit{cooldowns}.
+    \item \textbf{Flujo de Pantallas:} Navegación entre Menú Principal, 
+    Pausa y Pantalla de Resultados.
+\end{itemize}
 
 \section{Diseño arquitectónico}
 \label{sec:arquitectura}
-Descripción de los sistemas de producción, preproducción y pruebas.
+
+Para garantizar la escalabilidad y mantenibilidad del proyecto, se ha 
+diseñado una arquitectura dividida en tres subsistemas claramente diferenciados: 
+producción (tiempo de ejecución), preproducción (datos y herramientas) y validación (pruebas).
+
+\subsection{Sistema de Producción (Runtime)}
+El núcleo del juego sigue una arquitectura orientada a componentes desacoplados mediante 
+eventos, evitando dependencias directas que rigidicen el código.
+
+\begin{itemize}
+    \item \textbf{Patrón Singleton para Managers:} Se utilizan gestores globales 
+    (\texttt{GameManager}, \texttt{SoundManager}, \texttt{LevelManager}) responsables 
+    de orquestar el flujo del juego, la persistencia de datos entre escenas y la 
+    gestión de estados globales.
+    \item \textbf{Arquitectura de Eventos:} La comunicación entre sistemas dispares 
+    (por ejemplo, cuando el jugador recibe daño y el HUD debe actualizarse) se realiza 
+    mediante un bus de eventos. Esto permite que la lógica de combate 
+    no conozca la existencia de la interfaz de usuario, facilitando el trabajo paralelo de 
+    los dos integrantes del equipo.
+    \item \textbf{Composición sobre Herencia:} Las entidades del juego se construyen 
+    mediante la agregación de componentes funcionales (Movimiento, Salud, Atacante) en 
+    lugar de largas cadenas de herencia, aprovechando el modelo Component-Entity de Unity.
+\end{itemize}
+
+\subsection{Sistema de Preproducción (Datos)}
+Dado que el juego requiere un balanceo constante de 15 tipos de enemigos,
+múltiples ítems y estadísticas de personajes, se ha separado la lógica de los datos.
+
+\begin{itemize}
+    \item \textbf{ScriptableObjects:} Se utiliza este contenedor de datos nativo de
+    Unity para definir las propiedades de enemigos, configuraciones de niveles y 
+    atributos de ítems. Esto permite ajustar la dificultad (daño, velocidad, vida) 
+    directamente desde el editor sin necesidad de modificar el código fuente ni recompilar, 
+    agilizando las iteraciones de diseño.
+    \item \textbf{Prefabs Variantes:} Se emplea un sistema de \textit{Prefabs} para 
+    crear variaciones de enemigos o salas base, permitiendo propagar cambios generales 
+    (como un cambio en la lógica de detección) a todas las instancias específicas 
+    automáticamente.
+\end{itemize}
+
+\subsection{Sistema de Pruebas (QA)}
+Para asegurar la estabilidad de las versiones que se fusionan a la rama 
+\texttt{develop}, se ha establecido un protocolo de pruebas multinivel:
+
+\begin{itemize}
+    \item \textbf{Pruebas Unitarias (Lógica):} Verificación de algoritmos aislados que 
+    no dependen del motor gráfico, como el cálculo de daño, la gestión de inventario o 
+    la lógica de la máquina de estados.
+    \item \textbf{Pruebas de Integración (Play Mode):} Validación de interacciones 
+    complejas dentro del motor, como la generación correcta del mapa procedural 
+    (asegurando que siempre existe un camino viable) o la detección física de colisiones.
+    \item \textbf{Validación Funcional (DoD):} Como se mencionó en la metodología, 
+    ninguna funcionalidad se da por cerrada hasta que ambos desarrolladores verifican 
+    visualmente en una \textit{build} que la mecánica cumple los requisitos de la lista 
+    de características, sin producir regresiones en sistemas previos.
+\end{itemize}
