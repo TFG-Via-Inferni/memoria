@@ -1,4 +1,4 @@
-%!TEX root =  tfg.tex
+%!TEX root =  tfg.tex
 \chapter{Metodología}
 
 \begin{quotation}[Novelist]{Ernest Hemingway (1899--1961)}
@@ -6,98 +6,123 @@ The good parts of a book may be only something a writer is lucky enough to overh
 \end{quotation}
 
 \begin{abstract}
-En este capítulo se describe el marco de trabajo seleccionado para la ejecución del proyecto. Se detalla 
-la estructura organizativa del equipo, el reparto de responsabilidades entre sus integrantes y la metodología 
-ágil empleada. El objetivo es justificar cómo la combinación de técnicas de gestión (Kanban/Scrum) y 
-herramientas de control de versiones garantiza un desarrollo ordenado, eficiente y capaz de adaptarse 
-a los cambios técnicos surgidos durante la creación de Vía Inferni.
+En este capítulo se describe el marco de trabajo seleccionado para la ejecución del proyecto. 
+Se detalla la estructura organizativa del equipo, 
+basada en un modelo de responsabilidad conjunta donde el núcleo del software 
+es desarrollado conjuntamente, y la metodología ágil empleada. 
+El objetivo es justificar cómo la combinación de técnicas de gestión y un 
+flujo de trabajo simplificado en el control de versiones garantiza un desarrollo ordenado, 
+priorizando la estabilidad de las funcionalidades centrales de Via Inferni antes de la 
+expansión de contenido.
 \end{abstract}
 
 \section{Estructura organizacional del proyecto}
 
-El proyecto ha sido desarrollado de forma conjunta por un equipo de dos integrantes, bajo un modelo de 
-responsabilidad compartida y trabajo colaborativo. A diferencia de una estructura jerárquica rígida, 
-se ha optado por un sistema de desarrollo transversal, donde ambos perfiles intervienen en todas las 
-capas del software (arquitectura, gameplay y diseño) para garantizar la coherencia del producto y un 
-aprendizaje integral de todas las áreas de la Ingeniería del Software.
+El proyecto ha sido desarrollado de forma conjunta por un equipo de dos integrantes 
+bajo un modelo de responsabilidad conjunta. 
+A diferencia de una estructura donde se separan los roles entre compañeros, 
+se ha optado por un enfoque donde ambos desarrolladores intervienen 
+equitativamente en la implementación de las funcionalidades críticas.
 
-Para organizar el trabajo de forma eficiente y evitar conflictos técnicos, las tareas se han distribuido 
-siguiendo un esquema de especialización operativa, pero manteniendo una supervisión cruzada y constante:
+Esta decisión busca asegurar que ambos integrantes posean un 
+conocimiento profundo y total de la arquitectura del juego, evitando silos de información. 
+La distribución del trabajo se organiza de la siguiente manera:
 
 \begin{itemize}
-    \item \textbf{Co-desarrollo de Sistemas Críticos:} Ambos integrantes han participado activamente 
-    en la definición de la arquitectura base (patrones de diseño y sistemas de eventos) y en el 
-    núcleo del gameplay. Esto asegura que cualquier cambio en el motor de combate o en la generación 
-    procedural sea conocido y validado por ambas partes, facilitando la integración de nuevos contenidos.
+    \item \textbf{Desarrollo Conjunto del Núcleo (Core):} Las funcionalidades base 
+    que sustentan el juego (generación procedural de niveles, dualidad de personajes, 
+    sistema de combate, enemigos e items básicos) han sido implementadas por partes iguales. 
+    Ambos integrantes trabajan sobre los mismos scripts y sistemas fundamentales, 
+    asegurando que la arquitectura base sea robusta y comprendida por todo el equipo.
     
-    \item \textbf{Gestión de Infraestructura Lógica y Datos (Integrante A):} Lidera la implementación 
-    de la arquitectura desacoplada, el sistema de generación procedural de salas y la gestión de datos 
-    mediante \textit{ScriptableObjects}. Para ello, cuenta con el apoyo constante del Integrante B en 
-    la integración de los elementos visuales y el diseño de niveles dentro de estos sistemas lógicos.
+    \item \textbf{Expansión de Contenido Independiente:} Una vez asentadas las bases 
+    de las funcionalidades core, la implementación de añadidos se realiza de forma 
+    independiente para agilizar la producción. Elementos como nuevos enemigos, 
+    ítems específicos, variaciones de nivel o mejoras visuales se asignan individualmente, 
+    siempre respetando la arquitectura predefinida en la fase conjunta.
     
-    \item \textbf{Diseño de Comportamiento e Interfaz (Integrante B):} Coordina el desarrollo de la 
-    inteligencia artificial de los enemigos y la lógica de la interfaz de usuario (HUD y menús). 
-    En esta tarea, cuenta con el apoyo del Integrante A para asegurar que dichos subsistemas se 
-    acoplen correctamente a la arquitectura global y a los sistemas de eventos del juego.
-    
-    \item \textbf{Validación y Pruebas:} Ambos integrantes comparten la responsabilidad de las 
-    pruebas de integración y la corrección de errores críticos para asegurar que los módulos 
-    individuales funcionen correctamente como un todo, garantizando la estabilidad de la demo técnica.
+    \item \textbf{Validación Cruzada:} Aunque la expansión de contenido sea individual, 
+    se mantiene una supervisión constante. Ninguna funcionalidad se considera cerrada hasta 
+    que es revisada y aprobada por el otro integrante, garantizando la coherencia.
 \end{itemize}
-
-Ambos integrantes comparten la responsabilidad de las pruebas de integración y la corrección de errores 
-críticos para asegurar que los módulos individuales funcionen correctamente como un todo, cumpliendo 
-así con los estándares de calidad exigidos en un proyecto de Ingeniería del Software.
 
 \section{Metodología de desarrollo}
 
-Para el desarrollo de Vía Inferni se ha optado por una Metodología Ágil, específicamente un modelo 
-híbrido entre Kanban y ceremonias ligeras de Scrum. Esta elección se debe a la necesidad de flexibilidad 
-en un proyecto creativo donde las mecánicas de juego requieren iteración constante.
+Para el desarrollo de Via Inferni se ha optado por una Metodología Ágil híbrida, 
+adaptada a un equipo reducido de dos personas. 
+La prioridad ha sido la flexibilidad y la entrega continua de funcionalidades verificables.
 
-\subsection{Gestión de tareas con Kanban}
+\subsection{Gestión de tareas y Definición de Hecho (DoD)}
 
-Dado que nuestro equipo es de dos personas, el uso de Git es crítico para evitar conflictos en los 
-binarios de Unity:
+La gestión del trabajo se ha realizado mediante un tablero Kanban digital, 
+permitiendo visualizar el estado del proyecto en tiempo real.
+Un aspecto crítico de nuestra metodología es el consenso sobre cuándo una tarea 
+está terminada:
+
 \begin{itemize}
-\item \textbf{Adaptación:} A diferencia de proyectos industriales con ciclos cerrados, nuestra adaptación 
-de Kanban permite una gestión granular de tareas. Esto facilita que ambos integrantes puedan trabajar 
-en módulos complementarios (por ejemplo, uno en la lógica de daño y otro en el HUD que la visualiza) 
-sin bloquearse mutuamente, ajustando la prioridad de las tareas según las necesidades de la "build" actual.
+    \item \textbf{Definición de Hecho (DoD):} Para evitar ambigüedades, una tarea 
+    (ya sea del núcleo o de contenido) no se marca como "Done"  simplemente 
+    al terminar el código. Debe cumplir con un criterio de aceptación compartido: la 
+    implementación debe ser funcional dentro del juego, no romper sistemas existentes 
+    y ser validada visualmente por ambos integrantes. Solo cuando el equipo confirma que 
+    el requisito funciona según lo esperado, se cierra la tarea y se procede a la fusión 
+    del código.
 \end{itemize}
 
-\subsection{Sincronización y Comunicación (Scrum Ligero)}
+\subsection{Sincronización y Comunicación}
 
-Dado que nuestro equipo es de dos personas, el uso de Git es crítico para evitar conflictos en los 
-binarios de Unity:
+Debido a la naturaleza colaborativa del núcleo del juego, la comunicación es constante:
 \begin{itemize}
-\item \textbf{Sincronización diaria (Daily):} Reuniones breves de 15 minutos para poner en común el 
-trabajo realizado, los objetivos de la jornada y, fundamentalmente, identificar bloqueos técnicos.
-\item \textbf{Hitos de Sprint:} El calendario se ha dividido en fases críticas (Prototipado, Core Loop, 
-Contenido y Pulido). Al final de cada fase, se realiza una evaluación del producto para decidir si una 
-mecánica (como el cambio dual de Dante/Virgilio) funciona como se esperaba o requiere un rediseño antes 
-de avanzar.
+    \item \textbf{Sincronización Continua:} Más allá de reuniones formales diarias, 
+    se mantiene una comunicación fluida durante las sesiones de desarrollo para resolver 
+    dudas de arquitectura al instante.
+    \item \textbf{Hitos de Desarrollo:} El proyecto avanza mediante la consecución de 
+    hitos funcionales (ej. "Genración procedural base", "Movimiento base personajes"), 
+    asegurando que el núcleo sea estable antes de añadir complejidad.
 \end{itemize}
 
-\subsection{Control de versiones y flujo de trabajo (GitFlow)}
+\section{Control de versiones y flujo de trabajo}
 
-Dado que nuestro equipo es de dos personas, el uso de Git es crítico para evitar conflictos en los 
-binarios de Unity:
+La gestión del código fuente es vital para evitar conflictos en un motor 
+basado en componentes como Unity. Se ha diseñado un flujo de trabajo simplificado 
+(basado en principios de GitFlow pero adaptado a ramas locales) para minimizar la 
+burocracia en el repositorio remoto.
+
+\subsection{Estrategia de Ramas}
+
+El repositorio se estructura en torno a dos ramas persistentes y 
+múltiples ramas volátiles locales:
+
+\begin{enumerate}
+    \item \textbf{Rama Main:} Contiene únicamente las versiones estables y 
+    funcionales del proyecto (releases). Es la "verdad única" del producto final.
+    \item \textbf{Rama Develop:} Es la rama de integración principal. 
+    Aquí convive el código que está siendo probado y ensamblado antes de pasar a producción. 
+    Ambos integrantes sincronizan su trabajo contra esta rama en el repositorio 
+    remoto (\textit{upstream}).
+\end{enumerate}
+
+\subsection{Ciclo de Vida de una Funcionalidad}
+
+Para mantener el historial del repositorio remoto limpio y ordenado, 
+trabajamos con ramas de funcionalidad locales que no se publican en el servidor:
+
 \begin{itemize}
-\item \textbf{Ramas de funcionalidad (Feature Branches):} Se utiliza una rama independiente para cada 
-nueva mecánica (ej: feature/generacion-procedural). Esto permite trabajar en paralelo en el sistema de 
-niveles y en la IA sin riesgo de corromper la versión estable del juego.
-\item \textbf{Revisión de Código:} Antes de fusionar cualquier funcionalidad en la rama de desarrollo 
-(develop), el otro integrante debe revisar el código. Este proceso no solo actúa como filtro de calidad, 
-sino que asegura que ambos comprendamos la lógica del compañero, manteniendo la transversalidad del equipo.
+    \item \textbf{Desarrollo en Local:} Cuando un integrante comienza una tarea 
+    (ej. implementar un nuevo enemigo), crea una rama en su entorno local partiendo de 
+    \texttt{develop}.
+    \item \textbf{Implementación y Pruebas:} El trabajo se realiza exclusivamente en 
+    dicha rama local hasta que cumple con la \textbf{Definición de Hecho (DoD)}.
+    \item \textbf{Fusión y Limpieza:} Una vez la funcionalidad está terminada y verificada:
+    \begin{enumerate}
+        \item Se fusiona (\textit{merge}) la rama local a la rama \texttt{develop} local.
+        \item Se eliminan los conflictos si los hubiera.
+        \item Se suben los cambios (\textit{push}) a la rama \texttt{develop} del 
+        repositorio remoto (\textit{upstream}).
+        \item La rama de funcionalidad local se elimina, ya que su ciclo de vida ha terminado.
+    \end{enumerate}
 \end{itemize}
 
-\subsection{Gestión de riesgos}
-
-Se han identificado riesgos específicos del trabajo en equipo, como los conflictos en los prefabs de 
-Unity o la posible desincronización de tareas. 
-\begin{itemize}
-\item \textbf{Mitigación:} Para mitigarlos, se ha establecido que las partes más complejas del código 
-se traten mediante sesiones de Pair Programming (programación en pareja), asegurando que el conocimiento 
-técnico sea compartido y no dependa de un solo integrante.
-\end{itemize}
+Este enfoque nos permite trabajar en paralelo sin llenar el repositorio compartido 
+de ramas inconclusas, asegurando que lo que llega a \texttt{develop} en el servidor 
+es siempre código funcional que cumple con los requisitos del equipo.
