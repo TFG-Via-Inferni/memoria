@@ -19,36 +19,59 @@ establecida una base arquitectónica sólida.
 
 \section{Estructura organizacional del proyecto}
 
-El proyecto ha sido desarrollado por un equipo de dos integrantes que asumen conjuntamente 
-todos los roles necesarios en un proyecto de videojuego. A diferencia de estructuras 
-tradicionales donde se asignan roles específicos (programador, diseñador, artista, tester), 
-ambos integrantes participan equitativamente en todas las facetas del desarrollo: 
-programación de sistemas, diseño de mecánicas, implementación de elementos visuales, 
-pruebas y ajustes de \textit{gameplay}.
+El proyecto ha sido desarrollado por un equipo de dos integrantes: Adolfo Agustín Borrego González 
+y Germán Sánchez Carmona. Ambos asumen conjuntamente todos los roles necesarios en un proyecto de 
+videojuego,. A diferencia de estructuras tradicionales donde se asignan roles diferenciados 
+(programador principal, diseñador, artista, tester), los dos integrantes participan 
+equitativamente en todas las facetas del desarrollo: programación de sistemas, 
+diseño de mecánicas, implementación de elementos visuales, pruebas y ajustes de \textit{gameplay}.
 
-Este modelo de responsabilidad compartida sin roles diferenciados busca garantizar 
-que ambos integrantes posean un conocimiento profundo y total de la arquitectura del 
-juego, evitando silos de información y facilitando la toma de decisiones conjunta. 
-Dentro de este marco de trabajo colaborativo, la distribución de tareas se organiza 
-de la siguiente manera:
+Este modelo de responsabilidad compartida busca garantizar que ambos integrantes posean un 
+conocimiento profundo y completo de la arquitectura del juego, evitando silos de información 
+y facilitando la toma de decisiones conjunta.
+
+\subsection{Fases de distribución del trabajo}
+
+La distribución de tareas se estructura en dos fases claramente diferenciadas:
+
+\subsubsection{Fase 1: Desarrollo conjunto del núcleo (Core)}
+
+Durante la primera fase, las funcionalidades base que sustentan el juego (generación procedural 
+de niveles, dualidad de personajes, sistema de combate, enemigos e ítems básicos) se desarrollan 
+de forma \textbf{conjunta mediante revisión cruzada constante}. Esto significa que:
 
 \begin{itemize}
-    \item \textbf{Desarrollo conjunto del núcleo (Core):} Las funcionalidades base 
-    que sustentan el juego (generación procedural de niveles, dualidad de personajes, 
-    sistema de combate, enemigos e ítems básicos) han sido implementadas por partes iguales. 
-    Ambos integrantes trabajan sobre los mismos scripts y sistemas fundamentales, 
-    asegurando que la arquitectura base sea robusta y comprendida por todo el equipo.
+    \item Ambos integrantes participan activamente en las decisiones arquitectónicas fundamentales 
+    a través de sesiones de diseño y revisión de código sincrónicas.
     
-    \item \textbf{Implementación de contenido adicional:} Una vez asentadas las bases 
-    de las funcionalidades core, la implementación de añadidos se realiza de forma 
-    independiente para agilizar la producción. Elementos como nuevos enemigos, 
-    ítems específicos, variaciones de niveles o mejoras visuales se asignan individualmente, 
-    siempre respetando la arquitectura común desarrollada en la fase conjunta.
+    \item Cada funcionalidad core se implementa bajo el principio de \textit{pair review}: 
+    una persona codifica mientras la otra revisa en tiempo real, alternándose según la complejidad 
+    de la tarea y el conocimiento previo de cada integrante.
     
-    \item \textbf{Validación cruzada:} Aunque la adición de contenido sea individual, 
-    se mantiene una comunicación constante. Ninguna funcionalidad se considera cerrada hasta 
-    que es revisada y aprobada por el otro integrante, garantizando la coherencia.
+    \item Antes de dar por completada cualquier funcionalidad, ambos integrantes deben 
+    comprender y aprobar tanto el diseño como la implementación técnica.
+    
+    \item Se prioriza la coherencia arquitectónica y la robustez de los sistemas 
+    sobre la velocidad de producción en esta fase.
 \end{itemize}
+
+Esta fase es crítica porque establece el fundamento sobre el que se apoya el resto del proyecto.
+
+\subsubsection{Fase 2: Implementación de contenido adicional}
+
+Una vez asentadas las bases de las funcionalidades core, la implementación de contenido adicional 
+se realiza de forma \textbf{independiente y paralela} para agilizar la producción. Esto incluye:
+
+\begin{itemize}
+    \item Creación de nuevos enemigos con patrones de comportamiento variados.
+    \item Diseño e implementación de ítems y objetos interactivos adicionales.
+    \item Variaciones procedurales en la generación de niveles.
+    \item Mejoras visuales y refinamientos artísticos.
+\end{itemize}
+
+Pese a la independencia de esta fase, se mantiene una comunicación constante para garantizar 
+la coherencia. Ninguna funcionalidad se considera cerrada hasta que es revisada y aprobada 
+por el otro integrante, siguiendo los criterios de aceptación definidos en la Definición de Hecho (DoD).
 
 \section{Metodología de desarrollo}
 
