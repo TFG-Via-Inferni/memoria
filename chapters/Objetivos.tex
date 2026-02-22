@@ -1,24 +1,76 @@
-%!TEX root =  tfg.tex
+%!TEX root = tfg.tex
 \chapter{Objetivos}
 
 \begin{quotation}[Novelist]{Ernest Hemingway (1899--1961)}
-The good parts of a book may be only something a writer is lucky enough to overhear or it may be the wreck of his whole damn life -- and one is as good as the other.
+The good parts of a book may be only something a writer is lucky enough to overhear 
+or it may be the wreck of his whole damn life -- and one is as good as the other.
 \end{quotation}
 
 \begin{abstract}
-Este capítulo detalla los motivos que impulsan el desarrollo de Via Inferni, analizando la oportunidad de mercado en el género roguelike y el público al que va dirigido. Asimismo, se definen de forma precisa los objetivos técnicos y funcionales que guiarán la construcción del videojuego bajo una metodología de Ingeniería del Software.\end{abstract}
+Este capítulo detalla los motivos que impulsan el desarrollo de Via Inferni, 
+analizando la oportunidad de mercado en el género roguelike y el público al que va 
+dirigido. Asimismo, se definen de forma precisa los objetivos técnicos y funcionales 
+que guiarán la construcción del videojuego bajo una metodología de Ingeniería del Software, 
+asegurando la creación de un sistema modular, escalable y rejugable.
+\end{abstract}
 
 \section{Motivación}
-El desarrollo de este proyecto nace de la intersección entre la literatura clásica y las tendencias actuales de la industria del videojuego independiente. El género roguelike ha demostrado una gran viabilidad comercial debido a su alta rejugabilidad y costes de producción contenidos. Sin embargo, existe una oportunidad para integrar narrativas profundas y estructuras literarias complejas, como la Divina Comedia, en mecánicas de juego procedurales.
+El desarrollo de este proyecto nace de la intersección entre la literatura clásica y 
+las tendencias actuales de la industria del videojuego independiente. El género 
+\textit{roguelike} ha demostrado una gran viabilidad comercial debido a su alta 
+rejugabilidad y costes de producción contenidos. Sin embargo, existe una oportunidad 
+para integrar narrativas profundas y estructuras literarias complejas, como la 
+\textit{Divina Comedia}, en mecánicas de juego procedurales.
 
-La hipótesis es que la estructura de los nueve círculos del infierno es ideal para un diseño de niveles ascendentes en dificultad. El público objetivo son jugadores aficionados a retos de habilidad y la estética pixel art, que buscan experiencias de juego cortas pero intensas.
+Más allá del análisis de mercado, este trabajo surge del interés por experimentar 
+el ciclo de vida completo del desarrollo de un software de entretenimiento, desde la 
+concepción de la idea hasta su implementación y validación. El desafío de transformar 
+conceptos abstractos y reglas de diseño en un producto interactivo funcional supone un 
+reto intelectual y técnico que motiva la realización de este proyecto. Como estudiantes 
+de Ingeniería Informática a los que nos encanta el sector de los videojuegos, 
+este TFG representa la oportunidad de aplicar todos los conocimientos 
+adquiridos durante el grado en un contexto real, enfrentando problemas complejos de 
+arquitectura de software, optimización y gestión de proyectos.
+
+La hipótesis central es que la estructura de los nueve círculos del infierno es ideal 
+para un diseño de niveles ascendentes en dificultad. Cada círculo funciona como un nivel 
+temático con ambientación, enemigos y desafíos propios, culminando en enfrentamientos contra 
+jefes finales icónicos como Cancerbero y Satán. El público objetivo son jugadores aficionados 
+a retos de habilidad y la estética \textit{pixel art}, que buscan experiencias de juego 
+cortas pero intensas.
 
 \section{Listado de objetivos}
 
+Para cumplir con la visión del proyecto, se establecen los siguientes 
+objetivos específicos:
+
 \begin{description}
-\item \textbf{Objetivo 1. Diseño y desarrollo de una arquitectura de juego modular.} Implementar un sistema sólido en Unity que permita la gestión de entidades (jugador, enemigos, ítems) y la separación de la lógica de juego de la representación visual.
-\item \textbf{Objetivo 2. Generación procedural de niveles.} Crear un algoritmo de generación aleatoria de salas que garantice que cada partida sea única, respetando la coherencia temática de los nueve círculos del infierno.
-\item \textbf{Objetivo 3. Implementación del sistema de "Cambio Dual".} Desarrollar la mecánica que permite alternar entre dos personajes (Dante y Virgilio), cada uno con estadísticas y habilidades diferenciadas, aportando una capa estratégica al combate.
-\item \textbf{Objetivo 4. Creación de un ecosistema de enemigos y jefes.} Programar una inteligencia artificial variada con al menos 15 tipos de enemigos y jefes finales con patrones de ataque específicos (como Cancerbero y Satán).
-\item \textbf{Objetivo 5. Gestión de progresión y economía.} Diseñar e implementar un sistema de inventario, objetos pasivos/consumibles y una tienda que permita al jugador mejorar sus capacidades durante la partida.
+    \item \textbf{Objetivo 1. Diseño de una arquitectura desacoplada.} Implementar una 
+    estructura software basada en el patrón \textit{Observer} y el uso de 
+    \textit{ScriptableObjects} para minimizar las dependencias entre la lógica de combate, 
+    el sistema de estadísticas y la interfaz de usuario.
+    
+    \item \textbf{Objetivo 2. Generación procedural de niveles dinámicos.} Desarrollar un
+    motor de generación basado en el algoritmo \textit{Drunkard’s Walk} modificado, 
+    que gestione la disposición de salas (combate, tesoro, tienda y descanso) garantizando 
+    siempre rutas conectadas.
+    
+    \item \textbf{Objetivo 3. Implementación del sistema de Dualidad de Personajes.} Programar la 
+    mecánica de alternancia entre Dante y Virgilio mediante un objeto de persistencia 
+    (\textit{RunSession}) que garantice el traspaso de ítems y estadísticas entre ambos 
+    personajes en las salas de descanso.
+    
+    \item \textbf{Objetivo 4. Creación de un ecosistema de enemigos.} Desarrollar un sistema 
+    de estados (\textit{Finite State Machine}) para gestionar el comportamiento de al menos
+    15 tipos de enemigos y jefes finales con patrones de ataque multifase.
+    
+    \item \textbf{Objetivo 5. Gestión de progresión y economía en tiempo real.} Implementar 
+    un sistema de inventario y tienda que gestione objetos pasivos y consumibles, integrados 
+    en una interfaz funcional que incluya un minimapa dinámico para mejorar la navegación del 
+    jugador.
+
+    \item \textbf{Objetivo 6. Aseguramiento de la calidad y equilibrio de juego.} Realizar un 
+    plan de pruebas (\textit{playtesting}) y sesiones de balanceo para ajustar la curva de 
+    dificultad y verificar la estabilidad técnica del motor de generación ante situaciones 
+    límite.
 \end{description}
