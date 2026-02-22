@@ -102,60 +102,134 @@ Sistemas que otorgan profundidad estratégica a la partida.
 \end{itemize}
 
 \section{Diseño arquitectónico}
-\label{sec:arquitectura}
 
-Para garantizar la escalabilidad y mantenibilidad del proyecto, se ha 
-diseñado una arquitectura dividida en tres subsistemas claramente diferenciados: 
-producción (tiempo de ejecución), preproducción (datos y herramientas) y validación (pruebas).
+\subsection{Visión general del sistema}
 
-\subsection{Sistema de Producción (Runtime)}
-El núcleo del juego sigue una arquitectura orientada a componentes desacoplados mediante 
-eventos, evitando dependencias directas que rigidicen el código.
+El videojuego desarrollado en el presente Trabajo de Fin de Grado consiste en un roguelike con generación procedural de niveles inspirado en la estructura del Infierno de Dante. El juego se organiza en nueve círculos temáticos, cada uno con identidad visual propia, enemigos específicos, conjunto de salas diferenciado y un jefe final que permite el acceso al siguiente círculo.
 
-\begin{itemize}
-    \item \textbf{Patrón Singleton para Managers:} Se utilizan gestores globales 
-    (\texttt{GameManager}, \texttt{SoundManager}, \texttt{LevelManager}) responsables 
-    de orquestar el flujo del juego, la persistencia de datos entre escenas y la 
-    gestión de estados globales.
-    \item \textbf{Arquitectura de Eventos:} La comunicación entre sistemas dispares 
-    (por ejemplo, cuando el jugador recibe daño y el HUD debe actualizarse) se realiza 
-    mediante un bus de eventos. Esto permite que la lógica de combate 
-    no conozca la existencia de la interfaz de usuario, facilitando el trabajo paralelo de 
-    los dos integrantes del equipo.
-    \item \textbf{Composición sobre Herencia:} Las entidades del juego se construyen 
-    mediante la agregación de componentes funcionales (Movimiento, Salud, Atacante) en 
-    lugar de largas cadenas de herencia, aprovechando el modelo Component-Entity de Unity.
-\end{itemize}
+Desde el punto de vista arquitectónico, el sistema se ha diseñado siguiendo una estructura modular orientada a la separación de responsabilidades y al bajo acoplamiento entre componentes. La arquitectura se basa en un conjunto de gestores especializados (manager-based architecture), donde cada subsistema tiene una responsabilidad claramente delimitada.
 
-\subsection{Sistema de Preproducción (Datos)}
-Dado que el juego requiere un balanceo constante de 15 tipos de enemigos,
-múltiples ítems y estadísticas de personajes, se ha separado la lógica de los datos.
+Adicionalmente, el sistema contempla la existencia de dos personajes jugables, Dante y Virgilio, cuya lógica de control y estado debe poder alternarse dinámicamente durante la ejecución. Aunque la mecánica de diferenciación entre ambos personajes no se encuentra completamente definida en esta fase, la arquitectura global se ha diseñado para permitir su extensión sin modificaciones estructurales significativas.
+
+\subsection{Arquitectura global del sistema}
+
+El sistema se organiza en los siguientes subsistemas principales:
 
 \begin{itemize}
-    \item \textbf{ScriptableObjects:} Se utiliza este contenedor de datos nativo de
-    Unity para definir las propiedades de enemigos, configuraciones de niveles y 
-    atributos de ítems. Esto permite ajustar la dificultad (daño, velocidad, vida) 
-    directamente desde el editor sin necesidad de modificar el código fuente ni recompilar, 
-    agilizando las iteraciones de diseño.
-    \item \textbf{Prefabs Variantes:} Se emplea un sistema de \textit{Prefabs} para 
-    crear variaciones de enemigos o salas base, permitiendo propagar cambios generales 
-    (como un cambio en la lógica de detección) a todas las instancias específicas 
-    automáticamente.
+    \item \textbf{GameManager}: Controlador global del estado del juego.
+    \item \textbf{CircleManager}: Gestión del círculo actual.
+    \item \textbf{LevelGenerator}: Generación estructural del nivel.
+    \item \textbf{RoomManager}: Control de activación de salas.
+    \item \textbf{RoomGenerator}: Generación de contenido interno.
+    \item \textbf{DifficultyManager}: Ajuste dinámico de dificultad.
+    \item \textbf{CharacterManager}: Gestión de personajes jugables.
 \end{itemize}
 
-\subsection{Sistema de Pruebas (QA)}
-Para asegurar la estabilidad de las versiones que se fusionan a la rama 
-\texttt{develop}, se ha establecido un protocolo de pruebas multinivel:
+El siguiente diagrama ilustra la estructura general y las relaciones entre subsistemas:
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=1.8cm,
+    box/.style={rectangle, draw, rounded corners, align=center, minimum width=3cm, minimum height=0.9cm},
+    arrow/.style={-Latex}
+]
+
+\node[box] (gm) {GameManager};
+
+\node[box, below=of gm] (cm) {CircleManager};
+\node[box, left=of cm] (chm) {CharacterManager};
+\node[box, right=of cm] (dm) {DifficultyManager};
+
+\node[box, below=of cm] (lg) {LevelGenerator};
+\node[box, below=of lg] (rm) {RoomManager};
+\node[box, below=of rm] (rg) {RoomGenerator};
+
+\draw[arrow] (gm) -- (cm);
+\draw[arrow] (gm) -- (chm);
+\draw[arrow] (gm) -- (dm);
+
+\draw[arrow] (cm) -- (lg);
+\draw[arrow] (lg) -- (rm);
+\draw[arrow] (rm) -- (rg);
+
+\draw[arrow] (dm) -- (rg);
+
+\end{tikzpicture}
+\end{center}
+
+\subsection{Gestión de personajes jugables}
+
+El sistema contempla dos personajes jugables: Dante y Virgilio. Para garantizar extensibilidad, se ha diseñado un \textit{CharacterManager} responsable de:
 
 \begin{itemize}
-    \item \textbf{Pruebas Unitarias (Lógica):} Verificación de algoritmos aislados que 
-    no dependen del motor gráfico, como el cálculo de daño, la gestión de inventario o 
-    la lógica de la máquina de estados.
-    \item \textbf{Pruebas de Integración (Play Mode):} Validación de interacciones 
-    complejas dentro del motor, como la generación correcta del mapa procedural 
-    (asegurando que siempre existe un camino viable) o la detección física de colisiones.
-    \item \textbf{Validación Funcional (DoD):} Como se mencionó en la metodología, 
-    ninguna funcionalidad se da por cerrada hasta que ambos desarrolladores verifican 
-    visualmente en una \textit{build} que la mecánica cumple los requisitos de la lista 
-    de características, sin producir regresiones en sistemas previos.
+    \item Mantener el estado del personaje activo.
+    \item Gestionar el posible cambio dinámico entre personajes.
+    \item Centralizar atributos diferenciadores (estadísticas, habilidades, modificadores).
 \end{itemize}
+
+Ambos personajes comparten una interfaz común de comportamiento, lo que permite desacoplar la lógica del jugador del resto del sistema. De esta forma, la introducción de mecánicas específicas para cada personaje no afecta a los módulos de generación de niveles o enemigos.
+
+\subsection{Modelo estructural del nivel}
+
+La generación del nivel se basa en una arquitectura híbrida compuesta por:
+
+\begin{itemize}
+    \item Un modelo espacial basado en una cuadrícula bidimensional (grid) que controla la ocupación geométrica.
+    \item Un modelo lógico basado en grafos donde cada nodo representa una habitación y cada arista una conexión navegable.
+\end{itemize}
+
+El grid se emplea exclusivamente para validar la coherencia espacial durante la generación. Cada habitación define un conjunto de celdas ocupadas (footprint), lo que permite soportar geometrías complejas como salas rectangulares o en forma de L.
+
+Sin embargo, desde el punto de vista lógico, cada habitación constituye un único nodo en el grafo, independientemente de su tamaño. Esto permite desacoplar la estructura espacial de la conectividad del nivel.
+
+\subsection{Proceso de generación procedural}
+
+La generación se divide en dos fases claramente diferenciadas.
+
+\subsubsection{Generación estructural}
+
+En esta fase, el \textit{LevelGenerator} construye el grafo completo del círculo actual. El proceso sigue una estrategia de expansión iterativa:
+
+\begin{enumerate}
+    \item Se crea la sala inicial.
+    \item Se selecciona una puerta libre de una sala existente.
+    \item Se elige una plantilla de habitación compatible.
+    \item Se verifica su encaje espacial en el grid.
+    \item Si el encaje es válido, se actualizan grid y grafo.
+\end{enumerate}
+
+Una vez finalizada la generación, se determina la sala del jefe como el nodo más alejado de la sala inicial, utilizando un recorrido en anchura (BFS).
+
+\subsubsection{Generación de contenido bajo demanda}
+
+El contenido interno de las salas no se genera durante la fase estructural. En su lugar, el \textit{RoomGenerator} instancia enemigos, objetos y eventos únicamente cuando el jugador accede a una sala, así como en sus adyacentes inmediatas.
+
+Este enfoque reduce el consumo de memoria y permite que el \textit{DifficultyManager} ajuste dinámicamente la complejidad del contenido en función del estado actual del jugador.
+
+\subsection{Configuración basada en datos}
+
+Cada uno de los nueve círculos se define mediante una estructura de configuración independiente que incluye:
+
+\begin{itemize}
+    \item Conjunto de enemigos disponibles.
+    \item Conjunto de plantillas de habitaciones.
+    \item Conjunto de objetos.
+    \item Prefab del jefe.
+    \item Parámetros de dificultad.
+\end{itemize}
+
+Esta aproximación sigue un paradigma \textit{data-driven}, separando configuración y comportamiento. Esto permite modificar el balance del juego o añadir nuevos círculos sin alterar la lógica central del sistema.
+
+\subsection{Justificación arquitectónica}
+
+Las decisiones adoptadas persiguen los siguientes objetivos:
+
+\begin{itemize}
+    \item Separación clara de responsabilidades.
+    \item Bajo acoplamiento entre módulos.
+    \item Escalabilidad para incorporar nuevas mecánicas.
+    \item Soporte para geometrías complejas de habitaciones.
+    \item Flexibilidad para integrar múltiples personajes jugables.
+\end{itemize}
+
+La combinación de un modelo espacial basado en grid y un modelo lógico basado en grafos permite mantener coherencia geométrica sin sacrificar expresividad estructural. Asimismo, la modularización del sistema facilita su mantenimiento y evolución futura.
