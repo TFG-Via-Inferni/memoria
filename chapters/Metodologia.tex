@@ -30,48 +30,17 @@ Este modelo de responsabilidad compartida busca garantizar que ambos integrantes
 conocimiento profundo y completo de la arquitectura del juego, evitando silos de información 
 y facilitando la toma de decisiones conjunta.
 
-\subsection{Fases de distribución del trabajo}
+\subsection{Planificación de la distribución del trabajo}
 
-La distribución de tareas se estructura en dos fases claramente diferenciadas:
+La distribución del trabajo se plantea de forma sencilla y orientada a la planificación. En una 
+primera etapa se prioriza el desarrollo conjunto de las funcionalidades \textit{CORE}, ya que 
+constituyen la base del proyecto y requieren una visión compartida por parte de ambos miembros 
+del equipo.
 
-\subsubsection{Fase 1: Desarrollo conjunto del núcleo (Core)}
-
-Durante la primera fase, las funcionalidades base que sustentan el juego (generación procedural 
-de niveles, dualidad de personajes, sistema de combate, enemigos e ítems básicos) se desarrollan 
-de forma \textbf{conjunta mediante revisión cruzada constante}. Esto significa que:
-
-\begin{itemize}
-    \item Ambos integrantes participan activamente en las decisiones arquitectónicas fundamentales 
-    a través de sesiones de diseño y revisión de código sincrónicas.
-    
-    \item Cada funcionalidad core se implementa bajo el principio de \textit{pair review}: 
-    una persona codifica mientras la otra revisa en tiempo real, alternándose según la complejidad 
-    de la tarea y el conocimiento previo de cada integrante.
-    
-    \item Antes de dar por completada cualquier funcionalidad, ambos integrantes deben 
-    comprender y aprobar tanto el diseño como la implementación técnica.
-    
-    \item Se prioriza la coherencia arquitectónica y la robustez de los sistemas 
-    sobre la velocidad de producción en esta fase.
-\end{itemize}
-
-Esta fase es crítica porque establece el fundamento sobre el que se apoya el resto del proyecto.
-
-\subsubsection{Fase 2: Implementación de contenido adicional}
-
-Una vez asentadas las bases de las funcionalidades core, la implementación de contenido adicional 
-se realiza de forma \textbf{independiente y paralela} para agilizar la producción. Esto incluye:
-
-\begin{itemize}
-    \item Creación de nuevos enemigos con patrones de comportamiento variados.
-    \item Diseño e implementación de ítems y objetos interactivos adicionales.
-    \item Variaciones procedurales en la generación de niveles.
-    \item Mejoras visuales y refinamientos artísticos.
-\end{itemize}
-
-Pese a la independencia de esta fase, se mantiene una comunicación constante para garantizar 
-la coherencia. Ninguna funcionalidad se considera cerrada hasta que es revisada y aprobada 
-por el otro integrante, siguiendo los criterios de aceptación definidos en la Definición de Hecho (DoD).
+Una vez definida esa base, las funcionalidades adicionales se reparten entre los dos integrantes 
+para avanzar en paralelo con el contenido complementario. De esta forma, se mantiene un criterio 
+común sobre los sistemas esenciales y, al mismo tiempo, se optimiza el reparto del trabajo en las 
+tareas no críticas.
 
 \section{Metodología de desarrollo}
 

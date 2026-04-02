@@ -23,82 +23,115 @@ se ha descompuesto la visión global del videojuego en conjuntos de característ
 agrupados por dominio funcional. Esta lista representa el alcance del 
 Producto Mínimo Viable (MVP) y prioriza las mecánicas 
 centrales que definen la experiencia \textit{roguelike} en la ambientación de 
-la Divina Comedia.
+la Divina Comedia. El objetivo de esta sección es describir, de forma clara y 
+comprensible, qué elementos formarán parte de la primera versión funcional del juego 
+y qué papel cumple cada uno dentro de la experiencia completa.
 
 \subsection{Dominio: Jugador y Mecánicas Core}
-Este conjunto abarca las funcionalidades críticas relacionadas con el control, 
-el combate y el ciclo de vida del avatar.
+Este conjunto reúne las funcionalidades esenciales del jugador, es decir, aquellas 
+sin las cuales no sería posible jugar una partida completa. Incluye el control del 
+personaje, la interacción con los enemigos y las reglas básicas que determinan cuándo 
+una partida continúa y cuándo termina.
 \begin{itemize}
-    \item \textbf{Gestión de Personajes:} Implementación del sistema dual.
+    \item \textbf{Gestión de Personajes:} Se implementará un sistema de dos personajes 
+    jugables, con capacidad para distinguirlos y gestionar cuál está activo en cada 
+    momento de la partida.
     \begin{itemize}
-        \item La dualidad de los personaes por definir todavia.
+        \item La idea es que ambos personajes compartan la base del control, pero puedan 
+        tener diferencias en atributos o comportamiento para aportar variedad jugable.
     \end{itemize}
     \item \textbf{Sistema de Combate:}
     \begin{itemize}
-        \item Sistema de combate por definir todavia.
+        \item Se desarrollará el sistema que permite atacar, recibir daño y resolver los 
+        enfrentamientos contra enemigos y jefes.
+        \item Este sistema incluirá la lógica básica de impacto, daño y respuesta visual 
+        para que el combate resulte comprensible para el jugador.
     \end{itemize}
     \item \textbf{Ciclo de Vida (Run):}
     \begin{itemize}
-        \item Gestionar la salud actual y el estado de muerte (Game Over).
-        \item Reiniciar el progreso del mundo al morir (Muerte permanente).
+        \item Se controlará la salud del jugador, el estado de muerte y la condición que 
+        determina el final de la partida.
+        \item Cuando el personaje muera, la partida se reiniciará para mantener la 
+        estructura típica de un roguelike con progresión por intentos.
     \end{itemize}
 \end{itemize}
 
 \subsection{Dominio: Generación Procedural y Mundo}
-Funcionalidades encargadas de la construcción dinámica de los nueve círculos del infierno.
+Este bloque describe cómo se construirá el escenario de forma automática en cada partida. 
+En lugar de usar un único mapa fijo, el juego generará niveles diferentes dentro de los 
+nueve círculos del infierno, lo que aporta rejugabilidad y hace que cada intento sea distinto.
 \begin{itemize}
     \item \textbf{Algoritmo de Generación:}
     \begin{itemize}
-        \item Generar estructura de cuadrícula de A a B salas aleatorias (cambiar valores).
-        \item Seleccionar \textit{layouts} prediseñados de salas (combate, tesoro, tienda, 
-        descanso).
-        \item Aumentar la complejidad del mapa según la profundidad del círculo.
+        \item Se generará una estructura de habitaciones conectadas entre sí siguiendo una 
+        lógica procedimental, de manera que el mapa cambie en cada partida.
+        \item Las salas no serán todas iguales: se escogerán distintos \textit{layouts} 
+        prediseñados según el tipo de habitación, como salas de combate, tesoro, tienda o descanso.
+        \item La dificultad y la complejidad del mapa aumentarán progresivamente a medida que 
+        el jugador avance por círculos más profundos.
     \end{itemize}
     \item \textbf{Navegación:}
     \begin{itemize}
-        \item Gestionar el estado de las puertas (bloqueo por enemigos vivos).
-        \item Transicionar entre niveles (círculos) al derrotar al jefe.
+        \item Se controlará el estado de las puertas para evitar que el jugador avance mientras 
+        queden enemigos vivos en una sala.
+        \item El paso de un círculo al siguiente se activará al derrotar al jefe correspondiente.
     \end{itemize}
 \end{itemize}
 
 \subsection{Dominio: Entidades y Comportamiento}
-Definición de los agentes hostiles que pueblan el juego.
+Este apartado incluye a los enemigos y jefes que el jugador encontrará durante la partida. 
+Su función es generar desafío, obligar al jugador a adaptar su forma de jugar y dar identidad 
+propia a cada zona del juego.
 \begin{itemize}
-    \item \textbf{Arquetipos de Enemigos (10-15 variantes):}
+    \item \textbf{Arquetipos de Enemigos:} Cada uno de los nueve círculos contará con tres 
+    tipos de enemigo claramente definidos, de forma que la dificultad y la variedad aumenten 
+    de manera controlada a lo largo de la partida.
     \begin{itemize}
-        \item \textit{Chaser:} Navegación directa hacia el jugador (Pathfinding).
-        \item \textit{Ranged:} Cálculo de trayectoria y disparo de proyectiles.
-        \item \textit{Tank:} Comportamiento defensivo y alta resistencia.
-        \item \textit{Flying:} Movimiento ignorando obstáculos del terreno.
+        \item \textbf{Melee:} Enemigos de corto alcance con un comportamiento estándar, 
+        pensados para constituir la base del combate en cada círculo.
+        \item \textbf{Flying:} Enemigos que se desplazan por el escenario evitando parte de 
+        las limitaciones del terreno, lo que los hace más difíciles de controlar.
+        \item \textbf{Tank:} Enemigos más resistentes y peligrosos, diseñados para resistir 
+        más daño y obligar al jugador a prestarles una atención especial.
     \end{itemize}
     \item \textbf{Jefes Finales:}
     \begin{itemize}
-        \item \textbf{Cancerbero:} Patrones de ataques por definir todavia.
-        \item \textbf{Satán:} Patrones de ataques por definir todavia.
+        \item \textbf{Cancerbero:} Jefe de un nivel avanzado, con un conjunto de ataques y 
+        patrones específicos que funcionarán como prueba de habilidad para el jugador.
+        \item \textbf{Satán:} Jefe final del recorrido, diseñado como el mayor reto de la partida 
+        y encargado de cerrar el progreso del jugador dentro del juego.
     \end{itemize}
 \end{itemize}
 
 \subsection{Dominio: Economía y Progresión}
-Sistemas que otorgan profundidad estratégica a la partida.
+En este bloque se agrupan los sistemas que hacen que la partida no se base solo en combatir, 
+sino también en tomar decisiones sobre recursos y mejoras. Estos elementos dan sentido al 
+progreso del jugador dentro de una misma run.
 \begin{itemize}
     \item \textbf{Sistema de Ítems:}
     \begin{itemize}
-        \item Aplicar modificadores de estadísticas (ítems pasivos).
-        \item Ejecutar efectos de un solo uso (consumibles).
+        \item Se implementarán objetos que modifiquen las estadísticas del personaje de forma 
+        permanente o mientras dure la partida.
+        \item También habrá consumibles con efectos puntuales, pensados para resolver situaciones 
+        concretas o dar una ventaja temporal.
     \end{itemize}
     \item \textbf{Economía:}
     \begin{itemize}
-        \item Generar y recolectar monedas (\textit{drops}) de enemigos.
-        \item Transaccionar compra de mejoras en la sala de tienda.
+        \item Los enemigos podrán soltar monedas u otros recursos al ser derrotados, para que el 
+        jugador obtenga recompensas por avanzar y combatir.
+        \item Esos recursos se podrán gastar en la sala de tienda para adquirir mejoras, objetos 
+        o ventajas que ayuden a progresar.
     \end{itemize}
 \end{itemize}
 
 \subsection{Dominio: Interfaz y Feedback (UI/UX)}
 \begin{itemize}
-    \item \textbf{HUD (Heads-Up Display):} Visualizar vida, personaje activo, 
-    minimapa y \textit{cooldowns}.
-    \item \textbf{Flujo de Pantallas:} Navegación entre Menú Principal, 
-    Pausa y Pantalla de Resultados.
+    \item \textbf{HUD (Heads-Up Display):} Se mostrará en pantalla la información 
+    imprescindible para jugar, como la vida, el personaje activo, el minimapa y los tiempos 
+    de espera de habilidades o acciones.
+    \item \textbf{Flujo de Pantallas:} Se implementará la navegación entre las pantallas 
+    principales del juego, incluyendo el menú inicial, la pausa durante la partida y la 
+    pantalla final de resultados.
 \end{itemize}
 
 \section{Diseño arquitectónico}
