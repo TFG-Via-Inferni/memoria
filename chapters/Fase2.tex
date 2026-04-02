@@ -7,13 +7,61 @@ la implementación de los sistemas CORE del videojuego.
 \end{abstract}
 
 \section{Objetivos de la fase}
-En esta sección se detallarán los objetivos técnicos de implementación del núcleo del juego.
+Durante esta fase se definió e implementó la base funcional del videojuego. El objetivo principal
+fue construir los sistemas esenciales sobre los que se apoya el resto del proyecto, garantizando
+que la experiencia de juego pudiera desarrollarse de forma estable y coherente desde el inicio.
+
+En esta etapa se abordaron tanto la generación del mundo como la estructura básica de juego,
+la interacción del jugador con el entorno y la interfaz mínima necesaria para que la partida
+resultara jugable.
 
 \section{Trabajo realizado}
-En esta sección se describirán las funcionalidades núcleo implementadas y su estado.
+El trabajo realizado durante esta fase siguió el flujo de trabajo definido para el proyecto y
+se ejecutó de forma secuencial, de manera que cada tarea sirviera de base para la siguiente.
+Primero se asentaron los sistemas estructurales del juego, después se incorporaron los elementos
+jugables y, finalmente, se añadieron los componentes de interfaz y apoyo necesarios para cerrar
+una versión funcional y comprensible para el jugador.
+
+Las tareas desarrolladas fueron las siguientes, en el orden en el que se fueron abordando:
+
+\begin{enumerate}
+	\item Implementar generación procedural.
+	\item Añadir jugador.
+	\item Añadir enemigo.
+	\item Actualizar generación procedural.
+	\item Implementar lógica de círculos.
+	\item Actualizar cámara del personaje.
+	\item Implementar dualidad de personajes.
+	\item Implementar lógica de salas.
+	\item Implementar minimapa.
+	\item Implementar pantalla de pausa.
+	\item Añadir HUD.
+	\item Implementar menú principal.
+	\item Implementar libro.
+\end{enumerate}
+
+Este orden respondió a una lógica de dependencia técnica: la generación procedural debía estar
+lista antes de integrar correctamente al jugador y a los enemigos; la lógica de círculos y salas
+era necesaria para estructurar la progresión del nivel; y, una vez consolidada la base jugable,
+se añadieron la cámara, el minimapa, la pausa, el HUD, el menú principal y el libro del juego.
+
+El libro se entendió como el diccionario del juego, en el que se recogen los distintos enemigos
+y objetos existentes para su consulta dentro de la propia experiencia de juego.
 
 \section{Validación y resultados}
-En esta sección se presentarán pruebas, comprobaciones y resultados de estabilidad del núcleo.
+La validación de esta fase se centró en comprobar que todos los sistemas núcleo quedaban integrados
+entre sí y que el jugador podía avanzar dentro de una versión funcional del proyecto. Se realizaron
+pruebas sobre la generación de niveles, el comportamiento del personaje, la navegación entre salas
+y la correcta visualización de la interfaz.
+
+Como resultado, quedó consolidada una base jugable sobre la que fue posible seguir desarrollando
+contenido y ampliar el proyecto en fases posteriores.
 
 \section{Incidencias y ajustes}
-En esta sección se documentarán incidencias detectadas y ajustes aplicados durante la implementación.
+Durante la fase se realizaron ajustes sobre la generación procedural, la cámara y la estructura de
+las salas para asegurar que todos los sistemas funcionaran de forma coordinada. También fue necesario
+adaptar distintos elementos de la interfaz para que la información del juego se mostrara de forma clara
+y consistente.
+
+Estos ajustes permitieron estabilizar el núcleo del juego y dejaron preparada la arquitectura base
+para la incorporación de nuevas funcionalidades.
