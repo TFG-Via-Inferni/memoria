@@ -7,12 +7,12 @@ The good parts of a book may be only something a writer is lucky enough to overh
 
 \begin{abstract}
 Este capítulo describe la estrategia de gestión y el cronograma seguidos 
-para el desarrollo de \textit{Via Inferni}. Se detalla la división del proyecto en 
-cuatro fases lógicas, desde la concepción inicial hasta el cierre, justificando el 
-esfuerzo temporal y la carga de trabajo necesaria para cumplir con los estándares de un 
-Trabajo de Fin de Grado en Ingeniería Informática. El objetivo es ofrecer una visión clara 
-de cómo se han administrado los recursos y el tiempo para transformar los requisitos
-en un producto funcional.
+para el desarrollo de \textit{Via Inferni}. El proyecto se organiza ahora en tres fases 
+claras: planificación y gestión, diseño e implementación, y cierre del proyecto. 
+La Fase 2 se desglosa además en varias iteraciones asociadas al backlog, de forma que 
+quede trazabilidad entre cada issue, su motivación y el momento en el que se consideró 
+realmente terminada. El objetivo es ofrecer una visión clara de cómo se han administrado 
+los recursos y el tiempo para transformar los requisitos en un producto funcional.
 \end{abstract}
 
 \section{Resumen temporal del proyecto}
@@ -33,16 +33,15 @@ en un producto funcional.
 \textbf{ESTE CAPÍTULO DEBE ESCRIBIRSE AL COMIENZO DEL PROYECTO}
 
 En esta sección se presenta el desglose inicialmente planificado de las fases en las que se ha dividido el proyecto,
-así como una justificación de cada una de ellas. Se han definido cuatro fases principales:
+así como una justificación de cada una de ellas. Se han definido tres fases principales:
 
 \begin{table*}[htb]
 	\centering
 	\begin{coolTable}{ll}{2}
 {Resumen de fases del proyecto}
-	\textbf{Fase 1: Planificación y Diseño}&09/02/2026 a 15/02/2026\\
-	\textbf{Fase 2: Implementación del Núcleo}&16/02/2026 a 15/03/2026\\
-	\textbf{Fase 3: Implementación, Pruebas y Depuración}&16/03/2026 a 10/05/2026\\
-	\textbf{Fase 4: Cierre del Proyecto y Presentación del TFG}&11/05/2026 a 25/05/2026\\
+	\textbf{Fase 1: Planificación y Gestión}&09/02/2026 a 15/02/2026\\
+	\textbf{Fase 2: Diseño e Implementación}&16/02/2026 a 10/05/2026\\
+	\textbf{Fase 3: Cierre del Proyecto}&11/05/2026 a 25/05/2026\\
 	\end{coolTable}
 	\caption{Planificación temporal de fases del proyecto}
 \end{table*}
@@ -56,68 +55,57 @@ una comunicación constante con reuniones recurrentes para asegurar la integraci
 una vez al final de cada semana se realizará una reunión de seguimiento para revisar el progreso y
 planificar las tareas de la semana siguiente.
 
-\subsection{Fase 1: Planificación y Diseño}
+\subsection{Fase 1: Planificación y Gestión}
 
 Esta fase consistirá en realizar un análisis detallado de los requisitos del proyecto, definir 
-los objetivos específicos y elaborar un plan de trabajo detallado. Además, habrá que diseñar 
-la arquitectura del sistema y seleccionar las tecnologías y herramientas a utilizar.
+los objetivos específicos y elaborar un plan de trabajo detallado. Además, se fijará la estructura 
+de gestión del proyecto, la organización del backlog, la cadencia de revisión y la forma en la que 
+se documentarán los avances para que la memoria evolucione al mismo ritmo que el desarrollo.
 
 Se ha estimado una duración de una semana para esta fase, considerando el tiempo necesario para 
 la investigación, la elaboración de documentos de diseño y la planificación detallada del proyecto.
 Además, todo el trabajo previo hace posible esta aparentemente corta planificación, ya que se han realizado
 tareas de investigación y recopilación de información durante el periodo previo al inicio oficial del proyecto.
 
-\subsection{Fase 2: Implementación del Núcleo}
+\subsection{Fase 2: Diseño e Implementación}
 
-Durante esta fase se llevará a cabo la implementación de los componentes fundamentales del sistema,
-lo que sería el core del juego. Esto es el sistema de generación procedural de niveles, la gestión 
-de personajes, enemigos y objetos, y en general la implementación de la mecánica de juego básica.
+Durante esta fase se llevará a cabo el diseño incremental y la implementación de los componentes 
+fundamentales del sistema, es decir, el núcleo jugable del proyecto. La fase se ha descompuesto en 
+iteraciones ligadas al backlog para que cada issue quede asociado a un objetivo claro y a una razón 
+concreta de cierre.
 
 El objetivo de esta fase es establecer una base sólida sobre la cual se puedan construir las funcionalidades
-adicionales en fases posteriores, como podrán ser una mayor variedad de niveles, nuevos objetos y diferentes
-patrones de comportamiento de enemigos.
+adicionales, diferenciando entre features del FDD y tareas concretas del backlog. Así, por ejemplo, la feature
+\gls{generacionprocedural} se materializa en dos tareas distintas, \textit{Generación Procedural (I)} y
+\textit{Generación Procedural (II)}, porque la primera establece el esqueleto del sistema y la segunda lo
+ajusta una vez integrados el jugador, los enemigos y la estructura de salas.
 
 La implementación del núcleo se llevará a cabo de forma conjunta por los dos integrantes del equipo,
-de forma que se facilite el trabajo y la colaboración. Las tareas durante la siguiente fase podrán
-ser más individualizadas, pero durante esta fase se ha considerado importante que ambos integrantes 
-estén involucrados en la implementación del núcleo para asegurar una comprensión compartida del sistema. 
+de forma que se facilite el trabajo y la colaboración. Las tareas de la fase se agrupan en seis iteraciones,
+cada una con una justificación funcional propia:
 
-Se ha estimado una duración de cuatro semanas para esta fase, considerando la complejidad de los
-componentes a implementar y la falta de experiencia previa en el desarrollo de este tipo de sistemas.
-La idea es que ambos integrantes del equipo puedan colaborar y compartir el conocimiento, facilitando
-el trabajo de la siguiente fase.
+\begin{enumerate}
+\item \textbf{Iteración 1.} \textit{Generación Procedural (I)}, \textit{Añadir Jugador} y \textit{Añadir Enemigo}. Esta iteración fijó la base jugable mínima, porque sin generación de niveles y entidades principales no tenía sentido cerrar el resto del flujo de juego.
+\item \textbf{Iteración 2.} \textit{Generación Procedural (II)}, \textit{Lógica de Círculos (I)} y \textit{Cámara del Jugador}. La segunda iteración se reservó para estabilizar la estructura del nivel antes de seguir con la navegación y el encuadre de la cámara.
+\item \textbf{Iteración 3.} \textit{Lógica de Círculos (II)}, \textit{Dualidad de Personajes} y \textit{Minimap (I)}. Se pospuso parte de esta iteración porque la lógica de círculos necesitaba validarse tras la segunda pasada sobre la generación y porque el minimapa dependía de una estructura de nivel estable.
+\item \textbf{Iteración 4.} \textit{Head-Up Display (HUD)}, \textit{Menús (I)} y \textit{Menús (II)}. La interfaz se abordó cuando ya existía una experiencia jugable básica, para no bloquear el trabajo de sistema con elementos puramente de presentación.
+\item \textbf{Iteración 5.} \textit{Actualizar Sprites (I)}, \textit{Sistema de Combate (I)} y \textit{Sistema de Enemigos (I)}. El combate y el comportamiento enemigo se cerraron más tarde porque dependían de la cámara, la navegación y la base de interacción ya estabilizadas.
+\item \textbf{Iteración 6.} \textit{Gestión de Inventario}, \textit{Objetos} y \textit{Minimap (II)}. Esta iteración se dejó para el final de la fase porque inventario y objetos solo tenían sentido con el resto del bucle jugable consolidado, y el minimapa necesitaba un repaso final tras integrar todos los sistemas previos.
+\end{enumerate}
 
-\subsection{Fase 3: Implementación, Pruebas y Depuración}
+Se ha estimado una duración amplia para esta fase, considerando la complejidad de los componentes a implementar
+y la necesidad de ir cerrando cada issue cuando realmente dejaba de depender de otra iteración anterior. La idea es
+que ambos integrantes del equipo puedan colaborar y compartir el conocimiento, facilitando el trabajo de la fase de cierre.
 
-En esta fase se implementarán las funcionalidades adicionales del sistema, como la generación de niveles 
-más variados, la incorporación de nuevos objetos y enemigos, y la mejora de la mecánica de juego básica 
-establecida en la fase anterior. También se concentrará en esta etapa el trabajo de pruebas, depuración y 
-ajuste de las funcionalidades ya desarrolladas, para dejar una versión estable del juego antes del cierre.
+\subsection{Fase 3: Cierre del Proyecto}
 
-Como ya se ha mencionado, las tareas en esta fase podrán ser más individualizadas. Esto permitirá
-que, en caso de que surja algún tipo de dificultad que provoque que un miembro tenga que dejar
-de trabajar, o una eventual separación del equipo, cada integrante podrá mostrar y justificar
-su trabajo individual. De cualquier forma, y teniendo en cuenta que lo anteriormente mencionado
-se trata de una situación excepcional, se mantendrá una comunicación constante para asegurar 
-la coherencia del sistema y la integración.
-
-Se ha estimado una duración de ocho semanas para esta fase, teniendo en cuenta que la cantidad de funcionalidades
-adicionales que se pueden desarrollar es potencialmente muy amplia y que se pueden presentar desafíos técnicos
-durante la implementación y la validación. El alcance final de esta fase se irá adaptando en función del progreso realizado y
-de las dificultades encontradas, pero se ha considerado que ocho semanas es un plazo razonable para implementar, 
-comprobar y depurar una cantidad significativa de funcionalidades adicionales. Cabe destacar que parte de este periodo
-coincide con la Semana Santa, festividad que puede afectar el ritmo de trabajo del equipo.
-
-\subsection{Fase 4: Cierre del Proyecto y Presentación del TFG}
-
-En esta fase se realizará la documentación final del proyecto, incluyendo el manual de usuario y el 
-informe final. Además, se preparará la presentación del TFG y se llevará a cabo una revisión 
-general para asegurar que todo el trabajo realizado esté correctamente documentado y presentado 
-antes de la defensa.
+En esta fase se reservará el espacio para la revisión final del proyecto, la preparación de la defensa,
+la consolidación de la documentación y el cierre administrativo de la memoria. De momento se deja vacía,
+porque el trabajo asociado a este tramo todavía no se ha incorporado al texto final.
 
 Se ha estimado una duración de dos semanas para esta fase, considerando que la memoria se encontrará en
-un estado avanzado al trabajar sobre ella a lo largo de todo el proyecto, y que la preparación de 
-la presentación final requerirá tiempo para organizar el contenido y ensayar la presentación.
+un estado avanzado al trabajar sobre ella a lo largo de todo el proyecto, y que la preparación de la
+presentación final requerirá tiempo para organizar el contenido y ensayar la exposición.
 
 \section{Informe de tiempos del proyecto}
 
@@ -142,18 +130,14 @@ En esta sección se recogerá el contenido que se vaya completando para cada fas
 El objetivo es dejar un espacio claro en la memoria para ir incorporando, de forma ordenada, 
 qué se ha hecho en cada momento, qué decisiones se han tomado y qué resultados se han obtenido.
 
-\subsection{Fase 1: Planificación y Diseño}
+\subsection{Fase 1: Planificación y Gestión}
 En esta subsección se describirá todo lo relacionado con el arranque del proyecto: análisis inicial, 
-definición de objetivos, elección de herramientas, diseño de la arquitectura y preparación del plan de trabajo.
+definición de objetivos, elección de herramientas, organización del backlog y preparación del plan de trabajo.
 
-\subsection{Fase 2: Implementación del Núcleo}
-En esta subsección se incluirá el desarrollo de las mecánicas base del juego, es decir, todo lo necesario 
-para construir el núcleo funcional sobre el que se apoyará el resto del proyecto.
+\subsection{Fase 2: Diseño e Implementación}
+En esta subsección se recogerá el desarrollo de las mecánicas base del juego, distribuidas por iteraciones,
+junto con la justificación de por qué cada issue se cerró en una iteración concreta y no en la anterior.
 
-\subsection{Fase 3: Implementación, Pruebas y Depuración}
-En esta subsección se recogerá la implementación de funcionalidades adicionales, junto con las pruebas, 
-la depuración y los ajustes realizados para estabilizar el juego.
-
-\subsection{Fase 4: Cierre del Proyecto y Presentación del TFG}
-En esta subsección se añadirá la documentación final, la preparación de la presentación y la revisión 
-final del trabajo antes de su entrega.
+\subsection{Fase 3: Cierre del Proyecto}
+En esta subsección se añadirá, cuando corresponda, la documentación final, la preparación de la presentación 
+y la revisión final del trabajo antes de su entrega.

@@ -8,6 +8,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \selectlanguage{spanish}
+\renewcommand{\figurename}{Cuadro}
+\renewcommand{\listfigurename}{Índice de cuadros}
 
 \usepackage[pdftex,final]{graphicx}
 
@@ -64,6 +66,7 @@ Tu dedicatoria aquí
 
 \pagenumbering{arabic}
 \input{frontmatter/acronyms}
+\input{frontmatter/glossary}
 
 \lineNumbersOn
 \part{Introducción}
@@ -85,7 +88,6 @@ Tu dedicatoria aquí
 
 \part{Cierre del proyecto}
 
-\input{chapters/Fase4}
 \input{chapters/Manual}
 \input{chapters/Conclusiones}
 

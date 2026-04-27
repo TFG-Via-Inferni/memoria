@@ -1,9 +1,10 @@
 %!TEX root =  tfg.tex
-\chapter{Fase 2: Implementación del Núcleo}
+\chapter{Fase 2: Diseño e Implementación}
 
 \begin{abstract}
-Este capítulo recoge el trabajo realizado durante la Fase 2 del proyecto, enfocada en
-la implementación de los sistemas CORE del videojuego.
+Este capítulo recoge el trabajo realizado durante la Fase 2 del proyecto, organizada por features
+del FDD. Para cada feature se explica su objetivo general y, cuando ha sido necesario, su desglose
+en varias issues de backlog distribuidas en distintas iteraciones.
 \end{abstract}
 
 \section{Objetivos de la fase}
@@ -13,53 +14,76 @@ que la experiencia de juego pudiera desarrollarse de forma estable y coherente d
 
 En esta etapa se abordaron tanto la generación del mundo como la estructura básica de juego,
 la interacción del jugador con el entorno y la interfaz mínima necesaria para que la partida
-resultara jugable.
+resultara jugable. El seguimiento se ha realizado a nivel de feature general, vinculando su
+ejecución a issues concretas cuando la complejidad obligó a dividir el trabajo en varias iteraciones.
 
-\section{Trabajo realizado}
+\section{Desarrollo por features}
 El trabajo realizado durante esta fase siguió el flujo de trabajo definido para el proyecto y
-se ejecutó de forma secuencial, de manera que cada tarea sirviera de base para la siguiente.
-Primero se asentaron los sistemas estructurales del juego, después se incorporaron los elementos
-jugables y, finalmente, se añadieron los componentes de interfaz y apoyo necesarios para cerrar
-una versión funcional y comprensible para el jugador.
+se ejecutó de forma incremental. La planificación se controló por features del FDD y, dentro de
+cada feature, por issues de backlog que permitieran cerrar entregables verificables por iteración.
 
-Las tareas desarrolladas fueron las siguientes, en el orden en el que se fueron abordando:
+\subsection{Feature: Generación Procedural}
+Esta feature define el sistema que construye el nivel de forma dinámica. Incluye la estructura del
+mapa, la conexión entre zonas y las reglas de distribución del contenido inicial.
 
 \begin{enumerate}
-	\item Implementar generación procedural.
-	\item Añadir jugador.
-	\item Añadir enemigo.
-	\item Actualizar generación procedural.
-	\item Implementar lógica de círculos.
-	\item Actualizar cámara del personaje.
-	\item Implementar dualidad de personajes.
-	\item Implementar lógica de salas.
-	\item Implementar minimapa.
-	\item Implementar pantalla de pausa.
-	\item Añadir HUD.
-	\item Implementar menú principal.
-	\item Implementar libro.
+\item \textbf{Issue: Generación Procedural (I) -- Iteración 1.} Se implementó una primera versión funcional para disponer de una base jugable donde validar movimiento, aparición de entidades y navegación inicial.
+\item \textbf{Issue: Generación Procedural (II) -- Iteración 2.} Se completó el refinamiento del sistema, ajustando distribución y estabilidad de la estructura del nivel.
 \end{enumerate}
 
-Este orden respondió a una lógica de dependencia técnica: la generación procedural debía estar
-lista antes de integrar correctamente al jugador y a los enemigos; la lógica de círculos y salas
-era necesaria para estructurar la progresión del nivel; y, una vez consolidada la base jugable,
-se añadieron la cámara, el minimapa, la pausa, el HUD, el menú principal y el libro del juego.
+Esta feature se dividió en dos issues porque su complejidad real fue mayor de la estimada al inicio.
+La primera entrega permitió validar el enfoque técnico, pero no era suficiente para dar por cerrada
+la feature completa sin una segunda iteración de ajustes.
 
-El libro se entendió como el diccionario del juego, en el que se recogen los distintos enemigos
-y objetos existentes para su consulta dentro de la propia experiencia de juego.
+\subsection{Feature: Lógica de Círculos}
+Esta feature gestiona la progresión del jugador por niveles temáticos y su coherencia con la estructura
+de partida.
 
-\section{Resumen de horas de la fase}
+\begin{enumerate}
+\item \textbf{Issue: Lógica de Círculos (I) -- Iteración 2.} Se construyó la versión inicial del flujo de progresión.
+\item \textbf{Issue: Lógica de Círculos (II) -- Iteración 3.} Se revisó y consolidó la lógica tras validar su integración con la generación del nivel.
+\end{enumerate}
 
-\begin{table*}[htb]
-	\centering
-	\begin{coolTable}{ll}{2}
-{Horas de la fase 2}
-	\textbf{Horas previstas}&Pendiente de ajustar\\
-	\textbf{Horas reales}&Pendiente de ajustar\\
-	\textbf{Observaciones}&Pendiente de ajustar\\
-	\end{coolTable}
-	\caption{Resumen de horas de la Fase 2}
-\end{table*}
+Se separó en dos issues porque la progresión dependía de componentes previos todavía inestables en la
+iteración 2. La segunda issue permitió cerrar inconsistencias detectadas durante la integración.
+
+\subsection{Feature: Minimap}
+Esta feature proporciona apoyo de navegación al jugador mediante una representación simplificada del nivel.
+
+\begin{enumerate}
+\item \textbf{Issue: Minimap (I) -- Iteración 3.} Se implementó la base visual y funcional para consulta de orientación.
+\item \textbf{Issue: Minimap (II) -- Iteración 6.} Se completó el ajuste final cuando la estructura completa del juego ya estaba estabilizada.
+\end{enumerate}
+
+La división en dos issues se debió a que el minimapa depende directamente del estado final de salas,
+rutas y sistemas de progresión. Cerrar la feature en una sola iteración habría generado retrabajo.
+
+\subsection{Feature: Menús}
+Esta feature engloba la navegación de pantallas y los flujos de entrada, pausa y salida del juego.
+
+\begin{enumerate}
+\item \textbf{Issue: Menús (I) -- Iteración 4.} Se implementaron los flujos principales de navegación.
+\item \textbf{Issue: Menús (II) -- Iteración 4.} Se refinó el comportamiento de transición y consistencia del flujo de pantallas.
+\end{enumerate}
+
+Aunque ambas issues se resolvieron en la misma iteración, se separaron para mantener trazabilidad entre
+la construcción base del sistema y su posterior consolidación de uso.
+
+\subsection{Features no divididas en iteraciones}
+El resto de trabajo de la fase se gestionó con una sola issue por feature o por bloque funcional:
+
+\begin{itemize}
+\item \textit{Añadir Jugador} (Iteración 1).
+\item \textit{Añadir Enemigo} (Iteración 1).
+\item \textit{Cámara del Jugador} (Iteración 2).
+\item \textit{Dualidad de Personajes} (Iteración 3).
+\item \textit{Head-Up Display (HUD)} (Iteración 4).
+\item \textit{Actualizar Sprites (I)} (Iteración 5).
+\item \textit{Sistema de Combate (I)} (Iteración 5).
+\item \textit{Sistema de Enemigos (I)} (Iteración 5).
+\item \textit{Gestión de Inventario} (Iteración 6).
+\item \textit{Objetos} (Iteración 6).
+\end{itemize}
 
 \section{Validación y resultados}
 La validación de esta fase se centró en comprobar que todos los sistemas núcleo quedaban integrados
@@ -71,10 +95,25 @@ Como resultado, quedó consolidada una base jugable sobre la que fue posible seg
 contenido y ampliar el proyecto en fases posteriores.
 
 \section{Incidencias y ajustes}
-Durante la fase se realizaron ajustes sobre la generación procedural, la cámara y la estructura de
-las salas para asegurar que todos los sistemas funcionaran de forma coordinada. También fue necesario
+Durante la fase se realizaron ajustes sobre la \gls{generacionprocedural}, la cámara y la estructura de
+las \glspl{sala} para asegurar que todos los sistemas funcionaran de forma coordinada. También fue necesario
 adaptar distintos elementos de la interfaz para que la información del juego se mostrara de forma clara
 y consistente.
 
+En concreto, se revisaron los sistemas de \gls{hud}, \gls{minimapa}, \gls{inventario}, \gls{objeto}, \gls{menu} y \gls{combate} para que el cierre de cada iteración no dejara tareas abiertas que pertenecieran a la siguiente. Este criterio evitó que una issue quedara artificialmente cerrada antes de tiempo.
+
 Estos ajustes permitieron estabilizar el núcleo del juego y dejaron preparada la arquitectura base
 para la incorporación de nuevas funcionalidades.
+
+\section{Resumen de horas de la fase}
+
+\begin{table*}[htb]
+	\centering
+	\begin{coolTable}{ll}{2}
+{Horas de la fase 2}
+	\textbf{Horas previstas}&Pendiente de ajustar\\
+	\textbf{Horas reales}&158\\
+	\textbf{Observaciones}&\\
+	\end{coolTable}
+	\caption{Resumen de horas de la Fase 2}
+\end{table*}
