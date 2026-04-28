@@ -1,0 +1,208 @@
+\section{Iteraci\'on 0}
+
+\subsection{Funcionalidades a desarrollar}
+
+La iteraci\'on 0 se concibi\'o como la primera entrega jugable del proyecto. Siguiendo el enfoque de
+\textit{Feature-Driven Development} (FDD), en esta iteraci\'on se abordaron las tres funcionalidades
+que definen el n\'ucleo del sistema:
+
+\begin{enumerate}
+\item \textbf{Generaci\'on procedural.} Construcci\'on autom\'atica de la mazmorra, incluyendo la
+topolog\'ia del nivel, la asignaci\'on de salas especiales y el soporte para habitaciones de distinto
+tama\~no y forma.
+\item \textbf{A\~nadir jugador.} Incorporaci\'on de una entidad controlable capaz de aparecer en la
+habitaci\'on inicial, recorrer el nivel y servir como referencia de navegaci\'on y seguimiento de
+c\'amara.
+\item \textbf{A\~nadir enemigos.} Integraci\'on de enemigos b\'asicos dentro de las salas, con
+comportamiento aut\'onomo simple y con capacidad de condicionar temporalmente la progresi\'on del
+jugador mediante el cierre de puertas.
+\end{enumerate}
+
+La combinaci\'on de estas tres funcionalidades permiti\'o pasar de una base t\'ecnica aislada a una
+primera versi\'on del bucle jugable: generar un nivel, recorrerlo con el jugador y resolver
+encuentros en salas con enemigos.
+
+\subsection{Dise\~no}
+
+Desde el punto de vista del dise\~no, la iteraci\'on se estructur\'o en torno a tres bloques
+coordinados: la generaci\'on abstracta del mapa, la materializaci\'on de ese mapa en salas jugables y
+la interacci\'on de entidades din\'amicas dentro de dichas salas. La Figura \ref{fig:uml-iteracion0}
+resume las relaciones principales entre las clases implicadas.
+
+\begin{figure}[htbp]
+\begin{center}
+% \missingfigure{Sustituir por el diagrama UML simplificado de la iteracion 0}
+\includegraphics[width=.6\textwidth]{figures/iteracion0_uml.pdf}
+\caption{Diagrama UML simplificado de la iteraci\'on 0}
+\label{fig:uml-iteracion0}
+\end{center}
+\end{figure}
+
+\subsubsection{Dise\~no de la generaci\'on procedural}
+
+La generaci\'on procedural se dise\~n\'o sobre una rejilla l\'ogica de 10x10 posiciones. Esta decisi\'on
+permite expresar las reglas de vecindad, conectividad y validaci\'on mediante \'indices enteros, lo
+que simplifica notablemente el algoritmo respecto a una representaci\'on geom\'etrica continua.
+
+La clase \texttt{MapGenerator} asume el papel de orquestador del proceso. Su responsabilidad no es
+dibujar salas concretas, sino construir una descripci\'on abstracta del nivel. Para ello mantiene un
+plano l\'ogico de ocupaci\'on y genera objetos \texttt{Cell} enriquecidos con dos propiedades clave:
+el tipo de sala y su forma geom\'etrica.
+
+El dise\~no contempla desde el inicio la existencia de salas de 1x1, 1x2, 2x1, 2x2 y en forma de
+L. Esto oblig\'o a que la unidad de trabajo no fuese una casilla individual, sino una agrupaci\'on de
+casillas coordinadas representadas por una misma \texttt{Cell}. Esa decisi\'on fue importante porque
+evit\'o limitar el sistema a habitaciones triviales y prepar\'o el terreno para una mayor variedad
+espacial desde las primeras iteraciones.
+
+\subsubsection{Dise\~no de las salas y de la conectividad}
+
+Para evitar acoplar el generador procedural con el contenido visual de cada habitaci\'on, se
+estableci\'o una segunda capa de traducci\'on gestionada por \texttt{RoomManager}. Mientras
+\texttt{MapGenerator} produce la topolog\'ia, \texttt{RoomManager} decide qu\'e prefab de sala debe
+instanciarse para cada \texttt{Cell} a partir de su forma, tipo y patr\'on de ocupaci\'on.
+
+La clase \texttt{Room} se dise\~n\'o como responsable local del montaje de cada habitaci\'on. En ella
+se integran tres tareas: la carga de la variaci\'on visual, la colocaci\'on de puertas y muros seg\'un
+la conectividad con salas vecinas y la gesti\'on de los enemigos que pertenecen a esa sala.
+
+La configuraci\'on de puertas se externaliza en \texttt{DoorScriptable}. Esta decisi\'on separa la
+l\'ogica estructural de la representaci\'on visual y facilita modificar el aspecto de las transiciones
+sin reescribir la l\'ogica de conexi\'on entre habitaciones.
+
+\subsubsection{Dise\~no del jugador y de los enemigos}
+
+En esta iteraci\'on, el jugador se dise\~n\'o con un enfoque deliberadamente simple. La clase
+\texttt{Player} concentra el movimiento sobre \texttt{Rigidbody2D}, lo que era suficiente para validar
+la navegaci\'on por el mapa generado y el ajuste espacial de las salas.
+
+Los enemigos se dise\~naron tambi\'en con una estructura sencilla pero extensible. La clase
+\texttt{EnemyController} implementa una m\'aquina de estados elemental con tres comportamientos:
+\textit{Idle}, \textit{Chase} y \textit{Attack}. Esta decisi\'on permiti\'o incorporar oposici\'on jugable
+sin introducir todav\'ia un sistema de IA complejo.
+
+La interacci\'on entre jugador, enemigos y sala se resolvi\'o a trav\'es del propio objeto
+\texttt{Room}. Cuando el jugador entra por primera vez en una habitaci\'on con enemigos, la sala
+bloquea sus puertas. Cuando todos los enemigos asociados han sido eliminados, las puertas se
+desbloquean. Este dise\~no convierte la habitaci\'on en una unidad jugable autocontenida y da forma
+al primer bucle de exploraci\'on y combate del proyecto.
+
+\subsection{Implementaci\'on}
+
+\subsubsection{Construcci\'on del mapa}
+
+La implementaci\'on del generador procedural parte de una estructura de ocupaci\'on lineal
+\texttt{floorPlan} y de una cola de exploraci\'on. El nivel arranca en una posici\'on central fija y va
+expandi\'endose hacia celdas adyacentes siempre que se cumplan varias restricciones de validez: que
+la casilla no haya sido ocupada, que no genere una conectividad excesiva y que la decisi\'on
+aleatoria de expansi\'on la acepte.
+
+De forma simplificada, el criterio de aceptaci\'on de una nueva casilla se resume en el Listado
+\ref{lst:visitcell}. Este fragmento resulta relevante porque concentra la decisi\'on principal del
+algoritmo: cu\'ando una posici\'on pasa a formar parte del nivel generado.
+
+\begin{lstlisting}[language={[Sharp]C},caption={Condicion simplificada de aceptacion de una celda en la generacion procedural},label={lst:visitcell}]
+if (floorPlan[index] != 0 ||
+    GetNeighborCount(index) > 1 ||
+    floorPlantCount > maxRooms ||
+    Random.value < 0.5f)
+{
+    return false;
+}
+\end{lstlisting}
+
+Cuando una expansi\'on se acepta, puede materializarse como una habitaci\'on simple o como una sala
+compuesta. Para ello se prueban patrones de offsets predefinidos que permiten formar habitaciones
+verticales, horizontales, de cuatro bloques o en forma de L. Una vez validada la forma, se crea la
+\texttt{Cell} correspondiente y se registran sus tiles ocupados.
+
+Tras generar el trazado principal se asignan las salas especiales: jefe, tienda, objeto y secreta.
+La sala secreta se trata de forma particular, ya que debe colocarse en una posici\'on vac\'ia pero
+adyacente a varias salas existentes para mantener su car\'acter oculto sin romper la coherencia del
+mapa.
+
+\subsubsection{Instanciaci\'on de habitaciones}
+
+Con la topolog\'ia ya generada, \texttt{RoomManager} recorre la lista de celdas y busca para cada una
+el \texttt{RoomScriptable} que coincide con su forma, tipo y distribuci\'on de tiles. La comprobaci\'on
+de compatibilidad normaliza la ocupaci\'on de tiles de la sala generada, de modo que la comparaci\'on
+no dependa de su posici\'on absoluta en la rejilla.
+
+Una vez elegida la definici\'on adecuada, se instancia un prefab base de \texttt{Room} y se le delega
+la configuraci\'on local. Dentro de la sala, se instancia una variaci\'on visual y se reajusta su
+tilemap para centrarlo correctamente. A continuaci\'on, se eval\'uan los bordes de la sala para
+decidir si deben colocarse puertas o muros.
+
+La clase \texttt{Door} no solo instancia el sprite de una puerta, sino que tambi\'en conserva la
+referencia al prefab de muro asociado. Gracias a ello, una puerta puede transformarse temporalmente
+en muro y volver a su estado original cuando la sala queda despejada.
+
+\subsubsection{Integraci\'on del jugador}
+
+La implementaci\'on del jugador se resolvi\'o mediante un controlador ligero basado en
+\texttt{Rigidbody2D}. En cada ciclo de actualizaci\'on se leen los ejes horizontal y vertical de
+Unity, y en la actualizaci\'on f\'isica se aplica la velocidad resultante al rigidbody. Esta soluci\'on,
+aunque sencilla, fue suficiente para validar tanto la escala de movimiento como la distribuci\'on
+real de las habitaciones.
+
+La aparici\'on del jugador se integra directamente con el generador procedural. En lugar de usar una
+coordenada fija de escena, el jugador se instancia en la sala central del nivel, calculando su
+posici\'on real a partir de la celda que contiene la casilla inicial y de los offsets empleados al
+materializar las salas.
+
+\subsubsection{Integraci\'on de enemigos y cierre de puertas}
+
+Los enemigos se instancian desde cada \texttt{Room} una vez configurada la habitaci\'on. El sistema
+genera un n\'umero aleatorio de enemigos dentro de un radio de aparici\'on alrededor del centro de la
+sala y conserva sus referencias en una lista de enemigos activos.
+
+Cada enemigo dispone de un comportamiento elemental gobernado por distancia al jugador. Si el
+jugador est\'a fuera de alcance, el enemigo permanece en reposo; si entra en su radio de detecci\'on,
+lo persigue; y si alcanza su rango de ataque, detiene el movimiento y ejecuta su acci\'on ofensiva
+seg\'un un enfriamiento temporal.
+
+El control del ritmo de combate se implementa en la propia sala. Un \texttt{RoomTrigger} detecta la
+entrada del jugador y notifica a la \texttt{Room} correspondiente. En ese primer acceso, si existen
+enemigos activos, se bloquean las puertas. Cada vez que un enemigo es eliminado, la sala actualiza
+su lista interna y, cuando esta queda vac\'ia, vuelve a abrir las puertas. Esta soluci\'on es simple,
+pero define claramente el patr\'on de ``entrar en sala, resolver encuentro y recuperar progreso''.
+
+\subsection{Resultados}
+
+El resultado de la iteraci\'on 0 fue la obtenci\'on de una primera base jugable y coherente del
+proyecto. Al finalizar la iteraci\'on ya se hab\'ia conseguido:
+
+\begin{itemize}
+\item generar proceduralmente un nivel con salas de distintas formas y con salas especiales;
+\item materializar ese nivel en habitaciones jugables conectadas mediante puertas y muros;
+\item incorporar un jugador capaz de desplazarse por el mapa generado;
+\item integrar enemigos b\'asicos en las salas y condicionar el avance del jugador mediante el
+bloqueo y desbloqueo de puertas.
+\end{itemize}
+
+Para documentar visualmente estos resultados, en esta subsecci\'on resulta especialmente adecuado
+insertar una captura general del mapa generado y una captura de una sala con enemigos activos. Las
+Figuras \ref{fig:iter0-mapa} y \ref{fig:iter0-combate} est\'an reservadas para ello.
+
+\begin{figure}[htbp]
+\begin{center}
+\missingfigure{Sustituir por captura del mapa generado con el jugador en la sala inicial}
+% \includegraphics[width=.9\textwidth]{figures/iteracion0_mapa_generado.png}
+\caption{Primera instancia jugable del mapa generado proceduralmente}
+\label{fig:iter0-mapa}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\missingfigure{Sustituir por captura de una sala con enemigos y puertas bloqueadas}
+% \includegraphics[width=.9\textwidth]{figures/iteracion0_sala_enemigos.png}
+\caption{Sala con enemigos activos y cierre temporal de puertas}
+\label{fig:iter0-combate}
+\end{center}
+\end{figure}
+
+Como cierre de la iteraci\'on, el sistema ya ofrec\'ia un primer bucle de juego completo: generar una
+mazmorra, recorrerla, entrar en una sala, enfrentarse a enemigos y continuar avanzando una vez
+resuelto el encuentro. Esa base fue suficiente para sostener el desarrollo de iteraciones
+posteriores con mec\'anicas y contenido m\'as avanzados.
