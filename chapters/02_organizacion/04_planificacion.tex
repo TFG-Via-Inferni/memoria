@@ -14,24 +14,36 @@ El desarrollo se ha dividido en tres grandes etapas que permiten una transición
 
 \subsection{Fase 1: Planificación y Gestión}
 Esta etapa comprende el establecimiento de los cimientos del proyecto. Se centra en el análisis de requisitos, la definición de objetivos técnicos y la configuración de toda la infraestructura necesaria, como el repositorio de código, el sistema de gestión de tareas y la elección del \textit{stack} tecnológico. Es aquí donde se desarrolla el modelo general de FDD que servirá de guía para el resto del trabajo.
+Esta etapa comprende el establecimiento de los cimientos del proyecto. Su finalidad es dejar preparado el marco de trabajo antes de entrar en la construcción del videojuego: análisis inicial del alcance, definición de objetivos, selección de herramientas, organización del repositorio y fijación del modelo de trabajo.
+
+La separación de esta fase respecto al resto está justificada porque aquí todavía no se pretende resolver problemas funcionales del juego, sino definir el contexto en el que esos problemas se abordarán. En otras palabras, primero se organiza el proyecto y después se ejecuta el desarrollo.
 
 \subsection{Fase 2: Diseño e Implementación}
 Representa el grueso del trabajo técnico y se desarrolla de forma puramente iterativa. En esta fase, se seleccionan elementos de la lista de funcionalidades para ser diseñados, implementados y validados. La duración total de esta etapa se subdivide en varias iteraciones de aproximadamente tres semanas cada una. Al final de cada ciclo, el equipo obtiene un incremento funcional del videojuego que se añade a la rama de desarrollo.
+Representa el grueso del trabajo técnico y se desarrolla de forma iterativa. En esta fase se toman las funcionalidades ya planificadas y se diseñan, implementan y validan en ciclos cerrados. Su existencia como fase independiente se justifica porque agrupa toda la construcción real del producto, separándola tanto de la preparación inicial como del cierre documental.
+
+La división interna de esta fase en iteraciones permite avanzar de forma controlada, revisar dependencias y consolidar incrementos funcionales sin acumular demasiado trabajo abierto al mismo tiempo. Cada iteración produce un avance verificable del proyecto y sirve como base para la siguiente.
 
 \subsection{Fase 3: Cierre del Proyecto}
 La fase final se dedica a la consolidación de la memoria técnica, la realización de las pruebas finales de integración y la preparación del material necesario para la defensa del trabajo. En esta etapa se asegura que toda la documentación técnica refleje fielmente la implementación final y se corrigen posibles inconsistencias detectadas durante el desarrollo.
+La fase final se dedica a consolidar el resultado obtenido, revisar la memoria técnica y preparar el material necesario para la defensa. Su propósito es cerrar el proyecto como producto académico, asegurando que la documentación refleja correctamente el trabajo realizado y que no quedan incoherencias entre planificación, desarrollo y resultados.
+
+Esta separación es importante porque el cierre no consiste en seguir desarrollando nuevas funcionalidades, sino en revisar, estabilizar y presentar de forma coherente lo ya construido.
 
 \section{Planes de Gestión del Proyecto}
 Para dotar al proyecto de un rigor profesional, se han aplicado conceptos extraídos del PMBOK, seleccionando los procesos que aportan mayor valor a un equipo reducido de ingeniería de software.
 
 \subsection{Gestión del Alcance}
 El alcance se gestiona mediante el \textit{Feature List} definido en la metodología FDD. Para evitar el fenómeno de la corrupción del alcance, cualquier propuesta de nueva funcionalidad durante el desarrollo debe ser sometida a un análisis de viabilidad temporal. Si la tarea compromete el cronograma de la Fase 2, se clasifica como una mejora para futuros desarrollos.
+El alcance se gestiona mediante el \textit{Feature List} definido en la metodología FDD. Cualquier nueva propuesta debe analizarse en relación con el valor que aporta y con el impacto que tendría sobre el cronograma. Si una idea compromete el objetivo de la fase de desarrollo, se pospone o se reserva como mejora futura. Con ello se evita que la planificación inicial quede desbordada por cambios tardíos de criterio.
 
 \subsection{Gestión de Tiempos y Calendario}
 Se estima una dedicación de 300 horas por miembro del equipo. El calendario se rige por hitos de control que coinciden con el final de cada fase y cada iteración. La visualización de este cronograma permite identificar desviaciones de forma temprana y ajustar la carga de trabajo de las siguientes iteraciones para cumplir con la fecha de entrega final.
+Se estima una dedicación de 300 horas por miembro del equipo. El calendario se articula mediante hitos de control asociados al final de cada fase y al cierre de cada iteración. Esta estructura facilita detectar desviaciones a tiempo y reajustar la carga de trabajo sin alterar la lógica general de la planificación.
 
 \subsection{Gestión de la Comunicación y RRHH}
 Al ser un equipo de dos personas, la comunicación es constante y bidireccional. No obstante, se establecen canales formales para evitar la pérdida de información:
+Al ser un equipo de dos personas, la comunicación es constante y bidireccional. Aun así, se establecen canales formales para evitar pérdidas de información y para que las decisiones importantes queden registradas:
 \begin{itemize}
     \item Se utiliza Discord para la coordinación técnica diaria y la resolución inmediata de bloqueos.
     \item Se realizan reuniones semanales de sincronización para actualizar el tablero Kanban y revisar la planificación de la iteración en curso.
@@ -40,6 +52,7 @@ Al ser un equipo de dos personas, la comunicación es constante y bidireccional.
 
 \subsection{Gestión de Riesgos}
 Se han identificado y priorizado los riesgos que podrían impactar en el éxito del proyecto:
+Se han identificado y priorizado los riesgos que podrían impactar en el éxito del proyecto. El objetivo no es eliminarlos por completo, sino reducir su probabilidad o su impacto antes de que comprometan el resultado final:
 \begin{itemize}
     \item \textbf{Riesgos Técnicos:} Problemas de rendimiento con el algoritmo de generación procedural. Se mitiga mediante la creación de prototipos tempranos o \textit{spikes} de investigación.
     \item \textbf{Riesgos de Plazos:} Retrasos debidos a la complejidad de la integración de sistemas. Se mitiga manteniendo un margen de seguridad en la fase de cierre y priorizando las funcionalidades críticas del núcleo jugable.
@@ -59,4 +72,4 @@ A continuación, se presenta la tabla resumen con las fechas estimadas para cada
     \caption{Resumen de las fases principales del proyecto.}
 \end{table}
 
-Dentro de la Fase 2, las iteraciones se han diseñado para cubrir los objetivos técnicos de manera incremental, asegurando que el juego sea siempre ejecutable. En cada iteración, se seleccionan los elementos del Kanban, se trackean a través de los estados definidos y se validan según la \textit{Definition of Done}.
+La tabla anterior resume el encaje temporal de cada fase. La descomposición interna de la Fase 2 en iteraciones no aparece aquí con detalle porque ese nivel de granularidad pertenece al desarrollo y no a la planificación general. En este capítulo solo interesa justificar el calendario y la lógica de reparto del trabajo; el detalle funcional se desarrolla más adelante en los capítulos técnicos.
