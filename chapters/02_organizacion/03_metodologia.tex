@@ -1,4 +1,4 @@
-%!TEX root =  tfg.tex
+%!TEX root = tfg.tex
 \chapter{Metodología}
 
 \begin{quotation}[Novelist]{Ernest Hemingway (1899--1961)}
@@ -6,251 +6,73 @@ The good parts of a book may be only something a writer is lucky enough to overh
 \end{quotation}
 
 \begin{abstract}
-En este capítulo se describe el marco de trabajo empleado para el desarrollo de Via Inferni.
-Se presenta la estructura organizativa del equipo de dos integrantes sin roles diferenciados, 
-donde ambos asumen conjuntamente todas las responsabilidades del proyecto (programación, 
-diseño, arte y pruebas). Se explica la metodología ágil adaptada al equipo, basada en Kanban 
-y una Definición de Hecho (DoD) consensuada, junto con un flujo de trabajo en control de 
-versiones basado en Trunk-Based Development simplificado con ramas de integración de corta 
-duración. Este enfoque prioriza el desarrollo conjunto del núcleo del juego para garantizar 
-conocimiento compartido, seguido de la implementación paralela de contenido adicional una vez 
-establecida una base arquitectónica sólida.
+En este capítulo se expone el marco metodológico integral que sustenta el desarrollo de \textit{Via Inferni}. La naturaleza técnica y creativa de un videojuego exige un enfoque que combine la agilidad en la entrega con un control riguroso de la arquitectura. Por ello, se detalla la adopción de \textit{Feature Driven Development} (FDD) como motor del ciclo de vida, la gestión dinámica mediante tableros Kanban y una política de gestión de configuración híbrida. Esta última busca aprovechar la estructura organizativa de \textit{GitFlow} y la velocidad de integración del \textit{Trunk-Based Development} (TBD), integrando además el estándar de \textit{Conventional Commits} para garantizar la trazabilidad y calidad del historial de código.
 \end{abstract}
 
-\section{Estructura organizacional del proyecto}
+\section{Marco de Trabajo: Feature Driven Development (FDD)}
+Para la construcción de este proyecto se ha seleccionado la metodología \textit{Feature Driven Development}. A diferencia de otros marcos ágiles, FDD pone un énfasis especial en el diseño técnico previo a la codificación, lo que resulta fundamental para asegurar la escalabilidad en sistemas complejos como un motor de generación procedural.
 
-El proyecto ha sido desarrollado por un equipo de dos integrantes: Adolfo Agustín Borrego González 
-y Germán Sánchez Carmona. Ambos asumen conjuntamente todos los roles necesarios en un proyecto de 
-videojuego,. A diferencia de estructuras tradicionales donde se asignan roles diferenciados 
-(programador principal, diseñador, artista, tester), los dos integrantes participan 
-equitativamente en todas las facetas del desarrollo: programación de sistemas, 
-diseño de mecánicas, implementación de elementos visuales, pruebas y ajustes de \textit{gameplay}.
+El proceso se articula a través de cinco pasos fundamentales que guían el proyecto desde su concepción hasta su despliegue funcional, tal y como se ilustra en la Figura \ref{fig:fdd_flow}.
 
-Este modelo de responsabilidad compartida busca garantizar que ambos integrantes posean un 
-conocimiento profundo y completo de la arquitectura del juego, evitando silos de información 
-y facilitando la toma de decisiones conjunta.
-
-\subsection{Planificación de la distribución del trabajo}
-
-La distribución del trabajo se plantea de forma sencilla y orientada a la planificación. En una 
-primera etapa se prioriza el desarrollo conjunto de las funcionalidades \textit{CORE}, ya que 
-constituyen la base del proyecto y requieren una visión compartida por parte de ambos miembros 
-del equipo.
-
-Una vez definida esa base, las funcionalidades adicionales se reparten entre los dos integrantes 
-para avanzar en paralelo con el contenido complementario. De esta forma, se mantiene un criterio 
-común sobre los sistemas esenciales y, al mismo tiempo, se optimiza el reparto del trabajo en las 
-tareas no críticas.
-
-\section{Metodología de desarrollo}
-
-Para el desarrollo de Via Inferni se ha optado por una metodología ágil híbrida, 
-adaptada a un equipo reducido de dos personas. Las prioridades han sido la flexibilidad, 
-el conocimiento compartido y la entrega continua de funcionalidades verificables.
-
-\subsection{Gestión de tareas}
-
-La gestión del trabajo se realiza mediante GitHub Projects, utilizando un tablero 
-Kanban digital con cuatro estados claramente diferenciados: \textbf{To-do}, 
-\textbf{In progress}, \textbf{In review} y \textbf{Done}. Esta herramienta proporciona 
-visibilidad en tiempo real del estado del proyecto y permite vincular automáticamente 
-los commits y ramas del repositorio con las tareas correspondientes, garantizando una 
-trazabilidad completa del desarrollo.
-
-\subsubsection{Planificación semanal}
-
-Cada domingo se celebra una reunión obligatoria de planificación donde el equipo:
-\begin{itemize}
-    \item Revisa el trabajo completado durante la semana anterior, analizando qué 
-    funcionalidades han sido implementadas y validadas.
-    \item Crea las tareas para la semana siguiente, priorizándolas según las necesidades 
-    del proyecto y los hitos establecidos.
-    \item Distribuye el trabajo entre ambos integrantes, respetando el principio de 
-    desarrollo conjunto para funcionalidades core e independiente para contenido adicional.
-\end{itemize}
-
-\subsubsection{Flujo de estados de las tareas}
-
-El ciclo de vida de una tarea sigue este flujo:
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}[node distance=1.2cm, auto,
+        block/.style={rectangle, draw, fill=gray!5, text width=6cm, text centered, rounded corners, minimum height=1cm, font=\small},
+        line/.style={draw, -latex, thick}]
+        
+        % Nodos
+        \node [block] (step1) {\textbf{1. Desarrollo de un Modelo General} \\ (Análisis de arquitectura y dominio)};
+        \node [block, below=of step1] (step2) {\textbf{2. Construcción de la Lista de Funcionalidades} \\ (Desglose del backlog)};
+        \node [block, below=of step2] (step3) {\textbf{3. Planificación por Funcionalidad} \\ (Priorización e hitos)};
+        \node [block, below=of step3, fill=blue!5] (step4) {\textbf{4. Diseño por Funcionalidad} \\ (Contratos y lógica técnica)};
+        \node [block, below=of step4, fill=blue!5] (step5) {\textbf{5. Construcción por Funcionalidad} \\ (Codificación e integración)};
+        
+        % Flechas principales
+        \path [line] (step1) -- (step2);
+        \path [line] (step2) -- (step3);
+        \path [line] (step3) -- (step4);
+        \path [line] (step4) -- (step5);
+        
+        % Bucle iterativo
+        \path [line] (step5.east) -- ++(1,0) -- ++(0,2.2) -- (step4.east);
+        \node [right=of step4, xshift=0.3cm, yshift=1cm, text width=2cm, font=\footnotesize\itshape] {Iteración continua por funcionalidad};
+        
+        % Caja contenedora para la fase de construcción
+        \draw[dashed, blue!40, thick] ([xshift=-0.5cm, yshift=0.3cm]step4.north west) rectangle ([xshift=2.5cm, yshift=-0.3cm]step5.south east);
+        \node[blue!60, rotate=90, anchor=south] at ([xshift=2.5cm]step5.east) {Fase Iterativa};
+    \end{tikzpicture}
+    \caption{Flujo de procesos de la metodología FDD aplicado al desarrollo del sistema.}
+    \label{fig:fdd_flow}
+\end{figure}
 
 \begin{enumerate}
-    \item \textbf{To-do:} Tareas planificadas pero no iniciadas, priorizadas según 
-    su importancia y dependencias.
-    \item \textbf{In progress:} Cuando un integrante comienza a trabajar en una tarea, 
-    la mueve a este estado y crea su rama local correspondiente.
-    \item \textbf{In review:} Una vez la implementación cumple con los criterios técnicos 
-    de la Definición de Hecho (DoD) (código funcional, sin errores, integrado en el juego), 
-    la tarea pasa a revisión.
-    \item \textbf{Done:} La tarea solo se marca como completada tras una reunión de 
-    validación conjunta donde ambos integrantes verifican que cumple los criterios de 
-    aceptación. Estas reuniones pueden realizarse varias veces por semana según la 
-    disponibilidad del equipo y la cantidad de tareas pendientes de revisión.
+    \item \textbf{Desarrollo de un Modelo General (Overall Model):} En esta fase inicial, el equipo analiza el dominio del problema. En nuestro caso, se traduce en la definición de la arquitectura de alto nivel del videojuego, estableciendo cómo interactúan el núcleo del motor, el sistema de persistencia y las entidades del juego. Este modelo sirve como guía conceptual para evitar desviaciones técnicas.
+    \item \textbf{Listado de Funcionalidades (Feature List):} Se desglosa el alcance en una lista de funcionalidades pequeñas y atómicas. Por ejemplo, en lugar de una tarea genérica de ``combate'', se definen unidades como ``el jugador puede realizar un ataque ligero'' o ``el enemigo detecta al jugador por proximidad''.
+    \item \textbf{Planificación por Funcionalidad (Plan by Feature):} Una vez obtenida la lista, se priorizan los elementos según su riesgo técnico y su importancia para el producto mínimo viable. En esta fase se asignan las funcionalidades a las diferentes iteraciones que componen el cronograma.
+    \item \textbf{Diseño por Funcionalidad:} Antes de proceder a la escritura del código, se realiza un diseño detallado de la solución. Esto incluye la definición de contratos entre clases, la estructura de los \textit{ScriptableObjects} en Unity y la lógica de los algoritmos implicados.
+    \item \textbf{Construcción por Funcionalidad:} Es el paso final donde se implementa el código, se realizan las pruebas unitarias y se integra la funcionalidad en la rama de desarrollo.
 \end{enumerate}
 
-\subsubsection{Definición de Hecho (DoD)}
+\section{Gestión del Flujo de Trabajo: Kanban}
+Para monitorizar el progreso diario y gestionar la carga de trabajo, se emplea la técnica de Kanban a través de GitHub Projects. Esta herramienta visual permite al equipo identificar rápidamente el estado de cada funcionalidad del FDD. El tablero se organiza en columnas de estado que reflejan el flujo de trabajo: \textit{Backlog} para las funcionalidades pendientes, \textit{To-do} para las seleccionadas en la iteración actual, \textit{In Progress} para las que están siendo desarrolladas, \textit{In Review} para la validación cruzada y, finalmente, \textit{Done}. 
 
-Para evitar ambigüedades, se establecen criterios claros que una tarea debe cumplir 
-antes de considerarse terminada:
+\section{Gestión de Configuración: Flujo Híbrido}
+La gestión del repositorio de código es crítica para asegurar la integridad del proyecto. Hemos diseñado una solución que fusiona dos estrategias consolidadas en la industria:
 
+\subsection{Estructura Organizacional: GitFlow}
+Del modelo \textit{GitFlow} adoptamos el uso de ramas con propósitos claramente definidos para organizar el ciclo de vida del software. La rama \texttt{main} representa el estado de producción y solo contiene código estable, mientras que la rama \texttt{develop} actúa como el eje central de integración diaria donde las funcionalidades terminadas se consolidan para comprobar su interoperabilidad.
+
+\subsection{Dinámica de Integración: Trunk-Based Development}
+Para evitar los problemas derivados de ramas de larga duración, aplicamos la filosofía de \textit{Trunk-Based Development}. Las ramas de funcionalidad (\textit{feature branches}) son efímeras y se crean para tareas específicas de la lista de FDD. Su vida útil es reducida, lo cual minimiza la divergencia de código entre los desarrolladores. Asimismo, se fomenta el uso de \textit{git rebase} en lugar de \textit{merge} para mantener un historial de \textit{commits} limpio y lineal.
+
+\subsection{Estandarización: Conventional Commits}
+Como buena práctica de ingeniería de software, se ha adoptado el estándar de \textit{Conventional Commits}. Esta técnica consiste en estructurar los mensajes de confirmación siguiendo un formato prefijado, facilitando la lectura del historial y permitiendo una futura automatización en la generación de cuadernos de cambios. Los tipos principales empleados son:
 \begin{itemize}
-    \item \textbf{Criterios técnicos:} La implementación debe ser funcional dentro 
-    del juego, no generar errores en la consola de Unity, y no romper sistemas existentes.
-    \item \textbf{Validación conjunta:} Ambos integrantes deben probar la funcionalidad 
-    en una sesión de revisión, verificando que el comportamiento es el esperado y que 
-    se integra correctamente con el resto del juego.
-    \item \textbf{Documentación del código:} Los scripts deben incluir comentarios 
-    explicativos en secciones complejas para facilitar el mantenimiento futuro.
-    \item \textbf{Trazabilidad en el repositorio:} Los commits relacionados deben estar 
-    vinculados a la tarea en GitHub Projects mediante referencias en los mensajes de commit.
+    \item \textbf{\texttt{feat}:} Incorporación de una nueva funcionalidad del listado FDD.
+    \item \textbf{\texttt{fix}:} Corrección de errores detectados en fases de prueba.
+    \item \textbf{\texttt{docs}:} Cambios que afecten exclusivamente a la documentación o a la memoria.
+    \item \textbf{\texttt{refactor}:} Modificaciones en el código que no alteran el comportamiento funcional pero mejoran su calidad.
 \end{itemize}
 
-Esta metodología de gestión garantiza que ninguna funcionalidad se considere completa 
-sin el consenso del equipo, manteniendo altos estándares de calidad y conocimiento compartido.
-
-\subsection{Sincronización y comunicación}
-
-Debido a la naturaleza colaborativa del proyecto, la comunicación es constante:
-\begin{itemize}
-    \item \textbf{Sincronización Continua:} Más allá de reuniones formales diarias, 
-    se mantiene una comunicación fluida durante las sesiones de desarrollo para resolver 
-    cualquier tipo de duda o conflicto al instante.
-    \item \textbf{Hitos de Desarrollo:} El proyecto se estructura en torno a la consecución 
-    de hitos funcionales incrementales. Estos hitos son especialmente críticos durante 
-    la fase de desarrollo del núcleo (ej. "Generación procedural", "Sistema de combate 
-    funcional", "Dualidad de personajes"), donde se prioriza la estabilidad 
-    arquitectónica antes de añadir complejidad. Una vez establecida la base sólida, 
-    los hitos posteriores se orientan a la expansión de contenido y refinamiento de 
-    mecánicas existentes (ej. "Pool de 10 enemigos únicos", "Sistema de objetos interactivos").
-\end{itemize}
-
-\section{Herramientas de desarrollo}
-
-Para facilitar la colaboración, el seguimiento del proyecto y el desarrollo del juego, 
-se utilizan las siguientes herramientas:
-
-\begin{itemize}
-    \item \textbf{Unity 6.3 LTS:} Motor gráfico y de juego empleado para el desarrollo 
-    de Via Inferni. Se eligió esta versión LTS (Long Term Support) para garantizar 
-    estabilidad y soporte a largo plazo durante el desarrollo del proyecto.
-    
-    \item \textbf{Visual Studio Code:} Editor de texto utilizado para la edición de código 
-    y configuración. Aunque técnicamente es un editor de texto y no un IDE completo, 
-    se prefiere a Visual Studio por su ligereza y familiaridad dentro del equipo.
-    
-    \item \textbf{GitHub:} Plataforma de alojamiento del repositorio Git y centro 
-    de colaboración del proyecto. Alberga el control de versiones, la gestión de 
-    ramas y la integración continua.
-    
-    \item \textbf{GitHub Projects:} Herramienta de gestión de tareas integrada en GitHub, 
-    utilizada para mantener el tablero Kanban del proyecto con los estados 
-    (To-do, In progress, In review, Done).
-    
-    \item \textbf{Git:} Sistema de control de versiones distribuido empleado para 
-    gestionar el código fuente del proyecto localmente y sincronizarlo con el repositorio 
-    remoto.
-    
-    \item \textbf{Clockify:} Aplicación de seguimiento de tiempo utilizada para registrar 
-    las horas de trabajo dedicadas a cada tarea, permitiendo un análisis posterior del 
-    esfuerzo invertido en diferentes aspectos del proyecto.
-    
-    \item \textbf{Discord:} Plataforma de comunicación sincrónica utilizada para 
-    videoconferencias, reuniones de planificación y sincronización continua durante 
-    las sesiones de desarrollo.
-    
-    \item \textbf{WhatsApp:} Aplicación de mensajería instantánea utilizada para 
-    comunicaciones rápidas y asincrónicas fuera de las sesiones de desarrollo formales.
-\end{itemize}
-
-\section{Control de versiones y flujo de trabajo}
-
-La gestión del código fuente es vital para evitar conflictos en un motor 
-basado en componentes como Unity. Se ha adoptado un enfoque de Trunk-Based Development 
-simplificado, que prioriza la integración continua en ramas de vida corta y minimiza 
-la complejidad del repositorio remoto.
-
-\subsection{Flujo de trabajo con Git}
-
-El repositorio se estructura en torno a dos ramas persistentes:
-
-\begin{itemize}
-    \item \textbf{Rama Main:} Contiene únicamente las versiones estables y 
-    validadas del proyecto. Cada domingo, durante la reunión semanal, si el equipo 
-    acuerda que todo el trabajo en \texttt{develop} se ha completado correctamente, 
-    se realiza un merge hacia \texttt{main}, generando así una nueva versión estable.
-    
-    \item \textbf{Rama Develop:} Es la rama de integración principal donde convive 
-    el código en desarrollo activo. Ambos integrantes sincronizan su trabajo 
-    constantemente contra esta rama.
-\end{itemize}
-
-El desarrollo de nuevas funcionalidades sigue un flujo sistemático basado en 
-ramas de corta duración que no se publican en el repositorio remoto. 
-A continuación se detalla el proceso completo:
-
-\subsubsection{Proceso de desarrollo de una funcionalidad}
-
-\begin{enumerate}
-    \item \textbf{Sincronización inicial:} Antes de comenzar cualquier trabajo, 
-    se actualiza la rama \texttt{develop} local con los últimos cambios del repositorio remoto:
-    \begin{verbatim}
-    git checkout develop
-    git pull
-    \end{verbatim}
-    
-    \item \textbf{Creación de rama de funcionalidad:} Se crea una rama local 
-    siguiendo la convención de nombres \texttt{feat/nombre-funcionalidad}:
-    \begin{verbatim}
-    git checkout -b feat/nombre-funcionalidad
-    \end{verbatim}
-    
-    \item \textbf{Desarrollo y commits atómicos:} El trabajo se realiza mediante 
-    commits atómicos (pequeños y con propósito único) siguiendo la especificación 
-    Conventional Commits\footnote{https://www.conventionalcommits.org/}:
-    \begin{verbatim}
-    git add .
-    git commit -m "feat: implementar funcionalidad"
-    \end{verbatim}
-    
-    Los prefijos más utilizados son: \texttt{feat:} (nueva funcionalidad), 
-    \texttt{fix:} (corrección de errores), \texttt{refactor:} (reestructuración 
-    sin cambio funcional), \texttt{docs:} (documentación).
-    
-    \item \textbf{Sincronización frecuente con develop:} Periódicamente, 
-    especialmente antes de finalizar una funcionalidad, se sincronizan los 
-    cambios de \texttt{develop} mediante rebase para evitar conflictos posteriores:
-    \begin{verbatim}
-    git fetch origin
-    git rebase origin/develop
-    \end{verbatim}
-    
-    \item \textbf{Preparación para integración:} Una vez la funcionalidad cumple 
-    con la Definición de Hecho (DoD), se realiza una sincronización final:
-    \begin{verbatim}
-    git checkout develop
-    git pull
-    git checkout feat/nombre-funcionalidad
-    git rebase develop
-    \end{verbatim}
-    
-    \item \textbf{Integración fast-forward:} Se integra la funcionalidad en 
-    \texttt{develop} mediante un merge fast-forward, manteniendo un historial lineal:
-    \begin{verbatim}
-    git checkout develop
-    git merge --ff-only feat/nombre-funcionalidad
-    \end{verbatim}
-    
-    \item \textbf{Publicación:} Los cambios se suben al repositorio remoto:
-    \begin{verbatim}
-    git push origin develop
-    \end{verbatim}
-    
-    \item \textbf{Limpieza:} Finalmente, se elimina la rama de funcionalidad local, 
-    ya que su ciclo de vida ha terminado:
-    \begin{verbatim}
-    git branch -d feat/nombre-funcionalidad
-    \end{verbatim}
-\end{enumerate}
-
-Este enfoque garantiza un historial limpio y lineal en el repositorio remoto, 
-permite el trabajo en paralelo sin interferencias, y asegura que todo el código 
-en \texttt{develop} ha sido integrado y probado correctamente antes de llegar a producción.
+\section{Definición de Hecho (DoD)}
+Una funcionalidad solo se considera finalizada hasta que cumple los siguientes criterios: el código compila sin errores en Unity, se ha realizado una revisión por pares y la funcionalidad ha sido probada en el motor para asegurar que no introduce regresiones.

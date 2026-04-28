@@ -1,0 +1,68 @@
+%!TEX root = tfg.tex
+\chapter{Arranque}
+
+\begin{abstract}
+Este capítulo marca el inicio de la sección de Desarrollo del Proyecto, actuando como el marco de referencia técnica para todas las fases posteriores de implementación. En él se formalizan los dos primeros pasos de la metodología \textit{Feature Driven Development} (FDD): la creación del \textit{Overall Model} y la elaboración de la \textit{Feature List}. A diferencia de una fase de diseño estática, este arranque establece las bases de una arquitectura orientada a datos y una estrategia de desarrollo basada en funcionalidades modulares. Se detalla aquí la lógica de generación procedural mediante grafos y celdas, así como la estructura de seguimiento que permitirá transformar los requisitos en un producto funcional a través de ciclos iterativos.
+\end{abstract}
+
+\section{Introducción a la Fase de Desarrollo}
+Tras la fase inicial de planificación y gestión, el proyecto entra en su etapa de construcción técnica. El desarrollo de \textit{Via Inferni} no se ha planteado como un proceso monolítico, sino como una evolución incremental basada en el desarrollo por características (\textit{features}). Tal y como se definía en la metodología del proyecto, el objetivo principal de esta fase es construir los sistemas esenciales —generación del mundo, mecánicas de combate e inteligencia artificial— garantizando que la experiencia de juego sea estable y coherente desde la primera versión funcional.
+
+Para lograrlo, el desarrollo se organiza en torno a unidades de trabajo verificables, donde cada funcionalidad se asocia a un conjunto de \textit{issues} del \textit{backlog}. Esta aproximación permite una trazabilidad total entre la visión conceptual del diseño y la implementación real en el motor Unity.
+
+\section{Paso 1 de FDD: Desarrollo del Modelo General (Overall Model)}
+El desarrollo del modelo general constituye el cimiento sobre el cual se apoya toda la lógica del videojuego. En lugar de limitarse a un esquema de clases, este modelo define los paradigmas arquitectónicos que aseguran que el sistema sea escalable y fácil de mantener por un equipo de dos desarrolladores.
+
+\subsection{El modelo espacial: Arquitectura basada en Grid}
+La representación física del mundo de \textit{Via Inferni} se fundamenta en un sistema de rejilla bidimensional o \textit{Grid}. Esta decisión técnica es el pilar de la generación procedural de niveles. Al discretizar el espacio de juego en celdas, el motor puede gestionar de forma óptima la ocupación del terreno, la colocación de obstáculos y la navegación de los personajes.
+
+Cada sala del videojuego se comporta como una entidad que conoce su posición y extensión dentro de este \textit{grid}. Este enfoque reduce drásticamente la complejidad de los cálculos espaciales y permite que el sistema de cámaras y el gestor de enemigos funcionen de forma coordinada, sabiendo en todo momento en qué celda se encuentra el jugador y qué elementos adyacentes deben estar activos.
+
+\subsection{El modelo lógico: Topología mediante Grafos}
+Para dotar de coherencia estructural al videojuego, se ha superpuesto al modelo espacial una capa lógica basada en la teoría de grafos. En este esquema, cada habitación es un nodo y cada pasillo o puerta es una arista que conecta dichos nodos.
+
+La utilización de grafos permite validar matemáticamente que el nivel generado siempre sea ``pasable'', es decir, que siempre exista un camino conectando el inicio con el final de cada círculo del Infierno. Esta separación entre la apariencia física (el \textit{grid}) y la estructura lógica (el grafo) permite que los algoritmos de generación sean extremadamente flexibles, soportando desde niveles lineales hasta laberintos complejos sin perder la integridad del diseño.
+
+\subsection{El paradigma Data-Driven: Uso de ScriptableObjects}
+Una de las decisiones más profundas en el arranque del proyecto ha sido la adopción de un diseño orientado a datos (\textit{Data-Driven Design}). Utilizando la tecnología de \textit{ScriptableObjects} de Unity, se ha logrado desacoplar totalmente la lógica del motor de los datos del contenido.
+
+Cada uno de los nueve círculos del Infierno se define mediante archivos de configuración independientes que contienen:
+\begin{itemize}
+    \item La biblioteca de plantillas de salas específicas de ese círculo.
+    \item Los parámetros de dificultad dinámica (salud y daño de enemigos).
+    \item El catálogo de objetos y recompensas que pueden aparecer en dicha zona.
+    \item Las referencias a los jefes finales únicos.
+\end{itemize}
+Este sistema permite que el equipo de desarrollo pueda ajustar el balanceo del juego o incluso añadir contenido nuevo sin necesidad de modificar ni una sola línea de código fuente, reduciendo el riesgo de introducir errores técnicos durante la fase de pulido.
+
+\section{Paso 2 de FDD: Construcción de la Lista de Funcionalidades}
+El segundo paso crítico en este arranque es la elaboración de la \textit{Feature List}. Esta lista no es una simple enumeración de deseos, sino una descomposición técnica de los objetivos del proyecto en entregables funcionales. Se han categorizado estas funcionalidades en áreas de dominio para permitir un desarrollo paralelo y eficiente.
+
+\subsection{Área: Generación y Estructura del Mundo}
+Esta área engloba las funcionalidades responsables de crear el entorno de juego en tiempo de ejecución.
+\begin{itemize}
+    \item \textbf{Generador de Layout:} Algoritmo que construye el grafo de salas asegurando la conectividad.
+    \item \textbf{Gestor de Instanciación:} Sistema encargado de colocar físicamente los modelos y colisionadores en la escena según el \textit{grid}.
+    \item \textbf{Distribución de Salas Especiales:} Lógica de balanceo para situar salas de tesoro, descanso y tiendas.
+\end{itemize}
+
+\subsection{Área: Mecánicas de Personaje y Dualidad}
+Incluye las funciones que definen cómo el jugador interactúa con el Infierno.
+\begin{itemize}
+    \item \textbf{Controlador Dual de Personaje:} Implementación de los movimientos y habilidades base para Dante y Virgilio.
+    \item \textbf{Sistema de Cambio (\textit{Switching}):} Lógica de relevo entre personajes en zonas seguras.
+    \item \textbf{Contenedor de Persistencia (\textit{RunSession}):} Objeto encargado de mantener las estadísticas y el inventario compartido durante toda la partida.
+\end{itemize}
+
+\subsection{Área: Sistemas de Combate e IA}
+Define el comportamiento de las amenazas dentro del videojuego.
+\begin{itemize}
+    \item \textbf{Motor de Estados de Enemigos:} Máquina de estados finitos que gestiona la transición entre patrulla, persecución y ataque.
+    \item \textbf{Sistema de Daño y \textit{Hitboxes}:} Gestión de colisiones para ataques de melé y proyectiles.
+    \item \textbf{Lógica de Jefes Finales:} Patrones de ataque complejos diseñados para cerrar cada círculo.
+\end{itemize}
+
+\section{Estrategia de Implementación y Seguimiento}
+Tal y como se detallará en los capítulos correspondientes a la Fase 2, el desarrollo se ejecutará de forma incremental. Cada una de las características descritas en la \textit{Feature List} se desglosará en tareas menores dentro del \textit{backlog} de GitHub.
+
+El criterio de éxito para esta fase es que cada cierre de iteración resulte en una versión funcional y probada. No se considera terminada una funcionalidad si no cumple con la \textit{Definition of Done} establecida: código compilado, revisión por pares realizada y validación funcional dentro del motor de juego. Esta rigurosidad en el arranque asegura que la arquitectura base no sufra degradación técnica a medida que el proyecto gana en complejidad.

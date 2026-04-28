@@ -1,4 +1,4 @@
-%!TEX root =  tfg.tex
+%!TEX root = tfg.tex
 \chapter{Costes}
 
 \begin{quotation}[Novelist]{Ernest Hemingway (1899--1961)}
@@ -6,35 +6,67 @@ The good parts of a book may be only something a writer is lucky enough to overh
 \end{quotation}
 
 \begin{abstract}
-Resumen de lo que va a ocurrir en el capítulo. ¿Cuál es el objetivo que tenemos con este capítulo?
+Este capítulo presenta un análisis económico detallado para determinar la inversión total requerida en el desarrollo de \textit{Via Inferni}. El estudio se fundamenta en los principios de gestión de costes en ingeniería de software, contemplando la valoración del capital humano basándose en estándares actuales del mercado tecnológico, la amortización del equipamiento físico y la imputación de gastos indirectos. Este análisis permite cuantificar el valor económico del proyecto de manera profesional, garantizando que todos los recursos empleados han sido debidamente valorados y justificados.
 \end{abstract}
 
-\section{Resumen de costes del proyecto}
-
-\begin{table*}[h!]
-	\centering
-	\begin{coolTable}{ll}{2}
-{Resumen del proyecto}
-	\textbf{Costes de personal}&5.045 \euro\\
-	Sueldo neto&2.030 \euro\\
-	Impuestos&1.000 \euro\\
-	Costes sociales&2.015 \euro\\
-	\textbf{Costes materiales}&560 \euro\\
-	\textbf{Costes indirectos}&450 \euro\\
-	\midrule
-	\textbf{TOTAL}&8.000 \euro\\
-	\end{coolTable}
-	\caption{Tabla resumen de costes}
-\end{table*}
+\section{Introducción a la gestión de costes}
+En el ámbito de la ingeniería del software, la correcta estimación de los costes es fundamental para evaluar la viabilidad y el retorno de inversión de cualquier producto. Para este Trabajo de Fin de Grado, se ha optado por un modelo de estimación basado en costes directos e indirectos, donde el peso principal recae sobre el tiempo de ingeniería invertido. Se han seguido los criterios de valoración de activos materiales y humanos estudiados en la disciplina de Planificación y Gestión de Proyectos Informáticos, adaptando las cifras a la realidad del mercado laboral prevista para el año 2026.
 
 \section{Costes de personal}
+El factor productivo de mayor impacto en este proyecto es el tiempo dedicado por los dos ingenieros de software que componen el equipo. Para realizar una valoración objetiva, se ha tomado como referencia la guía salarial de Manfred para el año 2026, seleccionando un perfil técnico de nivel junior en España con un salario bruto anual de 35.000 \euro.
 
-Ya hablaremos de esto
+La dedicación individual estimada para el cumplimiento de los créditos del TFG es de 300 horas. Teniendo en cuenta que una jornada laboral anual estándar en el sector se sitúa en las 1.800 horas, la participación en este proyecto representa una sexta parte (1/6) de la anualidad laboral. El desglose de costes por integrante se detalla a continuación:
+
+\begin{itemize}
+    \item \textbf{Salario Bruto Imputado:} Se calcula como el salario bruto anual dividido por el factor de proporcionalidad del proyecto. Para un salario de 35.000 \euro, la cifra resultante es de 5.833,33 \euro\ por persona.
+    \item \textbf{Costes Sociales:} De acuerdo con la normativa vigente y los estándares de carga prestacional para la empresa, se aplica un 30\% adicional sobre el salario bruto en concepto de cotizaciones a la Seguridad Social y otros beneficios sociales. Esto supone un coste de 1.750 \euro\ por integrante.
+\end{itemize}
+
+Sumando ambos conceptos, el coste total de personal por desarrollador asciende a 7.583,33 \euro. Dado que el equipo está formado por dos miembros con idéntica dedicación, el coste total de personal para el proyecto se sitúa en 15.166,66 \euro.
 
 \section{Costes materiales}
+Los costes materiales engloban tanto el equipamiento físico necesario para el desarrollo como el software y los servicios externos utilizados durante el ciclo de vida del producto.
 
-Y de esto también. Ver Sección \ref{sec:arquitectura}.
+\subsection{Amortización de equipos informáticos}
+Para el desarrollo de \textit{Via Inferni}, se han utilizado dos ordenadores portátiles con un valor de adquisición medio de 1.500 \euro\ cada uno. Siguiendo las tablas de amortización de la Agencia Tributaria para equipos de procesamiento de datos, se establece un coeficiente de amortización máximo del 25\% anual, lo que implica una vida útil de cuatro años.
+
+Puesto que el equipo se utiliza durante un periodo de tiempo equivalente a un sexto de la jornada anual, el gasto que debe imputarse al proyecto no es el valor total del equipo, sino la parte proporcional de su depreciación durante el desarrollo:
+\begin{enumerate}
+    \item \textbf{Amortización anual por equipo:} 1.500 \euro\ $\times$ 0,25 = 375 \euro.
+    \item \textbf{Imputación por tiempo de uso:} 375 \euro\ / 6 = 62,50 \euro\ por equipo.
+\end{enumerate}
+El coste total derivado de la amortización del hardware para los dos integrantes es de 125,00 \euro.
+
+\subsection{Software y servicios externos}
+En línea con la filosofía de optimización de recursos del proyecto, se ha priorizado el uso de herramientas de código abierto o bajo licencias académicas gratuitas. 
+\begin{itemize}
+    \item \textbf{Motor de desarrollo:} Se ha utilizado la versión \textit{Unity Student Plan}, que permite el uso profesional del motor sin costes de licencia para alumnos de grado.
+    \item \textbf{Entorno de desarrollo y gestión:} Herramientas como \textit{Visual Studio Code}, \textit{GitHub} y \textit{Discord} se han empleado bajo sus planes gratuitos, los cuales cubren sobradamente las necesidades de un equipo de dos personas.
+    \item \textbf{Activos y servicios:} No se ha incurrido en gastos de adquisición de \textit{assets} comerciales ni en la contratación de dominios o servicios de \textit{hosting}, ya que el despliegue se limita al entorno de ejecución local y a la entrega académica.
+\end{itemize}
+Por lo tanto, el coste en este apartado se considera nulo (0 \euro).
 
 \section{Costes indirectos}
+Los costes indirectos son aquellos que no pueden vincularse directamente a una tarea específica del desarrollo pero que son indispensables para su ejecución. En esta categoría se incluyen el consumo eléctrico, la conexión a internet de banda ancha y el espacio de trabajo.
 
-Y esto es una fiesta
+Para este estudio, se ha aplicado un porcentaje del 10\% sobre la suma de los costes directos (personal y materiales), siguiendo las métricas estándar de gestión de proyectos informáticos. Sobre una base de 15.291,66 \euro, los costes indirectos ascienden a 1.529,17 \euro.
+
+\section{Resumen de costes del proyecto}
+En la siguiente tabla se presenta el resumen consolidado de la inversión económica del proyecto. Es importante destacar que, aunque el desembolso real de los alumnos es mínimo, el valor del software producido tiene un coste de mercado significativo.
+
+\begin{table}[h!]
+    \centering
+    \begin{coolTable}{ll}{2}
+    {Resumen del presupuesto del proyecto}
+    \textbf{Costes de personal (Salarios brutos)} & 11.666,66 \euro \\
+    \textbf{Costes sociales (30\% sobre bruto)} & 3.500,00 \euro \\
+    \textbf{Costes materiales (Amortización hardware)} & 125,00 \euro \\
+    \textbf{Costes materiales (Software y servicios)} & 0,00 \euro \\
+    \midrule
+    \textbf{Total costes directos} & 15.291,66 \euro \\
+    \textbf{Costes indirectos (10\%)} & 1.529,17 \euro \\
+    \midrule
+    \textbf{TOTAL DEL PROYECTO} & \textbf{16.820,83 \euro} \\
+    \end{coolTable}
+    \caption{Resumen detallado de la inversión económica total.}
+\end{table}

@@ -1,4 +1,4 @@
-%!TEX root =  tfg.tex
+%!TEX root = tfg.tex
 \chapter{Planificación}
 
 \begin{quotation}[Novelist]{Ernest Hemingway (1899--1961)}
@@ -6,138 +6,57 @@ The good parts of a book may be only something a writer is lucky enough to overh
 \end{quotation}
 
 \begin{abstract}
-Este capítulo describe la estrategia de gestión y el cronograma seguidos 
-para el desarrollo de \textit{Via Inferni}. El proyecto se organiza ahora en tres fases 
-claras: planificación y gestión, diseño e implementación, y cierre del proyecto. 
-La Fase 2 se desglosa además en varias iteraciones asociadas al backlog, de forma que 
-quede trazabilidad entre cada issue, su motivación y el momento en el que se consideró 
-realmente terminada. El objetivo es ofrecer una visión clara de cómo se han administrado 
-los recursos y el tiempo para transformar los requisitos en un producto funcional.
+Este capítulo detalla la organización temporal y la gestión de recursos del proyecto \textit{Via Inferni}. La planificación se estructura en tres fases principales que cubren desde la concepción inicial hasta el cierre definitivo de la memoria. Además, se presentan los diferentes planes de gestión basados en las mejores prácticas del estándar PMBOK, adaptados a la escala y necesidades de un Trabajo de Fin de Grado desarrollado por dos alumnos de ingeniería. El objetivo es garantizar una ejecución ordenada que cumpla con los plazos académicos y los requisitos de calidad técnica.
 \end{abstract}
 
-\section{Resumen temporal del proyecto}
-
-\begin{table*}[htb]
-	\centering
-	\begin{coolTable}{ll}{2}
-{Resumen del proyecto}
-	\textbf{Fecha de inicio}&10/10/2014\\
-	\textbf{Fecha de fin}&10/10/2014\\
-	\textbf{Periodicidad de las revisiones}&3 semanas\\
-	\end{coolTable}
-	\caption{Tabla resumen de tiempos y planificación}
-\end{table*}
-
-\section{Planificación inicial}
-
-\textbf{ESTE CAPÍTULO DEBE ESCRIBIRSE AL COMIENZO DEL PROYECTO}
-
-En esta sección se presenta el desglose inicialmente planificado de las fases en las que se ha dividido el proyecto,
-así como una justificación de cada una de ellas. Se han definido tres fases principales:
-
-\begin{table*}[htb]
-	\centering
-	\begin{coolTable}{ll}{2}
-{Resumen de fases del proyecto}
-	\textbf{Fase 1: Planificación y Gestión}&09/02/2026 a 15/02/2026\\
-	\textbf{Fase 2: Diseño e Implementación}&16/02/2026 a 10/05/2026\\
-	\textbf{Fase 3: Cierre del Proyecto}&11/05/2026 a 25/05/2026\\
-	\end{coolTable}
-	\caption{Planificación temporal de fases del proyecto}
-\end{table*}
-
-El trabajo se realizará del 9 de febrero al 25 de mayo, con una duración total de aproximadamente 
-tres meses y medio, y un total de 99 días. Se estiman unas 3 o 4 horas de trabajo diario,
-lo que se traduce en un total aproximado de 300 horas de trabajo por miembro. 
-
-Cada integrante adaptará las horas de trabajo diarias a su disponibilidad, pero se mantendrá 
-una comunicación constante con reuniones recurrentes para asegurar la integración. Al menos
-una vez al final de cada semana se realizará una reunión de seguimiento para revisar el progreso y
-planificar las tareas de la semana siguiente.
+\section{Estructura de Fases del Proyecto}
+El desarrollo se ha dividido en tres grandes etapas que permiten una transición lógica entre la teoría, la implementación y la documentación final:
 
 \subsection{Fase 1: Planificación y Gestión}
-
-Esta fase consistirá en realizar un análisis detallado de los requisitos del proyecto, definir 
-los objetivos específicos y elaborar un plan de trabajo detallado. Además, se fijará la estructura 
-de gestión del proyecto, la organización del backlog, la cadencia de revisión y la forma en la que 
-se documentarán los avances para que la memoria evolucione al mismo ritmo que el desarrollo.
-
-Se ha estimado una duración de una semana para esta fase, considerando el tiempo necesario para 
-la investigación, la elaboración de documentos de diseño y la planificación detallada del proyecto.
-Además, todo el trabajo previo hace posible esta aparentemente corta planificación, ya que se han realizado
-tareas de investigación y recopilación de información durante el periodo previo al inicio oficial del proyecto.
+Esta etapa comprende el establecimiento de los cimientos del proyecto. Se centra en el análisis de requisitos, la definición de objetivos técnicos y la configuración de toda la infraestructura necesaria, como el repositorio de código, el sistema de gestión de tareas y la elección del \textit{stack} tecnológico. Es aquí donde se desarrolla el modelo general de FDD que servirá de guía para el resto del trabajo.
 
 \subsection{Fase 2: Diseño e Implementación}
-
-Durante esta fase se llevará a cabo el diseño incremental y la implementación de los componentes 
-fundamentales del sistema, es decir, el núcleo jugable del proyecto. La fase se ha descompuesto en 
-iteraciones ligadas al backlog para que cada issue quede asociado a un objetivo claro y a una razón 
-concreta de cierre.
-
-El objetivo de esta fase es establecer una base sólida sobre la cual se puedan construir las funcionalidades
-adicionales, diferenciando entre features del FDD y tareas concretas del backlog. Así, por ejemplo, la feature
-\gls{generacionprocedural} se materializa en dos tareas distintas, \textit{Generación Procedural (I)} y
-\textit{Generación Procedural (II)}, porque la primera establece el esqueleto del sistema y la segunda lo
-ajusta una vez integrados el jugador, los enemigos y la estructura de salas.
-
-La implementación del núcleo se llevará a cabo de forma conjunta por los dos integrantes del equipo,
-de forma que se facilite el trabajo y la colaboración. Las tareas de la fase se agrupan en seis iteraciones,
-cada una con una justificación funcional propia:
-
-\begin{enumerate}
-\item \textbf{Iteración 1.} \textit{Generación Procedural (I)}, \textit{Añadir Jugador} y \textit{Añadir Enemigo}. Esta iteración fijó la base jugable mínima, porque sin generación de niveles y entidades principales no tenía sentido cerrar el resto del flujo de juego.
-\item \textbf{Iteración 2.} \textit{Generación Procedural (II)}, \textit{Lógica de Círculos (I)} y \textit{Cámara del Jugador}. La segunda iteración se reservó para estabilizar la estructura del nivel antes de seguir con la navegación y el encuadre de la cámara.
-\item \textbf{Iteración 3.} \textit{Lógica de Círculos (II)}, \textit{Dualidad de Personajes} y \textit{Minimap (I)}. Se pospuso parte de esta iteración porque la lógica de círculos necesitaba validarse tras la segunda pasada sobre la generación y porque el minimapa dependía de una estructura de nivel estable.
-\item \textbf{Iteración 4.} \textit{Head-Up Display (HUD)}, \textit{Menús (I)} y \textit{Menús (II)}. La interfaz se abordó cuando ya existía una experiencia jugable básica, para no bloquear el trabajo de sistema con elementos puramente de presentación.
-\item \textbf{Iteración 5.} \textit{Actualizar Sprites (I)}, \textit{Sistema de Combate (I)} y \textit{Sistema de Enemigos (I)}. El combate y el comportamiento enemigo se cerraron más tarde porque dependían de la cámara, la navegación y la base de interacción ya estabilizadas.
-\item \textbf{Iteración 6.} \textit{Gestión de Inventario}, \textit{Objetos} y \textit{Minimap (II)}. Esta iteración se dejó para el final de la fase porque inventario y objetos solo tenían sentido con el resto del bucle jugable consolidado, y el minimapa necesitaba un repaso final tras integrar todos los sistemas previos.
-\end{enumerate}
-
-Se ha estimado una duración amplia para esta fase, considerando la complejidad de los componentes a implementar
-y la necesidad de ir cerrando cada issue cuando realmente dejaba de depender de otra iteración anterior. La idea es
-que ambos integrantes del equipo puedan colaborar y compartir el conocimiento, facilitando el trabajo de la fase de cierre.
+Representa el grueso del trabajo técnico y se desarrolla de forma puramente iterativa. En esta fase, se seleccionan elementos de la lista de funcionalidades para ser diseñados, implementados y validados. La duración total de esta etapa se subdivide en varias iteraciones de aproximadamente tres semanas cada una. Al final de cada ciclo, el equipo obtiene un incremento funcional del videojuego que se añade a la rama de desarrollo.
 
 \subsection{Fase 3: Cierre del Proyecto}
+La fase final se dedica a la consolidación de la memoria técnica, la realización de las pruebas finales de integración y la preparación del material necesario para la defensa del trabajo. En esta etapa se asegura que toda la documentación técnica refleje fielmente la implementación final y se corrigen posibles inconsistencias detectadas durante el desarrollo.
 
-En esta fase se reservará el espacio para la revisión final del proyecto, la preparación de la defensa,
-la consolidación de la documentación y el cierre administrativo de la memoria. De momento se deja vacía,
-porque el trabajo asociado a este tramo todavía no se ha incorporado al texto final.
+\section{Planes de Gestión del Proyecto}
+Para dotar al proyecto de un rigor profesional, se han aplicado conceptos extraídos del PMBOK, seleccionando los procesos que aportan mayor valor a un equipo reducido de ingeniería de software.
 
-Se ha estimado una duración de dos semanas para esta fase, considerando que la memoria se encontrará en
-un estado avanzado al trabajar sobre ella a lo largo de todo el proyecto, y que la preparación de la
-presentación final requerirá tiempo para organizar el contenido y ensayar la exposición.
+\subsection{Gestión del Alcance}
+El alcance se gestiona mediante el \textit{Feature List} definido en la metodología FDD. Para evitar el fenómeno de la corrupción del alcance, cualquier propuesta de nueva funcionalidad durante el desarrollo debe ser sometida a un análisis de viabilidad temporal. Si la tarea compromete el cronograma de la Fase 2, se clasifica como una mejora para futuros desarrollos.
 
-\section{Informe de tiempos del proyecto}
+\subsection{Gestión de Tiempos y Calendario}
+Se estima una dedicación de 300 horas por miembro del equipo. El calendario se rige por hitos de control que coinciden con el final de cada fase y cada iteración. La visualización de este cronograma permite identificar desviaciones de forma temprana y ajustar la carga de trabajo de las siguientes iteraciones para cumplir con la fecha de entrega final.
 
-Lo mismo que el anterior pero con datos reales. Ver Tabla \ref{tab:InformeTiempos}.
+\subsection{Gestión de la Comunicación y RRHH}
+Al ser un equipo de dos personas, la comunicación es constante y bidireccional. No obstante, se establecen canales formales para evitar la pérdida de información:
+\begin{itemize}
+    \item Se utiliza Discord para la coordinación técnica diaria y la resolución inmediata de bloqueos.
+    \item Se realizan reuniones semanales de sincronización para actualizar el tablero Kanban y revisar la planificación de la iteración en curso.
+    \item El uso de GitHub para las revisiones de código asegura que ambos miembros tengan una visión global de todo el software desarrollado.
+\end{itemize}
 
-\begin{table*}[htb]
-	\centering
-	\begin{coolTable}{ll}{2}
-{Resumen de iteraciones}
-	\textbf{Iteración 1}&10/10/14 a 21/10/14\\
-	\textbf{Iteración 2}&21/10/14 a 15/11/14\\
-	\textbf{...}&dd/mm/aa a dd/mm/aa\\
-	\end{coolTable}
-	\caption{Planificación temporal de iteraciones\label{tab:InformeTiempos}}
-\end{table*}
+\subsection{Gestión de Riesgos}
+Se han identificado y priorizado los riesgos que podrían impactar en el éxito del proyecto:
+\begin{itemize}
+    \item \textbf{Riesgos Técnicos:} Problemas de rendimiento con el algoritmo de generación procedural. Se mitiga mediante la creación de prototipos tempranos o \textit{spikes} de investigación.
+    \item \textbf{Riesgos de Plazos:} Retrasos debidos a la complejidad de la integración de sistemas. Se mitiga manteniendo un margen de seguridad en la fase de cierre y priorizando las funcionalidades críticas del núcleo jugable.
+\end{itemize}
 
-Justificar los retrasos de forma detallada aquí para cada una de las iteraciones. Explicar las razones.
+\section{Cronograma y Resumen Temporal}
+A continuación, se presenta la tabla resumen con las fechas estimadas para cada una de las fases descritas:
 
-\section{Desglose por fases}
+\begin{table}[htb]
+    \centering
+    \begin{coolTable}{ll}{2}
+    {Planificación Temporal del TFG}
+    \textbf{Fase 1: Planificación y Gestión} & [Fecha Inicio] -- [Fecha Fin] \\
+    \textbf{Fase 2: Diseño e Implementación} & [Fecha Inicio] -- [Fecha Fin] \\
+    \textbf{Fase 3: Cierre del Proyecto} & [Fecha Inicio] -- [Fecha Fin] \\
+    \end{coolTable}
+    \caption{Resumen de las fases principales del proyecto.}
+\end{table}
 
-En esta sección se recogerá el contenido que se vaya completando para cada fase del proyecto. 
-El objetivo es dejar un espacio claro en la memoria para ir incorporando, de forma ordenada, 
-qué se ha hecho en cada momento, qué decisiones se han tomado y qué resultados se han obtenido.
-
-\subsection{Fase 1: Planificación y Gestión}
-En esta subsección se describirá todo lo relacionado con el arranque del proyecto: análisis inicial, 
-definición de objetivos, elección de herramientas, organización del backlog y preparación del plan de trabajo.
-
-\subsection{Fase 2: Diseño e Implementación}
-En esta subsección se recogerá el desarrollo de las mecánicas base del juego, distribuidas por iteraciones,
-junto con la justificación de por qué cada issue se cerró en una iteración concreta y no en la anterior.
-
-\subsection{Fase 3: Cierre del Proyecto}
-En esta subsección se añadirá, cuando corresponda, la documentación final, la preparación de la presentación 
-y la revisión final del trabajo antes de su entrega.
+Dentro de la Fase 2, las iteraciones se han diseñado para cubrir los objetivos técnicos de manera incremental, asegurando que el juego sea siempre ejecutable. En cada iteración, se seleccionan los elementos del Kanban, se trackean a través de los estados definidos y se validan según la \textit{Definition of Done}.
