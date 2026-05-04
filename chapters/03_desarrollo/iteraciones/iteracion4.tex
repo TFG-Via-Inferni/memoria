@@ -1,20 +1,157 @@
 \chapter{Iteración 4}
 
 \section{Lista de funcionalidades}
-En esta iteración se documentarán las funcionalidades seleccionadas del \textit{backlog}
-para seguir ampliando la experiencia jugable y cerrar entregas verificables.
+La cuarta iteración se orientó principalmente a mejorar la experiencia de uso del sistema
+fuera del combate y de la exploración estricta. Hasta este punto, el proyecto ya disponía
+de una base jugable relativamente sólida, con generación procedural, progresión por
+círculos, dualidad del jugador y una primera versión del minimapa. Sin embargo, la
+interacción con el juego seguía siendo todavía pobre desde el punto de vista de interfaz y
+de flujo de entrada y salida. Por ello, esta iteración se centró en dos bloques: el ajuste
+del \textit{Head-Up Display} y la consolidación del sistema de menús.
+
+\begin{enumerate}
+\item \textbf{Head-Up Display.} Esta funcionalidad se centró en mejorar la legibilidad y el
+encaje visual de la información en pantalla. En esta fase, el HUD ya existía como soporte
+de ciertos elementos informativos del juego, pero todavía necesitaba una mejor adaptación al
+espacio visible para resultar realmente útil durante la partida. El trabajo realizado en
+esta iteración consistió en ajustar el tamaño y la disposición de los elementos visibles del
+HUD para que su lectura fuera más clara y para que no compitieran de forma incómoda con el
+espacio de juego. En términos funcionales, esta feature no introduce una nueva capa de
+información, sino que refina la forma en la que el jugador recibe la información existente,
+mejorando la proporción, el equilibrio visual y la integración de la interfaz sobre la
+escena. Esto era importante porque, a medida que el proyecto iba incorporando más sistemas,
+la interfaz dejaba de ser un añadido accesorio y pasaba a convertirse en una herramienta
+necesaria para que el estado del juego se percibiera con claridad.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa del Head-Up Display en la iteración 4}
+% \includegraphics[width=.9\textwidth]{figures/iteracion4_hud.png}
+\caption{Resultado visual de la feature Head-Up Display en la iteración 4}
+\label{fig:iteracion4-feature-hud}
+\end{center}
+\end{figure}
+
+\item \textbf{Menús.} Esta funcionalidad consolidó el flujo de pantallas necesario para
+entrar al juego, pausarlo y salir de él de forma controlada. En términos reales, la feature
+quedó materializada en dos frentes complementarios. El primero fue el menú de pausa dentro
+de la partida, con capacidad para detener el tiempo de juego, ocultar temporalmente el HUD,
+ofrecer acciones de reanudación, reinicio y salida, y responder tanto a teclado como a
+mandos. El segundo fue el menú principal de entrada, responsable de cargar la escena de
+juego y de organizar los botones principales del sistema. Además, durante la iteración se
+realizaron ajustes de disposición para que el logotipo y los botones se adaptaran mejor al
+espacio disponible, mejorando la consistencia visual entre pantallas. Esta feature fue
+relevante porque convirtió el proyecto en una aplicación interactiva más completa: el juego
+dejó de depender de un arranque puramente técnico desde la escena principal y pasó a ofrecer
+una navegación básica más propia de un producto jugable real.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa de Menús en la iteración 4}
+% \includegraphics[width=.9\textwidth]{figures/iteracion4_menus.png}
+\caption{Resultado visual de la feature Menús en la iteración 4}
+\label{fig:iteracion4-feature-menus}
+\end{center}
+\end{figure}
+\end{enumerate}
+
+La combinación de ambas funcionalidades hizo que esta iteración actuara como una fase de
+maduración de la capa de presentación. Aunque no se centró en añadir profundidad al núcleo
+de combate o generación, sí resultó clave para mejorar la relación entre el jugador y el
+sistema, ordenando mejor la información y estructurando la navegación entre estados del
+juego.
 
 \section{Diseño}
-Este apartado recogerá las decisiones de diseño adoptadas para las funcionalidades de la
-iteración, así como su impacto sobre la arquitectura existente.
+El diseño de esta iteración partió de una necesidad clara: el juego ya no podía seguir
+tratando la interfaz como un elemento secundario. A medida que el sistema crecía, resultaba
+necesario distinguir mejor entre la experiencia puramente jugable y la experiencia de
+interacción global con la aplicación.
+
+\subsection{Diseño del Head-Up Display}
+La decisión principal respecto al HUD fue asumir que su valor no depende solo de la
+información que muestra, sino también de cómo se integra visualmente con la escena. Un HUD
+mal proporcionado puede ser tan problemático como la ausencia de información, ya que invade
+espacio de juego o dificulta la lectura rápida del estado actual de la partida.
+
+Por ello, el trabajo de diseño en esta iteración se centró en el ajuste de escala y
+proporciones, buscando que los elementos visibles mantuvieran presencia suficiente para ser
+útiles, pero sin romper el equilibrio del encuadre. La intención no era rediseñar por
+completo la interfaz, sino llevarla a un punto en el que pudiera convivir mejor con el
+resto del sistema.
+
+\subsection{Diseño del sistema de menús}
+En el caso de los menús, la decisión de diseño importante fue separar claramente dos
+contextos distintos de interacción: el contexto de entrada al juego y el contexto de pausa
+dentro de una partida ya iniciada. Ambos comparten convenciones visuales y botones, pero
+responden a necesidades diferentes.
+
+El menú principal se diseñó como puerta de acceso al sistema, centralizando el inicio de
+partida y la salida de la aplicación. El menú de pausa, en cambio, se concibió como una
+capa superpuesta que interrumpe temporalmente la ejecución del juego sin romper el estado de
+la sesión. Este segundo caso exigía una relación más directa con el control del tiempo, del
+audio y de la visibilidad de la interfaz de gameplay.
+
+Además, se decidió prestar atención a la disposición adaptable de los elementos, especialmente
+del logotipo y de los botones, para evitar una composición rígida o mal proporcionada entre
+distintas pantallas.
 
 \section{Implementación}
-Aquí se detallará la implementación realizada, indicando los principales cambios técnicos y
-los elementos integrados en el proyecto durante la iteración.
+La implementación de esta iteración se apoyó menos en nuevos sistemas lógicos profundos y
+más en controladores de interfaz y ajustes de escena. Aun así, el trabajo realizado no fue
+meramente cosmético, ya que varios de los cambios introducen comportamiento funcional
+directo sobre el flujo del juego.
+
+\subsection{Implementación del Head-Up Display}
+La feature de HUD se materializó principalmente mediante ajustes sobre la escena de juego,
+modificando el tamaño de los elementos de interfaz ya presentes para mejorar su legibilidad
+durante la partida. Aunque esta intervención no requirió la creación de un gran controlador
+nuevo, sí tuvo un efecto funcional claro: mejorar la forma en la que el jugador percibe la
+información ya disponible.
+
+Este tipo de refinamiento es relevante en un proyecto de videojuego porque la utilidad del
+HUD depende tanto de su contenido como de su presencia visual. Con este ajuste, la interfaz
+de partida quedó mejor adaptada al espacio real de uso y más preparada para convivir con
+otras capas de información que se incorporarán en iteraciones posteriores.
+
+\subsection{Implementación de Menús}
+La implementación del sistema de menús se apoyó en dos scripts principales:
+\texttt{MainMenuController} y \texttt{PauseMenuController}. El primero centraliza el menú de
+inicio y vincula los botones principales con acciones como cargar la escena de juego o salir
+de la aplicación. El segundo controla el ciclo de pausa dentro de la partida, escuchando la
+entrada correspondiente, alternando el estado pausado, ocultando o mostrando la interfaz de
+juego y gestionando las acciones de reanudar, reiniciar y abandonar la sesión.
+
+Desde el punto de vista funcional, la lógica de pausa tiene varias consecuencias directas:
+detiene el tiempo mediante \texttt{Time.timeScale}, pausa el audio global, selecciona el
+botón adecuado para facilitar la navegación y restaura el estado normal al reanudar. De
+esta manera, el menú de pausa deja de ser una simple pantalla visual y pasa a convertirse en
+un verdadero controlador del estado de juego.
+
+La parte final de la feature se completó con ajustes en la composición visual de las
+pantallas, especialmente sobre el logotipo y la distribución de los botones, para que su
+encaje fuera más consistente y adaptable.
 
 \section{Resultados}
-En esta sección se resumirán los resultados obtenidos tras la validación de las
-funcionalidades desarrolladas.
+El resultado de la iteración fue una mejora apreciable en la capa de presentación y en el
+flujo general de uso del videojuego. El jugador pasó a disponer de una interfaz más
+legible durante la partida y de un conjunto de pantallas más claro para iniciar, pausar,
+reanudar o abandonar el juego.
+
+De forma resumida, al final de esta iteración se había conseguido:
+
+\begin{itemize}
+    \item mejorar la proporción visual del HUD para hacerlo más legible durante la partida;
+    \item incorporar un controlador funcional del menú de pausa;
+    \item detener y reanudar correctamente la ejecución de la partida desde el menú;
+    \item permitir reiniciar la escena actual o salir al menú principal desde la pausa;
+    \item consolidar un menú principal de entrada al juego con una composición visual más estable.
+\end{itemize}
+
+Desde el punto de vista del desarrollo global, esta iteración fue importante porque reforzó
+la percepción del proyecto como producto jugable completo. El sistema ya no solo podía
+generar contenido y ejecutar mecánicas, sino también ofrecer una interacción más ordenada y
+comprensible en torno a la sesión de juego. Eso convierte a la cuarta iteración en un paso
+clave de maduración de la experiencia de usuario.
 
 \begin{figure}[htbp]
 \begin{center}
