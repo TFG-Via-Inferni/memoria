@@ -1,20 +1,172 @@
 \chapter{Iteración 6}
 
 \section{Lista de funcionalidades}
-En esta iteración se documentarán las funcionalidades seleccionadas del \textit{backlog}
-para cerrar bloques funcionales y preparar las últimas integraciones del sistema.
+La sexta iteración se centró en incorporar una primera capa real de progresión basada en
+objetos y en preparar una mejora posterior del minimapa. Hasta este momento, el jugador ya
+podía explorar, combatir y progresar entre círculos, pero todavía no disponía de un sistema
+interno de inventario capaz de almacenar recompensas, seleccionar contenido adquirido o
+relacionar el mundo con objetos persistentes de la partida. Por ello, esta iteración se
+estructura en torno a tres funcionalidades: la gestión de inventario, los objetos y una
+segunda mejora del minimapa que se deja preparada para concretarse con la implementación
+final del día.
+
+\begin{enumerate}
+\item \textbf{Gestión de Inventario.} Esta funcionalidad introdujo la base runtime del
+inventario del jugador, organizando la colección de objetos en una estructura de slots con
+capacidad limitada y con selección activa. Su funcionamiento real se apoya en un inventario
+de doce posiciones potenciales, aunque no todas están desbloqueadas desde el comienzo, lo
+que permite tratar la capacidad como parte de la progresión del personaje. La feature
+incorpora operaciones para seleccionar slots, añadir objetos válidos, soltar el objeto del
+slot actual y notificar a la interfaz cuando se produce un cambio. También contempla casos
+de error como inventario lleno, slot vacío, slot bloqueado u objeto inválido, registrando
+la causa del fallo para facilitar la comunicación con el jugador o con herramientas de
+depuración. En términos funcionales, esta feature convierte la acumulación de objetos en una
+parte real del sistema, ya que deja de tratarse de elementos efímeros en el mundo y pasa a
+existir una estructura persistente de almacenamiento asociada al jugador.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa de Gestión de Inventario en la iteración 6}
+% \includegraphics[width=.9\textwidth]{figures/iteracion6_gestion_inventario.png}
+\caption{Resultado visual de la feature Gestión de Inventario en la iteración 6}
+\label{fig:iteracion6-feature-inventario}
+\end{center}
+\end{figure}
+
+\item \textbf{Objetos.} Esta funcionalidad definió la representación de los objetos como
+entidades consistentes tanto en datos como en mundo. Su funcionamiento real se articula en
+dos niveles. El primero es la definición del objeto como recurso configurable, con
+identificador normalizado, nombre visible, icono, tipo y parámetros asociados a su efecto.
+El segundo es su presencia dentro del mundo mediante pickups capaces de mostrar ese objeto,
+permitir su recogida por parte del jugador y desaparecer cuando la operación tiene éxito.
+La feature contempla además la validación de definiciones para evitar inconsistencias en los
+datos y fuerza un modelo de objetos únicos no apilables, simplificando la lógica inicial del
+inventario. En conjunto, esta funcionalidad conecta por primera vez el contenido recogible
+del escenario con una representación interna estructurada y con la interfaz del inventario,
+haciendo posible que los objetos se conviertan en una unidad real de progresión jugable.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa de Objetos en la iteración 6}
+% \includegraphics[width=.9\textwidth]{figures/iteracion6_objetos.png}
+\caption{Resultado visual de la feature Objetos en la iteración 6}
+\label{fig:iteracion6-feature-objetos}
+\end{center}
+\end{figure}
+
+\item \textbf{Minimap.} Esta funcionalidad corresponde a una segunda mejora del minimapa
+sobre la base ya introducida anteriormente. En esta iteración se deja identificada como
+trabajo de ampliación de la feature, orientado a enriquecer la forma en la que el jugador
+lee el estado del mapa y la información de progreso dentro de la mazmorra. Su redacción
+definitiva deberá ajustarse una vez cerrada la implementación concreta, pero conceptualmente
+esta mejora se entiende como una extensión del minimapa ya existente, no como una feature
+independiente.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa de Minimap en la iteración 6}
+% \includegraphics[width=.9\textwidth]{figures/iteracion6_minimap.png}
+\caption{Resultado visual de la feature Minimap en la iteración 6}
+\label{fig:iteracion6-feature-minimap}
+\end{center}
+\end{figure}
+\end{enumerate}
+
+La combinación de estas tres funcionalidades hace que la sexta iteración actúe como puente
+entre el núcleo de combate ya consolidado y una capa de progresión más tangible basada en
+recompensas, recogida de contenido y lectura más rica del estado de la partida.
 
 \section{Diseño}
-Este apartado recogerá las decisiones de diseño adoptadas para las funcionalidades de la
-iteración, así como su impacto sobre la arquitectura existente.
+El diseño de esta iteración giró en torno a una idea central: convertir los objetos en
+elementos persistentes y gestionables, en lugar de tratarlos como contenido aislado dentro
+del mundo. Para ello era necesario definir una estructura interna de inventario, un formato
+estable para los objetos y una forma clara de relacionar ambos sistemas con el jugador y con
+la interfaz.
+
+\subsection{Diseño de la gestión de inventario}
+La principal decisión de diseño fue modelar el inventario como una colección cerrada de
+slots, no como una lista ilimitada de entradas dinámicas. Esto facilita el control del HUD,
+la selección activa y la idea de capacidad desbloqueable como parte de la progresión del
+personaje.
+
+Además, se decidió separar la lógica de selección, la lógica de almacenamiento y la gestión
+de errores, de modo que el sistema pueda reaccionar de forma distinta según la operación que
+falle. La presencia de slots bloqueados desde el diseño también prepara el terreno para
+mejoras futuras sin obligar a rediseñar el modelo base del inventario.
+
+\subsection{Diseño de los objetos}
+Los objetos se diseñaron como definiciones de datos independientes del pickup físico que los
+representa en el mundo. Esta separación era importante porque evita mezclar configuración y
+representación visual, permitiendo que un mismo tipo de objeto pueda existir como recurso
+abstracto, como icono de inventario o como entidad recogible.
+
+También se tomó la decisión de imponer, en esta primera fase, una política de objetos
+únicos no apilables. Esto reduce la complejidad inicial del sistema y hace que cada slot
+tenga una interpretación directa, algo útil mientras el inventario aún se encuentra en una
+fase relativamente temprana.
+
+\subsection{Diseño de la ampliación del minimapa}
+La mejora del minimapa se plantea en esta iteración como una continuación de la línea ya
+abierta en la entrega anterior. Su diseño general sigue orientado a reforzar la lectura del
+recorrido y del estado del mapa por parte del jugador. El detalle definitivo deberá quedar
+ajustado cuando se cierre la implementación concreta de esta segunda fase de la feature.
 
 \section{Implementación}
-Aquí se detallará la implementación realizada, indicando los principales cambios técnicos y
-los elementos integrados en el proyecto durante la iteración.
+La implementación de esta iteración se apoyó sobre todo en la incorporación de nuevos tipos
+de dato y en la conexión entre mundo, jugador e interfaz. A diferencia de la iteración
+anterior, donde el foco estaba claramente en combate y enemigos, aquí el peso recae en la
+gestión del contenido recogible y en su persistencia durante la partida.
+
+\subsection{Implementación de la gestión de inventario}
+La lógica principal quedó centralizada en \texttt{PlayerInventory}. Este componente
+implementa un inventario de tamaño máximo fijo, mantiene el índice del slot seleccionado y
+expone operaciones para cambiar de slot, añadir objetos y soltar el objeto activo. También
+se apoya en eventos para notificar modificaciones, lo que permite desacoplar la actualización
+del inventario de su representación visual en la interfaz.
+
+La capacidad disponible se enlaza con \texttt{PlayerStats}, de forma que el número de slots
+desbloqueados puede depender del estado de progresión del jugador. A ello se suma una lógica
+de validación de operaciones que registra por qué una acción falla, lo que resulta útil
+tanto para depuración como para la futura comunicación con el usuario.
+
+\subsection{Implementación de los objetos}
+La representación de los objetos se apoyó en \texttt{InventoryItemDefinition}, que define la
+identidad del objeto, su icono, su tipo y los datos asociados a sus posibles efectos.
+Además, \texttt{InventoryItemValidationUtility} se encarga de validar estas definiciones y
+de normalizar identificadores para evitar inconsistencias.
+
+La presencia física del objeto en el mundo se resolvió mediante \texttt{WorldInventoryPickup},
+un componente encargado de mostrar el icono del ítem, ofrecer una operación de recogida
+contra el inventario del jugador y destruir o mantener el pickup según el resultado. Esto
+permite que el vínculo entre mundo e inventario quede resuelto de manera directa: el jugador
+interactúa con un pickup y, si la operación es válida, el objeto pasa a su inventario.
+
+\subsection{Implementación de la mejora del minimapa}
+La segunda fase del minimapa se deja en esta iteración como una mejora identificada y
+preparada para describirse con mayor precisión una vez implementada. A nivel documental, se
+mantiene su hueco dentro de la iteración porque forma parte del reparto funcional previsto,
+pero el detalle final deberá completarse cuando el comportamiento concreto esté cerrado.
 
 \section{Resultados}
-En esta sección se resumirán los resultados obtenidos tras la validación de las
-funcionalidades desarrolladas.
+El resultado de la iteración fue la introducción de una base clara para la progresión por
+objetos. El jugador pasó a disponer de una estructura de inventario real, el mundo pudo
+contener pickups conectados con ese inventario y el sistema quedó preparado para que los
+objetos actúen como recompensas persistentes dentro de la partida.
+
+De forma resumida, al final de esta iteración se había conseguido:
+
+\begin{itemize}
+    \item incorporar un inventario por slots con capacidad limitada y selección activa;
+    \item definir objetos con identidad, icono, tipo y validación interna;
+    \item conectar pickups del mundo con el inventario del jugador;
+    \item preparar la progresión de capacidad del inventario desde las estadísticas del jugador;
+    \item dejar encajada la siguiente ampliación del minimapa dentro del flujo de iteraciones.
+\end{itemize}
+
+Desde el punto de vista del desarrollo global, esta iteración fue importante porque añadió
+una capa de persistencia y recompensa que el proyecto todavía no tenía de forma clara. A
+partir de aquí, los objetos pueden empezar a desempeñar un papel más fuerte en la economía,
+la progresión y la toma de decisiones del jugador dentro de cada \textit{run}.
 
 \begin{figure}[htbp]
 \begin{center}
