@@ -8,8 +8,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \selectlanguage{spanish}
-\renewcommand{\figurename}{Cuadro}
-\renewcommand{\listfigurename}{Índice de cuadros}
+\addto\captionsspanish{%
+  \renewcommand{\figurename}{Figura}%
+  \renewcommand{\listfigurename}{\'{I}ndice de Figuras}%
+  \renewcommand{\tablename}{Tabla}%
+  \renewcommand{\listtablename}{\'{I}ndice de tablas}%
+}
 
 \usepackage[pdftex,final]{graphicx}
 
@@ -60,7 +64,6 @@ Tu dedicatoria aquí
 \tableofcontents
 \listoffigures
 \listoftables
-\listoftodos
 \newpage
 
 \pagenumbering{arabic}
