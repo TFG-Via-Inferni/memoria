@@ -20,9 +20,71 @@ clara de responsabilidades y facilitar la evolución del sistema.
 
 \subsection{FDD: Lista de Funcionalidades -- Feature List}
 A partir de ese modelo general se construyó una lista de funcionalidades agrupadas por
-dominio: mecánicas del jugador, generación procedural y mundo, entidades y comportamiento,
-economía y progresión, e interfaz y \textit{feedback}. Esta descomposición hizo posible
-planificar por incrementos verificables y justificar cada avance dentro de la memoria.
+dominio. Esta descomposición hizo posible planificar por incrementos verificables y
+justificar cada avance dentro de la memoria. En este punto se define qué es cada
+\textit{feature}; el detalle de diseño e implementación se desarrolla más adelante en las
+iteraciones.
+
+\subsubsection{Dominio: generación y estructura del mundo}
+\begin{itemize}
+    \item \textbf{Generación Procedural:} Sistema encargado de construir automáticamente la
+    estructura del nivel, definir la conectividad entre salas y distribuir los distintos
+    tipos de habitaciones que forman cada partida.
+    \item \textbf{Lógica de círculos:} Mecanismo que gobierna la progresión del jugador por
+    los distintos niveles temáticos del Infierno, controlando el avance entre círculos y
+    su coherencia con el estado general de la partida.
+\end{itemize}
+
+\subsubsection{Dominio: jugador y sistemas base}
+\begin{itemize}
+    \item \textbf{Añadir Jugador:} Incorporación de una entidad jugable capaz de aparecer en
+    el nivel generado, desplazarse por las salas y servir como núcleo de interacción con
+    el resto de sistemas del juego.
+    \item \textbf{Cámara de jugador:} Sistema de seguimiento visual que mantiene al jugador
+    como referencia principal en escena y facilita una navegación clara por el mapa
+    generado.
+    \item \textbf{Dualidad de personajes:} Mecánica que permite trabajar con Dante y
+    Virgilio como personajes complementarios, contemplando su alternancia y la persistencia
+    de información compartida durante la partida.
+\end{itemize}
+
+\subsubsection{Dominio: enemigos y combate}
+\begin{itemize}
+    \item \textbf{Añadir Enemigo:} Integración de enemigos básicos dentro de las salas para
+    convertir el desplazamiento por el nivel en una experiencia jugable con oposición real.
+    \item \textbf{Sistema de combate:} Conjunto de reglas y mecanismos que permiten atacar,
+    recibir daño y resolver enfrentamientos entre jugador y enemigos de forma coherente.
+    \item \textbf{Sistema de Enemigos:} Lógica de comportamiento que regula el estado,
+    movimiento y respuesta de los enemigos, permitiendo definir patrones diferenciados y
+    escalar la dificultad del juego.
+\end{itemize}
+
+\subsubsection{Dominio: interfaz y experiencia de uso}
+\begin{itemize}
+    \item \textbf{Minimap:} Representación simplificada del nivel que permite al jugador
+    orientarse, comprender la estructura del mapa y seguir su progreso durante la partida.
+    \item \textbf{Head-Up Display:} Capa de interfaz que muestra en tiempo real la
+    información esencial de la partida, como vida, recursos, estado del personaje o
+    indicadores de progreso.
+    \item \textbf{Menús:} Flujo de pantallas que organiza la interacción fuera del núcleo
+    jugable, incluyendo acceso al juego, pausa, navegación entre opciones y salida.
+    \item \textbf{Actualizar Sprites:} Revisión y mejora de los elementos visuales del
+    proyecto para mantener coherencia estética y reforzar la identidad del videojuego.
+\end{itemize}
+
+\subsubsection{Dominio: progresión, economía y objetos}
+\begin{itemize}
+    \item \textbf{Gestión de Inventario:} Sistema responsable de almacenar, consultar y
+    administrar los recursos y elementos obtenidos por el jugador durante una \textit{run}.
+    \item \textbf{Objetos:} Conjunto de elementos interactivos, pasivos o consumibles que
+    modifican la partida, aportan variedad a las decisiones del jugador y refuerzan la
+    progresión interna del juego.
+\end{itemize}
+
+Cada una de estas funcionalidades define el alcance del producto a nivel de feature. El
+detalle de diseño, implementación, incidencias y resultados se desarrolla posteriormente
+en las iteraciones, donde se documenta con mayor profundidad cómo se abordó cada bloque
+de trabajo.
 
 \section{Ejecución del plan de gestión del cronograma}
 La planificación temporal se ejecutó mediante tres fases principales y una descomposición
