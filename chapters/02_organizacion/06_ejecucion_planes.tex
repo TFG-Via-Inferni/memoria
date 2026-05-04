@@ -1,0 +1,73 @@
+%!TEX root = tfg.tex
+\chapter{Ejecución de los Planes de Gestión}
+
+\begin{abstract}
+Este capítulo describe cómo los planes de gestión definidos previamente se trasladaron a
+la ejecución real del proyecto.
+\end{abstract}
+
+\section{Ejecución del plan de gestión del alcance}
+La ejecución del alcance se articuló sobre FDD, utilizando una visión global del sistema y
+una descomposición en funcionalidades manejables. Este enfoque permitió controlar qué
+entraba realmente dentro del producto mínimo viable y qué quedaba fuera del alcance del TFG.
+
+\subsection{FDD: Modelo general -- Overall Model}
+El modelo general fija la estructura de alto nivel del videojuego. En \textit{Via Inferni}
+esto implicó definir la relación entre el núcleo jugable, la generación procedural, la
+progresión por círculos, la interfaz y la persistencia de la partida. También se adoptó
+una arquitectura modular basada en gestores especializados para mantener una separación
+clara de responsabilidades y facilitar la evolución del sistema.
+
+\subsection{FDD: Lista de Funcionalidades -- Feature List}
+A partir de ese modelo general se construyó una lista de funcionalidades agrupadas por
+dominio: mecánicas del jugador, generación procedural y mundo, entidades y comportamiento,
+economía y progresión, e interfaz y \textit{feedback}. Esta descomposición hizo posible
+planificar por incrementos verificables y justificar cada avance dentro de la memoria.
+
+\section{Ejecución del plan de gestión del cronograma}
+La planificación temporal se ejecutó mediante tres fases principales y una descomposición
+interna en iteraciones para la fase de desarrollo. Los hitos se utilizaron como puntos de
+control para revisar desviaciones, reajustar la carga de trabajo y decidir si una
+funcionalidad debía consolidarse, aplazarse o dividirse en entregas más pequeñas.
+
+\section{Ejecución del plan de gestión de comunicaciones}
+La comunicación diaria se apoyó en Discord, mientras que GitHub concentró el seguimiento
+formal de incidencias, revisiones y cambios sobre el código. El tablero Kanban de GitHub
+Projects se utilizó como herramienta visual de seguimiento, permitiendo distinguir qué
+funcionalidades estaban pendientes, en curso, en revisión o cerradas.
+
+\section{Ejecución del plan de gestión de riesgos}
+La gestión de riesgos se aplicó de forma preventiva. Los componentes con mayor
+incertidumbre, como la generación procedural y la integración entre salas, enemigos e
+interfaz, se abordaron tempranamente para detectar problemas antes de que afectaran a una
+parte mayor del sistema. Cuando una funcionalidad resultó más costosa de lo previsto, se
+subdividió en varias iteraciones para reducir el riesgo de bloqueo.
+
+\section{Ejecución del plan de gestión de la calidad}
+La \textit{Definition of Done} se aplicó como criterio de cierre real de cada feature.
+Esto evitó considerar terminadas soluciones parciales o aisladas. La validación se realizó
+tanto desde el punto de vista técnico como jugable, comprobando que cada incremento
+funcionaba en el motor y convivía correctamente con los sistemas ya integrados.
+
+\section{Ejecución del plan de gestión de costes}
+La ejecución del plan de costes se reflejó mediante una estimación consolidada del valor
+económico del proyecto. El mayor peso recae en el tiempo de trabajo de los dos
+desarrolladores, complementado con la amortización del hardware y los costes indirectos del
+entorno de desarrollo.
+
+\begin{table}[h!]
+    \centering
+    \begin{coolTable}{ll}{2}
+    {Resumen del presupuesto del proyecto}
+    \textbf{Costes de personal (salarios brutos)} & 11.666,66 \euro \\
+    \textbf{Costes sociales (30\% sobre bruto)} & 3.500,00 \euro \\
+    \textbf{Costes materiales (amortización hardware)} & 125,00 \euro \\
+    \textbf{Costes materiales (software y servicios)} & 0,00 \euro \\
+    \midrule
+    \textbf{Total costes directos} & 15.291,66 \euro \\
+    \textbf{Costes indirectos (10\%)} & 1.529,17 \euro \\
+    \midrule
+    \textbf{TOTAL DEL PROYECTO} & \textbf{16.820,83 \euro} \\
+    \end{coolTable}
+    \caption{Resumen detallado de la inversión económica total.}
+\end{table}

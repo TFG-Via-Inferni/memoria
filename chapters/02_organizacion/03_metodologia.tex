@@ -1,86 +1,85 @@
 %!TEX root = tfg.tex
 \chapter{Metodología}
 
-\begin{quotation}[Novelist]{Ernest Hemingway (1899--1961)}
-The good parts of a book may be only something a writer is lucky enough to overhear or it may be the wreck of his whole damn life -- and one is as good as the other.
-\end{quotation}
-
 \begin{abstract}
-En este capítulo se expone el marco metodológico que ha guiado el desarrollo de \textit{Via Inferni}. Al tratarse de un videojuego con una fuerte componente técnica y creativa, el proyecto necesita una metodología que permita avanzar de forma incremental sin perder el control sobre la arquitectura ni sobre la calidad del código. Por ello, se adopta \textit{Feature Driven Development} (FDD) como marco principal de trabajo, se utiliza Kanban para el seguimiento operativo del progreso y se define una estrategia de configuración híbrida que combina la organización de \textit{GitFlow} con la integración rápida propia de \textit{Trunk-Based Development}. Todo ello se complementa con \textit{Conventional Commits} y una \textit{Definition of Done} común para asegurar trazabilidad, coherencia y validación continua.
+En este capítulo se expone el marco metodológico que ha guiado el desarrollo de
+\textit{Via Inferni}. La propuesta combina prácticas de planificación inspiradas en
+PMBOK, un enfoque iterativo basado en FDD y una gestión del código orientada a mantener
+trazabilidad y estabilidad durante el desarrollo.
 \end{abstract}
 
-\section{Marco de trabajo: \textit{Feature Driven Development} (FDD)}
-Para la construcción de este proyecto se ha seleccionado la metodología \textit{Feature Driven Development}. La razón principal es que FDD encaja especialmente bien en proyectos donde la funcionalidad debe crecer por incrementos pequeños, comprobables y con un diseño técnico suficientemente claro antes de implementar cada cambio. Esto resulta muy adecuado en un videojuego como \textit{Via Inferni}, donde el juego completo depende de la integración de varios subsistemas relativamente independientes: generación procedural, combate, inventario, interfaz, enemigos, progresión y persistencia de estado.
+\section{PMBOK adaptado a un videojuego}
+El proyecto toma como referencia varias áreas de conocimiento del PMBOK, pero adaptadas a
+la escala real de un TFG y a las particularidades del desarrollo de un videojuego. En
+lugar de aplicar una gestión documental pesada, se seleccionan únicamente aquellos planes
+que aportan control efectivo sobre el alcance, el calendario, la comunicación, los
+riesgos, la calidad y los costes.
 
-FDD permite trabajar con una visión global del producto, pero sin perder granularidad en la ejecución. En lugar de abordar el desarrollo como un bloque único, el proyecto se descompone en funcionalidades manejables que pueden diseñarse, implementarse y validarse por separado. Ese enfoque reduce el riesgo de integrar cambios demasiado grandes y facilita justificar cada avance dentro de la memoria.
+Este enfoque permite mantener una visión de proyecto completa sin perder agilidad. La
+planificación sirve como marco de decisión, mientras que la ejecución técnica se documenta
+de forma incremental y vinculada a entregables funcionales.
 
-El proceso se articula a través de cinco pasos fundamentales que guían el proyecto desde su concepción hasta la incorporación de cada funcionalidad, tal y como se ilustra en la Figura \ref{fig:fdd_flow}.
+\section{Feature Driven Development}
+Para la construcción de \textit{Via Inferni} se ha seleccionado la metodología
+\textit{Feature Driven Development} (FDD). La razón principal es que encaja especialmente
+bien en proyectos donde la funcionalidad debe crecer por incrementos pequeños,
+comprobables y con un diseño técnico suficientemente claro antes de implementar cada
+cambio.
+
+FDD permite trabajar con una visión global del producto, pero sin perder granularidad en
+la ejecución. En lugar de abordar el desarrollo como un bloque único, el proyecto se
+descompone en funcionalidades manejables que pueden diseñarse, implementarse y validarse
+por separado.
+
+El proceso se articula a través de cinco pasos fundamentales que guían el proyecto desde
+su concepción hasta la incorporación de cada funcionalidad, tal y como se ilustra en la
+Figura \ref{fig:fdd_flow}.
 
 \begin{figure}[htb]
     \centering
     \begin{tikzpicture}[node distance=1.2cm, auto,
         block/.style={rectangle, draw, fill=gray!5, text width=6cm, text centered, rounded corners, minimum height=1cm, font=\small},
         line/.style={draw, -latex, thick}]
-        
-        % Nodos
         \node [block] (step1) {\textbf{1. Desarrollo de un modelo general} \\ (Análisis de arquitectura y dominio)};
-        \node [block, below=of step1] (step2) {\textbf{2. Construcción de la Lista de Funcionalidades} \\ (Desglose del backlog)};
+        \node [block, below=of step1] (step2) {\textbf{2. Construcción de la lista de funcionalidades} \\ (Desglose del backlog)};
         \node [block, below=of step2] (step3) {\textbf{3. Planificación por funcionalidad} \\ (Priorización e hitos)};
         \node [block, below=of step3, fill=blue!5] (step4) {\textbf{4. Diseño por funcionalidad} \\ (Contratos y lógica técnica)};
         \node [block, below=of step4, fill=blue!5] (step5) {\textbf{5. Construcción por funcionalidad} \\ (Codificación e integración)};
-        
-        % Flechas principales
+
         \path [line] (step1) -- (step2);
         \path [line] (step2) -- (step3);
         \path [line] (step3) -- (step4);
         \path [line] (step4) -- (step5);
-        
-        % Bucle iterativo
         \path [line] (step5.east) -- ++(1,0) -- ++(0,2.2) -- (step4.east);
         \node [right=of step4, xshift=0.3cm, yshift=1cm, text width=2cm, font=\footnotesize\itshape] {Iteración continua por funcionalidad};
-        
-        % Caja contenedora para la fase de construcción
         \draw[dashed, blue!40, thick] ([xshift=-0.5cm, yshift=0.3cm]step4.north west) rectangle ([xshift=2.5cm, yshift=-0.3cm]step5.south east);
-        \node[blue!60, rotate=90, anchor=south] at ([xshift=2.5cm]step5.east) {Fase Iterativa};
+        \node[blue!60, rotate=90, anchor=south] at ([xshift=2.5cm]step5.east) {Fase iterativa};
     \end{tikzpicture}
     \caption{Flujo de procesos de la metodología FDD aplicado al desarrollo del sistema.}
     \label{fig:fdd_flow}
 \end{figure}
 
-\begin{enumerate}
-    \item \textbf{Desarrollo de un modelo general (Overall Model):} En la primera fase se analiza el dominio del problema y se fija una visión de alto nivel del sistema. En este proyecto eso implica definir cómo se relacionan el núcleo jugable, la generación de niveles, la progresión por círculos, la interfaz y la persistencia del estado de partida. El objetivo no es bajar al detalle de implementación, sino dejar clara la estructura sobre la que se apoyará todo lo demás.
-    \item \textbf{Construcción de la lista de funcionalidades (Feature List):} A partir de ese modelo general se descompone el alcance en funcionalidades pequeñas, observables y verificables. Esta fragmentación evita tareas demasiado amplias y permite describir el proyecto como una suma de incrementos concretos, por ejemplo, acciones del jugador, generación de salas, comportamiento de enemigos o gestión de inventario.
-    \item \textbf{Planificación por funcionalidad (Plan by Feature):} Una vez definida la lista, las funcionalidades se priorizan según dependencias, riesgo técnico y valor para la versión jugable. Esta priorización es la que conecta la metodología con la planificación temporal del proyecto, porque determina qué se resuelve primero y qué se deja para iteraciones posteriores.
-    \item \textbf{Diseño por funcionalidad (Design by Feature):} Antes de programar cada bloque se realiza un diseño concreto de la solución. En esta fase se concretan responsabilidades, contratos entre clases, estructuras de datos y reglas de interacción, de manera que la implementación no dependa de decisiones improvisadas ni de acoplamientos innecesarios.
-    \item \textbf{Construcción por funcionalidad (Build by Feature):} Finalmente se implementa la funcionalidad, se integra con el resto del sistema y se comprueba que cumple el comportamiento esperado. En un proyecto de estas características esta fase incluye también validación práctica dentro del motor, ya que una feature solo tiene sentido si funciona correctamente en el contexto real del juego.
-\end{enumerate}
+\section{Gestión de la configuración y el código}
+La gestión del repositorio es crítica para asegurar la integridad del proyecto. Para ello
+se ha definido una estrategia híbrida que combina la organización estructural de
+\textit{GitFlow} con la integración frecuente propia de \textit{Trunk-Based Development}.
 
-FDD aporta una ventaja adicional para un TFG de estas características: permite documentar el desarrollo de forma natural. Cada incremento funcional tiene sentido por sí mismo, pero también encaja dentro de una visión global que puede explicarse en la memoria sin mezclar los niveles de detalle de planificación, diseño e implementación.
+La rama \texttt{main} representa el estado estable del proyecto, mientras que
+\texttt{develop} actúa como punto de integración del trabajo validado. Las ramas de
+funcionalidad son efímeras y se crean para resolver tareas concretas del \textit{backlog},
+reduciendo así el coste de integración y el riesgo de divergencias largas.
 
-\section{Gestión del Flujo de Trabajo: Kanban}
-Para monitorizar el progreso diario y gestionar la carga de trabajo, se emplea Kanban a través de GitHub Projects. Esta herramienta visual permite situar cada funcionalidad del FDD en un estado claramente identificable y simplifica la coordinación entre los dos miembros del equipo. El tablero se organiza en columnas que reflejan el flujo real de trabajo: \textit{Backlog} para lo pendiente, \textit{To-do} para lo seleccionado en la iteración actual, \textit{In Progress} para lo que está en desarrollo, \textit{In Review} para lo que debe validarse y \textit{Done} para lo ya cerrado.
+Como criterio de trazabilidad se ha adoptado el estándar \textit{Conventional Commits},
+que facilita identificar la intención de cada cambio y relacionarlo con funcionalidades,
+correcciones o ajustes de documentación.
 
-El uso de Kanban no sustituye a la planificación, sino que la complementa. La planificación define qué debe hacerse y en qué orden; Kanban muestra en cada momento qué se está haciendo y qué bloquea el avance. Esa combinación resulta útil en un proyecto reducido, donde el control visual del progreso es más eficaz que una gestión documental excesivamente pesada.
+\section{Herramientas y tecnologías}
+El desarrollo del proyecto se apoya en un conjunto de herramientas técnicas y de gestión
+que permiten coordinar el trabajo y mantener control sobre el avance.
 
-\section{Gestión de Configuración: Flujo Híbrido}
-La gestión del repositorio de código es crítica para asegurar la integridad del proyecto. Para ello se ha diseñado una solución híbrida que combina la organización estructural de \textit{GitFlow} con la rapidez de integración del \textit{Trunk-Based Development}. El objetivo no es seguir un modelo purista, sino adaptar ambos enfoques a un equipo pequeño con necesidades de integración frecuentes y trazabilidad clara.
-
-\subsection{Estructura Organizacional: GitFlow}
-Del modelo \textit{GitFlow} se adopta el uso de ramas con un propósito claro para organizar el ciclo de vida del software. La rama \texttt{main} representa el estado estable del proyecto y solo contiene versiones validadas, mientras que la rama \texttt{develop} actúa como punto de integración de las funcionalidades ya terminadas. Esta separación ayuda a mantener un historial comprensible y evita que el trabajo en curso contamine la base estable del proyecto.
-
-\subsection{Dinámica de Integración: Trunk-Based Development}
-Para evitar los problemas derivados de ramas largas o divergentes, se aplica la filosofía de \textit{Trunk-Based Development} en la parte operativa del trabajo diario. Las ramas de funcionalidad son efímeras y se crean para resolver tareas concretas de la lista de FDD. Su vida útil es corta, de modo que el código se integra pronto y se reduce el coste de resolver conflictos o diferencias de criterio entre desarrollos paralelos. Siempre que es posible, se prefiere un historial lineal y limpio, con integraciones frecuentes y acotadas.
-
-\subsection{Estandarización: Conventional Commits}
-Como buena práctica de ingeniería de software, se ha adoptado el estándar de \textit{Conventional Commits}. Este formato estructura los mensajes de confirmación de manera homogénea y hace más fácil recuperar la intención de cada cambio en el historial. Además, mejora la trazabilidad entre las issues, las funcionalidades y las modificaciones concretas del código. Los tipos principales empleados son:
 \begin{itemize}
-    \item \textbf{\texttt{feat}:} Incorporación de una nueva funcionalidad del listado FDD.
-    \item \textbf{\texttt{fix}:} Corrección de errores detectados en fases de prueba.
-    \item \textbf{\texttt{docs}:} Cambios que afecten exclusivamente a la documentación o a la memoria.
-    \item \textbf{\texttt{refactor}:} Modificaciones en el código que no alteran el comportamiento funcional pero mejoran su calidad.
+    \item Unity actúa como motor principal de desarrollo del videojuego.
+    \item Git y GitHub se utilizan para el control de versiones, revisión de cambios y seguimiento de tareas.
+    \item GitHub Projects proporciona el tablero Kanban con el que se monitoriza el flujo de trabajo.
+    \item La memoria se mantiene en LaTeX, lo que permite modularizar capítulos y gestionar el documento con el mismo rigor que el código.
 \end{itemize}
-
-\section{Definición de hecho (DoD)}
-Una funcionalidad solo se considera finalizada cuando supera un conjunto mínimo de validaciones comunes al proyecto. En este TFG, una feature queda cerrada si el código compila sin errores en Unity, ha sido revisada por el otro miembro del equipo, se ha probado dentro del motor y no introduce regresiones en los sistemas ya integrados.
-
-Este criterio es especialmente importante porque evita dar por terminado un trabajo que solo funciona de forma aislada. En un videojuego, una feature no está realmente cerrada hasta que convive correctamente con el resto del sistema.
