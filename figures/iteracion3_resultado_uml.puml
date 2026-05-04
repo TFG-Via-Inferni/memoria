@@ -1,0 +1,106 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 40
+
+title Iteracion 3 - Vista simplificada
+
+class CircleManager {
+  +DescendToNextCircle()
+  +GetCircleName()
+}
+
+class CircleDatabase {
+  +GetByNumber()
+}
+
+class CircleDefinition {
+  +GetRoomPoolOrEmpty()
+  +GetDoorPoolOrEmpty()
+  +PickEnemyEntry()
+}
+
+class WeightedEnemyEntry
+
+class CircleUI {
+  +UpdateCircleDisplay()
+  +UpdateSelectionHudDisplay()
+}
+
+class Stairs {
+  +SetActive()
+}
+
+class MapGenerator {
+  +SetupDungeon()
+  +SpawnPlayer()
+}
+
+class Cell
+
+class RoomManager {
+  +SetUpRooms()
+  +GetRoomContainingPoint()
+}
+
+class Room {
+  +ConfigureEnemySpawnEntry()
+  +ContainsPoint()
+}
+
+class RoomCameraController {
+  +RegisterPlayer()
+  +SnapToPlayerRoom()
+  +OnPlayerEnteredRoom()
+}
+
+class Player {
+  +TrySwapForm()
+  +GetSwapCooldownRemaining()
+}
+
+class PlayerStats {
+  +GetSelectedWeaponIndex()
+  +GetSelectedWeaponId()
+}
+
+class MinimapUIController
+
+CircleManager --> CircleDatabase : consulta definicion
+CircleManager --> CircleDefinition : mantiene circulo activo
+CircleManager --> CircleUI : actualiza HUD
+CircleManager --> MapGenerator : regenera mazmorra
+
+CircleDatabase "1" o-- "*" CircleDefinition : almacena
+CircleDefinition "1" o-- "*" WeightedEnemyEntry : define pools
+
+Stairs --> CircleManager : solicita descenso
+
+MapGenerator "1" o-- "*" Cell : genera
+MapGenerator --> RoomManager : entrega celdas
+MapGenerator --> RoomCameraController : registra jugador
+MapGenerator --> Player : instancia
+
+RoomManager --> CircleDefinition : selecciona salas/puertas
+RoomManager "1" o-- "*" Room : crea
+
+Room --> WeightedEnemyEntry : selecciona enemigos
+Room --> Cell : representa sala
+Room --> Stairs : activa salida
+
+RoomCameraController --> RoomManager : consulta sala actual
+RoomCameraController --> Room : ajusta encuadre
+RoomCameraController --> Player : sigue objetivo
+
+Player --> PlayerStats : comparte estado
+CircleUI --> Player : muestra forma activa
+CircleUI --> PlayerStats : muestra arma activa
+
+MinimapUIController --> MapGenerator : consulta salas
+MinimapUIController --> Cell : representa descubrimiento
+
+@enduml

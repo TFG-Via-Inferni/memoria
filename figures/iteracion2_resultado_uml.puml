@@ -1,0 +1,72 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 40
+
+title Iteracion 2 - Vista simplificada
+
+class CircleManager {
+  +DescendToNextCircle()
+  +GetCircleName()
+}
+
+class CircleDatabase {
+  +GetByNumber()
+}
+
+class CircleUI {
+  +UpdateCircleDisplay()
+}
+
+class Stairs {
+  +SetActive()
+}
+
+class MapGenerator {
+  +SetupDungeon()
+  +SpawnPlayer()
+}
+
+class Cell
+
+class RoomManager {
+  +SetUpRooms()
+  +GetRoomContainingPoint()
+}
+
+class Room {
+  +ContainsPoint()
+}
+
+class RoomCameraController {
+  +RegisterPlayer()
+  +SnapToPlayerRoom()
+  +OnPlayerEnteredRoom()
+}
+
+class Player
+
+CircleManager --> CircleDatabase : consulta definicion
+CircleManager --> CircleUI : actualiza HUD
+CircleManager --> MapGenerator : regenera mazmorra
+
+Stairs --> CircleManager : solicita descenso
+
+MapGenerator "1" o-- "*" Cell : genera
+MapGenerator --> RoomManager : entrega celdas
+MapGenerator --> Player : instancia
+MapGenerator --> RoomCameraController : registra jugador
+
+RoomManager "1" o-- "*" Room : crea
+Room --> Cell : representa sala
+Room --> Stairs : activa salida
+
+RoomCameraController --> RoomManager : consulta sala actual
+RoomCameraController --> Room : ajusta encuadre
+RoomCameraController --> Player : sigue objetivo
+
+@enduml

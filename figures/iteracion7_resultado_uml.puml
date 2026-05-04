@@ -1,0 +1,66 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 40
+
+title Iteracion 7 - Vista simplificada
+
+class Player {
+  +TryCollectNearestInventoryPickup()
+  +TryDropSelectedInventoryItem()
+}
+
+class PlayerStats {
+  +InventoryCapacity
+  +IncreaseInventoryCapacity()
+}
+
+class PlayerInventory {
+  +TryAddItem()
+  +TryDropSelected()
+  +GetSlotState()
+  +SelectNextSlotCyclic()
+}
+
+class InventoryItemDefinition {
+  +IsValid()
+}
+
+class InventoryItemValidationUtility {
+  +NormalizeId()
+  +ValidateDefinition()
+}
+
+class WorldInventoryPickup {
+  +TryPickup()
+  +Spawn()
+}
+
+class CircleUI {
+  +UpdateInventoryHudDisplay()
+}
+
+class MinimapUIController
+
+class MapGenerator
+
+Player --> PlayerInventory : gestiona recogida y drop
+PlayerInventory --> PlayerStats : consulta capacidad
+
+PlayerInventory "1" o-- "*" InventoryItemDefinition : almacena slots
+InventoryItemDefinition --> InventoryItemValidationUtility : valida definicion
+
+WorldInventoryPickup --> InventoryItemDefinition : referencia item
+WorldInventoryPickup --> PlayerInventory : intenta recoger
+
+CircleUI --> PlayerInventory : representa slots
+CircleUI --> PlayerStats : muestra capacidad
+
+MinimapUIController --> MapGenerator : representa progreso del mapa
+MinimapUIController --> Player : centra la vista del minimapa
+
+@enduml

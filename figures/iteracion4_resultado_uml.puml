@@ -1,0 +1,71 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 40
+
+title Iteracion 4 - Vista simplificada
+
+class CircleManager {
+  +DescendToNextCircle()
+  +GetCircleName()
+}
+
+class CircleDatabase {
+  +GetByNumber()
+}
+
+class CircleDefinition {
+  +GetRoomPoolOrEmpty()
+  +GetDoorPoolOrEmpty()
+  +PickEnemyEntry()
+}
+
+class CircleUI {
+  +UpdateCircleDisplay()
+  +UpdateSelectionHudDisplay()
+  +UpdateVitalsHudDisplay()
+}
+
+class MainMenuController {
+  +StartGame()
+  +OpenOptions()
+  +ExitGame()
+}
+
+class PauseMenuController {
+  +TogglePause()
+  +ResumeGame()
+  +RestartGame()
+  +ExitGame()
+}
+
+class SceneManager
+
+class MapGenerator {
+  +SetupDungeon()
+}
+
+class Player
+class PlayerStats
+
+CircleManager --> CircleDatabase : consulta definicion
+CircleManager --> CircleDefinition : mantiene circulo activo
+CircleManager --> CircleUI : actualiza HUD
+CircleManager --> MapGenerator : regenera mazmorra
+
+CircleUI --> CircleManager : muestra circulo
+CircleUI --> Player : muestra forma activa
+CircleUI --> PlayerStats : muestra vida/atributos
+
+MainMenuController --> SceneManager : carga partida / salida
+
+PauseMenuController --> SceneManager : reinicia o vuelve al menu
+PauseMenuController --> CircleUI : oculta / muestra HUD
+
+Player --> PlayerStats : comparte estado
+
+@enduml

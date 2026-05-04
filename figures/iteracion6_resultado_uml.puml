@@ -1,0 +1,86 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 40
+
+title Iteracion 6 - Vista simplificada
+
+class CircleUI {
+  +UpdateSelectionHudDisplay()
+  +UpdateVitalsHudDisplay()
+  +UpdateInventoryHudDisplay()
+}
+
+class MinimapUIController
+
+class MapGenerator
+
+class Player {
+  +TrySwapForm()
+  +TryCollectNearestInventoryPickup()
+  +TryDropSelectedInventoryItem()
+}
+
+class PlayerStats {
+  +GetFinalDamage()
+  +GetSelectedWeaponId()
+  +IncreaseInventoryCapacity()
+}
+
+class PlayerCombatController {
+  +TryAttack()
+}
+
+class PlayerInventory {
+  +TryAddItem()
+  +TryDropSelected()
+  +GetSlotState()
+  +SelectNextSlotCyclic()
+}
+
+class InventoryItemDefinition {
+  +IsValid()
+}
+
+class InventoryItemValidationUtility {
+  +NormalizeId()
+  +ValidateDefinition()
+}
+
+class WorldInventoryPickup {
+  +TryPickup()
+  +Spawn()
+}
+
+class WeaponDefinition
+class EnemyController
+class Room
+
+CircleUI --> Player : muestra estado activo
+CircleUI --> PlayerStats : muestra atributos
+CircleUI --> PlayerInventory : muestra slots
+
+MinimapUIController --> MapGenerator : consulta salas
+MinimapUIController --> Player : centra la vista
+
+Player --> PlayerStats : comparte estado
+Player --> PlayerInventory : gestiona recogida y drop
+PlayerCombatController --> Player : obtiene forma/direccion
+PlayerCombatController --> PlayerStats : calcula dano
+PlayerCombatController --> WeaponDefinition : selecciona arma
+
+PlayerInventory --> PlayerStats : consulta capacidad
+PlayerInventory "1" o-- "*" InventoryItemDefinition : almacena slots
+InventoryItemDefinition --> InventoryItemValidationUtility : valida definicion
+
+WorldInventoryPickup --> InventoryItemDefinition : referencia item
+WorldInventoryPickup --> PlayerInventory : intenta recoger
+
+EnemyController --> Player : mantiene combate
+EnemyController --> Room : notifica muerte
+
+@enduml

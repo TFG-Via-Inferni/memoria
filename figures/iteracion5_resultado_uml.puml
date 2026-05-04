@@ -1,0 +1,90 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 40
+
+title Iteracion 5 - Vista simplificada
+
+class CircleUI {
+  +UpdateSelectionHudDisplay()
+  +UpdateVitalsHudDisplay()
+}
+
+class PauseMenuController {
+  +TogglePause()
+}
+
+class Player {
+  +TrySwapForm()
+}
+
+class PlayerStats {
+  +GetFinalDamage()
+  +GetSelectedWeaponId()
+}
+
+class PlayerCombatController {
+  +TryAttack()
+}
+
+class WeaponDefinition
+
+class MeleeHitbox {
+  +Initialize()
+}
+
+class Projectile {
+  +Initialize()
+}
+
+class DamageSourceContext {
+  +Configure()
+}
+
+class EnemyController {
+  +Configure()
+  +ActivateAI()
+  +ModifyIncomingDamage()
+}
+
+class EnemyHealth {
+  +TakeDamage()
+}
+
+class EnemyProjectile {
+  +Initialize()
+}
+
+class Room {
+  +OnPlayerEnter()
+  +OnEnemyDestroyed()
+}
+
+CircleUI --> Player : muestra forma activa
+CircleUI --> PlayerStats : muestra arma y vida
+
+Player --> PlayerStats : comparte estado
+PlayerCombatController --> Player : obtiene forma/direccion
+PlayerCombatController --> PlayerStats : calcula dano final
+PlayerCombatController --> WeaponDefinition : selecciona arma
+PlayerCombatController --> MeleeHitbox : genera ataque melee
+PlayerCombatController --> Projectile : genera proyectil
+
+MeleeHitbox --> DamageSourceContext : conserva contexto
+Projectile --> DamageSourceContext : conserva contexto
+
+MeleeHitbox --> EnemyHealth : aplica dano
+Projectile --> EnemyHealth : aplica dano
+
+EnemyHealth --> EnemyController : consulta resistencias
+EnemyController --> Player : persigue / ataca
+EnemyController --> EnemyProjectile : dispara
+EnemyController --> Room : notifica muerte
+
+PauseMenuController --> CircleUI : pausa la interfaz
+
+@enduml

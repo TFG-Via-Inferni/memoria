@@ -1,0 +1,61 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 40
+
+title Iteracion 1 - Vista simplificada
+
+class MapGenerator {
+  +SetupDungeon()
+  +GenerateDungeon()
+  +SpawnPlayer()
+}
+
+class Cell
+
+class RoomManager {
+  +SetUpRooms()
+}
+
+class Room {
+  +SetupRoom()
+  +OnPlayerEnter()
+  +OnEnemyDestroyed()
+}
+
+class Door {
+  +Lock()
+  +Unlock()
+}
+
+class RoomScriptable
+class DoorScriptable
+
+class Player
+
+class EnemyController
+
+class RoomTrigger
+
+MapGenerator "1" o-- "*" Cell : genera
+MapGenerator --> RoomManager : entrega celdas
+MapGenerator --> Player : instancia
+
+RoomManager "1" o-- "*" Room : crea
+RoomManager --> RoomScriptable : selecciona
+RoomManager --> DoorScriptable : consulta
+
+Room --> Cell : representa
+Room "1" o-- "*" Door : contiene
+Room "1" o-- "*" EnemyController : gestiona
+Room --> DoorScriptable : configura
+
+RoomTrigger --> Room : notifica entrada
+EnemyController --> Player : persigue/ataca
+EnemyController --> Room : notifica destruccion
+
+@enduml
