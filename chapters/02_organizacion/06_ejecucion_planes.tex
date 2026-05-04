@@ -7,19 +7,49 @@ la ejecución real del proyecto.
 \end{abstract}
 
 \section{Ejecución del plan de gestión del alcance}
-La ejecución del alcance se articuló sobre FDD, utilizando una visión global del sistema y
-una descomposición en funcionalidades manejables. Este enfoque permitió controlar qué
-entraba realmente dentro del producto mínimo viable y qué quedaba fuera del alcance del TFG.
+La ejecución del alcance se articuló sobre FDD mediante una descomposición del sistema en
+funcionalidades manejables. Este enfoque permitió controlar qué entraba realmente dentro
+del producto mínimo viable y qué quedaba fuera del alcance del TFG.
 
 \subsection{FDD: Modelo general -- Overall Model}
-El modelo general fija la estructura de alto nivel del videojuego. En \textit{Via Inferni}
-esto implicó definir la relación entre el núcleo jugable, la generación procedural, la
-progresión por círculos, la interfaz y la persistencia de la partida. También se adoptó
-una arquitectura modular basada en gestores especializados para mantener una separación
-clara de responsabilidades y facilitar la evolución del sistema.
+Dentro de FDD, el \textit{Overall Model} no se entiende como un diseño detallado del
+sistema, sino como una representación conceptual de alto nivel que permite compartir una
+misma visión del producto antes de descomponerlo en \textit{features}. En el caso de
+\textit{Via Inferni}, este modelo general sirvió para identificar los grandes bloques
+funcionales del videojuego, su propósito dentro de la experiencia de juego y la relación
+existente entre ellos.
+
+Desde esta perspectiva, el sistema puede interpretarse como una estructura formada por
+cuatro áreas principales:
+
+\begin{itemize}
+    \item \textbf{Generación y estructura del mundo:} bloque encargado de construir la
+    partida, distribuir salas, establecer su conectividad y definir la progresión espacial
+    del recorrido. Este dominio constituye la base sobre la que se apoya el resto del
+    videojuego, ya que determina el espacio jugable donde se desarrollan las mecánicas.
+    \item \textbf{Jugador, enemigos y combate:} núcleo jugable del sistema. En este bloque
+    se integran la entidad controlable, los enemigos y las reglas de interacción entre
+    ambos. Aquí se sitúan tanto el desplazamiento y la dualidad de personajes como las
+    acciones ofensivas, la recepción de daño y el comportamiento enemigo.
+    \item \textbf{Interfaz y apoyo a la experiencia de uso:} conjunto de mecanismos que
+    median entre el estado interno del juego y la percepción del jugador. Incluye la
+    cámara, el minimapa, el \textit{Head-Up Display} y los menús necesarios para
+    comunicar información, facilitar la navegación y controlar la partida.
+    \item \textbf{Progresión y gestión de recursos:} bloque orientado a sostener la
+    evolución de la \textit{run} más allá del movimiento y el combate inmediato. En este
+    dominio se sitúan los objetos, el inventario y los elementos que añaden persistencia,
+    toma de decisiones y variedad a cada partida.
+\end{itemize}
+
+La relación entre estos bloques es secuencial y dependiente. La generación del mundo crea
+el contexto de juego; sobre ese contexto actúan el jugador y los enemigos; la interfaz
+permite interpretar lo que ocurre durante la partida; y los sistemas de progresión añaden
+continuidad y profundidad a la experiencia. De este modo, el \textit{Overall Model}
+proporciona una visión estructurada del producto sin descender todavía al nivel de diseño
+de clases, algoritmos o implementaciones concretas.
 
 \subsection{FDD: Lista de Funcionalidades -- Feature List}
-A partir de ese modelo general se construyó una lista de funcionalidades agrupadas por
+A partir de esta organización se construyó una lista de funcionalidades agrupadas por
 dominio. Esta descomposición hizo posible planificar por incrementos verificables y
 justificar cada avance dentro de la memoria. En este punto se define qué es cada
 \textit{feature}; el detalle de diseño e implementación se desarrolla más adelante en las
