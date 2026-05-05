@@ -11,71 +11,408 @@ adaptando el enfoque del PMBOK a la escala de un TFG de desarrollo de videojuego
 \end{abstract}
 
 \section{Plan de gestión del alcance}
-El alcance se gestiona a partir del \textit{Feature List} definido en FDD. Cada
-funcionalidad incluida en el proyecto debe aportar valor directo al núcleo jugable o a
-la estabilidad del producto. Las propuestas que no cumplen ese criterio, o que ponen en
-riesgo el calendario disponible, se posponen como mejoras futuras.
+El alcance se gestiona a partir del \textit{Feature List} definido en Feature Driven
+Development (FDD). Cada funcionalidad incluida en el proyecto debe satisfacer un criterio
+simple: \textbf{¿Aporta valor directo al núcleo jugable o a la estabilidad del producto?}
 
-Este control del alcance resulta especialmente importante en un videojuego, donde es fácil
-incorporar nuevas ideas durante el desarrollo. Para evitar la corrupción del alcance, la
-planificación se apoya en un \textit{backlog} visible y en una priorización continua por
-dependencias, riesgo técnico y valor para la versión jugable.
+Aquellas propuestas que no cumplan ese criterio, o que pongan en riesgo el calendario
+disponible, se postergan explícitamente como mejoras futuras o trabajo de extensión fuera
+del alcance del TFG.
+
+\subsection{Estructura del alcance mediante FDD}
+El alcance se organiza en dos niveles:
+
+\begin{itemize}
+    \item \textbf{Nivel 1 -- Overall Model (Modelo General):} Descomposición conceptual del
+    sistema en cuatro bloques funcionales independientes: generación y estructura del mundo,
+    jugador y enemigos, interfaz de usuario, y progresión y gestión de recursos. Este modelo
+    proporciona una visión coherente sin descender aún a detalles de implementación.
+
+    \item \textbf{Nivel 2 -- Feature List (Lista de Funcionalidades):} Descomposición de cada
+    bloque en features manejables. Cada feature es una unidad de trabajo independiente que
+    puede diseñarse, implementarse y testearse en una iteración o fraccionarse si es muy
+    grande. La lista es priorizada considerando dependencias técnicas, riesgo y valor para
+    el núcleo jugable.
+\end{itemize}
+
+\subsection{Control del alcance durante la ejecución}
+Para evitar que el alcance se corrompiera:
+\begin{itemize}
+    \item \textbf{Evaluación estricta:} Toda propuesta nueva se evalúa inmediatamente
+    contra el criterio establecido. Si no aporta valor directo al núcleo o a la estabilidad,
+    se rechaza formalmente y se registra en un backlog de mejoras futuras.
+
+    \item \textbf{Visibilidad del backlog:} El backlog se mantiene actualizado y visible en
+    GitHub Projects, de forma que el equipo puede ver en cualquier momento qué ha sido
+    aceptado, qué ha sido pospuesto y por qué.
+
+    \item \textbf{Replanificación iterativa:} Si durante una iteración se descubre que una
+    feature es más compleja de lo estimado, se puede subdividir y abocar la primera parte a
+    la iteración actual, posponiendo la segunda a la siguiente. Esto mantiene el alcance
+    predefinido pero con flexibilidad en la distribución temporal.
+
+    \item \textbf{Escalada al equipo:} Cambios significativos en el alcance requieren
+    consenso explícito en una reunión. No se toman en aislamiento; se discuten en reuniones
+    de planificación de iteración.
+\end{itemize}
+
+\subsection{Nivel de detalle del alcance}
+El alcance se define con suficiente detalle para ser verificable, pero no tanto como para
+congelar decisiones de diseño. En otras palabras:
+
+\begin{itemize}
+    \item Se especifica \textbf{qué} debe hacer cada feature (su comportamiento observable).
+    \item Se especifica \textbf{por qué} es importante (su contribución al producto).
+    \item \textbf{No} se especifica en detalle el cómo (eso pertenece a la fase de diseño
+    de cada iteración).
+\end{itemize}
+
+Esta aproximación permite que el equipo tenga claridad sobre las metas sin ser presionado
+por decisiones de implementación que aún no están maduras.
 
 \section{Plan de gestión del cronograma}
 El cronograma del proyecto se divide en tres fases principales que ordenan el trabajo
-desde la preparación inicial hasta el cierre final de la memoria.
+desde la preparación inicial hasta el cierre final de la memoria. Cada fase establece
+hitos específicos que marcan el progreso y permiten detectar desviaciones respecto a la
+planificación inicial.
 
 \subsection{Fase 1: Planificación}
-En esta fase se establecen los cimientos del proyecto: definición de objetivos, análisis
-del alcance, selección de herramientas, configuración del repositorio y preparación de la
-documentación base. Su finalidad es dejar preparado un marco de trabajo sólido antes de
-iniciar la construcción del videojuego.
+En esta fase se establecen los cimientos del proyecto: definición clara de objetivos,
+análisis detallado del alcance, selección y validación de herramientas técnicas,
+configuración del repositorio con políticas de integración, y preparación de la
+documentación base de la memoria.
 
-\subsection{Fase 2: Ejecución y seguimiento y control}
-Esta fase concentra el grueso del trabajo técnico. Las funcionalidades se abordan de forma
-iterativa, en ciclos cerrados que permiten diseñar, implementar, validar e integrar
-incrementos jugables sin acumular demasiado trabajo abierto simultáneamente.
+Su finalidad es dejar preparado un marco de trabajo sólido y coherente antes de iniciar
+la construcción del videojuego. Durante esta fase no hay trabajo técnico de
+implementación, sino únicamente de arquitectura de proyecto, análisis de requisitos y
+disposición de la infraestructura que soportará el desarrollo posterior.
+
+\subsection{Fase 2: Ejecución, seguimiento y control}
+Esta fase concentra el grueso del trabajo técnico y se estructuran en iteraciones
+independientes. Las funcionalidades se abordan de forma cíclica, en entregas cerradas que
+permiten diseñar, implementar, validar e integrar incrementos jugables sin acumular
+demasiado trabajo abierto simultáneamente.
+
+Cada iteración se divide en dos bloques diferenciados:
+
+\subsubsection{Ejecución: Diseño e Implementación}
+En este apartado se concreta el trabajo técnico de la iteración. Se estructura en tres
+partes:
+
+\begin{itemize}
+    \item \textbf{Lista de Funcionalidades:} Definición explícita de qué \textit{features}
+    se van a abordar en la iteración. Para cada funcionalidad se deja clara su
+    contribución al núcleo jugable o a la estabilidad del producto, justificando por
+    qué se eligió en este momento de la planificación. Este apartado también registra
+    cualquier decisión relacionada con priorización, dependencias o cambios respecto a
+    la planificación inicial.
+
+    \item \textbf{Diseño:} Descripción de las decisiones de arquitectura, patrones y
+    estructuras que se van a aplicar para resolver cada funcionalidad. El diseño no
+    entra en detalles de implementación línea a línea, sino que presenta las ideas
+    conceptuales clave, la separación de responsabilidades, las interfaces entre
+    sistemas y las restricciones técnicas que se tuvieron en cuenta.
+
+    \item \textbf{Implementación:} Narrativa del proceso real de construcción. Se describe
+    cómo se tradujeron las decisiones de diseño en código, qué desafíos técnicos
+    aparecieron, cómo se resolvieron y qué aprendizajes quedaron registrados para
+    futuras iteraciones. Este apartado también recoge decisiones sobre integración con
+    sistemas anteriores y validación de funcionamiento durante el desarrollo.
+\end{itemize}
+
+\subsubsection{Seguimiento y control: Resultados de la iteración}
+En este apartado se documentan los resultados obtenidos y se valida el cumplimiento de
+los objetivos de la iteración.
+
+\begin{itemize}
+    \item \textbf{Validación de Funcionalidades:} Confirmación de que cada feature se
+    comporta según lo esperado dentro del motor, se integra correctamente con sistemas
+    anteriores y no introduce regresiones en funcionalidades ya implementadas.
+
+    \item \textbf{Estado Técnico:} Análisis del estado arquitectónico del sistema tras la
+    iteración. Se describe qué partes de la arquitectura quedaron consolidadas, qué
+    módulos se dejaron abiertos para cambios posteriores y cuáles son las hipótesis
+    técnicas validadas.
+
+    \item \textbf{Artefactos y Diagrama de Diseño:} Generación de un diagrama UML o
+    equivalente que represente la estructura del sistema después de la iteración,
+    facilitando la comunicación sobre la evolución de la arquitectura y permitiendo
+    documentar cómo la solución crece de forma coherente.
+
+    \item \textbf{Aprendizajes y Desviaciones:} Documentación de qué salió bien, qué
+    requirió replanificación, y qué cambios al alcance o al cronograma fueron necesarios.
+    Esta información retroalimenta la selección de funcionalidades para las iteraciones
+    futuras.
+\end{itemize}
+
+De esta forma, cada iteración completa genera un incremento verificable del producto que
+se puede jugar, testear e integrar, a la vez que deja registrado cómo se llegó a esa
+solución y qué se aprendió en el camino.
 
 \subsection{Fase 3: Cierre}
 La fase final se dedica a consolidar la memoria, revisar la coherencia entre documentación
-y producto implementado, preparar los materiales de entrega y cerrar el proyecto como
-trabajo académico.
+y producto implementado, elaborar manuales de usuario e instalación, preparar los
+materiales de entrega y cerrar formalmente el proyecto como trabajo académico.
+
+En esta fase no se abordan nuevas funcionalidades, sino que se cierra el producto tal
+como quedó al final de la última iteración y se prepara la documentación de cierre.
 
 \section{Plan de gestión de comunicaciones}
 Aunque el equipo está formado por dos personas, se han definido canales y rutinas de
-comunicación para mantener la coordinación y registrar decisiones relevantes.
+comunicación para mantener la coordinación continua, registrar decisiones relevantes y
+asegurar que ambos miembros operan desde la misma comprensión del estado del proyecto.
+
+\subsection{Canales de Comunicación}
+La comunicación diaria se articula sobre tres ejes:
 
 \begin{itemize}
-    \item Discord se utiliza para la coordinación diaria y la resolución rápida de bloqueos.
-    \item Se realizan reuniones periódicas para revisar el estado del tablero y reajustar la iteración en curso.
-    \item GitHub centraliza las revisiones de código y deja trazabilidad sobre las decisiones técnicas.
+    \item \textbf{Discord:} Canal principal para coordinación inmediata, resolución rápida
+    de bloqueos técnicos, decisiones operativas del día a día y avisos de urgencia. Su
+    naturaleza asincrónica permite que cada miembro pueda responder en su propio ritmo
+    sin requerir disponibilidad simultánea.
+
+    \item \textbf{GitHub:} Centraliza toda la trazabilidad formal del proyecto. Las
+    revisiones de código (\textit{pull requests}), las incidencias técnicas, los comentarios
+    sobre cambios de arquitectura y las referencias a decisiones de diseño quedan
+    registradas de forma permanente, permitiendo reconstruir el razonamiento detrás de cada
+    cambio.
+
+    \item \textbf{Reuniones síncronas:} Se realizan cuando es estrictamente necesario
+    resolver ambigüedades, alinearse en decisiones de diseño o revisar de forma colaborativa
+    avances complejos. Estas reuniones quedan documentadas con notas y decisiones registradas
+    para referencia posterior.
 \end{itemize}
 
-\section{Plan de gestión de riesgos}
-Los principales riesgos detectados en el proyecto se agrupan en dos bloques. Por un lado,
-los riesgos técnicos, especialmente los relacionados con la generación procedural, el
-rendimiento y la integración entre sistemas. Por otro, los riesgos de plazo, derivados de
-la complejidad del videojuego y del tiempo acotado disponible para un TFG.
+\subsection{Cadencia de Reuniones: Sincronización iterativa}
+Aunque se pueden convocar reuniones en cualquier momento si surge necesidad, existe una
+cadencia obligatoria de reuniones sincronizadas al inicio y al cierre de cada iteración:
 
-Como medidas de mitigación se ha optado por construir prototipos tempranos de los sistemas
-más delicados, priorizar las funcionalidades del núcleo jugable y mantener margen de
-maniobra en la fase de cierre para absorber desviaciones.
+\begin{itemize}
+    \item \textbf{Reunión de cierre de iteración:} Se realiza al finalizar el ciclo de
+    desarrollo de una iteración. En esta reunión se:
+    \begin{itemize}
+        \item Valida colectivamente que las funcionalidades implementadas cumplen los
+        criterios de aceptación definidos.
+        \item Documentan de forma consensuada los resultados y aprendizajes de la iteración.
+        \item Se identifica qué tuvo que replanificarse, qué riesgos emergieron y cómo se
+        gestionaron.
+        \item Se elabora un resumen del estado técnico que sirvirá como línea de base para
+        la siguiente iteración.
+    \end{itemize}
+
+    \item \textbf{Reunión de planificación de iteración:} Se realiza antes o al inicio de
+    la siguiente iteración. En esta reunión se:
+    \begin{itemize}
+        \item Seleccionar las funcionalidades que se van a abordar en el próximo ciclo,
+        considerando dependencias, estimaciones de esfuerzo y riesgos técnicos.
+        \item Establecen criterios de aceptación claros para cada funcionalidad.
+        \item Se distribuyen responsabilidades entre los dos miembros del equipo si es
+        necesario.
+        \item Se actualizan el \textit{backlog} y se deja documentada la decisión de
+        planificación.
+    \end{itemize}
+\end{itemize}
+
+De esta forma, la comunicación combina flexibilidad para el día a día con momentos
+deliberados de sincronización donde se alinean las visiones, se consolida el aprendizaje
+y se prepara el siguiente ciclo con claridad compartida.
+
+\section{Plan de gestión de riesgos}
+Los principales riesgos detectados en el proyecto se agrupan en dos categorías principales,
+cada una con su estrategia de mitigación.
+
+\subsection{Riesgos técnicos}
+Los riesgos técnicos son aquellos relacionados con la viabilidad de las soluciones
+elegidas, la estabilidad de la arquitectura y la integración entre sistemas complejos.
+
+\begin{itemize}
+    \item \textbf{Generación procedural:} La mayor incertidumbre reside en si el algoritmo
+    de generación será capaz de producir niveles válidos en tiempo aceptable, manteniendo
+    navegabilidad garantizada y variedad adecuada. \textit{Mitigación:} Se aborda en la
+    iteración más temprana posible (iteración 1) con un prototipo completamente funcional,
+    permitiendo validar la viabilidad antes de construir sobre esa base.
+
+    \item \textbf{Rendimiento e integración:} Conforme se añaden más sistemas (generación,
+    enemigos, interfaz, progresión), existe el riesgo de que el motor se vuelva inestable,
+    que surjan problemas de concurrencia o que la arquitectura no escale adecuadamente.
+    \textit{Mitigación:} Se mantiene un enfoque modular desde el arranque, se testea cada
+    feature en contexto de integración, y se dedican iteraciones intermedias a estabilización
+    y refactorización si es necesario.
+
+    \item \textbf{Cambios en terceros:} Unity puede recibir actualizaciones que rompan
+    compatibilidad o que afecten a las soluciones implementadas. \textit{Mitigación:}
+    Se fija la versión del motor al inicio del proyecto y solo se consideran actualizaciones
+    si aportan estabilidad o características críticas, nunca durante ciclos activos de
+    desarrollo.
+\end{itemize}
+
+\subsection{Riesgos de plazo}
+Los riesgos de plazo surgen de la complejidad inherente del videojuego y del tiempo
+limitado disponible para un TFG.
+
+\begin{itemize}
+    \item \textbf{Sobre-alcance:} La naturaleza iterativa del desarrollo de videojuegos
+    hace que sea fácil incorporar nuevas ideas durante el desarrollo que no estaban
+    previstas originalmente. Esto puede corromper el alcance y comprometer el cierre
+    del proyecto. \textit{Mitigación:} El alcance se gestiona estrictamente a partir del
+    \textit{Feature List} definido en FDD. Cada propuesta nueva se evalúa contra la
+    pregunta: ``¿Aporta valor directo al núcleo jugable o a la estabilidad?''. Si la
+    respuesta es no, la propuesta se pospone como mejora futura.
+
+    \item \textbf{Estimaciones optimistas:} El esfuerzo real de implementación puede
+    exceder las estimaciones iniciales, especialmente en iteraciones tempranas donde
+    aún hay incertidumbre arquitectónica. \textit{Mitigación:} Se deja margen de
+    maniobra explícito en la planificación. La Fase 2 (Ejecución) no cubre el 100\% del
+    tiempo disponible; se reserva buffer para absorber desviaciones. Además, tras cada
+    iteración se ajustan las estimaciones futuras basándose en lo que realmente costó.
+
+    \item \textbf{Bloqueos de dependencias:} Una funcionalidad puede descubrirse más
+    compleja de lo esperado, o puede encontrarse un requisito técnico que impida avanzar
+    sobre una base previa. \textit{Mitigación:} Las funcionalidades se seleccionan no
+    solo por valor, sino también considerando dependencias y riesgo técnico. Las features
+    más delicadas se abordan lo antes posible para tener tiempo de replanificación si
+    surgen problemas. Si un trabajo se bloquea, se dispone de un \textit{backlog} de
+    tareas alternativas de menor riesgo para mantener el progreso.
+\end{itemize}
+
+\subsection{Estrategia general de mitigación}
+La estrategia global combina anticipación con flexibilidad:
+
+\begin{itemize}
+    \item \textbf{Prototipos tempranos:} Los sistemas más delicados se construyen primero
+    en forma de prototipo, permitiendo descubrir problemas antes de que propaguen a
+    sistemas dependientes.
+
+    \item \textbf{Priorización continua:} En cada reunión de planificación de iteración,
+    se revisan riesgos emergentes y se reajusta la prioridad del \textit{backlog} si es
+    necesario.
+
+    \item \textbf{Margen de maniobra en cierre:} La Fase 3 (Cierre) no comienza cuando se
+    termina la última iteración prevista, sino que hay buffer de tiempo para absorber
+    desviaciones. Si una iteración se extiende, se recupera tiempo de otras iteraciones
+    menos críticas sin afectar el cierre de la documentación.
+
+    \item \textbf{Definición clara del mínimo viable:} El núcleo jugable está bien definido.
+    Si el tiempo comienza a escasear, el proyecto se cierra con lo que haya en ese núcleo,
+    y las mejoras se postergan como trabajo futuro. Esto evita que se derrumbe todo por
+    intentar hacerlo todo.
+\end{itemize}
 
 \section{Plan de gestión de la calidad}
-La calidad se asegura mediante una \textit{Definition of Done} común a todo el proyecto.
-Una funcionalidad solo se considera cerrada cuando compila correctamente en Unity, ha sido
-revisada por el otro miembro del equipo, se ha validado en el contexto real del juego y no
-introduce regresiones en sistemas ya integrados.
+La calidad del producto se asegura mediante una \textit{Definition of Done} (DoD) común a
+todo el proyecto. La DoD es un checklist explícito que define cuáles son los criterios
+que debe cumplir una funcionalidad para considerarse realmente cerrada. Sin una DoD clara,
+es fácil confundir ``funcionalidad desarrollada'' con ``funcionalidad completada'', lo que
+lleva a acumular trabajo parcialmente integrado que genera problemas posteriores.
 
-Este criterio se complementa con pruebas de integración dentro del motor y con sesiones
-de validación funcional orientadas a comprobar estabilidad, coherencia jugable y equilibrio
-general del sistema.
+\subsection{Definition of Done: Criterios de aceptación}
+Una funcionalidad solo se considera cerrada cuando cumple \textbf{todos} los siguientes
+criterios:
+
+\begin{enumerate}
+    \item \textbf{Compila correctamente en Unity.} El código no presenta errores de
+    compilación y no genera warnings críticos que indiquen problemas de diseño o
+    importación incorrecta de dependencias.
+
+    \item \textbf{Se ha integrado en el contexto real del juego.} La funcionalidad no existe
+    en aislamiento, sino que ha sido testeada dentro del motor ejecutando el juego completo.
+    Se valida que la feature funciona como se esperaba cuando interactúa con otros sistemas
+    ya implementados.
+
+    \item \textbf{No introduce regresiones.} Se verifica que la funcionalidad no rompe el
+    comportamiento de features anteriormente implementadas. Esto incluye probar que sistemas
+    ya cerrados siguen siendo estables tras integrar el nuevo código.
+
+    \item \textbf{Ha sido revisada por el otro miembro del equipo.} Toda feature requiere una
+    revisión técnica por parte del otro desarrollador. La revisión se registra en GitHub
+    mediante un \textit{pull request}, dejando trazabilidad de qué fue aprobado y por qué.
+    En la revisión se valida decisiones de arquitectura, limpieza del código y coherencia
+    con el resto del sistema.
+
+    \item \textbf{Cuenta con el diagrama o documentación técnica asociada.} Cada iteración
+    genera un diagrama UML o equivalente que refleja cómo la arquitectura ha evolucionado.
+    La documentación en la memoria explica qué se implementó, cómo, y qué decisiones de
+    diseño justificaron esa implementación.
+
+    \item \textbf{Ha superado validación funcional en sesiones de testeo.} Se realiza al
+    menos una sesión de juego real donde se verifica que la funcionalidad se comporta de
+    forma equilibrada y coherente desde el punto de vista jugable. Esto va más allá del
+    testeo técnico: se valida que la experiencia es la esperada.
+\end{enumerate}
+
+\subsection{Aplicación práctica de la DoD}
+La Definition of Done actúa como barrera entre iteraciones. Si una funcionalidad no cumple
+la DoD, no se cierra formalmente, independientemente de cuánto avance técnico represente.
+Esto previene dos problemas comunes:
+
+\begin{itemize}
+    \item \textbf{Deuda técnica acumulada:} Sin DoD, es tentador marcar features como
+    ``cerradas'' cuando están 80\% funcionales con la esperanza de completarlas después.
+    En la práctica, esa deuda se acumula, y conforme pasan iteraciones, cada feature
+    incompleta contamina más sistemas, haciendo que el código sea cada vez más frágil.
+
+    \item \textbf{Sorpresas en cierre:} Sin revisión y validación claras, los problemas se
+    descubren tarde. La DoD asegura que cada ciclo termina con un producto verificado,
+    no con una esperanza de que funcione.
+\end{itemize}
+
+\subsection{Métricas de calidad}
+Complementariamente, se mantienen métricas simples durante el desarrollo:
+
+\begin{itemize}
+    \item \textbf{Tasa de regresiones:} Se registra si cada nueva iteración introduce
+    bugs que rompen features previas. Una tasa alta indica problemas de integración que
+    deben abordarse con refactorización o cambios arquitectónicos.
+
+    \item \textbf{Estabilidad del compilado:} Se verifica que el juego compilado es estable
+    y no crashea en escenarios típicos de uso. Los crashes son bloqueadores absolutos para
+    la aceptación de features.
+
+    \item \textbf{Coherencia en sesiones de juego extendidas:} Se realizan partidas largas
+    del juego para verificar que la estabilidad se mantiene durante mucho tiempo y que no
+    aparecen efectos secundarios como memory leaks o comportamientos erróneos tras varias
+    horas de ejecución.
+\end{itemize}
 
 \section{Plan de gestión de costes}
 La estimación económica del proyecto se apoya en tres componentes: coste de personal,
-amortización de equipamiento y gastos indirectos. Aunque se trata de un trabajo académico,
-esta aproximación permite valorar el esfuerzo invertido con criterios profesionales.
+amortización de equipamiento y gastos indirectos. Aunque se trata de un trabajo académico
+sin transacción económica real, esta aproximación permite valorar el esfuerzo invertido
+con criterios profesionales, facilitando comparativas con proyectos reales de similar
+envergadura.
 
-Se toma como referencia una dedicación de 300 horas por integrante y un perfil junior de
-ingeniería del software. A ello se suma la amortización proporcional del hardware empleado
-y un porcentaje de costes indirectos asociado al entorno de trabajo, consumo y conectividad.
+\subsection{Estructura de costes}
+Los costes se desglosan de la siguiente manera:
+
+\begin{itemize}
+    \item \textbf{Costes de personal:} Se estima una dedicación aproximada de 300 horas por
+    integrante del equipo (dos desarrolladores), lo que suma 600 horas totales. Se adopta
+    un perfil de ingeniero de software junior con un salario bruto estimado según mercado
+    actual. Aunque ninguno de los dos miembros recibe pago real por este trabajo, la
+    estimación refleja cuál sería el coste de ejecutar el proyecto en un contexto
+    profesional.
+
+    \item \textbf{Costes sociales:} Se aplica un factor de 30\% sobre el coste bruto de
+    personal, que corresponde típicamente a cotizaciones a la Seguridad Social, seguros y
+    otros costes inherentes a la relación laboral.
+
+    \item \textbf{Costes de equipamiento:} Se realiza una amortización proporcional del
+    hardware utilizado (ordenadores, periféricos, etc.) distribuida sobre el período de
+    duración del proyecto. Solo se contabilizan los equipos empleados directamente en el
+    desarrollo.
+
+    \item \textbf{Costes de software y servicios:} Se registran como cero, ya que se utilizan
+    principalmente herramientas de código abierto o con licencias educativas (Unity,
+    GitHub, etc.). Si fuera necesario pagar por servicios de terceros, se registraría aquí.
+
+    \item \textbf{Costes indirectos:} Se añade un porcentaje de 10\% sobre los costes
+    directos para contabilizar gastos asociados al entorno de trabajo, electricidad,
+    conectividad a internet y otros costes indirectos del espacio de desarrollo.
+\end{itemize}
+
+\subsection{Justificación de la estimación}
+La estimación de 300 horas por miembro se basa en el análisis del alcance del proyecto.
+Con aproximadamente 8-10 funcionalidades principales a abordar, 8 iteraciones de desarrollo,
+más fases de planificación y cierre, 300 horas representa un promedio de 37.5 horas por
+semana durante diez semanas de desarrollo intensivo, lo que es coherente con la dedicación
+esperada de un TFG a tiempo completo o equivalente.

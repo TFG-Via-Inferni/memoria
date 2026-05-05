@@ -55,7 +55,6 @@ Cuadro \ref{fig:fdd_flow}.
         \path [line] (step3) -- (step4);
         \path [line] (step4) -- (step5);
         \path [line] (step5.east) -- ++(1,0) -- ++(0,2.2) -- (step4.east);
-        \node [right=of step4, xshift=0.3cm, yshift=1cm, text width=2cm, font=\footnotesize\itshape] {Iteración continua por funcionalidad};
         \draw[dashed, blue!40, thick] ([xshift=-0.5cm, yshift=0.3cm]step4.north west) rectangle ([xshift=2.5cm, yshift=-0.3cm]step5.south east);
         \node[blue!60, rotate=90, anchor=south] at ([xshift=2.5cm]step5.east) {Fase iterativa};
     \end{tikzpicture}
@@ -82,7 +81,7 @@ El desarrollo del proyecto se apoya en un conjunto de herramientas técnicas y d
 que permiten coordinar el trabajo y mantener control sobre el avance.
 
 \begin{itemize}
-    \item Unity actúa como motor principal de desarrollo del videojuego.
+    \item Unity actúa como motor gráfico para el desarrollo del videojuego.
     \item Git y GitHub se utilizan para el control de versiones, revisión de cambios y seguimiento de tareas.
     \item GitHub Projects proporciona el tablero Kanban con el que se monitoriza el flujo de trabajo.
     \item La memoria se mantiene en LaTeX, lo que permite modularizar capítulos y gestionar el documento con el mismo rigor que el código.

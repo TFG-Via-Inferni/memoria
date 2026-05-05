@@ -18,7 +18,7 @@ El desarrollo de este proyecto nace de la intersección entre la literatura clá
 las tendencias actuales de la industria del videojuego independiente. El género 
 \textit{roguelike} ha demostrado una gran viabilidad comercial debido a su alta 
 rejugabilidad y costes de producción contenidos. Sin embargo, existe una oportunidad 
-para integrar narrativas profundas y estructuras literarias complejas, como la 
+para integrar narrativas profundas, como la 
 \textit{Divina Comedia}, en mecánicas de juego procedurales.
 
 Más allá del análisis de mercado, este trabajo surge del interés por experimentar 
@@ -33,43 +33,91 @@ arquitectura de software, optimización y gestión de proyectos.
 
 La hipótesis central es que la estructura de los nueve círculos del infierno es ideal 
 para un diseño de niveles ascendentes en dificultad. Cada círculo funciona como un nivel 
-temático con ambientación, enemigos y desafíos propios, culminando en enfrentamientos contra 
-jefes finales icónicos como Cancerbero y Satán. El público objetivo son jugadores aficionados 
+temático con ambientación, enemigos y desafíos propios, culminando en  el enfrentamiento contra 
+el jefe final: Satán. El público objetivo son jugadores aficionados 
 a retos de habilidad y la estética \textit{pixel art}, que buscan experiencias de juego 
 cortas pero intensas.
 
-\section{Listado de objetivos}
+\section{Objetivos}
 
-Para cumplir con la visión del proyecto, se establecen los siguientes 
-objetivos específicos:
+\subsection{Objetivo general}
+
+El objetivo principal de este Trabajo de Fin de Grado es el desarrollo de un 
+prototipo funcional del videojuego \textit{Via Inferni}, inspirado en la 
+\textit{Divina Comedia}, aplicando de forma sistemática principios de 
+Ingeniería del Software. En particular, se busca integrar prácticas de gestión 
+de proyectos basadas en PMBOK con un enfoque de desarrollo iterativo apoyado en 
+Feature-Driven Development (FDD), con el fin de evaluar su idoneidad en el 
+contexto del desarrollo de videojuegos.
+
+\subsection{Objetivos específicos}
+
+Para alcanzar este objetivo general, se establecen los siguientes objetivos 
+específicos, organizados en tres dimensiones: gestión del proyecto, desarrollo 
+técnico y validación de resultados.
+
+\subsubsection{Objetivos de gestión del proyecto}
 
 \begin{description}
-    \item \textbf{Objetivo 1. Diseño de una arquitectura desacoplada.} Implementar una 
-    estructura software basada en el patrón \textit{Observer} y el uso de 
-    \textit{ScriptableObjects} para minimizar las dependencias entre la lógica de combate, 
-    el sistema de estadísticas y la interfaz de usuario.
-    
-    \item \textbf{Objetivo 2. Generación procedural de niveles dinámicos.} Desarrollar un
-    motor de generación basado en el algoritmo \textit{Drunkard’s Walk} modificado, 
-    que gestione la disposición de salas (combate, tesoro, tienda y descanso) garantizando 
-    siempre rutas conectadas.
-    
-    \item \textbf{Objetivo 3. Implementación del sistema de Dualidad de Personajes.} Programar la 
-    mecánica de alternancia entre Dante y Virgilio mediante un objeto de persistencia 
-    (\textit{RunSession}) que garantice el traspaso de ítems y estadísticas entre ambos 
-    personajes en las salas de descanso.
-    
-    \item \textbf{Objetivo 4. Creación de un ecosistema de enemigos.} Desarrollar un sistema 
-    de estados (\textit{Finite State Machine}) para gestionar el comportamiento de al menos
-    15 tipos de enemigos y jefes finales con patrones de ataque multifase.
-    
-    \item \textbf{Objetivo 5. Gestión de progresión y economía en tiempo real.} Implementar 
-    un sistema de inventario y tienda que gestione objetos pasivos y consumibles, integrados 
-    en una interfaz funcional que incluya un minimapa dinámico para mejorar la navegación del 
-    jugador.
+    \item \textbf{OG1. Planificación del proyecto.} Definir el alcance, cronograma 
+    y recursos del proyecto siguiendo las áreas de conocimiento de PMBOK.
 
-    \item \textbf{Objetivo 6. Aseguramiento de la calidad y equilibrio de juego.} Realizar un 
-    plan de pruebas (\textit{playtesting}) y sesiones de balanceo para ajustar la curva de 
-    dificultad y verificar la estabilidad técnica del motor de generación ante situaciones 
-    límite.
+    \item \textbf{OG2. Gestión iterativa del desarrollo.} Adaptar la metodología 
+    Feature-Driven Development (FDD) al contexto del desarrollo de videojuegos, 
+    estructurando el trabajo en iteraciones basadas en funcionalidades 
+    incrementales.
+
+    \item \textbf{OG3. Seguimiento y control.} Establecer mecanismos de 
+    monitorización del progreso mediante métricas de cumplimiento de hitos, 
+    esfuerzo y evolución del producto.
+
+    \item \textbf{OG4. Gestión de riesgos y calidad.} Identificar riesgos 
+    potenciales del proyecto y definir estrategias de mitigación, así como 
+    criterios de calidad para el producto final.
+\end{description}
+
+\subsubsection{Objetivos técnicos del producto}
+
+\begin{description}
+    \item \textbf{OT1. Diseño de una arquitectura desacoplada.} Implementar una 
+    estructura software basada en el patrón \textit{Observer} y el uso de 
+    \textit{ScriptableObjects} para minimizar las dependencias entre sistemas.
+
+    \item \textbf{OT2. Generación procedural de niveles dinámicos.} Desarrollar un
+    sistema de generación basado en el algoritmo \textit{Drunkard’s Walk} 
+    modificado, garantizando la conectividad y diversidad de las salas.
+
+    \item \textbf{OT3. Implementación del sistema de dualidad de personajes.} 
+    Programar la alternancia entre Dante y Virgilio mediante un objeto de 
+    persistencia que permita mantener el estado de la partida.
+
+    \item \textbf{OT4. Desarrollo de un ecosistema de enemigos.} Implementar un 
+    sistema de comportamiento basado en máquinas de estados finitos para gestionar 
+    múltiples tipos de enemigos y jefes.
+
+    \item \textbf{OT5. Sistema de progresión y economía.} Diseñar e implementar un 
+    sistema de inventario, objetos y tienda que contribuya a la rejugabilidad del 
+    videojuego.
+
+    \item \textbf{OT6. Interfaz y experiencia de usuario.} Desarrollar una interfaz 
+    funcional que incluya elementos como minimapa dinámico y gestión de información 
+    relevante para el jugador.
+\end{description}
+
+\subsubsection{Objetivos de validación}
+
+\begin{description}
+    \item \textbf{OV1. Evaluación del proceso de desarrollo.} Analizar la adecuación 
+    del uso combinado de PMBOK y FDD en el contexto del proyecto realizado.
+
+    \item \textbf{OV2. Aseguramiento de la calidad.} Diseñar y ejecutar un plan de 
+    pruebas que permita validar la estabilidad del sistema y detectar errores.
+
+    \item \textbf{OV3. Balanceo y jugabilidad.} Realizar sesiones de 
+    \textit{playtesting} para ajustar la curva de dificultad y mejorar la 
+    experiencia del usuario.
+
+    \item \textbf{OV4. Análisis de resultados.} Evaluar los resultados obtenidos en 
+    términos de cumplimiento de objetivos, calidad del producto y viabilidad del 
+    enfoque metodológico adoptado.
 \end{description}
