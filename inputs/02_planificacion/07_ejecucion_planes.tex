@@ -1,0 +1,165 @@
+%!TEX root = tfg.tex
+\chapter{Ejecución de los Planes de Gestión}
+
+\begin{abstract}
+Este capítulo describe cómo los planes de gestión definidos previamente se trasladaron a
+la ejecución real del proyecto.
+\end{abstract}
+
+\section{Ejecución del plan de gestión del alcance}
+La ejecución del alcance se articuló sobre FDD mediante una descomposición del sistema en
+funcionalidades manejables. Este enfoque permitió controlar qué entraba realmente dentro
+del producto mínimo viable y qué quedaba fuera del alcance del TFG.
+
+\subsection{FDD: Modelo general -- Overall Model}
+Dentro de FDD, el \textit{Overall Model} no se entiende como un diseño detallado del
+sistema, sino como una representación conceptual de alto nivel que permite compartir una
+misma visión del producto antes de descomponerlo en \textit{features}. En el caso de
+\textit{Via Inferni}, este modelo general sirvió para identificar los grandes bloques
+funcionales del videojuego, su propósito dentro de la experiencia de juego y la relación
+existente entre ellos.
+
+Desde esta perspectiva, el sistema puede interpretarse como una estructura formada por
+cuatro áreas principales:
+
+\begin{itemize}
+    \item \textbf{Generación y estructura del mundo:} bloque encargado de construir la
+    partida, distribuir salas, establecer su conectividad y definir la progresión espacial
+    del recorrido. Este dominio constituye la base sobre la que se apoya el resto del
+    videojuego, ya que determina el espacio jugable donde se desarrollan las mecánicas.
+    \item \textbf{Jugador, enemigos y combate:} núcleo jugable del sistema. En este bloque
+    se integran la entidad controlable, los enemigos y las reglas de interacción entre
+    ambos. Aquí se sitúan tanto el desplazamiento y la dualidad de personajes como las
+    acciones ofensivas, la recepción de daño y el comportamiento enemigo.
+    \item \textbf{Interfaz y apoyo a la experiencia de uso:} conjunto de mecanismos que
+    median entre el estado interno del juego y la percepción del jugador. Incluye la
+    cámara, el minimapa, el \textit{Head-Up Display} y los menús necesarios para
+    comunicar información, facilitar la navegación y controlar la partida.
+    \item \textbf{Progresión y gestión de recursos:} bloque orientado a sostener la
+    evolución de la \textit{run} más allá del movimiento y el combate inmediato. En este
+    dominio se sitúan los objetos, el inventario y los elementos que añaden persistencia,
+    toma de decisiones y variedad a cada partida.
+\end{itemize}
+
+La relación entre estos bloques es secuencial y dependiente. La generación del mundo crea
+el contexto de juego; sobre ese contexto actúan el jugador y los enemigos; la interfaz
+permite interpretar lo que ocurre durante la partida; y los sistemas de progresión añaden
+continuidad y profundidad a la experiencia. De este modo, el \textit{Overall Model}
+proporciona una visión estructurada del producto sin descender todavía al nivel de diseño
+de clases, algoritmos o implementaciones concretas.
+
+\subsection{FDD: Lista de Funcionalidades -- Feature List}
+A partir de esta organización se construyó una lista de funcionalidades agrupadas por
+dominio. Esta descomposición hizo posible planificar por incrementos verificables y
+justificar cada avance dentro de la memoria. En este punto se define qué es cada
+\textit{feature}; el detalle de diseño e implementación se desarrolla más adelante en las
+iteraciones.
+
+\subsubsection{Dominio: generación y estructura del mundo}
+\begin{itemize}
+    \item \textbf{Generación Procedural:} Sistema encargado de construir automáticamente la
+    estructura del nivel, definir la conectividad entre salas y distribuir los distintos
+    tipos de habitaciones que forman cada partida.
+    \item \textbf{Lógica de círculos:} Mecanismo que gobierna la progresión del jugador por
+    los distintos niveles temáticos del Infierno, controlando el avance entre círculos y
+    su coherencia con el estado general de la partida.
+\end{itemize}
+
+\subsubsection{Dominio: jugador y sistemas base}
+\begin{itemize}
+    \item \textbf{Añadir Jugador:} Incorporación de una entidad jugable capaz de aparecer en
+    el nivel generado, desplazarse por las salas y servir como núcleo de interacción con
+    el resto de sistemas del juego.
+    \item \textbf{Cámara de jugador:} Sistema de seguimiento visual que mantiene al jugador
+    como referencia principal en escena y facilita una navegación clara por el mapa
+    generado.
+    \item \textbf{Dualidad de personajes:} Mecánica que permite trabajar con Dante y
+    Virgilio como personajes complementarios, contemplando su alternancia y la persistencia
+    de información compartida durante la partida.
+\end{itemize}
+
+\subsubsection{Dominio: enemigos y combate}
+\begin{itemize}
+    \item \textbf{Añadir Enemigo:} Integración de enemigos básicos dentro de las salas para
+    convertir el desplazamiento por el nivel en una experiencia jugable con oposición real.
+    \item \textbf{Sistema de combate:} Conjunto de reglas y mecanismos que permiten atacar,
+    recibir daño y resolver enfrentamientos entre jugador y enemigos de forma coherente.
+    \item \textbf{Sistema de Enemigos:} Lógica de comportamiento que regula el estado,
+    movimiento y respuesta de los enemigos, permitiendo definir patrones diferenciados y
+    escalar la dificultad del juego.
+\end{itemize}
+
+\subsubsection{Dominio: interfaz y experiencia de uso}
+\begin{itemize}
+    \item \textbf{Minimap:} Representación simplificada del nivel que permite al jugador
+    orientarse, comprender la estructura del mapa y seguir su progreso durante la partida.
+    \item \textbf{Head-Up Display:} Capa de interfaz que muestra en tiempo real la
+    información esencial de la partida, como vida, recursos, estado del personaje o
+    indicadores de progreso.
+    \item \textbf{Menús:} Flujo de pantallas que organiza la interacción fuera del núcleo
+    jugable, incluyendo acceso al juego, pausa, navegación entre opciones y salida.
+    \item \textbf{Actualizar Sprites:} Revisión y mejora de los elementos visuales del
+    proyecto para mantener coherencia estética y reforzar la identidad del videojuego.
+\end{itemize}
+
+\subsubsection{Dominio: progresión, economía y objetos}
+\begin{itemize}
+    \item \textbf{Gestión de Inventario:} Sistema responsable de almacenar, consultar y
+    administrar los recursos y elementos obtenidos por el jugador durante una \textit{run}.
+    \item \textbf{Objetos:} Conjunto de elementos interactivos, pasivos o consumibles que
+    modifican la partida, aportan variedad a las decisiones del jugador y refuerzan la
+    progresión interna del juego.
+\end{itemize}
+
+Cada una de estas funcionalidades define el alcance del producto a nivel de feature. El
+detalle de diseño, implementación, incidencias y resultados se desarrolla posteriormente
+en las iteraciones, donde se documenta con mayor profundidad cómo se abordó cada bloque
+de trabajo.
+
+\section{Ejecución del plan de gestión del cronograma}
+La planificación temporal se ejecutó mediante tres fases principales y una descomposición
+interna en iteraciones para la fase de desarrollo. Los hitos se utilizaron como puntos de
+control para revisar desviaciones, reajustar la carga de trabajo y decidir si una
+funcionalidad debía consolidarse, aplazarse o dividirse en entregas más pequeñas.
+
+\section{Ejecución del plan de gestión de comunicaciones}
+La comunicación diaria se apoyó en Discord, mientras que GitHub concentró el seguimiento
+formal de incidencias, revisiones y cambios sobre el código. El tablero Kanban de GitHub
+Projects se utilizó como herramienta visual de seguimiento, permitiendo distinguir qué
+funcionalidades estaban pendientes, en curso, en revisión o cerradas.
+
+\section{Ejecución del plan de gestión de riesgos}
+La gestión de riesgos se aplicó de forma preventiva. Los componentes con mayor
+incertidumbre, como la generación procedural y la integración entre salas, enemigos e
+interfaz, se abordaron tempranamente para detectar problemas antes de que afectaran a una
+parte mayor del sistema. Cuando una funcionalidad resultó más costosa de lo previsto, se
+subdividió en varias iteraciones para reducir el riesgo de bloqueo.
+
+\section{Ejecución del plan de gestión de la calidad}
+La \textit{Definition of Done} se aplicó como criterio de cierre real de cada feature.
+Esto evitó considerar terminadas soluciones parciales o aisladas. La validación se realizó
+tanto desde el punto de vista técnico como jugable, comprobando que cada incremento
+funcionaba en el motor y convivía correctamente con los sistemas ya integrados.
+
+\section{Ejecución del plan de gestión de costes}
+La ejecución del plan de costes se reflejó mediante una estimación consolidada del valor
+económico del proyecto. El mayor peso recae en el tiempo de trabajo de los dos
+desarrolladores, complementado con la amortización del hardware y los costes indirectos del
+entorno de desarrollo.
+
+\begin{table}[h!]
+    \centering
+    \begin{coolTable}{ll}{2}
+    {Resumen del presupuesto del proyecto}
+    \textbf{Costes de personal (salarios brutos)} & 11.666,66 \euro \\
+    \textbf{Costes sociales (30\% sobre bruto)} & 3.500,00 \euro \\
+    \textbf{Costes materiales (amortización hardware)} & 125,00 \euro \\
+    \textbf{Costes materiales (software y servicios)} & 0,00 \euro \\
+    \midrule
+    \textbf{Total costes directos} & 15.291,66 \euro \\
+    \textbf{Costes indirectos (10\%)} & 1.529,17 \euro \\
+    \midrule
+    \textbf{TOTAL DEL PROYECTO} & \textbf{16.820,83 \euro} \\
+    \end{coolTable}
+    \caption{Resumen detallado de la inversión económica total.}
+\end{table}

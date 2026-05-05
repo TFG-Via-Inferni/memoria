@@ -1,0 +1,85 @@
+%!TEX root = tfg.tex
+\chapter{Metodología}
+
+\begin{abstract}
+En este capítulo se expone el marco metodológico que ha guiado el desarrollo de
+\textit{Via Inferni}. La propuesta combina prácticas de planificación inspiradas en
+PMBOK, un enfoque iterativo basado en FDD y una gestión del código orientada a mantener
+trazabilidad y estabilidad durante el desarrollo.
+\end{abstract}
+
+\section{PMBOK adaptado a un videojuego}
+El proyecto toma como referencia varias áreas de conocimiento del PMBOK, pero adaptadas a
+la escala real de un TFG y a las particularidades del desarrollo de un videojuego. En
+lugar de aplicar una gestión documental pesada, se seleccionan únicamente aquellos planes
+que aportan control efectivo sobre el alcance, el calendario, la comunicación, los
+riesgos, la calidad y los costes.
+
+Este enfoque permite mantener una visión de proyecto completa sin perder agilidad. La
+planificación sirve como marco de decisión, mientras que la ejecución técnica se documenta
+de forma incremental y vinculada a entregables funcionales.
+
+\section{Feature Driven Development}
+Para la construcción de \textit{Via Inferni} se ha seleccionado la metodología
+\textit{Feature Driven Development} (FDD). La razón principal es que encaja especialmente
+bien en proyectos donde la funcionalidad debe crecer por incrementos pequeños,
+comprobables y con un diseño técnico suficientemente claro antes de implementar cada
+cambio.
+
+FDD permite trabajar con una visión global del producto, pero sin perder granularidad en
+la ejecución. En lugar de abordar el desarrollo como un bloque único, el proyecto se
+descompone en funcionalidades manejables que pueden diseñarse, implementarse y validarse
+por separado.
+
+El proceso se articula a través de cinco pasos fundamentales que guían el proyecto desde
+su concepción hasta la incorporación de cada funcionalidad, tal y como se ilustra en la
+Cuadro \ref{fig:fdd_flow}.
+
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}[node distance=1.2cm, auto,
+        block/.style={rectangle, draw, fill=gray!5, text width=6cm, text centered, rounded corners, minimum height=1cm, font=\small},
+        line/.style={draw, -latex, thick}]
+        \node [block] (step1) {\textbf{1. Desarrollo de un modelo general} \\ (Análisis de arquitectura y dominio)};
+        \node [block, below=of step1] (step2) {\textbf{2. Construcción de la lista de funcionalidades} \\ (Desglose del backlog)};
+        \node [block, below=of step2] (step3) {\textbf{3. Planificación por funcionalidad} \\ (Priorización e hitos)};
+        \node [block, below=of step3, fill=blue!5] (step4) {\textbf{4. Diseño por funcionalidad} \\ (Contratos y lógica técnica)};
+        \node [block, below=of step4, fill=blue!5] (step5) {\textbf{5. Construcción por funcionalidad} \\ (Codificación e integración)};
+
+        \path [line] (step1) -- (step2);
+        \path [line] (step2) -- (step3);
+        \path [line] (step3) -- (step4);
+        \path [line] (step4) -- (step5);
+        \path [line] (step5.east) -- ++(1,0) -- ++(0,2.2) -- (step4.east);
+        \node [right=of step4, xshift=0.3cm, yshift=1cm, text width=2cm, font=\footnotesize\itshape] {Iteración continua por funcionalidad};
+        \draw[dashed, blue!40, thick] ([xshift=-0.5cm, yshift=0.3cm]step4.north west) rectangle ([xshift=2.5cm, yshift=-0.3cm]step5.south east);
+        \node[blue!60, rotate=90, anchor=south] at ([xshift=2.5cm]step5.east) {Fase iterativa};
+    \end{tikzpicture}
+    \caption{Flujo de procesos de la metodología FDD aplicado al desarrollo del sistema.}
+    \label{fig:fdd_flow}
+\end{figure}
+
+\section{Gestión de la configuración y el código}
+La gestión del repositorio es crítica para asegurar la integridad del proyecto. Para ello
+se ha definido una estrategia híbrida que combina la organización estructural de
+\textit{GitFlow} con la integración frecuente propia de \textit{Trunk-Based Development}.
+
+La rama \texttt{main} representa el estado estable del proyecto, mientras que
+\texttt{develop} actúa como punto de integración del trabajo validado. Las ramas de
+funcionalidad son efímeras y se crean para resolver tareas concretas del \textit{backlog},
+reduciendo así el coste de integración y el riesgo de divergencias largas.
+
+Como criterio de trazabilidad se ha adoptado el estándar \textit{Conventional Commits},
+que facilita identificar la intención de cada cambio y relacionarlo con funcionalidades,
+correcciones o ajustes de documentación.
+
+\section{Herramientas y tecnologías}
+El desarrollo del proyecto se apoya en un conjunto de herramientas técnicas y de gestión
+que permiten coordinar el trabajo y mantener control sobre el avance.
+
+\begin{itemize}
+    \item Unity actúa como motor principal de desarrollo del videojuego.
+    \item Git y GitHub se utilizan para el control de versiones, revisión de cambios y seguimiento de tareas.
+    \item GitHub Projects proporciona el tablero Kanban con el que se monitoriza el flujo de trabajo.
+    \item La memoria se mantiene en LaTeX, lo que permite modularizar capítulos y gestionar el documento con el mismo rigor que el código.
+\end{itemize}
