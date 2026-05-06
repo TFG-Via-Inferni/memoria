@@ -12,13 +12,13 @@ la evolución del minimapa, preparando una experiencia más completa y mejor est
 
 \section{Lista de funcionalidades}
 La sexta iteración se centró en incorporar una primera capa real de progresión basada en
-objetos y en preparar una mejora posterior del minimapa. Hasta este momento, el jugador ya
+objetos y en consolidar una segunda mejora del minimapa. Hasta este momento, el jugador ya
 podía explorar, combatir y progresar entre círculos, pero todavía no disponía de un sistema
 interno de inventario capaz de almacenar recompensas, seleccionar contenido adquirido o
 relacionar el mundo con objetos persistentes de la partida. Por ello, esta iteración se
 estructura en torno a tres funcionalidades: la gestión de inventario, los objetos y una
-segunda mejora del minimapa que se deja preparada para concretarse con la implementación
-final del día.
+segunda mejora del minimapa orientada a convertirlo en un apoyo de navegación más claro,
+reactivo y coherente con el estado real de la mazmorra.
 
 \begin{enumerate}
 \item \textbf{Gestión de Inventario.} Esta funcionalidad introdujo la base runtime del
@@ -64,13 +64,15 @@ haciendo posible que los objetos se conviertan en una unidad real de progresión
 \end{center}
 \end{figure}
 
-\item \textbf{Minimap.} Esta funcionalidad corresponde a una segunda mejora del minimapa
-sobre la base ya introducida anteriormente. En esta iteración se deja identificada como
-trabajo de ampliación de la feature, orientado a enriquecer la forma en la que el jugador
-lee el estado del mapa y la información de progreso dentro de la mazmorra. Su redacción
-definitiva deberá ajustarse una vez cerrada la implementación concreta, pero conceptualmente
-esta mejora se entiende como una extensión del minimapa ya existente, no como una feature
-independiente.
+\item \textbf{Minimap.} Esta funcionalidad completó una segunda mejora del minimapa sobre la
+base ya introducida anteriormente. Su alcance real consistió en hacer que la representación
+del mapa respondiera al progreso del jugador dentro de la partida, diferenciando entre salas
+no descubiertas, salas visitadas y sala actual. Además, el sistema pasó a centrar la cámara
+del minimapa sobre la habitación en la que se encuentra el jugador y a adaptar su
+presentación visual al tamaño de pantalla mediante un contenedor con máscara, marco y fondo
+propios. En términos funcionales, esta ampliación convirtió el minimapa en una herramienta
+de orientación más legible, capaz de reflejar tanto el recorrido realizado como la posición
+actual dentro de la mazmorra sin mostrar desde el principio toda la estructura del nivel.
 
 \begin{figure}[H]
 \begin{center}
@@ -116,10 +118,17 @@ tenga una interpretación directa, algo útil mientras el inventario aún se enc
 fase relativamente temprana.
 
 \subsection{Diseño de la ampliación del minimapa}
-La mejora del minimapa se plantea en esta iteración como una continuación de la línea ya
-abierta en la entrega anterior. Su diseño general sigue orientado a reforzar la lectura del
-recorrido y del estado del mapa por parte del jugador. El detalle definitivo deberá quedar
-ajustado cuando se cierre la implementación concreta de esta segunda fase de la feature.
+La segunda fase del minimapa se diseñó alrededor de una idea sencilla: la información del
+mapa debía revelarse en función del recorrido real del jugador, no mostrarse completa desde
+el inicio. Para ello se optó por separar tres estados visuales distintos, correspondientes a
+salas ocultas, salas ya visitadas y sala actual, de modo que el minimapa funcionara también
+como resumen del progreso de exploración.
+
+Además, se decidió desacoplar la lógica de descubrimiento, el centrado de cámara y la
+presentación en interfaz. Esta separación permite que el estado de las salas quede
+gestionado por el generador del mapa, mientras que la cámara del minimapa y su contenedor de
+interfaz puedan evolucionar sin depender de cambios estructurales sobre la lógica de
+generación.
 
 \section{Implementación}
 La implementación de esta iteración se apoyó sobre todo en la incorporación de nuevos tipos
@@ -152,16 +161,29 @@ permite que el vínculo entre mundo e inventario quede resuelto de manera direct
 interactúa con un pickup y, si la operación es válida, el objeto pasa a su inventario.
 
 \subsection{Implementación de la mejora del minimapa}
-La segunda fase del minimapa se deja en esta iteración como una mejora identificada y
-preparada para describirse con mayor precisión una vez implementada. A nivel documental, se
-mantiene su hueco dentro de la iteración porque forma parte del reparto funcional previsto,
-pero el detalle final deberá completarse cuando el comportamiento concreto esté cerrado.
+La ampliación del minimapa se apoyó principalmente en \texttt{MapGenerator},
+\texttt{MinimapCameraController} y \texttt{MinimapUIController}. En primer lugar,
+\texttt{MapGenerator} pasó a mantener el conjunto de salas visitadas, la sala actual y un
+sistema de actualización visual basado en niveles de opacidad. Con ello, cada celda puede
+representarse como no descubierta, visitada o activa, y el refresco del minimapa se produce
+cuando el jugador entra en una nueva habitación.
+
+En segundo lugar, \texttt{MinimapCameraController} se encarga de seguir la sala actual del
+jugador, centrando la cámara del minimapa sobre la celda correspondiente en lugar de dejar
+una vista fija de todo el nivel. Esto hace que la lectura del mapa se mantenga focalizada en
+la zona relevante de la exploración.
+
+Por último, \texttt{MinimapUIController} reorganiza la imagen del minimapa dentro del HUD,
+creando un contenedor propio con máscara, fondo y marco, además de recalcular su tamaño y
+su margen en función de la resolución disponible. De esta forma, la mejora no solo afecta al
+contenido mostrado, sino también a la calidad de su integración visual en pantalla.
 
 \section{Resultados}
 El resultado de la iteración fue la introducción de una base clara para la progresión por
-objetos. El jugador pasó a disponer de una estructura de inventario real, el mundo pudo
-contener pickups conectados con ese inventario y el sistema quedó preparado para que los
-objetos actúen como recompensas persistentes dentro de la partida.
+objetos y una mejora tangible de la lectura del mapa. El jugador pasó a disponer de una
+estructura de inventario real, el mundo pudo contener pickups conectados con ese inventario
+y el minimapa dejó de ser una referencia estática para convertirse en una vista más útil del
+recorrido y de la posición actual dentro de la partida.
 
 De forma resumida, al final de esta iteración se había conseguido:
 
@@ -170,13 +192,14 @@ De forma resumida, al final de esta iteración se había conseguido:
     \item definir objetos con identidad, icono, tipo y validación interna;
     \item conectar pickups del mundo con el inventario del jugador;
     \item preparar la progresión de capacidad del inventario desde las estadísticas del jugador;
-    \item dejar encajada la siguiente ampliación del minimapa dentro del flujo de iteraciones.
+    \item consolidar un minimapa con descubrimiento progresivo, resaltado de sala actual y adaptación al HUD.
 \end{itemize}
 
 Desde el punto de vista del desarrollo global, esta iteración fue importante porque añadió
-una capa de persistencia y recompensa que el proyecto todavía no tenía de forma clara. A
-partir de aquí, los objetos pueden empezar a desempeñar un papel más fuerte en la economía,
-la progresión y la toma de decisiones del jugador dentro de cada \textit{run}.
+una capa de persistencia y recompensa que el proyecto todavía no tenía de forma clara, al
+tiempo que mejoró la navegación momentánea dentro de cada \textit{run}. A partir de aquí,
+los objetos pueden empezar a desempeñar un papel más fuerte en la economía y la progresión,
+y el minimapa queda preparado para convivir con una estructura de salas cada vez más rica.
 
 \begin{figure}[htbp]
 \begin{center}

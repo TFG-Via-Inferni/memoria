@@ -69,6 +69,29 @@ Esta feature engloba la navegación de pantallas y los flujos de entrada, pausa 
 Aunque ambas issues se resolvieron en la misma iteración, se separaron para mantener trazabilidad entre
 la construcción base del sistema y su posterior consolidación de uso.
 
+\subsection{Feature: Sistema de Combate}
+Esta feature regula la forma en la que el jugador ataca, aplica daño y expresa diferencias reales entre armas.
+
+\begin{enumerate}
+\item \textbf{Issue: Sistema de Combate (I) -- Iteración 5.} Se construyó la base del combate apoyada en armas cuerpo a cuerpo y a distancia.
+\item \textbf{Issue: Sistema de Combate (II) -- Iteración 7.} Se refinó el sistema con ataques cargados, proyectiles más ricos en comportamiento y mejor retroalimentación visual.
+\end{enumerate}
+
+La separación entre ambas entregas permitió primero consolidar el combate como sistema funcional y, más adelante,
+ampliarlo cuando ya existía contexto suficiente para introducir variantes de ataque y una integración más profunda
+con otros sistemas.
+
+\subsection{Feature: Sistema de Enemigos}
+Esta feature gestiona el comportamiento táctico de los enemigos, su activación y su relación con el combate del jugador.
+
+\begin{enumerate}
+\item \textbf{Issue: Sistema de Enemigos (I) -- Iteración 5.} Se estableció la base de tipos enemigos y su integración inicial con el combate.
+\item \textbf{Issue: Sistema de Enemigos (II) -- Iteración 7.} Se reforzó la diferenciación táctica entre arquetipos, la lectura visual del ataque y la respuesta al contexto del arma utilizada.
+\end{enumerate}
+
+La división fue necesaria porque el primer cierre de la feature aseguró la funcionalidad base, mientras que la segunda
+entrega permitió convertir ese comportamiento en un sistema más legible y variado dentro de la partida.
+
 \subsection{Features no divididas en iteraciones}
 El resto de trabajo de la fase se gestionó con una sola issue por feature o por bloque funcional:
 
@@ -78,11 +101,10 @@ El resto de trabajo de la fase se gestionó con una sola issue por feature o por
 \item \textit{Cámara del Jugador} (Iteración 2).
 \item \textit{Dualidad de Personajes} (Iteración 3).
 \item \textit{Head-Up Display (HUD)} (Iteración 4).
-\item \textit{Actualizar Sprites (I)} (Iteración 5).
-\item \textit{Sistema de Combate (I)} (Iteración 5).
-\item \textit{Sistema de Enemigos (I)} (Iteración 5).
 \item \textit{Gestión de Inventario} (Iteración 6).
 \item \textit{Objetos} (Iteración 6).
+\item \textit{Sala de tienda} (Iteración 7).
+\item \textit{Sala secreta y de tesoro} (Iteración 7).
 \end{itemize}
 
 \section{Validación y resultados}
