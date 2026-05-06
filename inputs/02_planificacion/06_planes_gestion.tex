@@ -172,10 +172,9 @@ La comunicación diaria se articula sobre tres ejes:
     sin requerir disponibilidad simultánea.
 
     \item \textbf{GitHub:} Centraliza toda la trazabilidad formal del proyecto. Las
-    revisiones de código (\textit{pull requests}), las incidencias técnicas, los comentarios
-    sobre cambios de arquitectura y las referencias a decisiones de diseño quedan
-    registradas de forma permanente, permitiendo reconstruir el razonamiento detrás de cada
-    cambio.
+    incidencias técnicas, los cambios registrados en el repositorio, los comentarios sobre
+    decisiones de arquitectura y la evolución del backlog quedan documentados de forma
+    permanente, permitiendo reconstruir el razonamiento detrás de cada cambio.
 
     \item \textbf{Reuniones síncronas:} Se realizan cuando es estrictamente necesario
     resolver ambigüedades, alinearse en decisiones de diseño o revisar de forma colaborativa
@@ -324,10 +323,9 @@ criterios:
     ya cerrados siguen siendo estables tras integrar el nuevo código.
 
     \item \textbf{Ha sido revisada por el otro miembro del equipo.} Toda feature requiere una
-    revisión técnica por parte del otro desarrollador. La revisión se registra en GitHub
-    mediante un \textit{pull request}, dejando trazabilidad de qué fue aprobado y por qué.
-    En la revisión se valida decisiones de arquitectura, limpieza del código y coherencia
-    con el resto del sistema.
+    revisión técnica cruzada por parte del otro desarrollador. En esta revisión se validan
+    las decisiones de arquitectura, la limpieza del código y la coherencia con el resto del
+    sistema, dejando constancia del contraste técnico realizado.
 
     \item \textbf{Cuenta con el diagrama o documentación técnica asociada.} Cada iteración
     genera un diagrama UML o equivalente que refleja cómo la arquitectura ha evolucionado.
@@ -356,23 +354,27 @@ Esto previene dos problemas comunes:
     no con una esperanza de que funcione.
 \end{itemize}
 
-\subsection{Métricas de calidad}
-Complementariamente, se mantienen métricas simples durante el desarrollo:
+\subsection{Seguimiento de la calidad}
+Dado el tamaño del equipo y la escala del proyecto, el seguimiento de la calidad se plantea
+de forma práctica y no mediante un sistema pesado de métricas formales. El control se apoya
+en tres comprobaciones recurrentes:
 
 \begin{itemize}
-    \item \textbf{Tasa de regresiones:} Se registra si cada nueva iteración introduce
-    bugs que rompen features previas. Una tasa alta indica problemas de integración que
-    deben abordarse con refactorización o cambios arquitectónicos.
+    \item \textbf{Compilación estable en Unity:} Cada iteración debe dejar el proyecto en un
+    estado ejecutable y sin errores críticos de compilación.
 
-    \item \textbf{Estabilidad del compilado:} Se verifica que el juego compilado es estable
-    y no crashea en escenarios típicos de uso. Los crashes son bloqueadores absolutos para
-    la aceptación de features.
+    \item \textbf{Validación de integración:} Se comprueba que la nueva funcionalidad no
+    rompe sistemas previamente cerrados y que se comporta correctamente dentro del juego
+    completo.
 
-    \item \textbf{Coherencia en sesiones de juego extendidas:} Se realizan partidas largas
-    del juego para verificar que la estabilidad se mantiene durante mucho tiempo y que no
-    aparecen efectos secundarios como memory leaks o comportamientos erróneos tras varias
-    horas de ejecución.
+    \item \textbf{Sesiones de prueba jugable:} Se realizan pruebas manuales dentro del
+    proyecto para verificar que la experiencia resultante sigue siendo coherente desde el
+    punto de vista técnico y jugable.
 \end{itemize}
+
+Este enfoque es más realista para un TFG de dos personas que un sistema de medición más
+formalizado, y resulta suficiente para sostener la calidad del producto dentro del contexto
+del proyecto.
 
 \section{Plan de gestión de costes}
 La estimación económica del proyecto se apoya en tres componentes: coste de personal,
