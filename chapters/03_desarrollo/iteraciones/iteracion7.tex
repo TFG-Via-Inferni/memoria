@@ -3,8 +3,8 @@
 \begin{abstract}
 Esta iteración se orienta a consolidar sistemas ya introducidos y a extender la estructura
 del recorrido con salas especiales. El trabajo se centra en refinar el sistema de enemigos y
-el sistema de combate, además de integrar la sala de tienda y la lógica base de las salas
-secreta y de tesoro dentro de la generación procedural del mapa.
+el sistema de combate, además de cerrar la integración funcional de la sala de tienda, la
+sala de tesoro y la sala secreta dentro de la generación procedural del mapa.
 \end{abstract}
 
 \section{Lista de funcionalidades}
@@ -12,10 +12,9 @@ La séptima iteración se plantea como una fase de consolidación sobre sistemas
 entrega anterior ya eran funcionales, pero todavía admitían una mejora clara en profundidad
 jugable y en variedad de recorrido. El foco principal recae sobre combate y enemigos,
 mientras que la incorporación de salas especiales amplía la estructura del mapa con espacios
-de función diferenciada. En el estado actual del proyecto, la parte más cerrada de la
-iteración corresponde al refinamiento de combate y enemigos, mientras que las salas
-especiales quedan ya encajadas a nivel estructural y visual, aunque todavía requieren cierre
-funcional para darse por terminadas del todo.
+de función diferenciada. Con el estado actual del proyecto, la iteración ya no se limita a
+dejar estas salas encajadas a nivel estructural, sino que las conecta con contenido jugable
+real y reglas de acceso específicas.
 
 \begin{enumerate}
 \item \textbf{Sistema de Enemigos.} Esta funcionalidad profundiza en el comportamiento
@@ -60,11 +59,11 @@ producido en pantalla.
 
 \item \textbf{Sala de tienda.} Esta funcionalidad introduce una habitación especial dentro
 de la generación del mapa con identidad propia y con señalización específica en el minimapa.
-En el estado actual de la iteración, su aporte principal consiste en quedar integrada dentro
-del reparto de salas terminales, contar con tipo de sala diferenciado y poder representarse
-de forma explícita tanto en la celda del mapa como en la configuración de puertas y muros.
-Aunque su comportamiento jugable todavía necesita cerrarse, esta base ya permite tratar la
-tienda como una categoría espacial propia dentro de la estructura procedural del nivel.
+Su alcance real no se queda en la clasificación espacial de la habitación, sino que incorpora
+contenido interactivo mediante puestos de compra, selección de objetos y precios asociados al
+pool de drops del círculo actual. En términos funcionales, la tienda deja de ser una sala
+marcada en el mapa y pasa a convertirse en un nodo de economía y preparación dentro de la
+partida, conectado tanto con el inventario como con la progresión por objetos.
 
 \begin{figure}[H]
 \begin{center}
@@ -77,11 +76,11 @@ tienda como una categoría espacial propia dentro de la estructura procedural de
 
 \item \textbf{Sala secreta y de tesoro.} Esta funcionalidad amplía la distribución de salas
 especiales con espacios que no siguen exactamente las mismas reglas de acceso que las salas
-regulares. La implementación actual ya distingue estos nodos dentro del mapa, les asigna
-iconografía propia y, en el caso de la sala secreta, evita su conexión directa mediante el
-flujo habitual de puertas visibles. Esto refuerza la idea de exploración y de recompensa por
-descubrimiento, aunque el cierre definitivo de su comportamiento y de su contenido todavía
-queda pendiente dentro del desarrollo posterior de la iteración.
+regulares. En la versión actual del proyecto, la sala de tesoro ya genera recompensas
+recogibles, mientras que la sala secreta se resuelve como un espacio oculto accesible a
+través de un muro rompible, reforzando la idea de descubrimiento. Esta línea de trabajo se
+centra en hacer que el recorrido entre salas especiales deje de ser decorativo y pase a
+tener recompensa e identidad propia dentro de la \textit{run}.
 
 \begin{figure}[H]
 \begin{center}
@@ -96,7 +95,8 @@ queda pendiente dentro del desarrollo posterior de la iteración.
 La combinación de estas funcionalidades hace que la séptima iteración actúe como una capa de
 consolidación y ampliación. Por un lado, refuerza la calidad táctica del combate y de los
 enemigos; por otro, abre el mapa a recorridos más variados mediante salas especiales con un
-papel diferenciado dentro de la partida.
+papel diferenciado dentro de la partida y con impacto real sobre la economía, la exploración
+y la progresión.
 
 \section{Diseño}
 El diseño de esta iteración parte de una necesidad doble: enriquecer la calidad de los
@@ -134,8 +134,9 @@ selección procedural que otras salas especiales, en lugar de tratarla como una 
 colocada manualmente después.
 
 Este enfoque hace que la tienda forme parte natural del reparto del recorrido y permite que
-su identidad visual y estructural quede resuelta desde el propio generador de mapa, aunque
-la lógica jugable específica que contendrá la sala todavía deba completarse.
+su identidad visual y estructural quede resuelta desde el propio generador de mapa. Sobre esa
+base, la sala puede alojar contenido de compra sin depender de montaje manual en cada
+variación visual de habitación.
 
 \subsection{Diseño de la sala secreta y de tesoro}
 La lógica de estas salas se diseñó para reforzar la exploración y la recompensa. La sala de
@@ -189,8 +190,10 @@ dedicada.
 
 Después, esa información se propaga al resto del sistema a través del tipo de sala
 almacenado en la celda, lo que permite que puertas, muros y minimapa la interpreten como una
-categoría distinta. Aunque el contenido interactivo definitivo de la tienda no está cerrado,
-la integración estructural de la sala sí queda resuelta en esta fase.
+categoría distinta. Sobre esa base, \texttt{Room} busca o instancia un \texttt{ShopManager}
+al cargar la variación visual de la habitación, y este a su vez genera \texttt{ShopStand}
+con objetos y precios derivados del círculo actual. Con ello, la tienda queda integrada como
+espacio funcional y no solo como tipo de sala.
 
 \subsection{Implementación de la sala secreta y de tesoro}
 La incorporación de salas especiales se apoya también en \texttt{MapGenerator}, que reserva
@@ -201,35 +204,41 @@ para poder insertarla como espacio oculto.
 
 Por otra parte, \texttt{Room} utiliza el tipo de sala para condicionar la colocación de
 puertas. Esto permite que la sala secreta no siga exactamente el mismo patrón de acceso que
-una sala regular, reforzando su papel como espacio de descubrimiento. La sala de tesoro
-queda igualmente integrada en el sistema de identificación y representación, aunque su
-acabado funcional completo todavía sigue abierto.
+una sala regular, reforzando su papel como espacio de descubrimiento. Cuando se detecta una
+conexión hacia una sala secreta, se coloca un \texttt{BreakableWall} que, al destruirse,
+crea la puerta definitiva y mantiene la coherencia con el sistema de cierre y apertura de la
+habitación.
+
+En paralelo, la sala de tesoro se conecta con \texttt{TreasureManager} y
+\texttt{TreasureStand} para poblar recompensas al instanciar la sala.
 
 \section{Resultados}
-El estado actual de la iteración muestra un avance claro en dos frentes. Por un lado, el
-combate y los enemigos han ganado profundidad, legibilidad y capacidad de respuesta al
-contexto. Por otro, la generación del mapa ya contempla salas especiales con identidad
-propia, lo que amplía la variedad estructural del recorrido.
+El resultado de la iteración fue el cierre de una capa jugable más rica tanto en combate como
+en estructura de recorrido. Por un lado, combate y enemigos ganaron profundidad, legibilidad
+y capacidad de respuesta al contexto. Por otro, las salas especiales dejaron de ser meras
+variantes espaciales y pasaron a aportar economía, recompensa, exploración oculta y
+exploración oculta.
 
-De forma resumida, en este punto de la iteración se ha conseguido:
+De forma resumida, al final de esta iteración se había conseguido:
 
 \begin{itemize}
     \item reforzar la diferenciación táctica entre enemigos normales, voladores y tanque;
     \item ampliar el combate con ataques cargados y apoyos visuales más expresivos;
     \item mantener el contexto del arma y de la forma del jugador a lo largo del impacto;
-    \item integrar la sala de tienda como tipo de sala diferenciado dentro del mapa procedural;
-    \item dejar encajada la base estructural y visual de las salas secreta y de tesoro.
+    \item integrar la sala de tienda como espacio funcional de compra ligado al inventario y al círculo actual;
+    \item incorporar sala de tesoro y sala secreta con reglas de acceso y recompensa diferenciadas.
 \end{itemize}
 
 Desde el punto de vista del desarrollo global, esta iteración resulta importante porque
 mejora la calidad del enfrentamiento y empieza a enriquecer el recorrido más allá de la
-simple sucesión de salas regulares. Aun así, la parte correspondiente a tienda y salas
-especiales todavía requiere cierre funcional para considerar completada toda la iteración.
+simple sucesión de salas regulares. A partir de aquí, el proyecto dispone ya de una estructura
+de partida más completa, en la que el avance por el mapa no solo cambia la disposición de las
+habitaciones, sino también la clase de interacción y de recompensa que cada una puede ofrecer.
 
 \begin{figure}[htbp]
 \begin{center}
-\missingfigure{Sustituir por el diagrama UML de resultado de la iteración 7}
-% \includegraphics[width=\textwidth]{figures/iteracion7_resultado_uml.pdf}
+% \missingfigure{Sustituir por el diagrama UML de resultado de la iteración 7}
+\includegraphics[width=\textwidth]{figures/iteracion7_resultado_uml.pdf}
 \caption{Diagrama UML de resultado de la iteración 7}
 \label{fig:uml-resultado-iteracion7}
 \end{center}

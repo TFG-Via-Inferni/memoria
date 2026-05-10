@@ -1,0 +1,48 @@
+@startuml
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam nodesep 45
+skinparam ranksep 40
+
+title Iteracion 8 - Estado actual inicial
+
+class CircleManager {
+  +TryCollectCurrentCircleKey()
+  +DescendToNextCircle()
+}
+
+class CircleKeyPickup {
+  +TryPickup()
+  +Spawn()
+}
+
+class CircleUI {
+  +UpdateCircleDisplay()
+}
+
+class MapGenerator {
+  +IsKeyRoom()
+  +SetupDungeon()
+}
+
+class Room {
+  +SetupRoom()
+}
+
+class Stairs {
+  +SetRequiresCurrentCircleKey()
+  +RefreshActivationFromProgress()
+}
+
+MapGenerator --> Room : prepara sala con llave
+MapGenerator --> CircleKeyPickup : define pickup de progresion
+
+Room --> CircleKeyPickup : instancia llave del circulo
+CircleKeyPickup --> CircleManager : entrega llave
+CircleManager --> Stairs : habilita descenso
+CircleManager --> CircleUI : actualiza progreso visible
+
+@enduml

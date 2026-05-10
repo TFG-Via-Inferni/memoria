@@ -7,60 +7,96 @@ skinparam linetype ortho
 skinparam nodesep 45
 skinparam ranksep 40
 
-title Iteracion 7 - Vista simplificada
+title Iteracion 7 - Vista simplificada actualizada
 
-class Player {
-  +TryCollectNearestInventoryPickup()
-  +TryDropSelectedInventoryItem()
+class Player
+
+class PlayerCombatController {
+  +TryAttack()
 }
 
-class PlayerStats {
-  +InventoryCapacity
-  +IncreaseInventoryCapacity()
+class WeaponDefinition
+
+class Projectile {
+  +Initialize()
 }
 
-class PlayerInventory {
-  +TryAddItem()
-  +TryDropSelected()
-  +GetSlotState()
-  +SelectNextSlotCyclic()
+class MeleeHitbox {
+  +Initialize()
 }
 
-class InventoryItemDefinition {
-  +IsValid()
+class DamageSourceContext {
+  +Configure()
 }
 
-class InventoryItemValidationUtility {
-  +NormalizeId()
-  +ValidateDefinition()
+class EnemyController {
+  +Configure()
+  +SetDormant()
 }
 
-class WorldInventoryPickup {
-  +TryPickup()
-  +Spawn()
+class EnemyHealth {
+  +TakeDamage()
 }
 
-class CircleUI {
-  +UpdateInventoryHudDisplay()
+class CircleDefinition {
+  +PickEnemyEntry()
 }
 
-class MinimapUIController
+class MapGenerator {
+  +SetupDungeon()
+  +OnPlayerEnteredRoom()
+}
 
-class MapGenerator
+class Cell
 
-Player --> PlayerInventory : gestiona recogida y drop
-PlayerInventory --> PlayerStats : consulta capacidad
+class Room {
+  +SetupRoom()
+  +OnPlayerEnter()
+  +OnEnemyDestroyed()
+}
 
-PlayerInventory "1" o-- "*" InventoryItemDefinition : almacena slots
-InventoryItemDefinition --> InventoryItemValidationUtility : valida definicion
+class ShopManager {
+  +PopulateShop()
+}
 
-WorldInventoryPickup --> InventoryItemDefinition : referencia item
-WorldInventoryPickup --> PlayerInventory : intenta recoger
+class ShopStand {
+  +SetItem()
+}
 
-CircleUI --> PlayerInventory : representa slots
-CircleUI --> PlayerStats : muestra capacidad
+class TreasureManager {
+  +PopulateTreasure()
+}
 
-MinimapUIController --> MapGenerator : representa progreso del mapa
-MinimapUIController --> Player : centra la vista del minimapa
+class TreasureStand {
+  +SetItem()
+}
+
+class BreakableWall {
+  +TakeDamage()
+}
+
+PlayerCombatController --> Player : obtiene forma / direccion
+PlayerCombatController --> WeaponDefinition : selecciona arma
+PlayerCombatController --> MeleeHitbox : genera ataque melee
+PlayerCombatController --> Projectile : genera proyectil
+
+MeleeHitbox --> DamageSourceContext : conserva contexto
+Projectile --> DamageSourceContext : conserva contexto
+MeleeHitbox --> EnemyHealth : aplica dano
+Projectile --> EnemyHealth : aplica dano
+
+EnemyHealth --> EnemyController : notifica dano / muerte
+EnemyController --> CircleDefinition : consulta aparicion
+EnemyController --> Room : notifica limpieza
+
+MapGenerator --> Cell : clasifica tipos de sala
+MapGenerator --> Room : instancia recorrido
+
+Room --> ShopManager : integra sala tienda
+Room --> TreasureManager : integra sala tesoro
+Room --> BreakableWall : habilita acceso secreto
+
+ShopManager --> ShopStand : asigna objetos y precios
+TreasureManager --> TreasureStand : asigna recompensas
 
 @enduml
