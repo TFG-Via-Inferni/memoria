@@ -179,29 +179,24 @@ su margen en función de la resolución disponible. De esta forma, la mejora no 
 contenido mostrado, sino también a la calidad de su integración visual en pantalla.
 
 \section{Seguimiento y control}
-El seguimiento de la iteración muestra la introducción de una base clara para la progresión
-por objetos y una mejora tangible de la lectura del mapa. El jugador pasó a disponer de una
-estructura de inventario real, el mundo pudo contener pickups conectados con ese inventario
-y el minimapa dejó de ser una referencia estática para convertirse en una vista más útil del
-recorrido y de la posición actual dentro de la partida.
+El seguimiento de esta iteración mostró que el alcance previsto estaba bien dimensionado para
+el tiempo disponible. La gestión de inventario y los objetos pudieron avanzar de forma
+coordinada y, además, la iteración permitió completar la segunda parte del minimapa que había
+sido replanificada desde la iteración 3. Esto resulta relevante porque confirma que el
+aplazamiento anterior no respondió a un retraso desordenado, sino a una redistribución
+razonable del trabajo según el contexto técnico real.
 
-De forma resumida, al final de esta iteración se había conseguido:
+En términos temporales, la planificación y la ejecución quedaron muy próximas: frente a las
+50:00 horas previstas, se dedicaron 49:27 horas reales. Ese ajuste refuerza la idea de que
+el alcance de la iteración estuvo correctamente acotado y de que la secuencia entre
+inventario, objetos y minimapa permitía cerrar entregables funcionales sin abrir nuevas
+desviaciones.
 
-\begin{itemize}
-    \item incorporar un inventario por slots con capacidad limitada y selección activa;
-    \item definir objetos con identidad, icono, tipo y validación interna;
-    \item conectar pickups del mundo con el inventario del jugador;
-    \item preparar la progresión de capacidad del inventario desde las estadísticas del jugador;
-    \item consolidar un minimapa con descubrimiento progresivo, resaltado de sala actual y adaptación al HUD.
-\end{itemize}
-
-Desde el punto de vista del control del desarrollo, esta iteración fue importante porque añadió
-una capa de persistencia y recompensa que el proyecto todavía no tenía de forma clara, al
-tiempo que mejoró la navegación momentánea dentro de cada \textit{run}. A partir de aquí,
-los objetos pueden empezar a desempeñar un papel más fuerte en la economía y la progresión,
-y el minimapa queda preparado para convivir con una estructura de salas cada vez más rica.
-No se aprecia una desviación grave, aunque la iteración deja trabajo preparado para cierres
-posteriores de balance y contenido.
+Desde la perspectiva de seguimiento y control, la iteración puede considerarse bien cerrada.
+Se añadió una capa de persistencia y recompensa que el proyecto aún no tenía y, al mismo
+tiempo, se completó un refinamiento del minimapa que había quedado pendiente por complejidad
+en una iteración anterior. No fue necesario replanificar de nuevo, aunque sí quedaron
+preparadas bases para futuros ajustes de balance y contenido.
 
 \begin{table}[h!]
     \centering

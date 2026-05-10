@@ -182,28 +182,24 @@ jugador. Esto conecta directamente el comportamiento enemigo con la variedad int
 el nuevo sistema de combate.
 
 \section{Seguimiento y control}
-El seguimiento de la iteración muestra una mejora clara de la calidad jugable del núcleo de
-acción. El jugador ganó un combate más flexible y expresivo, las armas empezaron a tener
-identidad propia y los enemigos pasaron a responder de forma más rica tanto en su ataque
-como en su recepción de daño.
+El seguimiento de esta iteración permitió comprobar que el núcleo del combate podía quedar
+operativo dentro del tiempo previsto, pero también puso de manifiesto que tanto el sistema de
+combate como el sistema de enemigos tenían más recorrido del estimado inicialmente. La
+iteración cerró una base funcional sólida, con armas diferenciadas, proyectiles y enemigos
+mejor integrados, pero durante el desarrollo se vio que aún quedaban aspectos de legibilidad,
+\textit{feedback} y diferenciación táctica que no convenía forzar en el mismo ciclo.
 
-De forma resumida, al final de esta iteración se había conseguido:
+Desde el punto de vista temporal, la iteración quedó incluso ligeramente por debajo de la
+estimación: frente a las 50:00 horas planificadas, se registraron 48:22 horas reales. Esto
+significa que el ajuste no vino dado por una falta inmediata de tiempo, sino por una mejor
+comprensión del alcance real de las features a medida que se desarrollaban.
 
-\begin{itemize}
-    \item ajustar la cadencia de animación de los sprites del jugador para mejorar su lectura visual;
-    \item estructurar el combate en torno a armas con parámetros y comportamientos propios;
-    \item soportar ataques de melé, proyectiles y ataques cargados;
-    \item enriquecer la lógica enemiga con tipos diferenciados y proyectiles propios;
-    \item conectar la respuesta al daño enemigo con el arma y la forma utilizadas por el jugador.
-\end{itemize}
-
-Desde el punto de vista del control del desarrollo, esta iteración fue importante porque reforzó
-uno de los pilares centrales del proyecto: el combate como experiencia diferenciadora.
-Después de esta entrega, el juego no solo cuenta con exploración y progresión, sino también
-con una base mucho más sólida para que las decisiones del jugador dentro del enfrentamiento
-tengan consecuencias reales sobre el comportamiento y la vulnerabilidad de los enemigos. El
-alcance queda bien encauzado, aunque la profundidad del sistema justifica que su evolución
-continúe en iteraciones posteriores.
+Por ello, el control del avance llevó a considerar combate y enemigos como sistemas cerrados
+en una primera fase, pero no completamente agotados. Su refinamiento posterior se
+replanificó para la iteración 7. Esta decisión encaja con la observación general del
+proyecto: algunas features se habían estimado inicialmente como menos complejas de lo que
+realmente fueron, y dividirlas entre iteraciones permitió ajustar mejor el esfuerzo al
+resultado esperado.
 
 \begin{table}[h!]
     \centering

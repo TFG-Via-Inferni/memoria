@@ -198,29 +198,25 @@ la implementación logra el objetivo principal de la feature: ofrecer una lectur
 del recorrido del jugador por el nivel generado.
 
 \section{Seguimiento y control}
-El seguimiento de la iteración muestra un aumento claro de la profundidad estructural del
-proyecto. En primer lugar, la progresión por círculos dejó de limitarse al avance entre
-niveles y pasó a influir directamente en la identidad del contenido jugable. En segundo
-lugar, el jugador obtuvo una mecánica diferencial de alternancia entre formas que empieza a
-definir la personalidad del sistema de combate. En tercer lugar, la exploración ganó una
-herramienta de orientación permanente mediante un minimapa con descubrimiento progresivo.
+El seguimiento de esta iteración confirmó que el alcance principal podía cumplirse, aunque no
+todas las funcionalidades alcanzaron el mismo grado de madurez. La lógica de círculos sí
+quedó consolidada en el sentido previsto, porque dejó de ser una mera progresión numérica y
+pasó a organizar contenido real del juego. De forma similar, la dualidad de personajes quedó
+cerrada como primera versión jugable y suficientemente estable para apoyar iteraciones
+posteriores.
 
-De forma resumida, al final de esta iteración se había conseguido:
+Desde el punto de vista temporal, la iteración registró una ligera desviación respecto a la
+planificación: frente a las 50:00 horas previstas, se emplearon 51:41 horas reales. La
+diferencia es pequeña, pero el seguimiento del trabajo sí puso de manifiesto que el minimapa
+no convenía darse por terminado en esta fase si se quería mantener un cierre coherente del
+alcance.
 
-\begin{itemize}
-    \item organizar salas y enemigos en pools específicos por círculo;
-    \item hacer que el círculo actual determine el contenido que se genera en la partida;
-    \item introducir la dualidad de personajes como cambio entre forma de melé y forma a distancia con \textit{cooldown};
-    \item mantener estado compartido entre ambas formas del jugador;
-    \item mostrar un minimapa básico con visibilidad progresiva según las salas descubiertas.
-\end{itemize}
-
-Desde el punto de vista del control del desarrollo, esta iteración fue especialmente relevante
-porque convirtió varias ideas de diseño en sistemas con impacto directo sobre la experiencia
-de juego. La progresión se volvió más significativa, el jugador ganó una mecánica propia y
-la exploración pasó a estar mejor informada. En conjunto, la tercera iteración marca el
-paso desde una base funcional estable hacia un sistema más rico y más cercano a la
-identidad final del proyecto, sin exigir por ello una replanificación fuerte del alcance.
+La primera versión del minimapa cumplía su función básica de orientación, pero aún dependía
+de ajustes posteriores sobre el estado real de las salas, la cámara y su integración en el
+HUD. Por ello, se optó por cerrar en esta iteración una versión funcional mínima y
+replanificar su segunda parte para la iteración 6, cuando el resto de sistemas implicados ya
+estuviera más estabilizado. Esta decisión permitió ajustar el alcance a la complejidad real
+sin perder el control de la planificación general.
 
 \begin{table}[h!]
     \centering

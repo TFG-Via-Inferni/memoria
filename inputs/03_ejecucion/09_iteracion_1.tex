@@ -205,28 +205,24 @@ al quedar vacía, restauraba el paso. Esta solución definió de forma clara el 
 de exploración y combate del proyecto.
 
 \section{Seguimiento y control}
-El seguimiento de la iteración muestra que el alcance previsto para esta primera entrega se
-cubrió en sus objetivos fundamentales. Al finalizar este ciclo ya se había conseguido:
+El seguimiento de esta primera iteración se centró en comprobar si el alcance mínimo previsto
+para arrancar el proyecto podía completarse dentro del tiempo disponible. En términos
+funcionales, el objetivo principal sí se alcanzó: se obtuvo una primera versión jugable con
+generación del mapa, jugador controlable y encuentros básicos en salas. Esto permitió validar
+que la dirección técnica elegida era viable y que el proyecto podía apoyarse ya en un bucle
+de juego verificable.
 
-\begin{itemize}
-    \item generar proceduralmente un nivel con habitaciones de distinta forma;
-    \item materializar ese nivel en una escena jugable conectada mediante puertas y muros;
-    \item incorporar un jugador capaz de aparecer en la sala inicial y recorrer el mapa;
-    \item poblar salas con enemigos básicos y condicionar el avance a la resolución del combate.
-\end{itemize}
+Desde el punto de vista temporal, la planificación fue bastante ajustada. Frente a las 50:00
+horas previstas, la iteración consumió 50:17 horas reales, por lo que la desviación fue
+mínima. Aun así, el seguimiento del trabajo permitió detectar que algunas partes de la
+generación procedural tenían más complejidad de la estimada inicialmente, especialmente en el
+tratamiento coherente de ciertas salas especiales.
 
-Más allá de la funcionalidad concreta, la iteración validó varias hipótesis técnicas
-importantes. En primer lugar, confirmó que la arquitectura modular elegida era viable para
-coordinar generación, instanciación e interacción sin depender de un único controlador
-central. En segundo lugar, demostró que la generación procedural podía producir espacios
-jugables y no solo configuraciones abstractas. Por último, dejó establecido el primer bucle
-jugable completo sobre el que construir el resto de iteraciones.
-
-En términos de control, esta iteración no cerró todavía una experiencia rica ni equilibrada,
-pero sí resolvió lo más importante para el arranque del proyecto: demostrar que el sistema
-ya podía generar una partida, permitir al jugador recorrerla y articular encuentros básicos
-dentro de las salas. No se aprecia necesidad de replanificación estructural, aunque sí
-quedaron abiertas líneas de ampliación que justifican las iteraciones posteriores.
+Por ello, aunque el alcance esencial de la iteración quedó cumplido, no resultaba conveniente
+dar por completamente cerrada toda la feature de generación procedural. La parte que todavía
+requería ajuste se replanificó para la iteración 2. Esta decisión permitió mantener una
+relación realista entre alcance, tiempo y grado de acabado, evitando cerrar artificialmente
+una funcionalidad que aún necesitaba consolidación.
 
 \begin{table}[h!]
     \centering

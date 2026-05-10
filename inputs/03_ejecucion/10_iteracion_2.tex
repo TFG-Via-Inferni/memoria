@@ -209,31 +209,24 @@ habitación. Además, se añadieron utilidades de depuración para registrar tra
 facilitar el diagnóstico de comportamientos anómalos.
 
 \section{Seguimiento y control}
-El seguimiento de la iteración refleja una mejora clara en tres dimensiones distintas del
-proyecto. En primer lugar, la generación procedural quedó más consolidada al corregir una
-habitación especial que todavía no estaba bien resuelta espacialmente. En segundo lugar, el
-juego dejó de ser una exploración aislada de un único nivel y pasó a incorporar una primera
-progresión explícita entre círculos, visible tanto en la lógica como en la interfaz. En
-tercer lugar, la navegación entre salas ganó estabilidad visual gracias al rediseño del
-seguimiento de cámara.
+El seguimiento de esta iteración permitió comprobar que el alcance previsto estaba repartido
+entre una tarea de cierre técnico y dos ampliaciones funcionales nuevas. Por un lado, la
+parte pendiente de generación procedural pudo completarse correctamente, lo que permitió dar
+por cerrada una feature que en la iteración anterior todavía no estaba suficientemente madura.
+Por otro, la cámara y la progresión por círculos avanzaron de forma coherente con lo
+planificado.
 
-De forma resumida, al final de esta iteración se había conseguido:
+En cuanto al tiempo, la iteración se mantuvo dentro de un margen razonable respecto a la
+previsión inicial: frente a las 50:00 horas planificadas, se registraron 49:08 horas reales.
+Esto indica que el trabajo ejecutado fue compatible con la planificación temporal, aunque el
+seguimiento del contenido funcional mostró una cuestión importante: la lógica de círculos no
+debía considerarse cerrada todavía.
 
-\begin{itemize}
-    \item cerrar una parte pendiente de la feature de generación procedural mediante la corrección física de la sala secreta;
-    \item introducir un gestor persistente de círculos y un mecanismo funcional de descenso mediante escaleras;
-    \item mostrar en la interfaz el círculo activo de la partida;
-    \item regenerar el mapa al cambiar de círculo, conectando progresión y estructura espacial;
-    \item estabilizar el sistema de cámara en los cambios de sala y en los contextos de cámara fija.
-\end{itemize}
-
-Desde el punto de vista del control del desarrollo, esta iteración fue importante porque
-transformó el prototipo inicial en un sistema más cohesionado. La primera entrega había
-demostrado que era posible generar, recorrer y combatir; la segunda demostró que también era
-posible progresar y mantener una lectura espacial mucho más consistente del juego. Esto la
-convierte en una iteración de consolidación crítica. El cierre de la iteración no apunta a
-una replanificación amplia, pero sí confirma que algunas features necesitaban más de un ciclo
-para quedar realmente estabilizadas.
+La primera implementación resolvió el descenso entre círculos, pero durante la iteración se
+vio que aún faltaba convertir esa progresión en un sistema real de contenido capaz de afectar
+a salas y enemigos. Por ello, fue necesario replanificar una segunda parte de la feature para
+la iteración 3. La decisión no respondió a un descontrol de tiempos, sino a una revisión del
+alcance real a partir de la complejidad observada durante el desarrollo.
 
 \begin{table}[h!]
     \centering

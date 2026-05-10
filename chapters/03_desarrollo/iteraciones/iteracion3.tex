@@ -193,6 +193,21 @@ de interfaz mínimo asociado al HUD del minimapa. Aunque esta versión todavía 
 la implementación logra el objetivo principal de la feature: ofrecer una lectura progresiva
 del recorrido del jugador por el nivel generado.
 
+\section{Seguimiento y control}
+El seguimiento de la tercera iteración confirmó que el alcance principal podía cumplirse dentro
+del tiempo previsto, aunque no todas las funcionalidades alcanzaron el mismo grado de madurez.
+La lógica de círculos sí quedó cerrada con el nivel de profundidad esperado, ya que pasó de ser
+una mera progresión numérica a organizar contenido real del juego. También la dualidad quedó
+ suficientemente estable como primera versión jugable.
+
+El caso distinto fue el minimapa. Durante la iteración se comprobó que su primera versión era
+válida como apoyo básico de navegación, pero no suficiente para considerarlo terminado dentro del
+alcance final deseado. Su dependencia del estado real de las salas, de la cámara y de la
+integración en el HUD hacía que completar todos esos ajustes en la misma iteración supusiera un
+riesgo para los tiempos. Por ello, se optó por cerrar una versión funcional mínima y replanificar
+su segunda parte para la iteración 6, cuando el resto de sistemas implicados ya estuvieran más
+estabilizados.
+
 \section{Resultados}
 El resultado de la iteración fue un aumento claro de la profundidad estructural del
 proyecto. En primer lugar, la progresión por círculos dejó de limitarse al avance entre
