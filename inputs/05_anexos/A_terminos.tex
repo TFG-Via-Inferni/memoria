@@ -7,4 +7,9 @@ memoria. Su propósito es unificar el significado de la terminología empleada y
 lectura del documento.
 \end{abstract}
 
-\printglossary[title={Glosario de términos},toctitle={Glosario de términos}]
+% para incluir todos los términos en el glosario aunque no se hayan mencionado explícitamente en el texto
+\glsaddall
+\begingroup
+\renewcommand*{\glossarysection}[2][]{}
+\printglossary
+\endgroup
