@@ -7,42 +7,78 @@ skinparam linetype ortho
 skinparam nodesep 45
 skinparam ranksep 40
 
-title Iteracion 8 - Estado actual inicial
-
-class CircleManager {
-  +TryCollectCurrentCircleKey()
-  +DescendToNextCircle()
-}
-
-class CircleKeyPickup {
-  +TryPickup()
-  +Spawn()
-}
+title Iteracion 8 - Vista simplificada actualizada
 
 class CircleUI {
   +UpdateCircleDisplay()
+  +SetStatsPauseVisibility()
 }
 
-class MapGenerator {
-  +IsKeyRoom()
-  +SetupDungeon()
+class CircleManager {
+  +DescendToNextCircle()
+  +ResetRunState()
 }
 
-class Room {
-  +SetupRoom()
+class GameVictoryController {
+  +TriggerVictory()
+  +RestartGame()
+  +ExitGame()
 }
 
-class Stairs {
-  +SetRequiresCurrentCircleKey()
-  +RefreshActivationFromProgress()
+class GameOverController {
+  +RestartGame()
+  +ExitGame()
 }
 
-MapGenerator --> Room : prepara sala con llave
-MapGenerator --> CircleKeyPickup : define pickup de progresion
+class PauseMenuController {
+  +TogglePause()
+  +ResumeGame()
+}
 
-Room --> CircleKeyPickup : instancia llave del circulo
-CircleKeyPickup --> CircleManager : entrega llave
-CircleManager --> Stairs : habilita descenso
-CircleManager --> CircleUI : actualiza progreso visible
+class Player {
+  +IsDead()
+}
+
+class EnemyController {
+  +Configure()
+  +SetDormant()
+  +ModifyIncomingDamage()
+}
+
+class EnemyHealth {
+  +TakeDamage()
+}
+
+class EnemyDefinition
+
+class EnemySpriteAnimator {
+  +Bind()
+  +ApplyDefinition()
+}
+
+class EnemyDashTrailVisual {
+  +Configure()
+  +Play()
+}
+
+CircleManager --> GameVictoryController : dispara victoria al completar la run
+CircleManager --> CircleUI : actualiza estado visible
+
+GameVictoryController --> CircleManager : reinicia progreso
+GameOverController --> CircleManager : reinicia progreso
+
+GameVictoryController --> CircleUI : oculta HUD
+GameOverController --> CircleUI : oculta HUD
+PauseMenuController --> CircleUI : alterna HUD al pausar
+
+GameOverController --> Player : vigila derrota
+PauseMenuController --> GameOverController : bloquea pausa si hay derrota
+PauseMenuController --> CircleManager : bloquea pausa si la run termino
+
+EnemyController --> EnemyDefinition : aplica tipo, stats y sprites
+EnemyController --> EnemySpriteAnimator : enlaza animacion
+EnemyController --> EnemyDashTrailVisual : activa rastro visual
+EnemyHealth --> EnemyController : delega modificadores y muerte
+EnemySpriteAnimator --> EnemyDefinition : toma frames laterales
 
 @enduml

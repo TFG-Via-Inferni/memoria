@@ -1,73 +1,46 @@
 \chapter{Iteración 8}
 
 \begin{abstract}
-Esta iteración se orienta al cierre de la experiencia de partida. Las funcionalidades
-previstas siguen siendo victoria, derrota y una segunda revisión visual de
-\textit{sprites}, pero en el estado actual de desarrollo la iteración apenas se ha
-iniciado y solo incorpora un primer ajuste técnico sobre la progresión entre círculos.
+Esta iteración actúa como cierre funcional de la experiencia de partida. El trabajo se
+centra en resolver los estados finales de victoria y derrota, además de completar una
+segunda actualización visual orientada a los sprites de enemigos y a la cohesión general de
+las pantallas finales con el resto de la interfaz.
 \end{abstract}
 
 \section{Lista de funcionalidades}
 La octava iteración se plantea como una fase de cierre sobre la base ya consolidada en las
 entregas anteriores. Después de haber reforzado combate, enemigos, progresión por círculos,
-inventario y salas especiales, el proyecto necesita resolver qué ocurre cuando la partida se
-gana o se pierde, y cómo se presenta ese estado final al jugador. Por ello, esta iteración se
-estructura en torno a tres funcionalidades: victoria, derrota y una segunda actualización de
-\textit{sprites} orientada a unificar el acabado visual del juego. No obstante, a fecha de
-esta documentación la iteración está todavía en arranque y el único avance técnico ya
-integrado consiste en restringir la bajada de círculo hasta haber obtenido la llave
-correspondiente.
+inventario y salas especiales, el proyecto necesitaba resolver qué ocurre cuando la partida
+se gana o se pierde y cómo se presenta ese estado final al jugador. Por ello, esta iteración
+se articula en torno a tres funcionalidades: victoria, derrota y una segunda actualización
+de sprites centrada en dar consistencia visual al tramo final de la \textit{run}.
 
 \begin{enumerate}
-\item \textbf{Victoria.} Esta funcionalidad recogerá la lógica necesaria para detectar el
-cierre exitoso de la partida y trasladar al jugador a un estado final reconocible. Su alcance
-incluye decidir cuándo una \textit{run} debe considerarse completada, congelar el flujo de
-juego de forma controlada y mostrar una transición clara hacia la pantalla o capa visual de
-victoria. En términos funcionales, esta feature cerrará el bucle principal del juego, evitando
-que la progresión por círculos termine en un estado ambiguo o sin recompensa explícita.
+\item \textbf{Victoria.} Esta funcionalidad introduce la lógica necesaria para detectar el
+cierre exitoso de la partida y trasladar al jugador a un estado final explícito. Su alcance
+real consiste en reconocer que la \textit{run} ha terminado al completar el último círculo,
+detener el bucle jugable de forma controlada, ocultar la interfaz de partida y mostrar una
+pantalla final con acciones coherentes de reinicio o salida. En términos funcionales, esta
+feature cierra el recorrido principal del juego y evita que la progresión por círculos
+termine en un estado ambiguo o sin resolución visible para el jugador.
 
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa del flujo de Victoria en la iteración 8}
-% \includegraphics[width=.9\textwidth]{figures/iteracion8_victoria.png}
-\caption{Resultado visual previsto de la feature Victoria en la iteración 8}
-\label{fig:iteracion8-feature-victoria}
-\end{center}
-\end{figure}
+\item \textbf{Derrota.} Esta funcionalidad completa la gestión de estados finales de la
+partida cuando el jugador ya no puede continuar. Su funcionamiento real detecta la muerte del
+personaje, interrumpe la simulación, desactiva la capa jugable visible y expone un flujo de
+reinicio o retorno al menú principal alineado con el resto del sistema. En la práctica, esta
+feature hace que el fracaso deje de percibirse como una simple pérdida de control del
+personaje y pase a actuar como una respuesta formal del juego, legible y reutilizable dentro
+de la navegación general de escenas.
 
-\item \textbf{Derrota.} Esta funcionalidad introducirá el comportamiento asociado a la
-derrota del jugador cuando la partida no pueda continuar. Su alcance abarca la detección de
-la condición de derrota, la detención o atenuación del bucle jugable y la presentación de un
-flujo de reinicio o retorno a menú coherente con el resto de sistemas ya presentes. En la
-práctica, esta feature completa la gestión de estados de partida, permitiendo que el fracaso
-tenga una respuesta controlada, legible y reutilizable.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa del flujo de Derrota en la iteración 8}
-% \includegraphics[width=.9\textwidth]{figures/iteracion8_derrota.png}
-\caption{Resultado visual previsto de la feature Derrota en la iteración 8}
-\label{fig:iteracion8-feature-derrota}
-\end{center}
-\end{figure}
-
-\item \textbf{Actualizar Sprites (II).} Esta funcionalidad constituye la segunda parte de la
-feature \textit{Actualizar Sprites}, cuya primera entrega se realizó en la iteración 5. En
-esta ocasión, el alcance ya no se limita al ritmo de animación del jugador, sino que se
-orienta a unificar la identidad gráfica de \gls{hud}, menús y pantallas de cierre de partida.
-Su objetivo es que los nuevos estados de victoria y derrota no se perciban como capas
-aisladas, sino como una extensión natural del lenguaje visual ya usado en \textit{Via
-Inferni}. En términos funcionales, esta feature no introduce nueva mecánica, pero sí mejora
-la claridad y la cohesión con la que el jugador interpreta el estado de la partida.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Actualizar Sprites (II) en la iteración 8}
-% \includegraphics[width=.9\textwidth]{figures/iteracion8_actualizar_sprites_ii.png}
-\caption{Resultado visual previsto de la feature Actualizar Sprites (II) en la iteración 8}
-\label{fig:iteracion8-feature-sprites}
-\end{center}
-\end{figure}
+\item \textbf{Actualizar Sprites (II).} Esta funcionalidad constituye la segunda parte de
+la feature \textit{Actualizar Sprites}, cuya primera entrega se realizó en la iteración 5.
+En esta ocasión, el trabajo ya no se limita al ritmo de animación del jugador, sino que
+amplía la identidad visual del proyecto hacia los enemigos y hacia las pantallas de cierre de
+partida. Su alcance real incluye la incorporación de secuencias laterales de movimiento en
+enemigos, una mejor lectura de su orientación y una presentación más coherente entre HUD,
+menús y estados finales. En términos funcionales, esta feature no introduce una mecánica
+nueva, pero sí mejora la legibilidad visual del combate y da una sensación de acabado más
+consistente al cierre de la experiencia.
 \end{enumerate}
 
 La combinación de estas tres funcionalidades hace que la octava iteración actúe como cierre
@@ -76,146 +49,147 @@ aquí el objetivo pasa a ser cerrar el ciclo completo de la partida y presentarl
 identidad visual más consistente.
 
 \section{Diseño}
-El diseño de esta iteración parte de una necesidad de cierre. El proyecto ya dispone de una
+El diseño de esta iteración parte de una necesidad de cierre. El proyecto ya disponía de una
 partida suficientemente completa para explorar, combatir, progresar y descender por círculos,
-pero todavía necesita definir con claridad cómo termina esa experiencia y cómo se comunica ese
-final al jugador. La idea dominante es resolver esos estados finales sin introducir flujos
-paralelos innecesarios y reutilizando, siempre que sea posible, las piezas de interfaz y
-control de escena ya existentes. Como paso previo, ya se ha empezado a reforzar la progresión
-entre círculos obligando a validar la llave antes del descenso, de modo que el final de cada
-tramo de la \textit{run} quede mejor controlado.
+pero todavía necesitaba definir con claridad cómo termina esa experiencia y cómo se comunica
+ese final al jugador. La idea dominante fue resolver esos estados finales reutilizando, en la
+medida de lo posible, la arquitectura de interfaz y de control de escena ya existente, de
+modo que victoria, derrota y actualización visual no aparecieran como bloques aislados.
 
-\subsection{Diseño de la victoria}
-La victoria se diseñará como un estado terminal explícito del flujo de partida. La decisión
-principal consiste en no tratarla como una mera transición de escena desconectada del sistema
-de progresión, sino como una consecuencia directa del avance del jugador por los círculos y de
-la resolución del último objetivo de la \textit{run}.
+\subsection{Diseño de Victoria}
+La victoria se diseña como un estado terminal explícito del flujo de partida. La decisión
+principal consiste en no tratarla como una simple transición de escena desconectada del
+sistema de progresión, sino como una consecuencia directa del avance del jugador por los
+círculos y de la resolución del último tramo de la \textit{run}.
 
-Por ello, el diseño de esta funcionalidad debe separar dos responsabilidades: por un lado, la
-detección de que la partida ha terminado con éxito; por otro, la presentación visual y las
-acciones disponibles una vez alcanzado ese estado. Esta separación facilitará que la lógica de
-fin de partida pueda mantenerse estable aunque cambie el diseño de la interfaz final.
+Por ello, el diseño separa dos responsabilidades: por un lado, la detección de que la partida
+ha terminado con éxito; por otro, la presentación visual y las acciones disponibles una vez
+alcanzado ese estado. Esta separación permite mantener estable la lógica de fin de partida
+aunque el acabado de la interfaz final evolucione.
 
-\subsection{Diseño de la derrota}
-La derrota se diseñará con un criterio simétrico al de la victoria, pero atendiendo a que su
-activación depende del estado del jugador y no del progreso por círculos. La decisión
-importante aquí es evitar una derrota difusa, donde el jugador simplemente deje de controlar
-al personaje sin una transición clara.
+\subsection{Diseño de Derrota}
+La derrota se diseña con un criterio simétrico al de la victoria, aunque su activación
+depende del estado del jugador y no del progreso por círculos. La decisión importante aquí es
+evitar una derrota difusa, donde el personaje deja de responder sin que el sistema exprese de
+forma clara qué ha ocurrido.
 
-Por ello, el diseño debe contemplar un flujo que capture la pérdida de la partida, desactive
-la interacción jugable principal y exponga salidas claras, como reiniciar la \textit{run} o
-volver al menú principal. Esto permite que la derrota actúe como una respuesta del sistema y
-no como un fallo silencioso del juego.
+Por ello, el diseño contempla un flujo que capture la pérdida de la partida, detenga la
+interacción jugable principal y exponga salidas claras, como reiniciar la \textit{run} o
+volver al menú principal. Esto hace que la derrota actúe como una respuesta del sistema y no
+como un fallo silencioso del juego.
 
 \subsection{Diseño de Actualizar Sprites (II)}
 La segunda revisión visual se diseña como una capa de cohesión, no como una sustitución
-aislada de recursos. La decisión central es que los nuevos estados de victoria y derrota
-compartan la misma dirección visual que \gls{hud}, menús y elementos ya consolidados, en
+aislada de recursos. La decisión central es que los enemigos y los nuevos estados de victoria
+y derrota compartan la misma dirección visual que HUD, menús y elementos ya consolidados, en
 lugar de introducir estilos desconectados entre sí.
 
-Esto implica revisar tanto iconografía y paneles como la legibilidad de retratos, botones y
-composiciones visuales asociadas al cierre de partida. El objetivo no es solo mejorar el
-aspecto visual, sino hacer que el jugador identifique con mayor claridad en qué estado se
-encuentra el juego.
+Esto implica reforzar la lectura lateral del movimiento enemigo y cuidar la presentación de
+paneles, botones y composición visual asociada al cierre de partida. El objetivo no es solo
+mejorar el aspecto gráfico, sino hacer que el jugador identifique con mayor claridad en qué
+estado se encuentra el juego y qué está ocurriendo en pantalla.
 
 \section{Implementación}
-La implementación de esta iteración previsiblemente se apoyará en una capa de coordinación del
-estado de partida y en ajustes sobre la interfaz ya existente. Aunque las tres features tienen
-un peso distinto, comparten la necesidad de integrarse con el flujo actual de escenas, con la
-pausa y con el \gls{hud} sin duplicar lógica.
+La implementación de esta iteración se apoya sobre todo en una capa de coordinación del
+estado de partida y en ajustes de presentación visual. Aunque las tres features tienen un
+peso distinto, comparten la necesidad de integrarse con el flujo actual de escenas, con la
+pausa y con la interfaz ya existente sin duplicar lógica.
 
-\subsection{Estado actual de implementación}
-Por ahora, el único cambio ya incorporado en esta iteración consiste en reforzar la progresión
-entre círculos mediante una restricción sobre las escaleras de descenso. Este trabajo se apoya
-principalmente en \texttt{CircleKeyPickup}, \texttt{CircleManager}, \texttt{MapGenerator},
-\texttt{Room} y \texttt{Stairs}. \texttt{MapGenerator} reserva una sala válida para la llave
-del círculo, \texttt{Room} se encarga de instanciar el pickup cuando corresponde y
-\texttt{Stairs} solo activa el descenso cuando \texttt{CircleManager} confirma que la llave
-actual ha sido recogida.
+\subsection{Implementación de Victoria}
+La resolución técnica de la victoria se apoya principalmente en \texttt{CircleManager} y
+\texttt{GameVictoryController}. \texttt{CircleManager} mantiene el control de la progresión
+por círculos y, cuando el jugador alcanza el último, marca la \textit{run} como completada y
+dispara la transición hacia la victoria. Para mantener desacoplada la lógica de progresión de
+la interfaz final, el gestor invoca el flujo de victoria a través del controlador dedicado.
 
-Se trata todavía de un avance de infraestructura y no del cierre funcional de victoria,
-derrota o revisión visual. Su utilidad principal es preparar una progresión más controlada
-para las siguientes tareas de la iteración.
+Por su parte, \texttt{GameVictoryController} centraliza la presentación del estado final.
+Este componente muestra la capa visual de victoria, detiene el tiempo del juego, pausa el
+audio, oculta el HUD mediante \texttt{CircleUI} y enlaza los botones de reinicio y salida a
+las acciones correspondientes. Además, al reiniciar la partida reutiliza
+\texttt{CircleManager} para restaurar el progreso de la \textit{run}, evitando mantener
+estado residual entre una sesión y la siguiente.
 
-\subsection{Implementación prevista de la victoria}
-La resolución técnica de la victoria apunta a reutilizar los sistemas de progresión ya
-existentes en torno a \texttt{CircleManager}, \texttt{Stairs} y la escena principal de juego.
-Sobre esa base, será necesario incorporar un componente coordinador que detecte el cierre
-válido de la \textit{run}, congele la simulación y muestre la interfaz final de victoria.
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa del flujo de Victoria en la iteración 8}
+% \includegraphics[width=.9\textwidth]{figures/iteracion8_victoria.png}
+\caption{Resultado visual de la feature Victoria en la iteración 8}
+\label{fig:iteracion8-feature-victoria}
+\end{center}
+\end{figure}
 
-También será necesario conectar ese flujo con acciones posteriores, como reiniciar o volver al
-menú principal. En ese sentido, el comportamiento ya presente en \texttt{MainMenuController} y
-\texttt{PauseMenuController} ofrece una base útil para no reimplementar navegación de escenas
-desde cero.
+\subsection{Implementación de Derrota}
+La derrota se implementa principalmente a través de \texttt{GameOverController},
+\texttt{Player} y su relación con la interfaz de pausa y de estado. \texttt{GameOverController}
+localiza al jugador activo y comprueba si su estado ha pasado a muerte mediante
+\texttt{Player.IsDead()}. Cuando esto ocurre, el componente toma el control del flujo y
+activa la pantalla de derrota.
 
-\subsection{Implementación prevista de la derrota}
-La derrota se apoyará previsiblemente en \texttt{Player}, \texttt{PlayerStats} y en los puntos
-del sistema donde ya se procesa el daño recibido por el jugador. A partir de ese momento, la
-idea es introducir una notificación centralizada que permita pasar de estado jugable a estado
-de derrota sin depender de comprobaciones dispersas por distintos scripts.
+De forma análoga al flujo de victoria, el controlador de derrota hace visible su menú,
+detiene la simulación, pausa el audio y oculta la interfaz principal de la partida. También
+reutiliza la navegación ya existente para reiniciar la escena activa o volver al menú
+principal. Para mantener coherencia entre estados, \texttt{PauseMenuController} deja de
+permitir la pausa manual cuando la partida ya ha terminado, ya sea por victoria o por
+derrota.
 
-Una vez detectada la derrota, la interfaz final deberá tomar el control del flujo. Para ello,
-resulta razonable reutilizar parte de la lógica de pausa y control de escena ya existente, de
-forma que reinicio, retorno al menú y ocultación del \gls{hud} sigan un patrón común.
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa del flujo de Derrota en la iteración 8}
+% \includegraphics[width=.9\textwidth]{figures/iteracion8_derrota.png}
+\caption{Resultado visual de la feature Derrota en la iteración 8}
+\label{fig:iteracion8-feature-derrota}
+\end{center}
+\end{figure}
 
-\subsection{Implementación prevista de Actualizar Sprites (II)}
-La segunda revisión visual se apoyará sobre todo en elementos ya existentes como
-\texttt{CircleUI}, \texttt{MainMenuController}, \texttt{PauseMenuController} y los recursos
-gráficos vinculados a \texttt{PlayerSpriteAnimator} y al \gls{hud}. El objetivo no es abrir un
-nuevo sistema visual, sino adaptar y ampliar el ya presente para cubrir los nuevos estados de
-final de partida.
+\subsection{Implementación de Actualizar Sprites (II)}
+La segunda actualización visual se apoya sobre todo en \texttt{EnemyDefinition},
+\texttt{EnemyController}, \texttt{EnemySpriteAnimator} y en la reutilización de la capa de
+interfaz existente. \texttt{EnemyDefinition} pasa a almacenar tanto el sprite de referencia
+como una secuencia de fotogramas laterales, mientras que \texttt{EnemyController} enlaza esa
+información con el comportamiento activo del enemigo durante la configuración.
 
-Esto puede implicar ajustar \textit{sprites}, paneles, botones, retratos o composiciones de
-interfaz, así como asegurar que esos recursos mantienen una escala y una legibilidad
-coherentes con el resto del proyecto.
+Sobre esa base, \texttt{EnemySpriteAnimator} se encarga de reproducir la animación lateral,
+mantener la orientación del enemigo y actualizar el sprite mostrado según su estado visual y
+su dirección de movimiento. Esto mejora la legibilidad del desplazamiento sin alterar la
+lógica de combate ya consolidada. En paralelo, los flujos de victoria y derrota reutilizan la
+misma estrategia de ocultación del HUD y de presentación por paneles superpuestos, lo que
+contribuye a que el cierre visual de la partida se perciba coherente con el resto del
+proyecto.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa de Actualizar Sprites (II) en la iteración 8}
+% \includegraphics[width=.9\textwidth]{figures/iteracion8_actualizar_sprites_ii.png}
+\caption{Resultado visual de la feature Actualizar Sprites (II) en la iteración 8}
+\label{fig:iteracion8-feature-sprites}
+\end{center}
+\end{figure}
 
 \section{Seguimiento y control}
-El seguimiento de esta iteración muestra con claridad una desviación entre el alcance previsto y
-el trabajo realmente completado hasta el momento. La planificación inicial contemplaba cerrar los
-flujos de victoria, derrota y la segunda revisión visual de sprites, pero el control del avance
-indica que ese cierre todavía no se ha producido y que solo se ha integrado un primer ajuste
-técnico sobre la progresión mediante la llave de círculo.
+El seguimiento de esta iteración muestra una situación distinta a la del arranque provisional
+que se había documentado inicialmente. Aunque la iteración comenzó con parte del alcance aún
+sin cerrar, el control posterior permitió completar los flujos de victoria y derrota y
+terminar también la segunda revisión visual asociada a los sprites de enemigos y a las
+pantallas finales.
 
-Precisamente por eso, en esta iteración el seguimiento y control adquieren especial importancia:
-permiten dejar constancia de que el alcance comprometido era mayor que el tiempo efectivamente
-consumido hasta ahora ha permitido cerrar. En lugar de presentar estas features como terminadas,
-se ha optado por documentar el estado real, distinguir entre trabajo implementado y trabajo
-pendiente, y asumir la necesidad de replanificar el cierre final en función del tiempo restante.
-Este criterio mantiene la trazabilidad del proyecto y evita sobrevalorar el grado real de avance.
+Desde el punto de vista temporal, la iteración volvió a situarse ligeramente por encima de la
+estimación: frente a las 50:00 horas planificadas, se registraron 51:34 horas reales. No
+obstante, en esta ocasión la desviación no se traduce en un cierre incompleto, sino en un
+esfuerzo final de acabado mayor del estimado al principio. Este comportamiento encaja con la
+naturaleza de la iteración, orientada menos a abrir sistemas nuevos que a rematar de forma
+consistente los estados finales del juego.
 
-\section{Estado actual y resultados esperados}
-El cierre de esta iteración debería dejar resuelto el bucle completo de la partida. Con ello,
-el proyecto pasaría de ofrecer una \textit{run} jugable pero abierta a una experiencia capaz de
-cerrarse de forma explícita tanto en éxito como en fracaso. En el momento actual, sin embargo,
-solo se ha completado el primer ajuste técnico de progresión asociado a la llave de círculo.
-
-De forma resumida, en este punto de la iteración se ha conseguido:
-
-\begin{itemize}
-    \item restringir la bajada al siguiente círculo hasta recoger la llave correspondiente;
-    \item dejar preparada la base técnica sobre la que apoyar el cierre de la \textit{run}.
-\end{itemize}
-
-Al final de la iteración se espera además haber conseguido:
-
-\begin{itemize}
-    \item incorporar un flujo claro de victoria asociado al cierre de la \textit{run};
-    \item incorporar un flujo claro de derrota asociado a la pérdida del jugador;
-    \item reutilizar de forma coherente la navegación entre escenas, reinicio y retorno a menú;
-    \item unificar la presentación visual de \gls{hud}, menús y pantallas de cierre de partida;
-    \item dejar el proyecto preparado para una entrega final con estados de juego completos.
-\end{itemize}
-
-Desde el punto de vista del desarrollo global, esta iteración es importante porque debe
-transformar una base jugable completa en una experiencia cerrada. Por ahora, el alcance real
-todavía es pequeño y se limita a ese primer ajuste de progresión, de modo que aún no
-corresponde atribuir a la iteración un cierre funcional mayor del que realmente tiene.
+Por ello, el seguimiento y control de esta fase resulta especialmente útil para dejar
+constancia de dos aspectos. En primer lugar, que el cierre de partida requirió más ajuste del
+previsto por su dependencia de sistemas ya existentes. En segundo lugar, que ese esfuerzo
+adicional sí permitió completar el alcance comprometido sin necesidad de trasladar trabajo
+pendiente a otra iteración.
 
 \begin{figure}[htbp]
 \begin{center}
-\missingfigure{Sustituir por el diagrama UML de resultado de la iteración 8}
-% \includegraphics[width=\textwidth]{figures/iteracion8_resultado_uml.pdf}
-\caption{Diagrama UML del estado actual de la iteración 8}
+% \missingfigure{Sustituir por el diagrama UML de resultado de la iteración 8}
+\includegraphics[width=\textwidth]{figures/iteracion8_resultado_uml.pdf}
+\caption{Diagrama UML de resultado de la iteración 8}
 \label{fig:uml-resultado-iteracion8}
 \end{center}
 \end{figure}
