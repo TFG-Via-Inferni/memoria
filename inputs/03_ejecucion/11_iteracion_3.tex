@@ -52,7 +52,7 @@ compartido entre ambas variantes. Con ello se consigue que la dualidad deje de s
 de diseño y pase a actuar como una mecánica concreta de juego sobre la que podrán apoyarse
 futuras habilidades, sistemas de combate y decisiones tácticas.
 
-\item \textbf{Minimapa I.} Esta funcionalidad incorporó una primera versión muy simple del
+\item \textbf{Minimapa.} Esta funcionalidad incorporó una primera versión muy simple del
 minimapa orientada a cubrir una necesidad básica de orientación. Su funcionamiento real se
 apoya en la propia estructura de celdas generadas por el mapa, reutilizando esa
 representación para mostrar qué salas han sido descubiertas y cuáles permanecen ocultas
@@ -104,7 +104,7 @@ de modo que el cambio no se convierta en una acción sin coste ni ritmo. Tambié
 dar a cada forma una representación visual diferenciada para que el cambio fuera legible de
 inmediato dentro de la partida.
 
-\subsection{Diseño de Minimapa I}
+\subsection{Diseño de Minimapa}
 El minimapa se planteó como una proyección simplificada del propio modelo del nivel. La
 decisión importante aquí fue no construir una representación completamente independiente,
 sino reutilizar las celdas ya generadas por el sistema como soporte del mapa visual.
@@ -140,10 +140,10 @@ En la práctica, la implementación convirtió el descenso entre círculos en un
 configuración del mundo: al actualizarse el círculo activo, cambia también el conjunto de
 salas y enemigos que el sistema utiliza para construir la nueva planta.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/07_logica_circulos_II.png}
-\caption{Resultado visual de la feature Lógica de Círculos II en la iteración 3}
+\caption{Resultado de la feature Lógica de Círculos II en la iteración 3}
 \label{fig:iteracion3-feature-circulos}
 \end{center}
 \end{figure}
@@ -165,15 +165,15 @@ otros sistemas reaccionen a la dualidad en iteraciones posteriores. Aunque en es
 feature todavía no explota todas sus implicaciones de combate, la implementación deja ya
 resuelto el esqueleto funcional del sistema.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/08_dualidad_personajes.png}
-\caption{Resultado visual de la feature Dualidad de Personajes en la iteración 3}
+\caption{Resultado de la feature Dualidad de Personajes en la iteración 3}
 \label{fig:iteracion3-feature-dualidad}
 \end{center}
 \end{figure}
 
-\subsection{Implementación de Minimapa I}
+\subsection{Implementación de Minimapa}
 La primera versión del minimapa se integró directamente en \texttt{MapGenerator}. Se añadió
 un conjunto de índices de salas descubiertas y una lógica de inicialización que marca como
 visible la habitación inicial al comenzar una nueva partida. A partir de ahí, cada vez que
@@ -187,10 +187,10 @@ de interfaz mínimo asociado al HUD del minimapa. Aunque esta versión todavía 
 la implementación logra el objetivo principal de la feature: ofrecer una lectura progresiva
 del recorrido del jugador por el nivel generado.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/09_minimap_I.png}
-\caption{Resultado visual de la feature Minimapa I en la iteración 3}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/09_minimapa.png}
+\caption{Resultado de la feature Minimapa en la iteración 3}
 \label{fig:iteracion3-feature-minimap}
 \end{center}
 \end{figure}

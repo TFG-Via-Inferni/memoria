@@ -35,7 +35,7 @@ escena. Esto era importante porque, a medida que el proyecto iba incorporando m�
 la interfaz dejaba de ser un añadido accesorio y pasaba a convertirse en una herramienta
 necesaria para que el estado del juego se percibiera con claridad.
 
-\item \textbf{Menú Pausa.} Esta funcionalidad incorporó un flujo de interrupción controlada
+\item \textbf{Menú de Pausa.} Esta funcionalidad incorporó un flujo de interrupción controlada
 dentro de la partida. Su comportamiento real consistió en detener temporalmente la
 ejecución del juego, ocultar el HUD cuando correspondía, ofrecer acciones de reanudación,
 reinicio y salida, y responder tanto a teclado como a mandos. La feature fue importante
@@ -85,7 +85,7 @@ proporciones, buscando que los elementos visibles mantuvieran presencia suficien
 completo la interfaz, sino llevarla a un punto en el que pudiera convivir mejor con el
 resto del sistema.
 
-\subsection{Diseño de Menú Pausa}
+\subsection{Diseño de Menú de Pausa}
 El menú de pausa se concibió como una capa superpuesta que interrumpe temporalmente la
 ejecución del juego sin romper el estado de la sesión. Esta decisión exigía una relación
 directa con el control del tiempo, del audio y de la visibilidad de la interfaz de
@@ -129,15 +129,15 @@ HUD depende tanto de su contenido como de su presencia visual. Con este ajuste, 
 de partida quedó mejor adaptada al espacio real de uso y más preparada para convivir con
 otras capas de información que se incorporarán en iteraciones posteriores.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/10_HUD.png}
-\caption{Resultado visual de la feature Head-Up Display en la iteración 4}
+\caption{Resultado de la feature Head-Up Display en la iteración 4}
 \label{fig:iteracion4-feature-hud}
 \end{center}
 \end{figure}
 
-\subsection{Implementación de Menú Pausa}
+\subsection{Implementación de Menú de Pausa}
 La implementación del menú de pausa se apoyó en \texttt{PauseMenuController}. Este script
 controla el ciclo de pausa dentro de la partida, escuchando la entrada correspondiente,
 alternando el estado pausado, ocultando o mostrando la interfaz de juego y gestionando las
@@ -149,10 +149,10 @@ botón adecuado para facilitar la navegación y restaura el estado normal al rea
 esta manera, el menú de pausa deja de ser una simple pantalla visual y pasa a convertirse en
 un verdadero controlador del estado de juego.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/11_menus_I.png}
-\caption{Resultado visual de la feature Menú Pausa en la iteración 4}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/11_menus_pausa.png}
+\caption{Resultado de la feature Menú de Pausa en la iteración 4}
 \label{fig:iteracion4-feature-menu-pausa}
 \end{center}
 \end{figure}
@@ -167,10 +167,10 @@ La parte final de la feature se completó con ajustes en la composición visual 
 pantalla, especialmente sobre el logotipo y la distribución de los botones, para que su
 encaje fuera más consistente y adaptable.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/12_menus_II.png}
-\caption{Resultado visual de la feature Menú Principal en la iteración 4}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/12_menus_principal.png}
+\caption{Resultado de la feature Menú Principal en la iteración 4}
 \label{fig:iteracion4-feature-menu-principal}
 \end{center}
 \end{figure}
@@ -182,10 +182,10 @@ ni un controlador específico, esta mejora se documenta como una intervención d
 visual: sustituir recursos provisionales, ajustar referencias y dejar los objetos principales
 alineados con una estética más característica del proyecto.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/13_actualizar_sprites_I.png}
-\caption{Resultado visual de la feature Actualizar Sprites en la iteración 4}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/13_actualizar_sprites.png}
+\caption{Resultado de la feature Actualizar Sprites en la iteración 4}
 \label{fig:iteracion4-feature-sprites}
 \end{center}
 \end{figure}

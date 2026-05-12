@@ -23,7 +23,7 @@ seguimiento del jugador y la transición entre salas seguían produciendo compor
 incorrectos o poco estables.
 
 \begin{enumerate}
-\item \textbf{Generación Procedural.} Esta funcionalidad corresponde a una continuación del
+\item \textbf{Generación Procedural II.} Esta funcionalidad corresponde a una continuación del
 trabajo ya iniciado sobre el sistema de generación. Su objetivo no fue crear una
 nueva mecánica de generación, sino consolidar una parte del sistema que todavía no estaba
 resuelta de forma satisfactoria: la sala secreta. El funcionamiento real introducido en
@@ -37,7 +37,7 @@ para corregir una debilidad concreta detectada tras la validación de la primera
 la sala secreta existía en la estructura lógica del mapa, pero su representación espacial
 todavía no estaba completamente bien resuelta.
 
-\item \textbf{Lógica de círculos.} Esta funcionalidad introdujo por primera vez una
+\item \textbf{Lógica de Círculos.} Esta funcionalidad introdujo por primera vez una
 progresión explícita entre niveles temáticos del Infierno dentro de la partida. Hasta ese
 momento, el jugador podía recorrer un mapa generado y superar encuentros, pero el sistema
 todavía no ofrecía un mecanismo formal para descender de un círculo al siguiente. El
@@ -53,7 +53,7 @@ mazmorra para que el cambio de círculo no se limite a una variable interna, sin
 un efecto real sobre la continuidad de la partida. En esta iteración queda establecida la
 base funcional de la progresión, aunque no toda la lógica final del sistema de círculos.
 
-\item \textbf{Cámara de jugador.} Esta funcionalidad aborda la estabilización del sistema de
+\item \textbf{Cámara del Jugador.} Esta funcionalidad aborda la estabilización del sistema de
 seguimiento de cámara después de los problemas detectados en la exploración entre salas. Su
 comportamiento real no se limita a ``seguir al jugador'', sino a gestionar correctamente la
 transición entre habitaciones con restricciones espaciales distintas. En esta iteración se
@@ -94,7 +94,7 @@ como una pieza estructural que debía respetar los mismos criterios de coherenci
 resto del mapa: límites claros, colisión consistente y un contorno que no generara lecturas
 ambiguas del espacio.
 
-\subsection{Diseño de Lógica de Círculos I}
+\subsection{Diseño de Lógica de Círculos}
 La lógica de círculos se diseñó como un sistema persistente y centralizado. El criterio
 seguido fue que el estado del círculo no debía depender de una sala concreta ni de una
 escena concreta, sino de un gestor capaz de sobrevivir a la regeneración del mapa y de
@@ -148,12 +148,12 @@ de sus casos especiales.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/04_generacion_procedural_II.png}
-\caption{Resultado visual de la feature Generación Procedural II en la iteración 2}
+\caption{Resultado de la feature Generación Procedural II en la iteración 2}
 \label{fig:iteracion2-feature-generacion}
 \end{center}
 \end{figure}
 
-\subsection{Implementación de Lógica de Círculos I}
+\subsection{Implementación de Lógica de Círculos}
 La implementación de esta feature se apoyó en tres scripts principales. En primer lugar,
 \texttt{CircleManager} actúa como gestor persistente del progreso, manteniendo el círculo
 actual, controlando el límite máximo y ofreciendo tanto la operación de descenso como la
@@ -173,10 +173,10 @@ Como resultado, la progresión entre círculos dejó de ser una idea abstracta y
 un flujo funcional completo: llegar a la sala del jefe, encontrar la escalera, activarla
 tocándola, incrementar el círculo actual, refrescar la interfaz y reconstruir el escenario.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/05_logica_circulos_I.png}
-\caption{Resultado visual de la feature Lógica de Círculos I en la iteración 2}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/05_logica_circulos.png}
+\caption{Resultado de la feature Lógica de Círculos en la iteración 2}
 \label{fig:iteracion2-feature-circulos}
 \end{center}
 \end{figure}
@@ -198,10 +198,10 @@ es necesario y reaplica el \textit{confiner} de Cinemachine con los límites de 
 habitación. Además, se añadieron utilidades de depuración para registrar transiciones y
 facilitar el diagnóstico de comportamientos anómalos.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/06_camara_jugador.png}
-\caption{Resultado visual de la feature Cámara del Jugador en la iteración 2}
+\caption{Resultado de la feature Cámara del Jugador en la iteración 2}
 \label{fig:iteracion2-feature-camara}
 \end{center}
 \end{figure}

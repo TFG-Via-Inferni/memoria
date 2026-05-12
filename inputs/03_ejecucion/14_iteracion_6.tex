@@ -16,12 +16,12 @@ objetos y en consolidar una segunda mejora del minimapa. Hasta este momento, el 
 podía explorar, combatir y progresar entre círculos, pero todavía no disponía de un sistema
 interno de inventario capaz de almacenar recompensas, seleccionar contenido adquirido o
 relacionar el mundo con objetos persistentes de la partida. Por ello, esta iteración se
-estructura en torno a tres funcionalidades: la gestión de inventario, el sistema de objetos
+estructura en torno a tres funcionalidades: la gestión del inventario, el sistema de objetos
 y una segunda mejora del minimapa orientada a convertirlo en un apoyo de navegación más claro,
 reactivo y coherente con el estado real de la mazmorra.
 
 \begin{enumerate}
-\item \textbf{Gestión de Inventario.} Esta funcionalidad introdujo la base runtime del
+\item \textbf{Gestión del Inventario.} Esta funcionalidad introdujo la base runtime del
 inventario del jugador, organizando la colección de objetos en una estructura de slots con
 capacidad limitada y con selección activa. Su funcionamiento real se apoya en un inventario
 de doce posiciones potenciales, aunque no todas están desbloqueadas desde el comienzo, lo
@@ -33,15 +33,6 @@ la causa del fallo para facilitar la comunicación con el jugador o con herramie
 depuración. En términos funcionales, esta feature convierte la acumulación de objetos en una
 parte real del sistema, ya que deja de tratarse de elementos efímeros en el mundo y pasa a
 existir una estructura persistente de almacenamiento asociada al jugador.
-
-\begin{figure}[H]
-\begin{center}
-% \missingfigure{Sustituir por captura representativa de Gestión de Inventario en la iteración 6}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/16_gestion_inventario.png}
-\caption{Resultado visual de la feature Gestión de Inventario en la iteración 6}
-\label{fig:iteracion6-feature-inventario}
-\end{center}
-\end{figure}
 
 \item \textbf{Sistema de Objetos.} Esta funcionalidad definió la representación de los objetos como
 entidades consistentes tanto en datos como en mundo. Su funcionamiento real se articula en
@@ -55,15 +46,6 @@ inventario. En conjunto, esta funcionalidad conecta por primera vez el contenido
 del escenario con una representación interna estructurada y con la interfaz del inventario,
 haciendo posible que los objetos se conviertan en una unidad real de progresión jugable.
 
-\begin{figure}[H]
-\begin{center}
-% \missingfigure{Sustituir por captura representativa de Sistema de Objetos en la iteración 6}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/17_objetos.png}
-\caption{Resultado visual de la feature Sistema de Objetos en la iteración 6}
-\label{fig:iteracion6-feature-objetos}
-\end{center}
-\end{figure}
-
 \item \textbf{Minimapa II.} Esta funcionalidad completó una segunda mejora del minimapa sobre la
 base ya introducida anteriormente. Su alcance real consistió en hacer que la representación
 del mapa respondiera al progreso del jugador dentro de la partida, diferenciando entre salas
@@ -73,16 +55,6 @@ presentación visual al tamaño de pantalla mediante un contenedor con máscara,
 propios. En términos funcionales, esta ampliación convirtió el minimapa en una herramienta
 de orientación más legible, capaz de reflejar tanto el recorrido realizado como la posición
 actual dentro de la mazmorra sin mostrar desde el principio toda la estructura del nivel.
-
-\begin{figure}[H]
-\begin{center}
-% \missingfigure{Sustituir por captura representativa de Minimapa II en la iteración 6}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/18_minimap_II.png}
-\caption{Resultado visual de la feature Minimapa II en la iteración 6}
-\label{fig:iteracion6-feature-minimap}
-\end{center}
-\end{figure}
-\end{enumerate}
 
 La combinación de estas tres funcionalidades hace que la sexta iteración actúe como puente
 entre el núcleo de combate ya consolidado y una capa de progresión más tangible basada en
@@ -95,7 +67,7 @@ del mundo. Para ello era necesario definir una estructura interna de inventario,
 estable para los objetos y una forma clara de relacionar ambos sistemas con el jugador y con
 la interfaz.
 
-\subsection{Diseño de Gestión de Inventario}
+\subsection{Diseño de Gestión del Inventario}
 La principal decisión de diseño fue modelar el inventario como una colección cerrada de
 slots, no como una lista ilimitada de entradas dinámicas. Esto facilita el control del HUD,
 la selección activa y la idea de capacidad desbloqueable como parte de la progresión del
@@ -136,7 +108,7 @@ de dato y en la conexión entre mundo, jugador e interfaz. A diferencia de la it
 anterior, donde el foco estaba claramente en combate y enemigos, aquí el peso recae en la
 gestión del contenido recogible y en su persistencia durante la partida.
 
-\subsection{Implementación de Gestión de Inventario}
+\subsection{Implementación de Gestión del Inventario}
 La lógica principal quedó centralizada en \texttt{PlayerInventory}. Este componente
 implementa un inventario de tamaño máximo fijo, mantiene el índice del slot seleccionado y
 expone operaciones para cambiar de slot, añadir objetos y soltar el objeto activo. También
@@ -147,6 +119,14 @@ La capacidad disponible se enlaza con \texttt{PlayerStats}, de forma que el núm
 desbloqueados puede depender del estado de progresión del jugador. A ello se suma una lógica
 de validación de operaciones que registra por qué una acción falla, lo que resulta útil
 tanto para depuración como para la futura comunicación con el usuario.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/16_gestion_inventario.png}
+\caption{Resultado de la feature Gestión del Inventario en la iteración 6}
+\label{fig:iteracion6-feature-inventario}
+\end{center}
+\end{figure}
 
 \subsection{Implementación de Sistema de Objetos}
 La representación de los objetos se apoyó en \texttt{InventoryItemDefinition}, que define la
@@ -159,6 +139,14 @@ un componente encargado de mostrar el icono del ítem, ofrecer una operación de
 contra el inventario del jugador y destruir o mantener el pickup según el resultado. Esto
 permite que el vínculo entre mundo e inventario quede resuelto de manera directa: el jugador
 interactúa con un pickup y, si la operación es válida, el objeto pasa a su inventario.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/17_objetos.png}
+\caption{Resultado de la feature Sistema de Objetos en la iteración 6}
+\label{fig:iteracion6-feature-objetos}
+\end{center}
+\end{figure}
 
 \subsection{Implementación de Minimapa II}
 La ampliación del minimapa se apoyó principalmente en \texttt{MapGenerator},
@@ -177,10 +165,19 @@ Por último, \texttt{MinimapUIController} reorganiza la imagen del minimapa dent
 creando un contenedor propio con máscara, fondo y marco, además de recalcular su tamaño y
 su margen en función de la resolución disponible. De esta forma, la mejora no solo afecta al
 contenido mostrado, sino también a la calidad de su integración visual en pantalla.
+\end{enumerate}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/18_minimapa_II.png}
+\caption{Resultado de la feature Minimapa II en la iteración 6}
+\label{fig:iteracion6-feature-minimap}
+\end{center}
+\end{figure}
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración mostró que el alcance previsto estaba bien dimensionado para
-el tiempo disponible. La gestión de inventario y los objetos pudieron avanzar de forma
+el tiempo disponible. La gestión del inventario y los objetos pudieron avanzar de forma
 coordinada y, además, la iteración permitió completar la segunda parte del minimapa que había
 sido replanificada desde la iteración 3. Esto resulta relevante porque confirma que el
 aplazamiento anterior no respondió a un retraso desordenado, sino a una redistribución

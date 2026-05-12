@@ -32,15 +32,6 @@ interacciones más ricas con el comportamiento enemigo. En la práctica, esta fe
 el combate dejara de ser una acción uniforme y pasara a responder a la identidad de cada
 arma y a la forma actual del personaje, aumentando la profundidad táctica de la partida.
 
-\begin{figure}[H]
-\begin{center}
-% \missingfigure{Sustituir por captura representativa del Sistema de Combate en la iteración 5}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/14_sistema_combate_I.png}
-\caption{Resultado visual de la feature Sistema de Combate en la iteración 5}
-\label{fig:iteracion5-feature-combate}
-\end{center}
-\end{figure}
-
 \item \textbf{Sistema de Enemigos.} Esta funcionalidad consolidó el comportamiento enemigo
 para hacerlo más compatible con el nuevo sistema de combate y con la variedad creciente del
 juego. Su alcance real no se limitó a corregir errores de aparición en salas, sino que
@@ -53,16 +44,6 @@ enemigos y la introducción de multiplicadores de daño dependientes del context
 del tipo de enemigo. En conjunto, esta funcionalidad convirtió a los enemigos en agentes
 más variados y mejor integrados con el resto del combate, haciendo que la oposición del
 juego se sintiera menos genérica y más conectada con las decisiones del jugador.
-
-\begin{figure}[H]
-\begin{center}
-% \missingfigure{Sustituir por captura representativa del Sistema de Enemigos en la iteración 5}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/15_sistema_enemigos_I.png}
-\caption{Resultado visual de la feature Sistema de Enemigos en la iteración 5}
-\label{fig:iteracion5-feature-enemigos}
-\end{center}
-\end{figure}
-\end{enumerate}
 
 La combinación de estas dos funcionalidades convirtió la quinta iteración en una fase
 claramente orientada a la jugabilidad. Más que añadir nuevas capas de planificación o de
@@ -121,6 +102,14 @@ origen del daño, el identificador del arma y la forma del jugador. Esto permite
 no llegue al objetivo como un valor aislado, sino acompañado de contexto útil para otros
 sistemas.
 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/14_sistema_combate.png}
+\caption{Resultado de la feature Sistema de Combate en la iteración 5}
+\label{fig:iteracion5-feature-combate}
+\end{center}
+\end{figure}
+
 \subsection{Implementación de Sistema de Enemigos}
 La consolidación del sistema de enemigos se apoyó en cambios sobre \texttt{EnemyController},
 \texttt{EnemyProjectile} y \texttt{Room}. En primer lugar, los enemigos pasaron a incorporar
@@ -137,6 +126,15 @@ Por último, los enemigos pasaron a interpretar el contexto del arma que les da�
 modificando el multiplicador de daño según su tipo y según la herramienta utilizada por el
 jugador. Esto conecta directamente el comportamiento enemigo con la variedad introducida por
 el nuevo sistema de combate.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/15_sistema_enemigos.png}
+\caption{Resultado de la feature Sistema de Enemigos en la iteración 5}
+\label{fig:iteracion5-feature-enemigos}
+\end{center}
+\end{figure}
+\end{enumerate}
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración permitió comprobar que el núcleo del combate podía quedar

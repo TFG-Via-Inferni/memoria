@@ -38,7 +38,7 @@ empezara a diferenciar tipos de habitación con funciones distintas dentro de la
 En términos jugables, esta feature es la que hace posible que cada intento tenga una
 disposición diferente sin perder coherencia estructural.
 
-\item \textbf{Añadir Jugador.} Esta funcionalidad convirtió por primera vez el nivel
+\item \textbf{Jugador.} Esta funcionalidad convirtió por primera vez el nivel
 generado en un espacio realmente jugable. Su alcance real consistió en incorporar una
 entidad controlable capaz de aparecer en la sala inicial de la mazmorra, desplazarse por
 las habitaciones instanciadas y servir como punto de referencia para validar colisiones,
@@ -50,7 +50,7 @@ los enemigos pasan a organizarse en torno a la posición del jugador. En otras p
 era solo ``añadir un personaje'', sino introducir el elemento central a partir del cual la
 partida puede empezar a ejecutarse de forma interactiva.
 
-\item \textbf{Añadir Enemigos.} Esta funcionalidad incorporó oposición activa dentro del
+\item \textbf{Enemigos.} Esta funcionalidad incorporó oposición activa dentro del
 nivel y transformó la exploración en una experiencia jugable con tensión y resolución. Su
 comportamiento real consistió en poblar determinadas salas con enemigos básicos capaces de
 instanciarse correctamente dentro del espacio disponible, detectar al jugador cuando este
@@ -77,7 +77,7 @@ jugables y la interacción de entidades dinámicas dentro de dichas salas. La de
 principal fue no resolver todo en un único componente central, sino separar las
 responsabilidades desde el principio para evitar un crecimiento descontrolado del código.
 
-\subsection{Diseño de Generación Procedural I}
+\subsection{Diseño de Generación Procedural}
 La generación procedural se apoyó en una rejilla lógica bidimensional. Esta decisión
 permitía expresar con claridad las reglas de vecindad, ocupación, expansión y validación
 espacial, reduciendo la complejidad del algoritmo respecto a una representación continua.
@@ -103,13 +103,13 @@ puertas, sus muros y las entidades que aloja. Esta decisión hacía que el compo
 una habitación pudiera encapsularse localmente y reducía el acoplamiento con el resto del
 sistema.
 
-\subsection{Diseño de Añadir Jugador}
+\subsection{Diseño de Jugador}
 El jugador se diseñó inicialmente con un enfoque deliberadamente simple. La prioridad era
 validar movimiento, navegación y lectura del espacio antes de introducir mecánicas más
 complejas. Por ello, el diseño se apoyó en un controlador de desplazamiento básico,
 suficiente para recorrer el nivel generado y comprobar la coherencia del mapa.
 
-\subsection{Diseño de Añadir Enemigo}
+\subsection{Diseño de Enemigos}
 Los enemigos también se diseñaron con una estructura mínima pero extensible. En lugar de
 implementar desde el principio un sistema de IA complejo, se definió una máquina de estados
 elemental con tres comportamientos: reposo, persecución y ataque. Esta decisión permitía
@@ -150,15 +150,15 @@ del generador y el espacio real con el que interactuarían el jugador y los enem
 esta traducción fallaba, el mapa podía ser correcto desde el punto de vista lógico pero no
 jugable en el motor.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/01_generacion_procedural_I.png}
-\caption{Resultado visual de la feature Generación Procedural I en la iteración 1}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/01_generacion_procedural.png}
+\caption{Resultado de la feature Generación Procedural en la iteración 1}
 \label{fig:iteracion1-feature-generacion}
 \end{center}
 \end{figure}
 
-\subsection{Implementación de Añadir Jugador}
+\subsection{Implementación de Jugador}
 El jugador se integró mediante un controlador ligero apoyado en \texttt{Rigidbody2D}. En
 cada ciclo se leían las entradas de movimiento y se trasladaban al cuerpo físico del
 personaje, obteniendo así una solución suficiente para validar navegación, colisiones y
@@ -169,15 +169,15 @@ depender de una coordenada fija de escena. Esta decisión reforzaba el acoplamie
 entre generación procedural y sistemas jugables, ya que el personaje debía situarse siempre
 en una posición coherente con la partida recién creada.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/02_anadir_jugador.png}
-\caption{Resultado visual de la feature Añadir Jugador en la iteración 1}
+\caption{Resultado de la feature Jugador en la iteración 1}
 \label{fig:iteracion1-feature-jugador}
 \end{center}
 \end{figure}
 
-\subsection{Implementación de Añadir Enemigo}
+\subsection{Implementación de Enemigos}
 Los enemigos se instanciaron desde las propias salas una vez configuradas. Cada sala
 conservaba la referencia a sus enemigos activos, lo que hacía posible asociar el estado del
 combate con el estado de la habitación.
@@ -193,10 +193,10 @@ se bloqueaban. A medida que los enemigos eran derrotados, la sala actualizaba su
 al quedar vacía, restauraba el paso. Esta solución definió de forma clara el patrón básico
 de exploración y combate del proyecto.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/03_anadir_enemigo.png}
-\caption{Resultado visual de la feature Añadir Enemigo en la iteración 1}
+\caption{Resultado de la feature Enemigos en la iteración 1}
 \label{fig:iteracion1-feature-enemigos}
 \end{center}
 \end{figure}
@@ -237,7 +237,6 @@ una funcionalidad que aún necesitaba consolidación.
 
 \begin{figure}[htbp]
 \begin{center}
-% \missingfigure{Sustituir por el diagrama UML de resultado de la iteración 1}
 \includegraphics[width=\textwidth]{figures/iteracion1_resultado_uml.pdf}
 \caption{Diagrama UML de resultado de la iteración 1}
 \label{fig:uml-resultado-iteracion1}
