@@ -5,43 +5,22 @@ Programs must be written for people to read, and only incidentally for machines 
 \end{quotation}
 
 \begin{abstract}
-Esta iteración se centra en el núcleo jugable del combate. En ella se actualiza la
-presentación visual del jugador y se incorporan los sistemas de combate y de enemigos que
-permiten definir interacciones ofensivas, tipos de comportamiento y respuesta al daño.
+Esta iteración se centra en el núcleo jugable del combate. En ella se incorporan los
+sistemas de combate y de enemigos que permiten definir interacciones ofensivas, tipos de
+comportamiento y respuesta al daño.
 \end{abstract}
 
 \section{Análisis de características}
 La quinta iteración se centró en reforzar la identidad jugable del proyecto a través del
-combate, del comportamiento enemigo y de la presentación visual del personaje. Hasta este
-punto, el sistema ya permitía explorar, progresar por círculos, alternar entre formas y
-orientarse dentro del mapa, pero la sensación jugable seguía dependiendo en gran medida de
-la solidez del combate y de la respuesta de los enemigos. Por ello, esta iteración se
-articula en torno a tres funcionalidades: el ajuste de sprites del jugador, la ampliación
-del sistema de combate y la consolidación del sistema de enemigos.
+combate y del comportamiento enemigo. Hasta este punto, el sistema ya permitía explorar,
+progresar por círculos, alternar entre formas, orientarse dentro del mapa y apoyarse en una
+capa de presentación más consolidada, pero la sensación jugable seguía dependiendo en gran
+medida de la solidez del combate y de la respuesta de los enemigos. Por ello, esta
+iteración se articula en torno a dos funcionalidades: la ampliación del sistema de combate
+y la consolidación del sistema de enemigos.
 
 \begin{enumerate}
-\item \textbf{Actualizar Sprites.} Esta funcionalidad se centró en refinar la presentación
-animada del personaje, ajustando la cadencia de reproducción de los sprites para que su
-movimiento y sus distintas formas resultaran más coherentes visualmente. El trabajo
-realizado en esta iteración no consistió en sustituir por completo los recursos gráficos,
-sino en corregir su ritmo de reproducción para que la percepción del desplazamiento y de la
-animación no fuera excesivamente rápida o inconsistente entre variantes. En términos
-funcionales, esta feature mejora la lectura del personaje en pantalla y acompaña mejor la
-respuesta del sistema de control, lo que resulta especialmente importante en un juego donde
-la claridad visual afecta directamente a la sensación de precisión. Aunque se trata de una
-mejora menos estructural que otras features de esta iteración, su impacto sobre la calidad
-percibida del movimiento del jugador es significativo.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Actualizar Sprites en la iteración 5}
-% \includegraphics[width=.9\textwidth]{figures/iteracion5_actualizar_sprites.png}
-\caption{Resultado visual de la feature Actualizar Sprites en la iteración 5}
-\label{fig:iteracion5-feature-sprites}
-\end{center}
-\end{figure}
-
-\item \textbf{Sistema de combate.} Esta funcionalidad amplió de forma sustancial el combate
+\item \textbf{Sistema de Combate.} Esta funcionalidad amplió de forma sustancial el combate
 del jugador para adaptarlo a distintas armas y a las dos formas ya introducidas en la
 dualidad de personajes. Su funcionamiento real dejó de depender de un único ataque
 genérico y pasó a organizarse alrededor de definiciones de arma con comportamiento propio.
@@ -55,14 +34,14 @@ arma y a la forma actual del personaje, aumentando la profundidad táctica de la
 
 \begin{figure}[H]
 \begin{center}
-\missingfigure{Sustituir por captura representativa del Sistema de combate en la iteración 5}
+\missingfigure{Sustituir por captura representativa del Sistema de Combate en la iteración 5}
 % \includegraphics[width=.9\textwidth]{figures/iteracion5_sistema_combate.png}
-\caption{Resultado visual de la feature Sistema de combate en la iteración 5}
+\caption{Resultado visual de la feature Sistema de Combate en la iteración 5}
 \label{fig:iteracion5-feature-combate}
 \end{center}
 \end{figure}
 
-\item \textbf{Sistema de enemigos.} Esta funcionalidad consolidó el comportamiento enemigo
+\item \textbf{Sistema de Enemigos.} Esta funcionalidad consolidó el comportamiento enemigo
 para hacerlo más compatible con el nuevo sistema de combate y con la variedad creciente del
 juego. Su alcance real no se limitó a corregir errores de aparición en salas, sino que
 extendió la lógica de los enemigos con comportamientos diferenciados por tipo, integración
@@ -77,15 +56,15 @@ juego se sintiera menos genérica y más conectada con las decisiones del jugado
 
 \begin{figure}[H]
 \begin{center}
-\missingfigure{Sustituir por captura representativa del Sistema de enemigos en la iteración 5}
+\missingfigure{Sustituir por captura representativa del Sistema de Enemigos en la iteración 5}
 % \includegraphics[width=.9\textwidth]{figures/iteracion5_sistema_enemigos.png}
-\caption{Resultado visual de la feature Sistema de enemigos en la iteración 5}
+\caption{Resultado visual de la feature Sistema de Enemigos en la iteración 5}
 \label{fig:iteracion5-feature-enemigos}
 \end{center}
 \end{figure}
 \end{enumerate}
 
-La combinación de estas tres funcionalidades convirtió la quinta iteración en una fase
+La combinación de estas dos funcionalidades convirtió la quinta iteración en una fase
 claramente orientada a la jugabilidad. Más que añadir nuevas capas de planificación o de
 interfaz, esta entrega reforzó el núcleo de acción del videojuego, mejorando tanto la
 respuesta del jugador como la calidad de la oposición que ofrece el sistema.
@@ -97,17 +76,7 @@ demasiado uniforme ni en enemigos con comportamientos poco diferenciados. El obj
 dotar tanto al jugador como a sus adversarios de una lógica más expresiva sin perder el
 control sobre la modularidad del sistema.
 
-\subsection{Diseño de la actualización visual del jugador}
-El ajuste de sprites se planteó como un refinamiento de percepción más que como una
-reestructuración profunda. La decisión importante aquí fue reconocer que la calidad del
-movimiento no depende únicamente de la entrada y del desplazamiento físico, sino también del
-ritmo con el que las animaciones se reproducen en pantalla.
-
-Por ello, el diseño de esta mejora se centró en el control de la velocidad de reproducción
-de las secuencias de sprites, buscando una sensación visual más coherente entre las
-distintas variantes del personaje.
-
-\subsection{Diseño del sistema de combate}
+\subsection{Diseño de Sistema de Combate}
 La decisión central de esta feature fue diseñar el combate en torno a definiciones de arma,
 en lugar de codificar comportamientos específicos de forma rígida dentro del controlador del
 jugador. Esto permite que cada arma disponga de identidad propia mediante parámetros como
@@ -120,7 +89,7 @@ función de la forma actual del jugador. También se tuvo en cuenta la necesidad
 el contexto del daño producido, ya que esto permite que otras entidades, como los enemigos,
 interpreten de forma distinta un mismo impacto según el arma o la forma que lo originan.
 
-\subsection{Diseño del sistema de enemigos}
+\subsection{Diseño de Sistema de Enemigos}
 El rediseño de enemigos se apoyó en dos líneas principales. La primera fue diferenciar su
 comportamiento por tipo, de forma que no todos compartieran la misma respuesta táctica. La
 segunda fue conectarlos de manera más estrecha con el nuevo combate del jugador.
@@ -131,23 +100,11 @@ arma empleada. De este modo, el sistema de enemigos deja de ser un simple conjun
 objetivos que persiguen al jugador y pasa a formar parte de una relación táctica más rica.
 
 \section{Implementación}
-La implementación de esta iteración se repartió entre ajustes sobre la capa visual del
-jugador, ampliación del subsistema de combate y refuerzo del comportamiento enemigo. A
-medida que el proyecto gana complejidad, estas tres áreas empiezan a funcionar cada vez más
-como partes de un mismo bloque jugable.
+La implementación de esta iteración se repartió entre la ampliación del subsistema de
+combate y el refuerzo del comportamiento enemigo. A medida que el proyecto gana complejidad,
+estas dos áreas empiezan a funcionar cada vez más como partes de un mismo bloque jugable.
 
-\subsection{Implementación de Actualizar Sprites}
-La mejora visual del jugador se materializó mediante un ajuste en el componente
-\texttt{PlayerSpriteAnimator}, reduciendo o equilibrando los fotogramas por segundo usados
-por las distintas variantes visuales del personaje. El cambio se aplicó sobre la
-configuración del prefab del jugador, sin necesidad de reescribir la lógica general del
-animador.
-
-Aunque la implementación es pequeña en comparación con otras features de la iteración, su
-efecto práctico es claro: la animación deja de percibirse con una cadencia poco natural y
-se integra mejor con la velocidad real de movimiento del personaje.
-
-\subsection{Implementación del sistema de combate}
+\subsection{Implementación de Sistema de Combate}
 La ampliación del combate se apoyó principalmente en \texttt{PlayerCombatController},
 \texttt{WeaponDefinition}, \texttt{MeleeHitbox} y \texttt{Projectile}. El controlador de
 combate pasó a resolver los ataques a partir del arma actualmente seleccionada, consultando
@@ -164,7 +121,7 @@ origen del daño, el identificador del arma y la forma del jugador. Esto permite
 no llegue al objetivo como un valor aislado, sino acompañado de contexto útil para otros
 sistemas.
 
-\subsection{Implementación del sistema de enemigos}
+\subsection{Implementación de Sistema de Enemigos}
 La consolidación del sistema de enemigos se apoyó en cambios sobre \texttt{EnemyController},
 \texttt{EnemyProjectile} y \texttt{Room}. En primer lugar, los enemigos pasaron a incorporar
 comportamientos diferenciados según su tipo, ajustando persecución, distancia preferida,

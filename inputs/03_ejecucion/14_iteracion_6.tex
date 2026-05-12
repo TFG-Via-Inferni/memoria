@@ -16,8 +16,8 @@ objetos y en consolidar una segunda mejora del minimapa. Hasta este momento, el 
 podía explorar, combatir y progresar entre círculos, pero todavía no disponía de un sistema
 interno de inventario capaz de almacenar recompensas, seleccionar contenido adquirido o
 relacionar el mundo con objetos persistentes de la partida. Por ello, esta iteración se
-estructura en torno a tres funcionalidades: la gestión de inventario, los objetos y una
-segunda mejora del minimapa orientada a convertirlo en un apoyo de navegación más claro,
+estructura en torno a tres funcionalidades: la gestión de inventario, el sistema de objetos
+y una segunda mejora del minimapa orientada a convertirlo en un apoyo de navegación más claro,
 reactivo y coherente con el estado real de la mazmorra.
 
 \begin{enumerate}
@@ -43,7 +43,7 @@ existir una estructura persistente de almacenamiento asociada al jugador.
 \end{center}
 \end{figure}
 
-\item \textbf{Objetos.} Esta funcionalidad definió la representación de los objetos como
+\item \textbf{Sistema de Objetos.} Esta funcionalidad definió la representación de los objetos como
 entidades consistentes tanto en datos como en mundo. Su funcionamiento real se articula en
 dos niveles. El primero es la definición del objeto como recurso configurable, con
 identificador normalizado, nombre visible, icono, tipo y parámetros asociados a su efecto.
@@ -57,14 +57,14 @@ haciendo posible que los objetos se conviertan en una unidad real de progresión
 
 \begin{figure}[H]
 \begin{center}
-\missingfigure{Sustituir por captura representativa de Objetos en la iteración 6}
+\missingfigure{Sustituir por captura representativa de Sistema de Objetos en la iteración 6}
 % \includegraphics[width=.9\textwidth]{figures/iteracion6_objetos.png}
-\caption{Resultado visual de la feature Objetos en la iteración 6}
+\caption{Resultado visual de la feature Sistema de Objetos en la iteración 6}
 \label{fig:iteracion6-feature-objetos}
 \end{center}
 \end{figure}
 
-\item \textbf{Minimap.} Esta funcionalidad completó una segunda mejora del minimapa sobre la
+\item \textbf{Minimapa II.} Esta funcionalidad completó una segunda mejora del minimapa sobre la
 base ya introducida anteriormente. Su alcance real consistió en hacer que la representación
 del mapa respondiera al progreso del jugador dentro de la partida, diferenciando entre salas
 no descubiertas, salas visitadas y sala actual. Además, el sistema pasó a centrar la cámara
@@ -76,9 +76,9 @@ actual dentro de la mazmorra sin mostrar desde el principio toda la estructura d
 
 \begin{figure}[H]
 \begin{center}
-\missingfigure{Sustituir por captura representativa de Minimap en la iteración 6}
+\missingfigure{Sustituir por captura representativa de Minimapa II en la iteración 6}
 % \includegraphics[width=.9\textwidth]{figures/iteracion6_minimap.png}
-\caption{Resultado visual de la feature Minimap en la iteración 6}
+\caption{Resultado visual de la feature Minimapa II en la iteración 6}
 \label{fig:iteracion6-feature-minimap}
 \end{center}
 \end{figure}
@@ -95,7 +95,7 @@ del mundo. Para ello era necesario definir una estructura interna de inventario,
 estable para los objetos y una forma clara de relacionar ambos sistemas con el jugador y con
 la interfaz.
 
-\subsection{Diseño de la gestión de inventario}
+\subsection{Diseño de Gestión de Inventario}
 La principal decisión de diseño fue modelar el inventario como una colección cerrada de
 slots, no como una lista ilimitada de entradas dinámicas. Esto facilita el control del HUD,
 la selección activa y la idea de capacidad desbloqueable como parte de la progresión del
@@ -106,7 +106,7 @@ de errores, de modo que el sistema pueda reaccionar de forma distinta según la 
 falle. La presencia de slots bloqueados desde el diseño también prepara el terreno para
 mejoras futuras sin obligar a rediseñar el modelo base del inventario.
 
-\subsection{Diseño de los objetos}
+\subsection{Diseño de Sistema de Objetos}
 Los objetos se diseñaron como definiciones de datos independientes del pickup físico que los
 representa en el mundo. Esta separación era importante porque evita mezclar configuración y
 representación visual, permitiendo que un mismo tipo de objeto pueda existir como recurso
@@ -117,7 +117,7 @@ También se tomó la decisión de imponer, en esta primera fase, una política d
 tenga una interpretación directa, algo útil mientras el inventario aún se encuentra en una
 fase relativamente temprana.
 
-\subsection{Diseño de la ampliación del minimapa}
+\subsection{Diseño de Minimapa II}
 La segunda fase del minimapa se diseñó alrededor de una idea sencilla: la información del
 mapa debía revelarse en función del recorrido real del jugador, no mostrarse completa desde
 el inicio. Para ello se optó por separar tres estados visuales distintos, correspondientes a
@@ -136,7 +136,7 @@ de dato y en la conexión entre mundo, jugador e interfaz. A diferencia de la it
 anterior, donde el foco estaba claramente en combate y enemigos, aquí el peso recae en la
 gestión del contenido recogible y en su persistencia durante la partida.
 
-\subsection{Implementación de la gestión de inventario}
+\subsection{Implementación de Gestión de Inventario}
 La lógica principal quedó centralizada en \texttt{PlayerInventory}. Este componente
 implementa un inventario de tamaño máximo fijo, mantiene el índice del slot seleccionado y
 expone operaciones para cambiar de slot, añadir objetos y soltar el objeto activo. También
@@ -148,7 +148,7 @@ desbloqueados puede depender del estado de progresión del jugador. A ello se su
 de validación de operaciones que registra por qué una acción falla, lo que resulta útil
 tanto para depuración como para la futura comunicación con el usuario.
 
-\subsection{Implementación de los objetos}
+\subsection{Implementación de Sistema de Objetos}
 La representación de los objetos se apoyó en \texttt{InventoryItemDefinition}, que define la
 identidad del objeto, su icono, su tipo y los datos asociados a sus posibles efectos.
 Además, \texttt{InventoryItemValidationUtility} se encarga de validar estas definiciones y
@@ -160,7 +160,7 @@ contra el inventario del jugador y destruir o mantener el pickup según el resul
 permite que el vínculo entre mundo e inventario quede resuelto de manera directa: el jugador
 interactúa con un pickup y, si la operación es válida, el objeto pasa a su inventario.
 
-\subsection{Implementación de la mejora del minimapa}
+\subsection{Implementación de Minimapa II}
 La ampliación del minimapa se apoyó principalmente en \texttt{MapGenerator},
 \texttt{MinimapCameraController} y \texttt{MinimapUIController}. En primer lugar,
 \texttt{MapGenerator} pasó a mantener el conjunto de salas visitadas, la sala actual y un
@@ -189,7 +189,7 @@ razonable del trabajo según el contexto técnico real.
 En términos temporales, la planificación y la ejecución quedaron muy próximas: frente a las
 50:00 horas previstas, se dedicaron 49:27 horas reales. Ese ajuste refuerza la idea de que
 el alcance de la iteración estuvo correctamente acotado y de que la secuencia entre
-inventario, objetos y minimapa permitía cerrar entregables funcionales sin abrir nuevas
+inventario, sistema de objetos y minimapa permitía cerrar entregables funcionales sin abrir nuevas
 desviaciones.
 
 Desde la perspectiva de seguimiento y control, la iteración puede considerarse bien cerrada.

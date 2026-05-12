@@ -109,7 +109,7 @@ objetivo pasó a ser estabilizar ese bucle y empezar a articular su progresión.
 las decisiones de diseño no se centraron tanto en abrir nuevos subsistemas como en refinar
 los ya existentes y conectarlos entre sí de manera más coherente.
 
-\subsection{Diseño de la consolidación de la generación procedural}
+\subsection{Diseño de Generación Procedural II}
 La segunda parte de la feature de generación procedural se abordó como una tarea de
 consistencia espacial. La decisión importante aquí fue asumir que no bastaba con que una
 sala secreta existiera como tipo lógico dentro del generador; también debía comportarse
@@ -120,7 +120,7 @@ como una pieza estructural que debía respetar los mismos criterios de coherenci
 resto del mapa: límites claros, colisión consistente y un contorno que no generara lecturas
 ambiguas del espacio.
 
-\subsection{Diseño de la progresión por círculos}
+\subsection{Diseño de Lógica de Círculos I}
 La lógica de círculos se diseñó como un sistema persistente y centralizado. El criterio
 seguido fue que el estado del círculo no debía depender de una sala concreta ni de una
 escena concreta, sino de un gestor capaz de sobrevivir a la regeneración del mapa y de
@@ -137,7 +137,7 @@ La escalera se diseñó como el punto de activación del descenso. Su papel no e
 ornamental dentro de la \textit{boss room}, sino funcionar como interfaz física entre la
 resolución de una zona y el paso al siguiente bloque de progresión.
 
-\subsection{Diseño del seguimiento de cámara}
+\subsection{Diseño de Cámara del Jugador}
 El rediseño de la cámara partió de un problema claro: seguir directamente al jugador no era
 suficiente para resolver bien todos los tipos de transición entre salas. En particular,
 había que manejar dos situaciones distintas: salas donde la cámara debe acompañar al
@@ -159,7 +159,7 @@ prefabs y ampliación de scripts de coordinación. A diferencia de la primera it
 no todo el peso recae en la lógica del mapa o del jugador, sino en cómo se conectan
 subsistemas ya existentes para producir una experiencia más robusta.
 
-\subsection{Implementación de Generación Procedural (II)}
+\subsection{Implementación de Generación Procedural II}
 La consolidación de la sala secreta se materializó directamente sobre su prefab. El cambio
 consistió en añadir y reorganizar tiles de muro, así como en redefinir el contorno de la
 colisión compuesta de la habitación. Esta intervención no alteraba la lógica del generador,
@@ -171,7 +171,7 @@ ambiguas en sus bordes. Se trata, por tanto, de una implementación pequeña en 
 código, pero relevante para dar por estabilizada la feature de generación procedural en uno
 de sus casos especiales.
 
-\subsection{Implementación de Lógica de círculos (I)}
+\subsection{Implementación de Lógica de Círculos I}
 La implementación de esta feature se apoyó en tres scripts principales. En primer lugar,
 \texttt{CircleManager} actúa como gestor persistente del progreso, manteniendo el círculo
 actual, controlando el límite máximo y ofreciendo tanto la operación de descenso como la
@@ -191,7 +191,7 @@ Como resultado, la progresión entre círculos dejó de ser una idea abstracta y
 un flujo funcional completo: llegar a la sala del jefe, encontrar la escalera, activarla
 tocándola, incrementar el círculo actual, refrescar la interfaz y reconstruir el escenario.
 
-\subsection{Implementación de la Cámara de jugador}
+\subsection{Implementación de Cámara del Jugador}
 La revisión de cámara se concentró en \texttt{RoomCameraController}. El cambio más
 importante fue la introducción de un \textit{follow proxy}, un objeto intermedio que
 Cinemachine sigue realmente, aunque el objetivo lógico siga siendo el jugador o el ancla de

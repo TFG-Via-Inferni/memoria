@@ -103,7 +103,7 @@ jugables y la interacción de entidades dinámicas dentro de dichas salas. La de
 principal fue no resolver todo en un único componente central, sino separar las
 responsabilidades desde el principio para evitar un crecimiento descontrolado del código.
 
-\subsection{Diseño de la generación procedural}
+\subsection{Diseño de Generación Procedural I}
 La generación procedural se apoyó en una rejilla lógica bidimensional. Esta decisión
 permitía expresar con claridad las reglas de vecindad, ocupación, expansión y validación
 espacial, reduciendo la complejidad del algoritmo respecto a una representación continua.
@@ -119,7 +119,6 @@ de tamaño unitario. Se decidió soportar salas de 1x1, 1x2, 2x1, 2x2 y con form
 que limitar la generación a salas idénticas habría simplificado el arranque, pero también
 habría empobrecido mucho la expresividad espacial del sistema.
 
-\subsection{Diseño de la instanciación de salas}
 Una vez generada la topología abstracta del nivel, era necesario traducirla a una escena
 jugable dentro de Unity. Para ello se separó la responsabilidad del generador de mapa de la
 responsabilidad de instanciar salas concretas. El generador produce la descripción lógica
@@ -130,12 +129,13 @@ puertas, sus muros y las entidades que aloja. Esta decisión hacía que el compo
 una habitación pudiera encapsularse localmente y reducía el acoplamiento con el resto del
 sistema.
 
-\subsection{Diseño del jugador y de los enemigos}
+\subsection{Diseño de Añadir Jugador}
 El jugador se diseñó inicialmente con un enfoque deliberadamente simple. La prioridad era
 validar movimiento, navegación y lectura del espacio antes de introducir mecánicas más
 complejas. Por ello, el diseño se apoyó en un controlador de desplazamiento básico,
 suficiente para recorrer el nivel generado y comprobar la coherencia del mapa.
 
+\subsection{Diseño de Añadir Enemigo}
 Los enemigos también se diseñaron con una estructura mínima pero extensible. En lugar de
 implementar desde el principio un sistema de IA complejo, se definió una máquina de estados
 elemental con tres comportamientos: reposo, persecución y ataque. Esta decisión permitía
@@ -147,10 +147,10 @@ la propia sala podía bloquear las puertas y liberarlas cuando el combate hubies
 
 \section{Implementación}
 La implementación de esta iteración se realizó siguiendo el mismo orden lógico en el que se
-habían diseñado las features: primero la estructura del mundo, después la integración del
-jugador y, finalmente, la incorporación de enemigos y control de encuentros.
+habían diseñado las features: primero la generación procedural del mundo, después la
+integración del jugador y, finalmente, la incorporación de enemigos y control de encuentros.
 
-\subsection{Implementación de la generación procedural}
+\subsection{Implementación de Generación Procedural I}
 La construcción del mapa partió de una estructura de ocupación y de una estrategia de
 expansión controlada hacia celdas adyacentes. El algoritmo arranca desde una posición
 central y explora posiciones vecinas siempre que se cumplan ciertas restricciones:
@@ -166,7 +166,6 @@ iteración todavía no se explotaban todas sus posibilidades jugables, dejarlas 
 la generación resultaba clave para no tener que rediseñar la topología del sistema en fases
 posteriores.
 
-\subsection{Implementación de la instanciación de salas}
 Con la topología ya disponible, el sistema recorrió las habitaciones generadas y buscó para
 cada una una definición visual compatible con su forma y tipo. A partir de esa información
 se instanciaron las salas jugables dentro de la escena, ajustando sus dimensiones y
@@ -177,7 +176,7 @@ del generador y el espacio real con el que interactuarían el jugador y los enem
 esta traducción fallaba, el mapa podía ser correcto desde el punto de vista lógico pero no
 jugable en el motor.
 
-\subsection{Implementación del jugador}
+\subsection{Implementación de Añadir Jugador}
 El jugador se integró mediante un controlador ligero apoyado en \texttt{Rigidbody2D}. En
 cada ciclo se leían las entradas de movimiento y se trasladaban al cuerpo físico del
 personaje, obteniendo así una solución suficiente para validar navegación, colisiones y
@@ -188,7 +187,7 @@ depender de una coordenada fija de escena. Esta decisión reforzaba el acoplamie
 entre generación procedural y sistemas jugables, ya que el personaje debía situarse siempre
 en una posición coherente con la partida recién creada.
 
-\subsection{Implementación de enemigos y encuentros}
+\subsection{Implementación de Añadir Enemigo}
 Los enemigos se instanciaron desde las propias salas una vez configuradas. Cada sala
 conservaba la referencia a sus enemigos activos, lo que hacía posible asociar el estado del
 combate con el estado de la habitación.

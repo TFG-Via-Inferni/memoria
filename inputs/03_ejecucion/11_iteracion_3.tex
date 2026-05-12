@@ -26,7 +26,7 @@ la lógica de círculos como sistema de contenido, la incorporación de la duali
 personajes y la implementación inicial del minimapa.
 
 \begin{enumerate}
-\item \textbf{Lógica de círculos.} En esta iteración la lógica de círculos dejó de actuar
+\item \textbf{Lógica de Círculos II.} En esta iteración la lógica de círculos dejó de actuar
 únicamente como mecanismo de progresión secuencial y pasó a convertirse en el sistema que
 organiza el contenido del juego por niveles temáticos. Su funcionamiento real consistió en
 asociar a cada círculo una definición propia con nombre, conjunto de salas disponibles y
@@ -49,7 +49,7 @@ se encuentra el jugador.
 \end{center}
 \end{figure}
 
-\item \textbf{Dualidad de personajes.} Esta funcionalidad introdujo la primera versión
+\item \textbf{Dualidad de Personajes.} Esta funcionalidad introdujo la primera versión
 realmente jugable del sistema de dualidad, modelándolo como un cambio entre dos formas de
 combate complementarias: una forma cuerpo a cuerpo y una forma a distancia. Su
 comportamiento real no consistía en duplicar personajes independientes, sino en permitir
@@ -70,7 +70,7 @@ futuras habilidades, sistemas de combate y decisiones tácticas.
 \end{center}
 \end{figure}
 
-\item \textbf{Minimap.} Esta funcionalidad incorporó una primera versión muy simple del
+\item \textbf{Minimapa I.} Esta funcionalidad incorporó una primera versión muy simple del
 minimapa orientada a cubrir una necesidad básica de orientación. Su funcionamiento real se
 apoya en la propia estructura de celdas generadas por el mapa, reutilizando esa
 representación para mostrar qué salas han sido descubiertas y cuáles permanecen ocultas
@@ -84,9 +84,9 @@ iteraciones posteriores.
 
 \begin{figure}[H]
 \begin{center}
-\missingfigure{Sustituir por captura representativa de Minimap en la iteración 3}
+\missingfigure{Sustituir por captura representativa de Minimapa I en la iteración 3}
 % \includegraphics[width=.9\textwidth]{figures/iteracion3_minimap.png}
-\caption{Resultado visual de la feature Minimap en la iteración 3}
+\caption{Resultado visual de la feature Minimapa I en la iteración 3}
 \label{fig:iteracion3-feature-minimap}
 \end{center}
 \end{figure}
@@ -104,7 +104,7 @@ En vez de seguir ampliando el prototipo mediante soluciones puntuales, se buscó
 preparados mecanismos más generales para que el sistema pudiera crecer con nuevas variantes
 de contenido y con nuevas capas de interacción.
 
-\subsection{Diseño de la lógica de círculos como sistema de contenido}
+\subsection{Diseño de Lógica de Círculos II}
 La principal decisión de diseño consistió en transformar los círculos en unidades de
 configuración de contenido. En lugar de utilizar una única colección global de salas y
 enemigos para todo el juego, se diseñó una base de datos de círculos que permite definir,
@@ -117,7 +117,7 @@ lugar de depender de una lógica distribuida por múltiples scripts. La segunda 
 facilita la escalabilidad, ya que añadir o ajustar círculos pasa a ser principalmente una
 operación de configuración y no una reescritura del comportamiento interno del generador.
 
-\subsection{Diseño de la dualidad de personajes}
+\subsection{Diseño de Dualidad de Personajes}
 La dualidad se diseñó como una alternancia de formas y no como una sustitución de entidades
 completamente independientes. Esta decisión resultaba más coherente con el estado del
 proyecto, porque permitía introducir la mecánica sin duplicar toda la lógica del jugador ni
@@ -130,7 +130,7 @@ de modo que el cambio no se convierta en una acción sin coste ni ritmo. Tambié
 dar a cada forma una representación visual diferenciada para que el cambio fuera legible de
 inmediato dentro de la partida.
 
-\subsection{Diseño del minimapa}
+\subsection{Diseño de Minimapa I}
 El minimapa se planteó como una proyección simplificada del propio modelo del nivel. La
 decisión importante aquí fue no construir una representación completamente independiente,
 sino reutilizar las celdas ya generadas por el sistema como soporte del mapa visual.
@@ -148,7 +148,7 @@ diferencia de la segunda iteración, donde predominaban los mecanismos de transi
 estabilidad, aquí el peso recae más en la organización del contenido y en la introducción
 de nuevas capas de comportamiento jugable.
 
-\subsection{Implementación de la lógica de círculos}
+\subsection{Implementación de Lógica de Círculos II}
 La feature se materializó mediante dos nuevos tipos de \textit{Scriptable Objects}:
 \texttt{CircleDefinition}, que encapsula la configuración de un círculo concreto, y
 \texttt{CircleDatabase}, que centraliza el acceso a todas las definiciones disponibles. A
@@ -166,7 +166,7 @@ En la práctica, la implementación convirtió el descenso entre círculos en un
 configuración del mundo: al actualizarse el círculo activo, cambia también el conjunto de
 salas y enemigos que el sistema utiliza para construir la nueva planta.
 
-\subsection{Implementación de la dualidad de personajes}
+\subsection{Implementación de Dualidad de Personajes}
 La dualidad se implementó principalmente en el script \texttt{Player}. Se introdujo una
 enumeración para distinguir entre forma de melé y forma a distancia, una configuración de
 forma inicial, un tiempo de reutilización para el intercambio y referencias visuales
@@ -183,7 +183,7 @@ otros sistemas reaccionen a la dualidad en iteraciones posteriores. Aunque en es
 feature todavía no explota todas sus implicaciones de combate, la implementación deja ya
 resuelto el esqueleto funcional del sistema.
 
-\subsection{Implementación del minimapa}
+\subsection{Implementación de Minimapa I}
 La primera versión del minimapa se integró directamente en \texttt{MapGenerator}. Se añadió
 un conjunto de índices de salas descubiertas y una lógica de inicialización que marca como
 visible la habitación inicial al comenzar una nueva partida. A partir de ahí, cada vez que

@@ -6,8 +6,9 @@ Premature optimization is the root of all evil.
 
 \begin{abstract}
 Esta iteración se orienta a mejorar la interacción del usuario con el sistema a través de
-la interfaz. Se consolidan el \textit{Head-Up Display} y los menús principales del juego,
-aportando mayor legibilidad, control de la partida y coherencia en la experiencia de uso.
+la interfaz y la presentación visual. Se consolidan el \textit{Head-Up Display}, el menú
+de pausa y el menú principal del juego, y se actualizan los sprites y prefabs para aportar
+una estética más propia al proyecto.
 \end{abstract}
 
 \section{Análisis de características}
@@ -15,9 +16,10 @@ La cuarta iteración se orientó principalmente a mejorar la experiencia de uso 
 fuera del combate y de la exploración estricta. Hasta este punto, el proyecto ya disponía
 de una base jugable relativamente sólida, con generación procedural, progresión por
 círculos, dualidad del jugador y una primera versión del minimapa. Sin embargo, la
-interacción con el juego seguía siendo todavía pobre desde el punto de vista de interfaz y
-de flujo de entrada y salida. Por ello, esta iteración se centró en dos bloques: el ajuste
-del \textit{Head-Up Display} y la consolidación del sistema de menús.
+interacción con el juego seguía siendo todavía pobre desde el punto de vista de interfaz,
+flujo de entrada y salida, y personalidad visual. Por ello, esta iteración se centró en
+cuatro funcionalidades: el ajuste del \textit{Head-Up Display}, la incorporación del menú
+de pausa, la consolidación del menú principal y la actualización de sprites y prefabs.
 
 \begin{enumerate}
 \item \textbf{Head-Up Display.} Esta funcionalidad se centró en mejorar la legibilidad y el
@@ -42,34 +44,63 @@ necesaria para que el estado del juego se percibiera con claridad.
 \end{center}
 \end{figure}
 
-\item \textbf{Menús.} Esta funcionalidad consolidó el flujo de pantallas necesario para
-entrar al juego, pausarlo y salir de él de forma controlada. En términos reales, la feature
-quedó materializada en dos frentes complementarios. El primero fue el menú de pausa dentro
-de la partida, con capacidad para detener el tiempo de juego, ocultar temporalmente el HUD,
-ofrecer acciones de reanudación, reinicio y salida, y responder tanto a teclado como a
-mandos. El segundo fue el menú principal de entrada, responsable de cargar la escena de
-juego y de organizar los botones principales del sistema. Además, durante la iteración se
-realizaron ajustes de disposición para que el logotipo y los botones se adaptaran mejor al
-espacio disponible, mejorando la consistencia visual entre pantallas. Esta feature fue
-relevante porque convirtió el proyecto en una aplicación interactiva más completa: el juego
-dejó de depender de un arranque puramente técnico desde la escena principal y pasó a ofrecer
-una navegación básica más propia de un producto jugable real.
+\item \textbf{Menú Pausa.} Esta funcionalidad incorporó un flujo de interrupción controlada
+dentro de la partida. Su comportamiento real consistió en detener temporalmente la
+ejecución del juego, ocultar el HUD cuando correspondía, ofrecer acciones de reanudación,
+reinicio y salida, y responder tanto a teclado como a mandos. La feature fue importante
+porque convirtió la pausa en un estado explícito del sistema y no en una simple pantalla
+superpuesta, permitiendo que el jugador pudiera interrumpir y retomar la sesión de forma
+predecible.
 
 \begin{figure}[H]
 \begin{center}
-\missingfigure{Sustituir por captura representativa de Menús en la iteración 4}
-% \includegraphics[width=.9\textwidth]{figures/iteracion4_menus.png}
-\caption{Resultado visual de la feature Menús en la iteración 4}
-\label{fig:iteracion4-feature-menus}
+\missingfigure{Sustituir por captura representativa del Menú Pausa en la iteración 4}
+% \includegraphics[width=.9\textwidth]{figures/iteracion4_menu_pausa.png}
+\caption{Resultado visual de la feature Menú Pausa en la iteración 4}
+\label{fig:iteracion4-feature-menu-pausa}
+\end{center}
+\end{figure}
+
+\item \textbf{Menú Principal.} Esta funcionalidad consolidó la pantalla de entrada al
+juego, responsable de cargar la escena principal y organizar las acciones iniciales del
+sistema. Además de permitir iniciar la partida y salir de la aplicación, durante la
+iteración se realizaron ajustes de disposición para que el logotipo y los botones se
+adaptaran mejor al espacio disponible. Con ello, el proyecto dejó de depender de un
+arranque puramente técnico desde la escena jugable y pasó a ofrecer una entrada más propia
+de un producto interactivo completo.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa del Menú Principal en la iteración 4}
+% \includegraphics[width=.9\textwidth]{figures/iteracion4_menu_principal.png}
+\caption{Resultado visual de la feature Menú Principal en la iteración 4}
+\label{fig:iteracion4-feature-menu-principal}
+\end{center}
+\end{figure}
+
+\item \textbf{Actualizar Sprites.} Esta funcionalidad se centró en reforzar la identidad
+visual del juego mediante la incorporación de nuevos sprites diseñados para el proyecto y
+la actualización de prefabs que dependían de esos recursos. Su alcance no se planteó como
+un sistema nuevo de diseño o implementación, sino como una sustitución y ajuste de recursos
+para que personajes, elementos de interfaz y objetos principales encajaran mejor con una
+estética propia. El objetivo era que la presentación dejara de apoyarse en una apariencia
+provisional y empezara a transmitir una identidad visual más reconocible.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa de Actualizar Sprites en la iteración 4}
+% \includegraphics[width=.9\textwidth]{figures/iteracion4_actualizar_sprites.png}
+\caption{Resultado visual de la feature Actualizar Sprites en la iteración 4}
+\label{fig:iteracion4-feature-sprites}
 \end{center}
 \end{figure}
 \end{enumerate}
 
-La combinación de ambas funcionalidades hizo que esta iteración actuara como una fase de
+La combinación de estas funcionalidades hizo que esta iteración actuara como una fase de
 maduración de la capa de presentación. Aunque no se centró en añadir profundidad al núcleo
 de combate o generación, sí resultó clave para mejorar la relación entre el jugador y el
-sistema, ordenando mejor la información y estructurando la navegación entre estados del
-juego.
+sistema, ordenando mejor la información, estructurando la navegación entre estados del
+juego y reforzando la identidad visual del proyecto.
 
 \section{Diseño}
 El diseño de esta iteración partió de una necesidad clara: el juego ya no podía seguir
@@ -77,7 +108,7 @@ tratando la interfaz como un elemento secundario. A medida que el sistema crecí
 necesario distinguir mejor entre la experiencia puramente jugable y la experiencia de
 interacción global con la aplicación.
 
-\subsection{Diseño del Head-Up Display}
+\subsection{Diseño de Head-Up Display}
 La decisión principal respecto al HUD fue asumir que su valor no depende solo de la
 información que muestra, sino también de cómo se integra visualmente con la escena. Un HUD
 mal proporcionado puede ser tan problemático como la ausencia de información, ya que invade
@@ -89,21 +120,31 @@ proporciones, buscando que los elementos visibles mantuvieran presencia suficien
 completo la interfaz, sino llevarla a un punto en el que pudiera convivir mejor con el
 resto del sistema.
 
-\subsection{Diseño del sistema de menús}
-En el caso de los menús, la decisión de diseño importante fue separar claramente dos
-contextos distintos de interacción: el contexto de entrada al juego y el contexto de pausa
-dentro de una partida ya iniciada. Ambos comparten convenciones visuales y botones, pero
-responden a necesidades diferentes.
+\subsection{Diseño de Menú Pausa}
+El menú de pausa se concibió como una capa superpuesta que interrumpe temporalmente la
+ejecución del juego sin romper el estado de la sesión. Esta decisión exigía una relación
+directa con el control del tiempo, del audio y de la visibilidad de la interfaz de
+gameplay, ya que pausar la partida debía afectar al comportamiento del sistema y no solo a
+la presencia de una ventana en pantalla.
 
+También se tuvo en cuenta que el menú debía funcionar correctamente con distintos métodos
+de entrada. Por ello, su diseño priorizó acciones claras y un flujo reducido: reanudar,
+reiniciar o salir, evitando introducir opciones accesorias que pudieran complicar una capa
+destinada a interrumpir la partida de forma rápida.
+
+\subsection{Diseño de Menú Principal}
 El menú principal se diseñó como puerta de acceso al sistema, centralizando el inicio de
-partida y la salida de la aplicación. El menú de pausa, en cambio, se concibió como una
-capa superpuesta que interrumpe temporalmente la ejecución del juego sin romper el estado de
-la sesión. Este segundo caso exigía una relación más directa con el control del tiempo, del
-audio y de la visibilidad de la interfaz de gameplay.
+partida y la salida de la aplicación. A diferencia del menú de pausa, no depende del estado
+de una sesión en curso, sino que actúa como punto de entrada anterior al bucle jugable.
 
 Además, se decidió prestar atención a la disposición adaptable de los elementos, especialmente
 del logotipo y de los botones, para evitar una composición rígida o mal proporcionada entre
 distintas pantallas.
+
+La actualización de sprites no se trató como un bloque independiente de diseño, sino como
+una mejora de recursos aplicada sobre la estética general. La decisión relevante fue
+integrar los nuevos sprites en los prefabs existentes para que la identidad visual avanzara
+sin introducir una arquitectura nueva.
 
 \section{Implementación}
 La implementación de esta iteración se apoyó menos en nuevos sistemas lógicos profundos y
@@ -111,7 +152,7 @@ más en controladores de interfaz y ajustes de escena. Aun así, el trabajo real
 meramente cosmético, ya que varios de los cambios introducen comportamiento funcional
 directo sobre el flujo del juego.
 
-\subsection{Implementación del Head-Up Display}
+\subsection{Implementación de Head-Up Display}
 La feature de HUD se materializó principalmente mediante ajustes sobre la escena de juego,
 modificando el tamaño de los elementos de interfaz ya presentes para mejorar su legibilidad
 durante la partida. Aunque esta intervención no requirió la creación de un gran controlador
@@ -123,13 +164,11 @@ HUD depende tanto de su contenido como de su presencia visual. Con este ajuste, 
 de partida quedó mejor adaptada al espacio real de uso y más preparada para convivir con
 otras capas de información que se incorporarán en iteraciones posteriores.
 
-\subsection{Implementación de Menús}
-La implementación del sistema de menús se apoyó en dos scripts principales:
-\texttt{MainMenuController} y \texttt{PauseMenuController}. El primero centraliza el menú de
-inicio y vincula los botones principales con acciones como cargar la escena de juego o salir
-de la aplicación. El segundo controla el ciclo de pausa dentro de la partida, escuchando la
-entrada correspondiente, alternando el estado pausado, ocultando o mostrando la interfaz de
-juego y gestionando las acciones de reanudar, reiniciar y abandonar la sesión.
+\subsection{Implementación de Menú Pausa}
+La implementación del menú de pausa se apoyó en \texttt{PauseMenuController}. Este script
+controla el ciclo de pausa dentro de la partida, escuchando la entrada correspondiente,
+alternando el estado pausado, ocultando o mostrando la interfaz de juego y gestionando las
+acciones de reanudar, reiniciar y abandonar la sesión.
 
 Desde el punto de vista funcional, la lógica de pausa tiene varias consecuencias directas:
 detiene el tiempo mediante \texttt{Time.timeScale}, pausa el audio global, selecciona el
@@ -137,16 +176,29 @@ botón adecuado para facilitar la navegación y restaura el estado normal al rea
 esta manera, el menú de pausa deja de ser una simple pantalla visual y pasa a convertirse en
 un verdadero controlador del estado de juego.
 
-La parte final de la feature se completó con ajustes en la composición visual de las
-pantallas, especialmente sobre el logotipo y la distribución de los botones, para que su
+\subsection{Implementación de Menú Principal}
+La implementación del menú principal se apoyó en \texttt{MainMenuController}, encargado de
+vincular los botones principales con acciones como cargar la escena de juego o salir de la
+aplicación. Esta separación permitió mantener el flujo de entrada al juego independiente de
+la lógica de pausa usada durante la partida.
+
+La parte final de la feature se completó con ajustes en la composición visual de la
+pantalla, especialmente sobre el logotipo y la distribución de los botones, para que su
 encaje fuera más consistente y adaptable.
+
+La actualización de sprites se realizó mediante la inserción de los nuevos recursos gráficos
+diseñados para el juego y la revisión de los prefabs afectados. Al no requerir lógica propia
+ni un controlador específico, esta mejora se documenta como una intervención de integración
+visual: sustituir recursos provisionales, ajustar referencias y dejar los objetos principales
+alineados con una estética más característica del proyecto.
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración mostró una relación bastante estable entre el alcance
-previsto y el tiempo disponible. Las dos líneas de trabajo definidas, HUD y menús, pudieron
-desarrollarse dentro de la propia iteración y no requirieron trasladar funcionalidades a
-entregas posteriores. El resultado fue una mejora clara de la interacción con el sistema y de
-la legibilidad de la capa de presentación.
+previsto y el tiempo disponible. Las líneas de trabajo definidas, HUD, menú de pausa, menú
+principal y actualización de sprites, pudieron desarrollarse dentro de la propia iteración y
+no requirieron trasladar funcionalidades a entregas posteriores. El resultado fue una mejora
+clara de la interacción con el sistema, de la legibilidad de la capa de presentación y de la
+identidad visual del juego.
 
 En términos de tiempo sí apareció una desviación moderada: frente a las 50:00 horas
 planificadas, la iteración consumió 55:36 horas reales. Sin embargo, ese incremento no vino
@@ -155,8 +207,8 @@ una fase con menos incertidumbre técnica que otras anteriores.
 
 Por ello, desde la perspectiva de seguimiento y control, esta iteración no exigió una
 replanificación funcional relevante. Lo que se observa es más bien una sobrecarga moderada de
-esfuerzo para cerrar con mayor consistencia la experiencia de usuario. La separación interna
-de la feature de menús respondió a criterios de trazabilidad del trabajo y no a una
+esfuerzo para cerrar con mayor consistencia la experiencia de usuario. La separación entre
+menú de pausa y menú principal respondió a criterios de trazabilidad del trabajo y no a una
 fragmentación forzada por falta de tiempo.
 
 \begin{table}[h!]

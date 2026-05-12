@@ -6,23 +6,77 @@ Testing leads to failure, and failure leads to understanding.
 
 \begin{abstract}
 Esta iteración se orienta a consolidar sistemas ya introducidos y a extender la estructura
-del recorrido con salas especiales. El trabajo se centra en refinar el sistema de enemigos y
-el sistema de combate, además de integrar la sala de tienda y la lógica base de las salas
-secreta y de tesoro dentro de la generación procedural del mapa.
+del recorrido con salas especiales. El trabajo integra la sala de tienda y la lógica base
+de las salas secreta y de tesoro dentro de la generación procedural del mapa, además de
+refinar el sistema de combate y el sistema de enemigos.
 \end{abstract}
 
 \section{Análisis de características}
 La séptima iteración se plantea como una fase de consolidación sobre sistemas que en la
 entrega anterior ya eran funcionales, pero todavía admitían una mejora clara en profundidad
-jugable y en variedad de recorrido. El foco principal recae sobre combate y enemigos,
-mientras que la incorporación de salas especiales amplía la estructura del mapa con espacios
-de función diferenciada. En el estado actual del proyecto, la parte más cerrada de la
-iteración corresponde al refinamiento de combate y enemigos, mientras que las salas
-especiales quedan ya encajadas a nivel estructural y visual, aunque todavía requieren cierre
-funcional para darse por terminadas del todo.
+jugable y en variedad de recorrido. La incorporación de salas especiales amplía la
+estructura del mapa con espacios de función diferenciada, mientras que el refinamiento de
+combate y enemigos mejora la respuesta táctica de los encuentros. En el estado actual del
+proyecto, la parte más cerrada de la iteración corresponde al refinamiento de combate y
+enemigos, mientras que las salas especiales quedan ya encajadas a nivel estructural y
+visual, aunque todavía requieren cierre funcional para darse por terminadas del todo.
 
 \begin{enumerate}
-\item \textbf{Sistema de Enemigos.} Esta funcionalidad profundiza en el comportamiento
+\item \textbf{Sala Tienda.} Esta funcionalidad introduce una habitación especial dentro
+de la generación del mapa con identidad propia y con señalización específica en el minimapa.
+En el estado actual de la iteración, su aporte principal consiste en quedar integrada dentro
+del reparto de salas terminales, contar con tipo de sala diferenciado y poder representarse
+de forma explícita tanto en la celda del mapa como en la configuración de puertas y muros.
+Aunque su comportamiento jugable todavía necesita cerrarse, esta base ya permite tratar la
+tienda como una categoría espacial propia dentro de la estructura procedural del nivel.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa de la Sala Tienda en la iteración 7}
+% \includegraphics[width=.9\textwidth]{figures/iteracion7_sala_tienda.png}
+\caption{Resultado visual de la feature Sala Tienda en la iteración 7}
+\label{fig:iteracion7-feature-tienda}
+\end{center}
+\end{figure}
+
+\item \textbf{Sala Secreta y Tesoro.} Esta funcionalidad amplía la distribución de salas
+especiales con espacios que no siguen exactamente las mismas reglas de acceso que las salas
+regulares. La implementación actual ya distingue estos nodos dentro del mapa, les asigna
+iconografía propia y, en el caso de la sala secreta, evita su conexión directa mediante el
+flujo habitual de puertas visibles. Esto refuerza la idea de exploración y de recompensa por
+descubrimiento, aunque el cierre definitivo de su comportamiento y de su contenido todavía
+queda pendiente dentro del desarrollo posterior de la iteración.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa de la Sala Secreta y Tesoro en la iteración 7}
+% \includegraphics[width=.9\textwidth]{figures/iteracion7_salas_especiales.png}
+\caption{Resultado visual de la feature Sala Secreta y Tesoro en la iteración 7}
+\label{fig:iteracion7-feature-salas-especiales}
+\end{center}
+\end{figure}
+
+\item \textbf{Sistema de Combate II.} Esta funcionalidad refina el combate del jugador para
+que cada arma no solo tenga parámetros distintos, sino también una lectura más clara en su
+uso y una interacción más rica con el resto de sistemas. El trabajo realizado en esta
+iteración introduce ataques cargados para armas que lo requieren, proyectiles con
+comportamiento más sofisticado y apoyo visual específico tanto en ataques cuerpo a cuerpo
+como en proyectiles. Además, el sistema mantiene el contexto del arma y de la forma activa
+del jugador durante el ataque, lo que facilita que otros componentes interpreten el impacto
+con mayor precisión. En la práctica, esta ampliación hace que el combate se perciba como un
+sistema más expresivo, con mejor retroalimentación y con una conexión más sólida entre
+entrada, ataque y efecto producido en pantalla.
+
+\begin{figure}[H]
+\begin{center}
+\missingfigure{Sustituir por captura representativa del Sistema de Combate II en la iteración 7}
+% \includegraphics[width=.9\textwidth]{figures/iteracion7_sistema_combate.png}
+\caption{Resultado visual de la feature Sistema de Combate II en la iteración 7}
+\label{fig:iteracion7-feature-combate}
+\end{center}
+\end{figure}
+
+\item \textbf{Sistema de Enemigos II.} Esta funcionalidad profundiza en el comportamiento
 enemigo sobre la base ya creada anteriormente. Su alcance real consiste en diferenciar con
 más claridad la respuesta táctica de cada arquetipo, introduciendo preparación visible del
 ataque, desplazamientos de compromiso, recuperación tras empujes y una relación más fuerte
@@ -35,64 +89,10 @@ de amenaza al que se enfrenta.
 
 \begin{figure}[H]
 \begin{center}
-\missingfigure{Sustituir por captura representativa del Sistema de Enemigos en la iteración 7}
+\missingfigure{Sustituir por captura representativa del Sistema de Enemigos II en la iteración 7}
 % \includegraphics[width=.9\textwidth]{figures/iteracion7_sistema_enemigos.png}
-\caption{Resultado visual de la feature Sistema de Enemigos en la iteración 7}
+\caption{Resultado visual de la feature Sistema de Enemigos II en la iteración 7}
 \label{fig:iteracion7-feature-enemigos}
-\end{center}
-\end{figure}
-
-\item \textbf{Sistema de Combate.} Esta funcionalidad refina el combate del jugador para que
-cada arma no solo tenga parámetros distintos, sino también una lectura más clara en su uso y
-una interacción más rica con el resto de sistemas. El trabajo realizado en esta iteración
-introduce ataques cargados para armas que lo requieren, proyectiles con comportamiento más
-sofisticado y apoyo visual específico tanto en ataques cuerpo a cuerpo como en proyectiles.
-Además, el sistema mantiene el contexto del arma y de la forma activa del jugador durante el
-ataque, lo que facilita que otros componentes interpreten el impacto con mayor precisión. En
-la práctica, esta ampliación hace que el combate se perciba como un sistema más expresivo,
-con mejor retroalimentación y con una conexión más sólida entre entrada, ataque y efecto
-producido en pantalla.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa del Sistema de Combate en la iteración 7}
-% \includegraphics[width=.9\textwidth]{figures/iteracion7_sistema_combate.png}
-\caption{Resultado visual de la feature Sistema de Combate en la iteración 7}
-\label{fig:iteracion7-feature-combate}
-\end{center}
-\end{figure}
-
-\item \textbf{Sala de tienda.} Esta funcionalidad introduce una habitación especial dentro
-de la generación del mapa con identidad propia y con señalización específica en el minimapa.
-En el estado actual de la iteración, su aporte principal consiste en quedar integrada dentro
-del reparto de salas terminales, contar con tipo de sala diferenciado y poder representarse
-de forma explícita tanto en la celda del mapa como en la configuración de puertas y muros.
-Aunque su comportamiento jugable todavía necesita cerrarse, esta base ya permite tratar la
-tienda como una categoría espacial propia dentro de la estructura procedural del nivel.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de la Sala de tienda en la iteración 7}
-% \includegraphics[width=.9\textwidth]{figures/iteracion7_sala_tienda.png}
-\caption{Resultado visual de la feature Sala de tienda en la iteración 7}
-\label{fig:iteracion7-feature-tienda}
-\end{center}
-\end{figure}
-
-\item \textbf{Sala secreta y de tesoro.} Esta funcionalidad amplía la distribución de salas
-especiales con espacios que no siguen exactamente las mismas reglas de acceso que las salas
-regulares. La implementación actual ya distingue estos nodos dentro del mapa, les asigna
-iconografía propia y, en el caso de la sala secreta, evita su conexión directa mediante el
-flujo habitual de puertas visibles. Esto refuerza la idea de exploración y de recompensa por
-descubrimiento, aunque el cierre definitivo de su comportamiento y de su contenido todavía
-queda pendiente dentro del desarrollo posterior de la iteración.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de la Sala secreta y de tesoro en la iteración 7}
-% \includegraphics[width=.9\textwidth]{figures/iteracion7_salas_especiales.png}
-\caption{Resultado visual de la feature Sala secreta y de tesoro en la iteración 7}
-\label{fig:iteracion7-feature-salas-especiales}
 \end{center}
 \end{figure}
 \end{enumerate}
@@ -108,18 +108,27 @@ enfrentamientos y dar más valor estructural a determinadas salas dentro del rec
 procedural. En ambos casos, la idea dominante fue evitar soluciones aisladas y reutilizar la
 arquitectura ya existente para hacerla más expresiva sin perder coherencia con lo anterior.
 
-\subsection{Diseño del sistema de enemigos}
-La decisión principal fue reforzar la identidad táctica de cada tipo de enemigo mediante
-patrones de ataque y movimiento más distinguibles. No bastaba con que hubiera variantes con
-distinto daño o velocidad; era necesario que el jugador percibiera de forma clara cuándo un
-enemigo iba a cargar, disparar o comprometer una embestida.
+\subsection{Diseño de Sala Tienda}
+La sala de tienda se diseñó como una categoría espacial propia dentro del conjunto de salas
+terminales del mapa. La decisión importante aquí fue integrarla en la misma fase de
+selección procedural que otras salas especiales, en lugar de tratarla como una excepción
+colocada manualmente después.
 
-Por ello, el diseño de esta ampliación se orientó a introducir fases de preparación visibles,
-desplazamientos de ataque más marcados y una respuesta al daño más sensible al arma empleada.
-Con ello, el enemigo deja de ser únicamente una fuente de daño y pasa a actuar como una
-pieza táctica reconocible dentro del encuentro.
+Este enfoque hace que la tienda forme parte natural del reparto del recorrido y permite que
+su identidad visual y estructural quede resuelta desde el propio generador de mapa, aunque
+la lógica jugable específica que contendrá la sala todavía deba completarse.
 
-\subsection{Diseño del sistema de combate}
+\subsection{Diseño de Sala Secreta y Tesoro}
+La lógica de estas salas se diseñó para reforzar la exploración y la recompensa. La sala de
+tesoro se concibe como un nodo especial identificado dentro del mapa, mientras que la sala
+secreta requiere además un tratamiento distinto en su accesibilidad para que su descubrimiento
+no se perciba igual que el de una habitación regular.
+
+Por ello, el diseño introduce tipos de sala específicos y reglas de conexión diferenciadas,
+de forma que la presencia de estas habitaciones no solo cambie el icono mostrado en el mapa,
+sino también la lectura espacial del recorrido.
+
+\subsection{Diseño de Sistema de Combate II}
 El refinamiento del combate se diseñó bajo el criterio de mantener una lógica unificada para
 todas las armas, pero permitiendo comportamientos suficientemente distintos como para que la
 elección de una u otra tenga consecuencias jugables reales. A partir de ahí, se incorporó la
@@ -131,25 +140,16 @@ ser más expresivo, la respuesta en pantalla debía acompañar ese aumento de co
 eso, el diseño no se limita a parámetros de daño o alcance, sino que contempla también
 trazos, partículas y apoyos visuales ligados a la ejecución del ataque.
 
-\subsection{Diseño de la sala de tienda}
-La sala de tienda se diseñó como una categoría espacial propia dentro del conjunto de salas
-terminales del mapa. La decisión importante aquí fue integrarla en la misma fase de
-selección procedural que otras salas especiales, en lugar de tratarla como una excepción
-colocada manualmente después.
+\subsection{Diseño de Sistema de Enemigos II}
+La decisión principal fue reforzar la identidad táctica de cada tipo de enemigo mediante
+patrones de ataque y movimiento más distinguibles. No bastaba con que hubiera variantes con
+distinto daño o velocidad; era necesario que el jugador percibiera de forma clara cuándo un
+enemigo iba a cargar, disparar o comprometer una embestida.
 
-Este enfoque hace que la tienda forme parte natural del reparto del recorrido y permite que
-su identidad visual y estructural quede resuelta desde el propio generador de mapa, aunque
-la lógica jugable específica que contendrá la sala todavía deba completarse.
-
-\subsection{Diseño de la sala secreta y de tesoro}
-La lógica de estas salas se diseñó para reforzar la exploración y la recompensa. La sala de
-tesoro se concibe como un nodo especial identificado dentro del mapa, mientras que la sala
-secreta requiere además un tratamiento distinto en su accesibilidad para que su descubrimiento
-no se perciba igual que el de una habitación regular.
-
-Por ello, el diseño introduce tipos de sala específicos y reglas de conexión diferenciadas,
-de forma que la presencia de estas habitaciones no solo cambie el icono mostrado en el mapa,
-sino también la lectura espacial del recorrido.
+Por ello, el diseño de esta ampliación se orientó a introducir fases de preparación visibles,
+desplazamientos de ataque más marcados y una respuesta al daño más sensible al arma empleada.
+Con ello, el enemigo deja de ser únicamente una fuente de daño y pasa a actuar como una
+pieza táctica reconocible dentro del encuentro.
 
 \section{Implementación}
 La implementación de esta iteración se repartió entre el refinamiento de sistemas de acción
@@ -157,20 +157,32 @@ y la ampliación del generador procedural con nuevos tipos de sala. Aunque a niv
 las features parecen distintas, todas comparten un mismo objetivo: hacer que el juego
 responda con más riqueza al contexto en el que se produce cada evento.
 
-\subsection{Implementación del sistema de enemigos}
-La ampliación del comportamiento enemigo se apoyó sobre todo en \texttt{EnemyController},
-\texttt{EnemyProjectile}, \texttt{EnemyHealth} y \texttt{CircleDefinition}. En
-\texttt{EnemyController} se refuerzan los patrones diferenciados de enemigos normales,
-voladores y tanque mediante tiempos de preparación, ataques con embestida, disparos a
-distancia, recuperación de \textit{knockback} y señales visuales previas al ataque.
+\subsection{Implementación de Sala Tienda}
+La base técnica de la sala de tienda se apoya en \texttt{MapGenerator}, \texttt{Cell} y en
+la configuración de puertas y muros de \texttt{Room}. \texttt{MapGenerator} selecciona un
+índice específico para esta sala dentro del conjunto de habitaciones terminales, le asigna
+un tipo propio y actualiza su representación visual en el mapa mediante iconografía
+dedicada.
 
-Además, el sistema se integra de forma más estrecha con el contexto del arma del jugador.
-Para ello se consulta \texttt{DamageSourceContext}, lo que permite ajustar multiplicadores de
-daño en función del arma concreta y de la forma activa. A esto se suma una mejor relación
-con la activación por sala, el estado dormido inicial y la selección ponderada de enemigos
-desde la definición del círculo y del tipo de habitación.
+Después, esa información se propaga al resto del sistema a través del tipo de sala
+almacenado en la celda, lo que permite que puertas, muros y minimapa la interpreten como una
+categoría distinta. Aunque el contenido interactivo definitivo de la tienda no está cerrado,
+la integración estructural de la sala sí queda resuelta en esta fase.
 
-\subsection{Implementación del sistema de combate}
+\subsection{Implementación de Sala Secreta y Tesoro}
+La incorporación de salas especiales se apoya también en \texttt{MapGenerator}, que reserva
+índices específicos para estas habitaciones y actualiza su \texttt{RoomType} dentro de cada
+\texttt{Cell}. En el caso de la sala secreta, la selección se realiza con una lógica propia
+que busca posiciones no ocupadas y con suficiente proximidad estructural al resto del mapa
+para poder insertarla como espacio oculto.
+
+Por otra parte, \texttt{Room} utiliza el tipo de sala para condicionar la colocación de
+puertas. Esto permite que la sala secreta no siga exactamente el mismo patrón de acceso que
+una sala regular, reforzando su papel como espacio de descubrimiento. La sala de tesoro
+queda igualmente integrada en el sistema de identificación y representación, aunque su
+acabado funcional completo todavía sigue abierto.
+
+\subsection{Implementación de Sistema de Combate II}
 El refinamiento del combate se apoya en \texttt{PlayerCombatController},
 \texttt{WeaponDefinition}, \texttt{Projectile}, \texttt{MeleeHitbox},
 \texttt{PlayerChargeAttackVisual} y los componentes visuales asociados a proyectiles y
@@ -184,34 +196,22 @@ desplazamiento de proyectiles. El sistema conserva además el contexto completo 
 mediante \texttt{DamageSourceContext}, lo que permite conectar el golpe con otros sistemas
 que interpretan el impacto más allá del valor numérico del daño.
 
-\subsection{Implementación de la sala de tienda}
-La base técnica de la sala de tienda se apoya en \texttt{MapGenerator}, \texttt{Cell} y en
-la configuración de puertas y muros de \texttt{Room}. \texttt{MapGenerator} selecciona un
-índice específico para esta sala dentro del conjunto de habitaciones terminales, le asigna
-un tipo propio y actualiza su representación visual en el mapa mediante iconografía
-dedicada.
+\subsection{Implementación de Sistema de Enemigos II}
+La ampliación del comportamiento enemigo se apoyó sobre todo en \texttt{EnemyController},
+\texttt{EnemyProjectile}, \texttt{EnemyHealth} y \texttt{CircleDefinition}. En
+\texttt{EnemyController} se refuerzan los patrones diferenciados de enemigos normales,
+voladores y tanque mediante tiempos de preparación, ataques con embestida, disparos a
+distancia, recuperación de \textit{knockback} y señales visuales previas al ataque.
 
-Después, esa información se propaga al resto del sistema a través del tipo de sala
-almacenado en la celda, lo que permite que puertas, muros y minimapa la interpreten como una
-categoría distinta. Aunque el contenido interactivo definitivo de la tienda no está cerrado,
-la integración estructural de la sala sí queda resuelta en esta fase.
-
-\subsection{Implementación de la sala secreta y de tesoro}
-La incorporación de salas especiales se apoya también en \texttt{MapGenerator}, que reserva
-índices específicos para estas habitaciones y actualiza su \texttt{RoomType} dentro de cada
-\texttt{Cell}. En el caso de la sala secreta, la selección se realiza con una lógica propia
-que busca posiciones no ocupadas y con suficiente proximidad estructural al resto del mapa
-para poder insertarla como espacio oculto.
-
-Por otra parte, \texttt{Room} utiliza el tipo de sala para condicionar la colocación de
-puertas. Esto permite que la sala secreta no siga exactamente el mismo patrón de acceso que
-una sala regular, reforzando su papel como espacio de descubrimiento. La sala de tesoro
-queda igualmente integrada en el sistema de identificación y representación, aunque su
-acabado funcional completo todavía sigue abierto.
+Además, el sistema se integra de forma más estrecha con el contexto del arma del jugador.
+Para ello se consulta \texttt{DamageSourceContext}, lo que permite ajustar multiplicadores de
+daño en función del arma concreta y de la forma activa. A esto se suma una mejor relación
+con la activación por sala, el estado dormido inicial y la selección ponderada de enemigos
+desde la definición del círculo y del tipo de habitación.
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración estuvo muy condicionado por la naturaleza de las features
-planificadas. Dos de ellas, sistema de combate y sistema de enemigos, provenían de una
+planificadas. Dos de ellas, Sistema de Combate II y Sistema de Enemigos II, provenían de una
 replanificación deliberada tras comprobar en la iteración 5 que su complejidad real era
 mayor de la estimada inicialmente. En consecuencia, el control en esta fase no consistió solo
 en abrir trabajo nuevo, sino en cerrar con más profundidad aspectos que ya se habían validado
