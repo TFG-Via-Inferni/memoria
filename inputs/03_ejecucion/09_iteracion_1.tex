@@ -38,15 +38,6 @@ empezara a diferenciar tipos de habitación con funciones distintas dentro de la
 En términos jugables, esta feature es la que hace posible que cada intento tenga una
 disposición diferente sin perder coherencia estructural.
 
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Generación Procedural en la iteración 1}
-% \includegraphics[width=.9\textwidth]{figures/iteracion1_generacion_procedural.png}
-\caption{Resultado visual de la feature Generación Procedural en la iteración 1}
-\label{fig:iteracion1-feature-generacion}
-\end{center}
-\end{figure}
-
 \item \textbf{Añadir Jugador.} Esta funcionalidad convirtió por primera vez el nivel
 generado en un espacio realmente jugable. Su alcance real consistió en incorporar una
 entidad controlable capaz de aparecer en la sala inicial de la mazmorra, desplazarse por
@@ -58,15 +49,6 @@ para el resto de sistemas, ya que la cámara, la activación de salas y el compo
 los enemigos pasan a organizarse en torno a la posición del jugador. En otras palabras, no
 era solo ``añadir un personaje'', sino introducir el elemento central a partir del cual la
 partida puede empezar a ejecutarse de forma interactiva.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Añadir Jugador en la iteración 1}
-% \includegraphics[width=.9\textwidth]{figures/iteracion1_jugador.png}
-\caption{Resultado visual de la feature Añadir Jugador en la iteración 1}
-\label{fig:iteracion1-feature-jugador}
-\end{center}
-\end{figure}
 
 \item \textbf{Añadir Enemigos.} Esta funcionalidad incorporó oposición activa dentro del
 nivel y transformó la exploración en una experiencia jugable con tensión y resolución. Su
@@ -80,14 +62,6 @@ espacio de tránsito y pasa a comportarse como una unidad de encuentro con inici
 resolución. Esta funcionalidad fue clave para cerrar el primer bucle jugable completo del
 proyecto.
 
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Añadir Enemigos en la iteración 1}
-% \includegraphics[width=.9\textwidth]{figures/iteracion1_enemigos.png}
-\caption{Resultado visual de la feature Añadir Enemigos en la iteración 1}
-\label{fig:iteracion1-feature-enemigos}
-\end{center}
-\end{figure}
 \end{enumerate}
 
 La combinación de estas tres funcionalidades permitió pasar de una base técnica aislada a
@@ -176,6 +150,14 @@ del generador y el espacio real con el que interactuarían el jugador y los enem
 esta traducción fallaba, el mapa podía ser correcto desde el punto de vista lógico pero no
 jugable en el motor.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/01_generacion_procedural_I.png}
+\caption{Resultado visual de la feature Generación Procedural I en la iteración 1}
+\label{fig:iteracion1-feature-generacion}
+\end{center}
+\end{figure}
+
 \subsection{Implementación de Añadir Jugador}
 El jugador se integró mediante un controlador ligero apoyado en \texttt{Rigidbody2D}. En
 cada ciclo se leían las entradas de movimiento y se trasladaban al cuerpo físico del
@@ -186,6 +168,14 @@ La aparición del jugador se vinculó además a la sala inicial del nivel genera
 depender de una coordenada fija de escena. Esta decisión reforzaba el acoplamiento correcto
 entre generación procedural y sistemas jugables, ya que el personaje debía situarse siempre
 en una posición coherente con la partida recién creada.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/02_anadir_jugador.png}
+\caption{Resultado visual de la feature Añadir Jugador en la iteración 1}
+\label{fig:iteracion1-feature-jugador}
+\end{center}
+\end{figure}
 
 \subsection{Implementación de Añadir Enemigo}
 Los enemigos se instanciaron desde las propias salas una vez configuradas. Cada sala
@@ -202,6 +192,14 @@ encuentro. Cuando el jugador entraba por primera vez en una sala con enemigos, l
 se bloqueaban. A medida que los enemigos eran derrotados, la sala actualizaba su estado y,
 al quedar vacía, restauraba el paso. Esta solución definió de forma clara el patrón básico
 de exploración y combate del proyecto.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/03_anadir_enemigo.png}
+\caption{Resultado visual de la feature Añadir Enemigo en la iteración 1}
+\label{fig:iteracion1-feature-enemigos}
+\end{center}
+\end{figure}
 
 \section{Seguimiento y control}
 El seguimiento de esta primera iteración se centró en comprobar si el alcance mínimo previsto

@@ -35,15 +35,6 @@ escena. Esto era importante porque, a medida que el proyecto iba incorporando m�
 la interfaz dejaba de ser un añadido accesorio y pasaba a convertirse en una herramienta
 necesaria para que el estado del juego se percibiera con claridad.
 
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa del Head-Up Display en la iteración 4}
-% \includegraphics[width=.9\textwidth]{figures/iteracion4_hud.png}
-\caption{Resultado visual de la feature Head-Up Display en la iteración 4}
-\label{fig:iteracion4-feature-hud}
-\end{center}
-\end{figure}
-
 \item \textbf{Menú Pausa.} Esta funcionalidad incorporó un flujo de interrupción controlada
 dentro de la partida. Su comportamiento real consistió en detener temporalmente la
 ejecución del juego, ocultar el HUD cuando correspondía, ofrecer acciones de reanudación,
@@ -51,15 +42,6 @@ reinicio y salida, y responder tanto a teclado como a mandos. La feature fue imp
 porque convirtió la pausa en un estado explícito del sistema y no en una simple pantalla
 superpuesta, permitiendo que el jugador pudiera interrumpir y retomar la sesión de forma
 predecible.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa del Menú Pausa en la iteración 4}
-% \includegraphics[width=.9\textwidth]{figures/iteracion4_menu_pausa.png}
-\caption{Resultado visual de la feature Menú Pausa en la iteración 4}
-\label{fig:iteracion4-feature-menu-pausa}
-\end{center}
-\end{figure}
 
 \item \textbf{Menú Principal.} Esta funcionalidad consolidó la pantalla de entrada al
 juego, responsable de cargar la escena principal y organizar las acciones iniciales del
@@ -69,15 +51,6 @@ adaptaran mejor al espacio disponible. Con ello, el proyecto dejó de depender d
 arranque puramente técnico desde la escena jugable y pasó a ofrecer una entrada más propia
 de un producto interactivo completo.
 
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa del Menú Principal en la iteración 4}
-% \includegraphics[width=.9\textwidth]{figures/iteracion4_menu_principal.png}
-\caption{Resultado visual de la feature Menú Principal en la iteración 4}
-\label{fig:iteracion4-feature-menu-principal}
-\end{center}
-\end{figure}
-
 \item \textbf{Actualizar Sprites.} Esta funcionalidad se centró en reforzar la identidad
 visual del juego mediante la incorporación de nuevos sprites diseñados para el proyecto y
 la actualización de prefabs que dependían de esos recursos. Su alcance no se planteó como
@@ -86,14 +59,6 @@ para que personajes, elementos de interfaz y objetos principales encajaran mejor
 estética propia. El objetivo era que la presentación dejara de apoyarse en una apariencia
 provisional y empezara a transmitir una identidad visual más reconocible.
 
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Actualizar Sprites en la iteración 4}
-% \includegraphics[width=.9\textwidth]{figures/iteracion4_actualizar_sprites.png}
-\caption{Resultado visual de la feature Actualizar Sprites en la iteración 4}
-\label{fig:iteracion4-feature-sprites}
-\end{center}
-\end{figure}
 \end{enumerate}
 
 La combinación de estas funcionalidades hizo que esta iteración actuara como una fase de
@@ -164,6 +129,14 @@ HUD depende tanto de su contenido como de su presencia visual. Con este ajuste, 
 de partida quedó mejor adaptada al espacio real de uso y más preparada para convivir con
 otras capas de información que se incorporarán en iteraciones posteriores.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/10_HUD.png}
+\caption{Resultado visual de la feature Head-Up Display en la iteración 4}
+\label{fig:iteracion4-feature-hud}
+\end{center}
+\end{figure}
+
 \subsection{Implementación de Menú Pausa}
 La implementación del menú de pausa se apoyó en \texttt{PauseMenuController}. Este script
 controla el ciclo de pausa dentro de la partida, escuchando la entrada correspondiente,
@@ -176,6 +149,14 @@ botón adecuado para facilitar la navegación y restaura el estado normal al rea
 esta manera, el menú de pausa deja de ser una simple pantalla visual y pasa a convertirse en
 un verdadero controlador del estado de juego.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/11_menus_I.png}
+\caption{Resultado visual de la feature Menú Pausa en la iteración 4}
+\label{fig:iteracion4-feature-menu-pausa}
+\end{center}
+\end{figure}
+
 \subsection{Implementación de Menú Principal}
 La implementación del menú principal se apoyó en \texttt{MainMenuController}, encargado de
 vincular los botones principales con acciones como cargar la escena de juego o salir de la
@@ -186,11 +167,28 @@ La parte final de la feature se completó con ajustes en la composición visual 
 pantalla, especialmente sobre el logotipo y la distribución de los botones, para que su
 encaje fuera más consistente y adaptable.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/12_menus_II.png}
+\caption{Resultado visual de la feature Menú Principal en la iteración 4}
+\label{fig:iteracion4-feature-menu-principal}
+\end{center}
+\end{figure}
+
+\paragraph{Actualizar Sprites.}
 La actualización de sprites se realizó mediante la inserción de los nuevos recursos gráficos
 diseñados para el juego y la revisión de los prefabs afectados. Al no requerir lógica propia
 ni un controlador específico, esta mejora se documenta como una intervención de integración
 visual: sustituir recursos provisionales, ajustar referencias y dejar los objetos principales
 alineados con una estética más característica del proyecto.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/13_actualizar_sprites_I.png}
+\caption{Resultado visual de la feature Actualizar Sprites en la iteración 4}
+\label{fig:iteracion4-feature-sprites}
+\end{center}
+\end{figure}
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración mostró una relación bastante estable entre el alcance

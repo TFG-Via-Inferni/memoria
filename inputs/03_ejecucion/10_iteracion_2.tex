@@ -37,15 +37,6 @@ para corregir una debilidad concreta detectada tras la validación de la primera
 la sala secreta existía en la estructura lógica del mapa, pero su representación espacial
 todavía no estaba completamente bien resuelta.
 
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Generación Procedural en la iteración 2}
-% \includegraphics[width=.9\textwidth]{figures/iteracion2_generacion_procedural.png}
-\caption{Resultado visual de la feature Generación Procedural en la iteración 2}
-\label{fig:iteracion2-feature-generacion}
-\end{center}
-\end{figure}
-
 \item \textbf{Lógica de círculos.} Esta funcionalidad introdujo por primera vez una
 progresión explícita entre niveles temáticos del Infierno dentro de la partida. Hasta ese
 momento, el jugador podía recorrer un mapa generado y superar encuentros, pero el sistema
@@ -61,15 +52,6 @@ progresión con la regeneración del mapa, haciendo pública la rutina que recon
 mazmorra para que el cambio de círculo no se limite a una variable interna, sino que tenga
 un efecto real sobre la continuidad de la partida. En esta iteración queda establecida la
 base funcional de la progresión, aunque no toda la lógica final del sistema de círculos.
-
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Lógica de círculos en la iteración 2}
-% \includegraphics[width=.9\textwidth]{figures/iteracion2_logica_circulos.png}
-\caption{Resultado visual de la feature Lógica de círculos en la iteración 2}
-\label{fig:iteracion2-feature-circulos}
-\end{center}
-\end{figure}
 
 \item \textbf{Cámara de jugador.} Esta funcionalidad aborda la estabilización del sistema de
 seguimiento de cámara después de los problemas detectados en la exploración entre salas. Su
@@ -87,14 +69,6 @@ resuelve una necesidad clave de esta etapa del proyecto: que la navegación entr
 generadas no solo sea técnicamente posible, sino también legible y estable desde el punto
 de vista visual.
 
-\begin{figure}[H]
-\begin{center}
-\missingfigure{Sustituir por captura representativa de Cámara de jugador en la iteración 2}
-% \includegraphics[width=.9\textwidth]{figures/iteracion2_camara_jugador.png}
-\caption{Resultado visual de la feature Cámara de jugador en la iteración 2}
-\label{fig:iteracion2-feature-camara}
-\end{center}
-\end{figure}
 \end{enumerate}
 
 La combinación de estas tres funcionalidades convirtió la segunda iteración en una fase de
@@ -171,6 +145,14 @@ ambiguas en sus bordes. Se trata, por tanto, de una implementación pequeña en 
 código, pero relevante para dar por estabilizada la feature de generación procedural en uno
 de sus casos especiales.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/04_generacion_procedural_II.png}
+\caption{Resultado visual de la feature Generación Procedural II en la iteración 2}
+\label{fig:iteracion2-feature-generacion}
+\end{center}
+\end{figure}
+
 \subsection{Implementación de Lógica de Círculos I}
 La implementación de esta feature se apoyó en tres scripts principales. En primer lugar,
 \texttt{CircleManager} actúa como gestor persistente del progreso, manteniendo el círculo
@@ -191,6 +173,14 @@ Como resultado, la progresión entre círculos dejó de ser una idea abstracta y
 un flujo funcional completo: llegar a la sala del jefe, encontrar la escalera, activarla
 tocándola, incrementar el círculo actual, refrescar la interfaz y reconstruir el escenario.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/05_logica_circulos_I.png}
+\caption{Resultado visual de la feature Lógica de Círculos I en la iteración 2}
+\label{fig:iteracion2-feature-circulos}
+\end{center}
+\end{figure}
+
 \subsection{Implementación de Cámara del Jugador}
 La revisión de cámara se concentró en \texttt{RoomCameraController}. El cambio más
 importante fue la introducción de un \textit{follow proxy}, un objeto intermedio que
@@ -207,6 +197,14 @@ decide si la cámara debe adoptar seguimiento libre o anclaje fijo, recoloca el 
 es necesario y reaplica el \textit{confiner} de Cinemachine con los límites de la nueva
 habitación. Además, se añadieron utilidades de depuración para registrar transiciones y
 facilitar el diagnóstico de comportamientos anómalos.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/06_camara_jugador.png}
+\caption{Resultado visual de la feature Cámara del Jugador en la iteración 2}
+\label{fig:iteracion2-feature-camara}
+\end{center}
+\end{figure}
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración permitió comprobar que el alcance previsto estaba repartido
