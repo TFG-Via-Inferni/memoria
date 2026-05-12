@@ -218,6 +218,21 @@ sin perder el control de la planificación general.
 
 \begin{table}[h!]
     \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 3}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Lógica de Círculos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Descender de círculo mediante la escalera de la sala del jefe. \item Explorar la nueva mazmorra generada. \item Comprobar que las salas y enemigos corresponden al contenido configurado para el círculo activo y que el cambio no mantiene contenido residual del círculo anterior.\end{enumerate}\end{minipage} \\
+    \midrule
+    Dualidad de Personajes & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar la partida con el jugador en su forma inicial. \item Ejecutar el cambio de forma y repetirlo antes y después del tiempo de reutilización. \item Verificar que cambia la representación visual, que las estadísticas compartidas se conservan y que el \textit{cooldown} impide alternancias inmediatas.\end{enumerate}\end{minipage} \\
+    \midrule
+    Minimapa & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Comenzar una nueva partida y observar el minimapa inicial. \item Entrar por primera vez en varias habitaciones. \item Confirmar que la sala inicial aparece visible desde el comienzo y que las nuevas salas se revelan progresivamente al ser descubiertas.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 3.}
+\end{table}
+
+\begin{table}[h!]
+    \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 3}
     \textbf{Horas planificadas de la iteración} & 50:00 \\

@@ -228,6 +228,23 @@ requería remate efectivo.
 
 \begin{table}[h!]
     \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 7}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Sala Tienda & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar varias mazmorras hasta localizar la sala de tienda. \item Acceder a ella desde el recorrido normal y observar su representación en el minimapa. \item Comprobar que aparece como sala terminal diferenciada, que su tipo se conserva en la celda y que puertas y muros se configuran de forma coherente.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sala Secreta y Tesoro & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas con salas especiales activas. \item Localizar la sala de tesoro y buscar la sala secreta mediante exploración del mapa. \item Verificar que ambas usan iconografía propia, que la sala secreta no queda conectada como una habitación regular visible y que su colocación no rompe la navegación del nivel.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sistema de Combate II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Probar armas con ataque normal y ataque cargado en encuentros reales. \item Observar trazos de melé, indicadores de carga, proyectiles y efectos visuales asociados. \item Confirmar que el \textit{feedback} acompaña al momento del ataque, que el daño se aplica al finalizar la acción y que el contexto del arma se mantiene durante el impacto.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sistema de Enemigos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con enemigos normales, voladores y tanque. \item Mantener distintas distancias para provocar carga, disparo, persecución y recuperación tras empuje. \item Verificar que los avisos previos al ataque son legibles, que cada arquetipo mantiene su patrón táctico y que los multiplicadores de daño responden al arma usada por el jugador.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 7.}
+\end{table}
+
+\begin{table}[h!]
+    \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 7}
     \textbf{Horas planificadas de la iteración} & 50:00 \\

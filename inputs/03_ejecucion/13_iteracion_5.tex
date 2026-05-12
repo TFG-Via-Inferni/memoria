@@ -158,6 +158,19 @@ resultado esperado.
 
 \begin{table}[h!]
     \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 5}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Sistema de Combate & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Alternar entre forma de melé y forma a distancia. \item Ejecutar ataques cuerpo a cuerpo, disparos y ataques cargados con distintas armas. \item Comprobar que cada arma respeta su alcance, \textit{cooldown}, generación de hitbox o proyectil y aplicación de daño sobre enemigos válidos.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sistema de Enemigos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con distintos tipos de enemigos. \item Provocar persecución, ataque cuerpo a cuerpo y ataques a distancia. \item Verificar que los enemigos se activan con la sala, que sus proyectiles dañan al jugador, que reciben daño según el contexto del arma y que las puertas se liberan al terminar el encuentro.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 5.}
+\end{table}
+
+\begin{table}[h!]
+    \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 5}
     \textbf{Horas planificadas de la iteración} & 50:00 \\

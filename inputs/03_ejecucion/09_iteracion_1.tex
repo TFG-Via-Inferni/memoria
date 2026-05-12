@@ -223,6 +223,21 @@ una funcionalidad que aún necesitaba consolidación.
 
 \begin{table}[h!]
     \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 1}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Generación Procedural & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar varias partidas desde la escena principal. \item Recorrer la sala inicial y avanzar por las puertas disponibles. \item Comprobar que las habitaciones generadas quedan conectadas, que no aparecen huecos bloqueantes y que las salas especiales se instancian sin romper la navegación.\end{enumerate}\end{minipage} \\
+    \midrule
+    Jugador & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Aparecer en la sala inicial de una mazmorra generada. \item Desplazarse en las cuatro direcciones y atravesar varias habitaciones. \item Verificar que el movimiento responde correctamente, que las colisiones impiden atravesar muros y que la escala del personaje resulta coherente con el escenario.\end{enumerate}\end{minipage} \\
+    \midrule
+    Enemigos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en una sala con enemigos. \item Observar la activación del encuentro, el cierre de puertas y el cambio de los enemigos de reposo a persecución y ataque. \item Derrotar a todos los enemigos y comprobar que la sala libera de nuevo las puertas para continuar la exploración.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 1.}
+\end{table}
+
+\begin{table}[h!]
+    \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 1}
     \textbf{Horas planificadas de la iteración} & 50:00 \\

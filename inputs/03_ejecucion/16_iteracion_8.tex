@@ -191,6 +191,21 @@ pendiente a otra iteración.
 
 \begin{table}[h!]
     \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 8}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Victoria & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Progresar hasta completar el último círculo de la partida. \item Activar el flujo final de victoria desde la progresión normal. \item Comprobar que el juego detiene la simulación, oculta el HUD, pausa el audio y muestra la pantalla de victoria con acciones funcionales de reinicio y salida.\end{enumerate}\end{minipage} \\
+    \midrule
+    Derrota & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Provocar la muerte del jugador durante un encuentro. \item Esperar a que el controlador de derrota detecte el estado final. \item Verificar que el personaje deja de interactuar, que se detienen tiempo y audio, que aparece el menú de derrota y que las opciones de reiniciar o volver al menú principal funcionan correctamente.\end{enumerate}\end{minipage} \\
+    \midrule
+    Actualizar Sprites (II) & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Jugar encuentros contra varios tipos de enemigos con los nuevos sprites configurados. \item Observar su desplazamiento lateral, orientación y transición visual durante combate. \item Confirmar que las animaciones se reproducen con coherencia, que la orientación acompaña al movimiento y que las pantallas finales mantienen la misma línea visual que HUD y menús.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 8.}
+\end{table}
+
+\begin{table}[h!]
+    \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 8}
     \textbf{Horas planificadas de la iteración} & 50:00 \\

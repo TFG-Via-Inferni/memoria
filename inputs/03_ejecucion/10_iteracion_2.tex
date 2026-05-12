@@ -228,6 +228,21 @@ alcance real a partir de la complejidad observada durante el desarrollo.
 
 \begin{table}[h!]
     \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 2}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Generación Procedural II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas hasta localizar una sala secreta. \item Entrar o aproximarse a sus límites desde las salas cercanas. \item Comprobar que el cerramiento visual y físico no deja huecos, bordes atravesables ni lecturas ambiguas del espacio.\end{enumerate}\end{minipage} \\
+    \midrule
+    Lógica de Círculos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Avanzar por el mapa hasta la sala del jefe. \item Activar la escalera entrando en su zona de disparo. \item Verificar que aumenta el círculo actual, que la interfaz muestra el nuevo nombre y que la mazmorra se regenera para continuar la partida.\end{enumerate}\end{minipage} \\
+    \midrule
+    Cámara del Jugador & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Recorrer varias salas normales y salas con cámara fija. \item Observar la transición de cámara al cruzar puertas y cambiar de habitación. \item Confirmar que el encuadre no produce saltos bruscos, que respeta los límites de la sala activa y que fija la vista correctamente cuando la habitación lo requiere.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 2.}
+\end{table}
+
+\begin{table}[h!]
+    \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 2}
     \textbf{Horas planificadas de la iteración} & 50:00 \\

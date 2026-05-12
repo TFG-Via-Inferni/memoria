@@ -197,6 +197,21 @@ preparadas bases para futuros ajustes de balance y contenido.
 
 \begin{table}[h!]
     \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 6}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Gestión del Inventario & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar una partida con el inventario vacío. \item Seleccionar distintos slots, intentar usar slots bloqueados y llenar progresivamente los espacios disponibles. \item Comprobar que la selección activa se actualiza, que los objetos se almacenan en slots válidos y que los casos de inventario lleno, slot vacío o slot bloqueado se comportan de forma predecible.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sistema de Objetos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Localizar pickups dentro del mundo. \item Recoger objetos con espacio disponible en el inventario y repetir la acción con el inventario lleno o con definiciones inválidas preparadas para prueba. \item Verificar que el pickup desaparece solo cuando la recogida tiene éxito y que el objeto queda representado en el inventario con su icono y datos correctos.\end{enumerate}\end{minipage} \\
+    \midrule
+    Minimapa II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Explorar una mazmorra generada entrando en salas nuevas y regresando a salas ya visitadas. \item Observar el minimapa durante cada transición. \item Confirmar que distingue salas ocultas, visitadas y sala actual, que centra la cámara del minimapa en la posición del jugador y que el contenedor del HUD mantiene marco, máscara y tamaño correctos.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 6.}
+\end{table}
+
+\begin{table}[h!]
+    \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 6}
     \textbf{Horas planificadas de la iteración} & 50:00 \\
