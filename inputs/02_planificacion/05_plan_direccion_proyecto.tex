@@ -10,12 +10,12 @@ En este capítulo se define el Plan de Dirección del Proyecto de \textit{Via In
 tomando como referencia el enfoque propuesto por PMBOK y adaptándolo a la escala real de
 un Trabajo de Fin de Grado desarrollado por dos personas. El objetivo no es reproducir una
 gestión documental pesada, sino establecer un marco integrado que explique cómo se
-dirige, planifica, ejecuta, supervisa y cierra el proyecto.
+dirige, planifica, ejecuta, supervisa y cierra el proyecto \cite{pmbok2021}.
 \end{abstract}
 
 \section{Propósito del Plan de Dirección}
 El Plan de Dirección del Proyecto actúa como documento integrador de la planificación. En
-PMBOK, este plan coordina los planes subsidiarios de gestión, las líneas base del proyecto
+PMBOK \cite{pmbok2021}, este plan coordina los planes subsidiarios de gestión, las líneas base del proyecto
 y los mecanismos de control que permiten comparar lo planificado con lo realmente
 ejecutado.
 
@@ -104,7 +104,7 @@ videojuego.
 
 \section{Metodología de Desarrollo}
 Para la construcción de \textit{Via Inferni} se ha seleccionado la metodología
-\textit{Feature Driven Development} (FDD). La razón principal es que encaja especialmente
+\textit{Feature Driven Development} (FDD) \cite{palmer2002fdd}. La razón principal es que encaja especialmente
 bien en proyectos donde la funcionalidad debe crecer por incrementos pequeños,
 comprobables y con un diseño técnico suficientemente claro antes de implementar cada
 cambio.
@@ -144,14 +144,14 @@ Cuadro \ref{fig:fdd_flow}.
 \section{Gestión de la configuración y el código}
 La gestión del repositorio es crítica para asegurar la integridad del proyecto. Para ello
 se ha definido una estrategia híbrida que combina la organización estructural de
-\textit{GitFlow} con la integración frecuente propia de \textit{Trunk-Based Development}.
+\textit{GitFlow} \cite{driessen2010gitflow} con la integración frecuente propia de \textit{Trunk-Based Development} \cite{trunkbasedIntro}.
 
 La rama \texttt{main} representa el estado estable del proyecto, mientras que
 \texttt{develop} actúa como punto de integración del trabajo validado. Las ramas de
 funcionalidad son efímeras y se crean para resolver tareas concretas del \textit{backlog},
 reduciendo así el coste de integración y el riesgo de divergencias largas.
 
-Como criterio de trazabilidad se ha adoptado el estándar \textit{Conventional Commits},
+Como criterio de trazabilidad se ha adoptado el estándar \textit{Conventional Commits} \cite{conventionalCommits10},
 que facilita identificar la intención de cada cambio y relacionarlo con funcionalidades,
 correcciones o ajustes de documentación.
 
@@ -182,31 +182,31 @@ con una tecnología capaz de soportar con solvencia un videojuego 2D de tipo
 iteración rápida sobre sistemas jugables. Tras revisar opciones habituales en este ámbito y
 comparar sus características de forma general, se concluyó que Unity ofrecía el equilibrio
 más adecuado entre capacidad técnica, documentación disponible, curva de aprendizaje
-asumible y velocidad de prototipado.
+asumible y velocidad de prototipado \cite{unityLearnGettingStarted}.
 
 La decisión de utilizar GitHub como base del control de versiones y de la trazabilidad del
 trabajo también fue deliberada. Aunque existían alternativas más específicas para proyectos
 de Unity, se optó por Git y GitHub porque era el flujo de trabajo ya consolidado en la
 formación previa del equipo y porque ofrecía una trazabilidad más completa para los
 objetivos de la memoria: historial de cambios, revisión de código, gestión de incidencias,
-ramas de trabajo y vinculación directa entre desarrollo y documentación del proceso.
+ramas de trabajo y vinculación directa entre desarrollo y documentación del proceso \cite{githubIssuesProjects}.
 
-Por último, la memoria se mantuvo en LaTeX porque encajaba mejor con un documento extenso,
+Por último, la memoria se mantuvo en LaTeX \cite{latexProject} porque encajaba mejor con un documento extenso,
 técnico y modular. Su uso permitió separar capítulos, controlar referencias cruzadas,
 figuras, tablas y bibliografía con un nivel de rigor coherente con el tratamiento dado al
 código fuente y al resto de artefactos del proyecto.
 
-Para el registro de dedicación temporal se incorporó además Clockify. La elección fue
+Para el registro de dedicación temporal se incorporó además Clockify \cite{clockifyOfficial}. La elección fue
 práctica: se trata de una herramienta simple, suficientemente ligera para un equipo
 reducido y ya conocida por ambos integrantes del proyecto.
 
 \begin{itemize}
-    \item Unity actúa como motor gráfico para el desarrollo del videojuego.
-    \item Git y GitHub se utilizan para el control de versiones, revisión de cambios y seguimiento de tareas.
-    \item GitHub Projects proporciona el tablero Kanban con el que se monitoriza el flujo de trabajo.
+    \item Unity actúa como motor gráfico para el desarrollo del videojuego \cite{unityLearnGettingStarted}.
+    \item Git y GitHub se utilizan para el control de versiones, revisión de cambios y seguimiento de tareas \cite{githubIssuesProjects}.
+    \item GitHub Projects proporciona el tablero Kanban con el que se monitoriza el flujo de trabajo \cite{githubIssuesProjects}.
     \item Discord se utiliza como canal principal de comunicación operativa.
-    \item Clockify se utiliza para registrar las horas de trabajo reales de cada integrante del equipo.
-    \item La memoria se mantiene en LaTeX, lo que permite modularizar capítulos y gestionar el documento con el mismo rigor que el código.
+    \item Clockify se utiliza para registrar las horas de trabajo reales de cada integrante del equipo \cite{clockifyOfficial}.
+    \item La memoria se mantiene en LaTeX, lo que permite modularizar capítulos y gestionar el documento con el mismo rigor que el código \cite{latexProject}.
 \end{itemize}
 
 \section{Criterios de seguimiento y cierre}

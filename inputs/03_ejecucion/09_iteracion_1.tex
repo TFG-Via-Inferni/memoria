@@ -21,7 +21,7 @@ el núcleo mínimo que permitiera comprobar si la dirección técnica elegida er
 generar un nivel, instanciarlo en escena, introducir una entidad controlable y poblar las
 salas con enemigos básicos.
 
-Siguiendo el enfoque de \textit{Feature Driven Development} (FDD), en esta iteración se
+Siguiendo el enfoque de \textit{Feature Driven Development} (FDD) \cite{palmer2002fdd}, en esta iteración se
 abordaron tres funcionalidades que definen el arranque real del sistema:
 
 \begin{enumerate}
@@ -113,7 +113,7 @@ suficiente para recorrer el nivel generado y comprobar la coherencia del mapa.
 Los enemigos también se diseñaron con una estructura mínima pero extensible. En lugar de
 implementar desde el principio un sistema de IA complejo, se definió una máquina de estados
 elemental con tres comportamientos: reposo, persecución y ataque. Esta decisión permitía
-introducir oposición funcional sin comprometer la estabilidad del arranque.
+introducir oposición funcional sin comprometer la estabilidad del arranque \cite{gamma1994designpatterns}.
 
 Por último, se decidió que la sala, y no el enemigo individual, fuese la responsable del
 ritmo general del encuentro. Así, al entrar por primera vez en una habitación con enemigos,
