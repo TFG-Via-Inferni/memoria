@@ -64,29 +64,33 @@ iteraciones.
     \item \textbf{Generación Procedural:} Sistema encargado de construir automáticamente la
     estructura del nivel, definir la conectividad entre salas y distribuir los distintos
     tipos de habitaciones que forman cada partida.
-    \item \textbf{Lógica de círculos:} Mecanismo que gobierna la progresión del jugador por
+    \item \textbf{Lógica de Círculos:} Mecanismo que gobierna la progresión del jugador por
     los distintos niveles temáticos del Infierno, controlando el avance entre círculos y
     su coherencia con el estado general de la partida.
+    \item \textbf{Sala Tienda:} Habitación especial integrada en la generación del mapa
+    que introduce un punto de compra y preparación dentro de la \textit{run}.
+    \item \textbf{Sala Secreta y Tesoro:} Conjunto de salas especiales orientadas a
+    ampliar la exploración y la recompensa mediante contenido oculto y botín específico.
 \end{itemize}
 
 \subsubsection{Dominio: jugador y sistemas base}
 \begin{itemize}
-    \item \textbf{Añadir Jugador:} Incorporación de una entidad jugable capaz de aparecer en
+    \item \textbf{Jugador:} Incorporación de una entidad jugable capaz de aparecer en
     el nivel generado, desplazarse por las salas y servir como núcleo de interacción con
     el resto de sistemas del juego.
-    \item \textbf{Cámara de jugador:} Sistema de seguimiento visual que mantiene al jugador
+    \item \textbf{Cámara del Jugador:} Sistema de seguimiento visual que mantiene al jugador
     como referencia principal en escena y facilita una navegación clara por el mapa
     generado.
-    \item \textbf{Dualidad de personajes:} Mecánica que permite trabajar con Dante y
+    \item \textbf{Dualidad de Personajes:} Mecánica que permite trabajar con Dante y
     Virgilio como personajes complementarios, contemplando su alternancia y la persistencia
     de información compartida durante la partida.
 \end{itemize}
 
 \subsubsection{Dominio: enemigos y combate}
 \begin{itemize}
-    \item \textbf{Añadir Enemigo:} Integración de enemigos básicos dentro de las salas para
+    \item \textbf{Enemigos:} Integración de enemigos básicos dentro de las salas para
     convertir el desplazamiento por el nivel en una experiencia jugable con oposición real.
-    \item \textbf{Sistema de combate:} Conjunto de reglas y mecanismos que permiten atacar,
+    \item \textbf{Sistema de Combate:} Conjunto de reglas y mecanismos que permiten atacar,
     recibir daño y resolver enfrentamientos entre jugador y enemigos de forma coherente.
     \item \textbf{Sistema de Enemigos:} Lógica de comportamiento que regula el estado,
     movimiento y respuesta de los enemigos, permitiendo definir patrones diferenciados y
@@ -95,22 +99,28 @@ iteraciones.
 
 \subsubsection{Dominio: interfaz y experiencia de uso}
 \begin{itemize}
-    \item \textbf{Minimap:} Representación simplificada del nivel que permite al jugador
+    \item \textbf{Minimapa:} Representación simplificada del nivel que permite al jugador
     orientarse, comprender la estructura del mapa y seguir su progreso durante la partida.
     \item \textbf{Head-Up Display:} Capa de interfaz que muestra en tiempo real la
     información esencial de la partida, como vida, recursos, estado del personaje o
     indicadores de progreso.
-    \item \textbf{Menús:} Flujo de pantallas que organiza la interacción fuera del núcleo
-    jugable, incluyendo acceso al juego, pausa, navegación entre opciones y salida.
+    \item \textbf{Menú de Pausa:} Flujo de interrupción controlada de la partida que permite
+    pausar el juego y acceder a opciones de continuidad, navegación o salida.
+    \item \textbf{Menú Principal:} Pantalla de entrada al juego desde la que se organiza el
+    acceso a la partida y a las opciones principales de navegación.
     \item \textbf{Actualizar Sprites:} Revisión y mejora de los elementos visuales del
     proyecto para mantener coherencia estética y reforzar la identidad del videojuego.
+    \item \textbf{Victoria:} Resolución formal del cierre exitoso de la partida con su
+    correspondiente flujo de interfaz final.
+    \item \textbf{Derrota:} Resolución formal del fin de partida cuando el jugador pierde,
+    incluyendo reinicio o retorno al menú principal.
 \end{itemize}
 
 \subsubsection{Dominio: progresión, economía y objetos}
 \begin{itemize}
-    \item \textbf{Gestión de Inventario:} Sistema responsable de almacenar, consultar y
+    \item \textbf{Gestión del Inventario:} Sistema responsable de almacenar, consultar y
     administrar los recursos y elementos obtenidos por el jugador durante una \textit{run}.
-    \item \textbf{Objetos:} Conjunto de elementos interactivos, pasivos o consumibles que
+    \item \textbf{Sistema de Objetos:} Conjunto de elementos interactivos, pasivos o consumibles que
     modifican la partida, aportan variedad a las decisiones del jugador y refuerzan la
     progresión interna del juego.
 \end{itemize}
