@@ -140,6 +140,8 @@ En la práctica, la implementación convirtió el descenso entre círculos en un
 configuración del mundo: al actualizarse el círculo activo, cambia también el conjunto de
 salas y enemigos que el sistema utiliza para construir la nueva planta.
 
+La Figura~\ref{fig:iteracion3-feature-circulos} muestra el resultado de esta adaptación del contenido por círculo.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/07_logica_circulos_II.png}
@@ -165,6 +167,8 @@ otros sistemas reaccionen a la dualidad en iteraciones posteriores. Aunque en es
 feature todavía no explota todas sus implicaciones de combate, la implementación deja ya
 resuelto el esqueleto funcional del sistema.
 
+El resultado visual de la dualidad puede observarse en la Figura~\ref{fig:iteracion3-feature-dualidad}.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/08_dualidad_personajes.png}
@@ -187,6 +191,8 @@ de interfaz mínimo asociado al HUD del minimapa. Aunque esta versión todavía 
 la implementación logra el objetivo principal de la feature: ofrecer una lectura progresiva
 del recorrido del jugador por el nivel generado.
 
+La Figura~\ref{fig:iteracion3-feature-minimap} recoge el resultado de esta primera versión del minimapa.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/09_minimapa.png}
@@ -198,7 +204,7 @@ del recorrido del jugador por el nivel generado.
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se orientaron a validar que la progresión por
 círculos, la dualidad del jugador y el apoyo de navegación del minimapa quedaban integrados
-como parte del flujo normal de la partida. La tabla siguiente resume los playtests manuales
+como parte del flujo normal de la partida. La Tabla~\ref{tab:iteracion3-pruebas} resume los playtests manuales
 ejecutados sobre estas tres features.
 
 Además, el proceso de prueba permitió identificar ajustes necesarios en la transición entre
@@ -219,6 +225,7 @@ presentación visual y contenido generado.
     Minimapa & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Comenzar una nueva partida y observar el minimapa inicial. \item Entrar por primera vez en varias habitaciones. \item Confirmar que la sala inicial aparece visible desde el comienzo y que las nuevas salas se revelan progresivamente al ser descubiertas.\end{enumerate}\end{minipage} \\
     \end{coolTable}
     \caption{Pruebas de playtest realizadas en la iteración 3.}
+    \label{tab:iteracion3-pruebas}
 \end{table}
 
 \section{Seguimiento y control}
@@ -242,6 +249,8 @@ replanificar su segunda parte para la iteración 6, cuando el resto de sistemas 
 estuviera más estabilizado. Esta decisión permitió ajustar el alcance a la complejidad real
 sin perder el control de la planificación general.
 
+El resumen de horas de esta iteración se presenta en la Tabla~\ref{tab:iteracion3-horas}.
+
 \begin{table}[h!]
     \centering
     \begin{coolTable}{lr}{2}
@@ -254,7 +263,10 @@ sin perder el control de la planificación general.
     \textbf{Horas acumuladas reales hasta esta iteración} & 247:54 \\
     \end{coolTable}
     \caption{Resumen de horas reales de la iteración 3.}
+    \label{tab:iteracion3-horas}
 \end{table}
+
+La Figura~\ref{fig:uml-resultado-iteracion3} recoge el diagrama UML de resultado de la iteración 3.
 
 \begin{figure}[htbp]
 \begin{center}

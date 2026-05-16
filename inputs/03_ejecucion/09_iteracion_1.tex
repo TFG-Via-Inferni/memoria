@@ -128,7 +128,8 @@ integración del jugador y, finalmente, la incorporación de enemigos y control 
 La construcción del mapa partió de una estructura de ocupación y de una estrategia de
 expansión controlada hacia celdas adyacentes. El algoritmo arranca desde una posición
 central y explora posiciones vecinas siempre que se cumplan ciertas restricciones:
-disponibilidad espacial, límite de habitaciones y validez estructural de la expansión.
+disponibilidad espacial, límite de habitaciones y validez estructural de la expansión
+\cite{garnetBindingMap,luiscanaryProcgen}.
 
 Una vez aceptada una nueva posición, el sistema decide si se trata de una sala simple o de
 una sala compuesta por varias celdas. A continuación se registra tanto su ocupación física
@@ -150,6 +151,8 @@ del generador y el espacio real con el que interactuarían el jugador y los enem
 esta traducción fallaba, el mapa podía ser correcto desde el punto de vista lógico pero no
 jugable en el motor.
 
+El resultado de esta primera implementación puede observarse en la Figura~\ref{fig:iteracion1-feature-generacion}.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/01_generacion_procedural.png}
@@ -168,6 +171,8 @@ La aparición del jugador se vinculó además a la sala inicial del nivel genera
 depender de una coordenada fija de escena. Esta decisión reforzaba el acoplamiento correcto
 entre generación procedural y sistemas jugables, ya que el personaje debía situarse siempre
 en una posición coherente con la partida recién creada.
+
+La Figura~\ref{fig:iteracion1-feature-jugador} muestra el resultado visual de esta integración del jugador.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -193,6 +198,8 @@ se bloqueaban. A medida que los enemigos eran derrotados, la sala actualizaba su
 al quedar vacía, restauraba el paso. Esta solución definió de forma clara el patrón básico
 de exploración y combate del proyecto.
 
+El resultado obtenido para esta feature puede verse en la Figura~\ref{fig:iteracion1-feature-enemigos}.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/03_anadir_enemigo.png}
@@ -203,7 +210,7 @@ de exploración y combate del proyecto.
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar sobre partida real las
-features desarrolladas. La tabla siguiente resume los playtests manuales ejecutados sobre la
+features desarrolladas. La Tabla~\ref{tab:iteracion1-pruebas} resume los playtests manuales ejecutados sobre la
 generación procedural, el jugador y los enemigos, con el objetivo de comprobar tanto el
 comportamiento esperado como la estabilidad de la base jugable mínima.
 
@@ -225,6 +232,7 @@ salas especiales, reforzando la estabilidad de la primera base jugable.
     Enemigos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en una sala con enemigos. \item Observar la activación del encuentro, el cierre de puertas y el cambio de los enemigos de reposo a persecución y ataque. \item Derrotar a todos los enemigos y comprobar que la sala libera de nuevo las puertas para continuar la exploración.\end{enumerate}\end{minipage} \\
     \end{coolTable}
     \caption{Pruebas de playtest realizadas en la iteración 1.}
+    \label{tab:iteracion1-pruebas}
 \end{table}
 
 \section{Seguimiento y control}
@@ -247,6 +255,8 @@ requería ajuste se replanificó para la iteración 2. Esta decisión permitió 
 relación realista entre alcance, tiempo y grado de acabado, evitando cerrar artificialmente
 una funcionalidad que aún necesitaba consolidación.
 
+El resumen de horas de la iteración puede consultarse en la Tabla~\ref{tab:iteracion1-horas}.
+
 \begin{table}[h!]
     \centering
     \begin{coolTable}{lr}{2}
@@ -259,7 +269,10 @@ una funcionalidad que aún necesitaba consolidación.
     \textbf{Horas acumuladas reales hasta esta iteración} & 147:05 \\
     \end{coolTable}
     \caption{Resumen de horas reales de la iteración 1.}
+    \label{tab:iteracion1-horas}
 \end{table}
+
+La Figura~\ref{fig:uml-resultado-iteracion1} recoge el diagrama UML de resultado de la iteración.
 
 \begin{figure}[htbp]
 \begin{center}

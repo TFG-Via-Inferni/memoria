@@ -101,7 +101,7 @@ de arma configurable que ya existía.
 También se dio importancia al \textit{feedback} visual del ataque. Si el sistema pretendía
 ser más expresivo, la respuesta en pantalla debía acompañar ese aumento de complejidad. Por
 eso, el diseño no se limita a parámetros de daño o alcance, sino que contempla también
-trazos, partículas y apoyos visuales ligados a la ejecución del ataque.
+trazos, partículas y apoyos visuales ligados a la ejecución del ataque \cite{gameendeavorCombatFun}.
 
 \subsection{Diseño de Sistema de Enemigos II}
 La decisión principal fue reforzar la identidad táctica de cada tipo de enemigo mediante
@@ -132,6 +132,8 @@ almacenado en la celda, lo que permite que puertas, muros y minimapa la interpre
 categoría distinta. Aunque el contenido interactivo definitivo de la tienda no está cerrado,
 la integración estructural de la sala sí queda resuelta en esta fase.
 
+La Figura~\ref{fig:iteracion7-feature-tienda} muestra el resultado visual de esta integración.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/19_sala_tienda.png}
@@ -152,6 +154,8 @@ puertas. Esto permite que la sala secreta no siga exactamente el mismo patrón d
 una sala regular, reforzando su papel como espacio de descubrimiento. La sala de tesoro
 queda igualmente integrada en el sistema de identificación y representación, aunque su
 acabado funcional completo todavía sigue abierto.
+
+La Figura~\ref{fig:iteracion7-feature-salas-especiales} recoge el resultado obtenido para estas salas especiales.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -175,6 +179,8 @@ desplazamiento de proyectiles. El sistema conserva además el contexto completo 
 mediante \texttt{DamageSourceContext}, lo que permite conectar el golpe con otros sistemas
 que interpretan el impacto más allá del valor numérico del daño.
 
+La Figura~\ref{fig:iteracion7-feature-combate} muestra el resultado de este refinamiento del combate.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/21_sistema_combate_ii.png}
@@ -196,6 +202,8 @@ daño en función del arma concreta y de la forma activa. A esto se suma una mej
 con la activación por sala, el estado dormido inicial y la selección ponderada de enemigos
 desde la definición del círculo y del tipo de habitación.
 
+El resultado visual de esta ampliación del comportamiento enemigo puede verse en la Figura~\ref{fig:iteracion7-feature-enemigos}.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/22_sistema_enemigos_ii.png}
@@ -207,7 +215,7 @@ desde la definición del círculo y del tipo de habitación.
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar tanto la ampliación del
-recorrido con salas especiales como el refinamiento táctico de combate y enemigos. La tabla
+recorrido con salas especiales como el refinamiento táctico de combate y enemigos. La Tabla~\ref{tab:iteracion7-pruebas}
 siguiente resume los playtests manuales que se ejecutaron para comprobar tienda, salas
 secreta y de tesoro, ataques cargados y nuevos patrones enemigos.
 
@@ -231,6 +239,7 @@ mejorando su coherencia espacial y funcional dentro del recorrido.
     Sistema de Enemigos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con enemigos normales, voladores y tanque. \item Provocar sus distintos patrones de ataque. \item Verificar la legibilidad de avisos, su patrón táctico y la respuesta al arma del jugador.\end{enumerate}\end{minipage} \\
     \end{coolTable}
     \caption{Pruebas de playtest realizadas en la iteración 7.}
+    \label{tab:iteracion7-pruebas}
 \end{table}
 
 \section{Seguimiento y control}
@@ -254,6 +263,8 @@ puede considerarse consolidado, mientras que tienda y salas especiales justifica
 replanificación parcial del cierre para no presentar como terminada una funcionalidad que aún
 requería remate efectivo.
 
+La Tabla~\ref{tab:iteracion7-horas} resume el esfuerzo temporal registrado en esta iteración.
+
 \begin{table}[h!]
     \centering
     \begin{coolTable}{lr}{2}
@@ -266,7 +277,10 @@ requería remate efectivo.
     \textbf{Horas acumuladas reales hasta esta iteración} & 458:33 \\
     \end{coolTable}
     \caption{Resumen de horas reales de la iteración 7.}
+    \label{tab:iteracion7-horas}
 \end{table}
+
+La Figura~\ref{fig:uml-resultado-iteracion7} recoge el diagrama UML de resultado de la iteración 7.
 
 \begin{figure}[htbp]
 \begin{center}

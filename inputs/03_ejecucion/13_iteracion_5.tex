@@ -102,6 +102,8 @@ origen del daño, el identificador del arma y la forma del jugador. Esto permite
 no llegue al objetivo como un valor aislado, sino acompañado de contexto útil para otros
 sistemas.
 
+La Figura~\ref{fig:iteracion5-feature-combate} muestra el resultado de esta ampliación del sistema de combate.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/14_sistema_combate.png}
@@ -127,6 +129,8 @@ modificando el multiplicador de daño según su tipo y según la herramienta uti
 jugador. Esto conecta directamente el comportamiento enemigo con la variedad introducida por
 el nuevo sistema de combate.
 
+El resultado visual de esta integración puede verse en la Figura~\ref{fig:iteracion5-feature-enemigos}.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/15_sistema_enemigos.png}
@@ -138,7 +142,7 @@ el nuevo sistema de combate.
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar el núcleo jugable del
-combate y la respuesta de los enemigos en encuentros reales. La tabla siguiente recoge los
+combate y la respuesta de los enemigos en encuentros reales. La Tabla~\ref{tab:iteracion5-pruebas} recoge los
 playtests manuales con los que se comprobó el funcionamiento de las armas, los proyectiles,
 la aplicación de daño y la activación de los distintos comportamientos enemigos.
 
@@ -158,6 +162,7 @@ coherente y para reducir comportamientos inconsistentes durante los enfrentamien
     Sistema de Enemigos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con distintos tipos de enemigos. \item Provocar persecución, ataque cuerpo a cuerpo y ataques a distancia. \item Verificar que los enemigos se activan con la sala, que sus proyectiles dañan al jugador, que reciben daño según el contexto del arma y que las puertas se liberan al terminar el encuentro.\end{enumerate}\end{minipage} \\
     \end{coolTable}
     \caption{Pruebas de playtest realizadas en la iteración 5.}
+    \label{tab:iteracion5-pruebas}
 \end{table}
 
 \section{Seguimiento y control}
@@ -180,6 +185,8 @@ proyecto: algunas features se habían estimado inicialmente como menos complejas
 realmente fueron, y dividirlas entre iteraciones permitió ajustar mejor el esfuerzo al
 resultado esperado.
 
+El resumen temporal de la iteración se presenta en la Tabla~\ref{tab:iteracion5-horas}.
+
 \begin{table}[h!]
     \centering
     \begin{coolTable}{lr}{2}
@@ -192,7 +199,10 @@ resultado esperado.
     \textbf{Horas acumuladas reales hasta esta iteración} & 351:52 \\
     \end{coolTable}
     \caption{Resumen de horas reales de la iteración 5.}
+    \label{tab:iteracion5-horas}
 \end{table}
+
+La Figura~\ref{fig:uml-resultado-iteracion5} recoge el diagrama UML de resultado de la iteración 5.
 
 \begin{figure}[htbp]
 \begin{center}

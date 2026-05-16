@@ -145,6 +145,8 @@ ambiguas en sus bordes. Se trata, por tanto, de una implementación pequeña en 
 código, pero relevante para dar por estabilizada la feature de generación procedural en uno
 de sus casos especiales.
 
+La Figura~\ref{fig:iteracion2-feature-generacion} muestra el resultado de este ajuste sobre la sala secreta.
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/04_generacion_procedural_II.png}
@@ -173,6 +175,8 @@ Como resultado, la progresión entre círculos dejó de ser una idea abstracta y
 un flujo funcional completo: llegar a la sala del jefe, encontrar la escalera, activarla
 tocándola, incrementar el círculo actual, refrescar la interfaz y reconstruir el escenario.
 
+El resultado visual de esta integración puede verse en la Figura~\ref{fig:iteracion2-feature-circulos}.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/05_logica_circulos.png}
@@ -198,6 +202,8 @@ es necesario y reaplica el \textit{confiner} de Cinemachine con los límites de 
 habitación. Además, se añadieron utilidades de depuración para registrar transiciones y
 facilitar el diagnóstico de comportamientos anómalos.
 
+La Figura~\ref{fig:iteracion2-feature-camara} recoge el resultado obtenido para la cámara del jugador.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/06_camara_jugador.png}
@@ -208,7 +214,7 @@ facilitar el diagnóstico de comportamientos anómalos.
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en comprobar que la consolidación del
-prototipo inicial funcionaba correctamente en contexto de partida. La tabla siguiente recoge
+prototipo inicial funcionaba correctamente en contexto de partida. La Tabla~\ref{tab:iteracion2-pruebas} recoge
 los playtests manuales aplicados sobre la segunda fase de la generación procedural, la
 progresión entre círculos y el comportamiento de la cámara por salas.
 
@@ -229,6 +235,7 @@ y cambios de estado para estabilizar el desplazamiento visual y el paso entre ma
     Cámara del Jugador & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Recorrer varias salas normales y salas con cámara fija. \item Observar la transición de cámara al cruzar puertas y cambiar de habitación. \item Confirmar que el encuadre no produce saltos bruscos, que respeta los límites de la sala activa y que fija la vista correctamente cuando la habitación lo requiere.\end{enumerate}\end{minipage} \\
     \end{coolTable}
     \caption{Pruebas de playtest realizadas en la iteración 2.}
+    \label{tab:iteracion2-pruebas}
 \end{table}
 
 \section{Seguimiento y control}
@@ -251,6 +258,8 @@ a salas y enemigos. Por ello, fue necesario replanificar una segunda parte de la
 la iteración 3. La decisión no respondió a un descontrol de tiempos, sino a una revisión del
 alcance real a partir de la complejidad observada durante el desarrollo.
 
+El detalle temporal de la iteración puede consultarse en la Tabla~\ref{tab:iteracion2-horas}.
+
 \begin{table}[h!]
     \centering
     \begin{coolTable}{lr}{2}
@@ -263,7 +272,10 @@ alcance real a partir de la complejidad observada durante el desarrollo.
     \textbf{Horas acumuladas reales hasta esta iteración} & 196:13 \\
     \end{coolTable}
     \caption{Resumen de horas reales de la iteración 2.}
+    \label{tab:iteracion2-horas}
 \end{table}
+
+La Figura~\ref{fig:uml-resultado-iteracion2} resume el diagrama UML de resultado de esta iteración.
 
 \begin{figure}[htbp]
 \begin{center}

@@ -71,7 +71,7 @@ la interfaz.
 La principal decisión de diseño fue modelar el inventario como una colección cerrada de
 slots, no como una lista ilimitada de entradas dinámicas. Esto facilita el control del HUD,
 la selección activa y la idea de capacidad desbloqueable como parte de la progresión del
-personaje.
+personaje \cite{rumpledcodeInventory}.
 
 Además, se decidió separar la lógica de selección, la lógica de almacenamiento y la gestión
 de errores, de modo que el sistema pueda reaccionar de forma distinta según la operación que
@@ -120,6 +120,8 @@ desbloqueados puede depender del estado de progresión del jugador. A ello se su
 de validación de operaciones que registra por qué una acción falla, lo que resulta útil
 tanto para depuración como para la futura comunicación con el usuario.
 
+La Figura~\ref{fig:iteracion6-feature-inventario} muestra el resultado de esta primera versión del inventario.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/16_gestion_inventario.png}
@@ -139,6 +141,8 @@ un componente encargado de mostrar el icono del ítem, ofrecer una operación de
 contra el inventario del jugador y destruir o mantener el pickup según el resultado. Esto
 permite que el vínculo entre mundo e inventario quede resuelto de manera directa: el jugador
 interactúa con un pickup y, si la operación es válida, el objeto pasa a su inventario.
+
+El resultado visible de esta integración puede observarse en la Figura~\ref{fig:iteracion6-feature-objetos}.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -167,6 +171,8 @@ su margen en función de la resolución disponible. De esta forma, la mejora no 
 contenido mostrado, sino también a la calidad de su integración visual en pantalla.
 \end{enumerate}
 
+La Figura~\ref{fig:iteracion6-feature-minimap} recoge el resultado de esta segunda iteración del minimapa.
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/18_minimapa_II.png}
@@ -177,7 +183,7 @@ contenido mostrado, sino también a la calidad de su integración visual en pant
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se orientaron a validar la nueva capa de
-progresión basada en inventario, objetos y mejora del minimapa. La tabla siguiente resume
+progresión basada en inventario, objetos y mejora del minimapa. La Tabla~\ref{tab:iteracion6-pruebas} resume
 los playtests manuales aplicados para comprobar tanto la gestión de slots y pickups como la
 lectura visual del mapa durante la exploración.
 
@@ -199,6 +205,7 @@ progresión y mejorar su consistencia durante la exploración.
     Minimapa II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Explorar una mazmorra generada entrando en salas nuevas y regresando a salas ya visitadas. \item Observar el minimapa durante cada transición. \item Confirmar que distingue salas ocultas, visitadas y sala actual, que centra la cámara del minimapa en la posición del jugador y que el contenedor del HUD mantiene marco, máscara y tamaño correctos.\end{enumerate}\end{minipage} \\
     \end{coolTable}
     \caption{Pruebas de playtest realizadas en la iteración 6.}
+    \label{tab:iteracion6-pruebas}
 \end{table}
 
 \section{Seguimiento y control}
@@ -221,6 +228,8 @@ tiempo, se completó un refinamiento del minimapa que había quedado pendiente p
 en una iteración anterior. No fue necesario replanificar de nuevo, aunque sí quedaron
 preparadas bases para futuros ajustes de balance y contenido.
 
+El balance temporal de la iteración puede consultarse en la Tabla~\ref{tab:iteracion6-horas}.
+
 \begin{table}[h!]
     \centering
     \begin{coolTable}{lr}{2}
@@ -233,7 +242,10 @@ preparadas bases para futuros ajustes de balance y contenido.
     \textbf{Horas acumuladas reales hasta esta iteración} & 401:19 \\
     \end{coolTable}
     \caption{Resumen de horas reales de la iteración 6.}
+    \label{tab:iteracion6-horas}
 \end{table}
+
+La Figura~\ref{fig:uml-resultado-iteracion6} recoge el diagrama UML de resultado de la iteración 6.
 
 \begin{figure}[htbp]
 \begin{center}
