@@ -44,7 +44,7 @@
 %% Personal data macros
 %%
 \newcommand{\authorURL}[1]{\def\@authorURL {\url{#1}}}
-\newcommand{\authorEMail}[1]{\def\@authorEMail {\href{mailto:#1}{\nolinkurl{#1}}}}
+\newcommand{\authorEMail}[1]{\def\@authorEMail {#1}}
 \newcommand{\copyrightText}[1]{\def\@copyrightText {#1}}
 
 
@@ -401,6 +401,10 @@ fill=#2]
 {\csuse{authorName\thedrawauthorsCounter}\stepcounter{drawauthorsCounter}\ifnum\value{drawauthorsCounter} < \value{authorsCounter}{\\[0.5cm]}\fi
 }
 }
+\newcommand{\drawAuthorsCompact}{\setcounter{drawauthorsCounter}{0}\@whilenum \value{drawauthorsCounter} < \value{authorsCounter} \do
+{\csuse{authorName\thedrawauthorsCounter}\stepcounter{drawauthorsCounter}\ifnum\value{drawauthorsCounter} < \value{authorsCounter}{\\}\fi
+}
+}
 \newcommand{\setTitle}[1]{
 \def\dissertationTitle{#1}
 }
@@ -439,15 +443,18 @@ fill=#2]
           \node  [anchor=north,yshift=0.3\paperheight-2.5cm-20pt-20pt,inner sep=11pt,text width=0.8\paperwidth,text centered] (author) at (current page.center)  {\parbox{0.7\paperwidth}{\centering\color{ThemeColor1} \textbf{\LARGE\scshape \drawAuthors}}};
           % Supervisor node
            \node  [anchor=north,yshift=-40pt,inner sep=11pt] (dissertation) at (author)
-          {\color{ThemeColor1} \textbf{\Large Trabajo fin de Grado}};
-          \node  [anchor=north,yshift=-20pt,inner sep=11pt,text width=0.8\paperwidth,text centered] at (dissertation)
+          {\color{ThemeColor1} \textbf{\Large Trabajo Fin de Grado}};
+          \node  [anchor=north,yshift=-20pt,inner sep=11pt] (degree) at (dissertation)
+          {\color{ThemeColor1} \textbf{\Large Grado en Ingeniería Informática - Ingeniería del Software}};
+          \node  [anchor=north,yshift=-20pt,inner sep=11pt,text width=0.8\paperwidth,text centered] at (degree)
           {\parbox{0.7\paperwidth}{\centering \color{ThemeColor1}\Large\textbf{Supervisado por\drawSupervisorsEnglish}}};
           % University logo
           \node [anchor=south,yshift=0.2\paperheight] (logo) at (current page.south){
               \includegraphics[width=0.25\paperwidth]{figures/universidad}
           };
           \node [anchor=north,yshift=0.2\paperheight] at (current page.south) {\color{ThemeColor1} \textbf{\large \university}};
-          \node [anchor=north,yshift=0.15\paperheight] at (current page.south) {\color{ThemeColor1} \textbf{\large \monthYear\today}};
+          \node [anchor=north,yshift=0.16\paperheight] at (current page.south) {\color{ThemeColor1} \textbf{\large Primera Convocatoria}};
+          \node [anchor=north,yshift=0.12\paperheight] at (current page.south) {\color{ThemeColor1} \textbf{\large \monthYear\today}};
 
    \end{tikzpicture}
     
@@ -462,7 +469,7 @@ fill=#2]
 \thispagestyle{title}
 \begin{flushleft}
 \noindent Publicado en \monthYear\today ~ por\\
-\drawAuthors\\
+\drawAuthorsCompact\\
 Copyright \copyright ~ \uppercase\expandafter{\romannumeral \THEYEAR}\\
 
 %Author URL if it exists
