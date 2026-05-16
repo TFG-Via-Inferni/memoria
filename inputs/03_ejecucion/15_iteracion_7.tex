@@ -16,16 +16,16 @@ La séptima iteración se plantea como una fase de consolidación sobre sistemas
 entrega anterior ya eran funcionales, pero todavía admitían una mejora clara en profundidad
 jugable y en variedad de recorrido. La incorporación de salas especiales amplía la
 estructura del mapa con espacios de función diferenciada, mientras que el refinamiento de
-combate y enemigos mejora la respuesta táctica de los encuentros. En el estado actual del
-proyecto, la parte más cerrada de la iteración corresponde al refinamiento de combate y
-enemigos, mientras que las salas especiales quedan ya encajadas a nivel estructural y
-visual, aunque todavía requieren cierre funcional para darse por terminadas del todo.
+combate y enemigos mejora la respuesta táctica de los encuentros. Dentro del conjunto de la
+iteración, el refinamiento de combate y enemigos alcanzó un grado de cierre mayor, mientras
+que las salas especiales quedaron resueltas a nivel estructural y visual, pero con remates
+funcionales que pasaron a la iteración siguiente.
 
 \begin{enumerate}
 \item \textbf{Sala Tienda.} Esta funcionalidad introduce una habitación especial dentro
 de la generación del mapa con identidad propia y con señalización específica en el minimapa.
-En el estado actual de la iteración, su aporte principal consiste en quedar integrada dentro
-del reparto de salas terminales, contar con tipo de sala diferenciado y poder representarse
+Su aporte principal en esta iteración consiste en quedar integrada dentro del reparto de
+salas terminales, contar con tipo de sala diferenciado y poder representarse
 de forma explícita tanto en la celda del mapa como en la configuración de puertas y muros.
 Aunque su comportamiento jugable todavía necesita cerrarse, esta base ya permite tratar la
 tienda como una categoría espacial propia dentro de la estructura procedural del nivel.
@@ -59,6 +59,8 @@ aparición ponderada por círculo y por tipo de habitación. En términos funcio
 feature hace que los enfrentamientos resulten más legibles y menos genéricos, ya que el
 jugador puede anticipar mejor la intención del enemigo y adaptar su respuesta según el tipo
 de amenaza al que se enfrenta.
+
+\end{enumerate}
 
 La combinación de estas funcionalidades hace que la séptima iteración actúe como una capa de
 consolidación y ampliación. Por un lado, refuerza la calidad táctica del combate y de los
@@ -146,7 +148,7 @@ Por otra parte, \texttt{Room} utiliza el tipo de sala para condicionar la coloca
 puertas. Esto permite que la sala secreta no siga exactamente el mismo patrón de acceso que
 una sala regular, reforzando su papel como espacio de descubrimiento. La sala de tesoro
 queda igualmente integrada en el sistema de identificación y representación, aunque su
-acabado funcional completo todavía sigue abierto.
+acabado funcional completo quedó pendiente para la iteración siguiente.
 
 La Figura~\ref{fig:iteracion7-feature-salas-especiales} recoge el resultado obtenido para estas salas especiales.
 
@@ -182,8 +184,6 @@ con la activación por sala, el estado dormido inicial y la selección ponderada
 desde la definición del círculo y del tipo de habitación.
 
 El resultado visual de esta ampliación del comportamiento enemigo puede verse en la Figura~\ref{fig:iteracion7-feature-enemigos}.
-
-\end{enumerate}
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar tanto la ampliación del

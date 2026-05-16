@@ -39,7 +39,7 @@ personaje y pase a actuar como una respuesta formal del juego, legible y reutili
 de la navegación general de escenas.
 
 \item \textbf{Actualizar Sprites (II).} Esta funcionalidad constituye la segunda parte de
-la feature \textit{Actualizar Sprites}, cuya primera entrega se realizó en la iteración 5.
+la feature \textit{Actualizar Sprites}, cuya primera entrega se realizó en la iteración 4.
 En esta ocasión, el trabajo ya no se limita al ritmo de animación del jugador, sino que
 amplía la identidad visual del proyecto hacia los enemigos y hacia las pantallas de cierre de
 partida. Su alcance real incluye la incorporación de secuencias laterales de movimiento en
@@ -63,7 +63,7 @@ medida de lo posible, la arquitectura de interfaz y de control de escena ya exis
 modo que victoria, derrota y actualización visual no aparecieran como bloques aislados.
 
 \subsection{Diseño de Victoria}
-La victoria se diseña como un estado terminal explícito del flujo de partida. La decisión
+La victoria se diseñó como un estado terminal explícito del flujo de partida. La decisión
 principal consiste en no tratarla como una simple transición de escena desconectada del
 sistema de progresión, sino como una consecuencia directa del avance del jugador por los
 círculos y de la resolución del último tramo de la \textit{run}.
@@ -74,7 +74,7 @@ alcanzado ese estado. Esta separación permite mantener estable la lógica de fi
 aunque el acabado de la interfaz final evolucione.
 
 \subsection{Diseño de Derrota}
-La derrota se diseña con un criterio simétrico al de la victoria, aunque su activación
+La derrota se diseñó con un criterio simétrico al de la victoria, aunque su activación
 depende del estado del jugador y no del progreso por círculos. La decisión importante aquí es
 evitar una derrota difusa, donde el personaje deja de responder sin que el sistema exprese de
 forma clara qué ha ocurrido.
@@ -85,7 +85,7 @@ volver al menú principal. Esto hace que la derrota actúe como una respuesta de
 como un fallo silencioso del juego.
 
 \subsection{Diseño de Actualizar Sprites (II)}
-La segunda revisión visual se diseña como una capa de cohesión, no como una sustitución
+La segunda revisión visual se diseñó como una capa de cohesión, no como una sustitución
 aislada de recursos. La decisión central es que los enemigos y los nuevos estados de victoria
 y derrota compartan la misma dirección visual que HUD, menús y elementos ya consolidados, en
 lugar de introducir estilos desconectados entre sí.
