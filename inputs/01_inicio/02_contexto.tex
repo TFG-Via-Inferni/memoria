@@ -6,154 +6,117 @@ The beginning is the most important part of the work.
 \end{quotation}
 
 \begin{abstract}
-En este capítulo se describe el marco contextual del proyecto Via Inferni.
-Se analiza la relevancia actual de la industria de los videojuegos,
-se profundiza en las características del género roguelike y sus mecánicas clave,
-se revisa el estado del arte con títulos de referencia que han marcado la industria,
-y finalmente se explora cómo la obra clásica de Dante Alighieri
-sirve como inspiración narrativa y artística para este proyecto.
+En este capítulo se describe el marco contextual de \textit{Via Inferni}. Se presenta la
+relevancia del videojuego independiente, se resumen las características principales del
+género \textit{roguelike}, se revisan títulos de referencia y se explica el papel de la
+\textit{Divina Comedia} como base temática del proyecto.
 \end{abstract}
 
 \section{El mundo de los videojuegos}
 
-La industria del videojuego se ha consolidado en las últimas décadas
-como uno de los sectores de entretenimiento más dinámicos
-y con mayor crecimiento económico a nivel mundial.
-Tanto en mercados maduros como en emergentes,
-los videojuegos generan miles de millones de dólares anuales
-y atraen a audiencias de todas las edades y perfiles.
+La industria del videojuego se ha consolidado como uno de los sectores de entretenimiento
+más relevantes de las últimas décadas. Su crecimiento no se limita a las grandes
+producciones, sino que también incluye proyectos independientes capaces de alcanzar una
+visibilidad significativa mediante propuestas más acotadas, originales y ajustadas a
+equipos reducidos.
 
-Dentro de esta industria, el fenómeno de los videojuegos independientes (\textit{indie games})
-ha transformado significativamente el panorama creativo.
-Estudios pequeños con equipos reducidos han logrado alcanzar éxito comercial y crítico
-mediante propuestas innovadoras, narrativas profundas y mecánicas inventivas.
-Esto ha democratizado la creación de videojuegos,
-permitiendo que proyectos con recursos limitados pero alta creatividad
-compitan con producciones AAA multimillonarias.
-
-La accesibilidad de motores de desarrollo como Unity ha sido fundamental en este cambio \cite{unityLearnGettingStarted}.
-Herramientas que antes estaban disponibles solo para grandes editoras
-ahora son accesibles para cualquier desarrollador con pasión y dedicación.
-Via Inferni se inscribe en esta tradición de proyectos independientes
-que buscan aportar nuevas visiones al medio.
+Este contexto resulta especialmente importante para un TFG como \textit{Via Inferni}. El
+proyecto no pretende competir con una producción profesional de gran escala, sino adoptar
+un enfoque cercano al desarrollo independiente: alcance controlado, mecánicas bien
+definidas y aprovechamiento de herramientas accesibles. En este sentido, motores como
+Unity han facilitado que equipos pequeños puedan crear videojuegos completos con una base
+técnica sólida y una curva de aprendizaje asumible \cite{unityLearnGettingStarted}.
 
 \section{El género roguelike}
 
-El género roguelike representa una de las corrientes más influyentes
-del diseño de juegos contemporáneo.
-Sus raíces se remontan a los juegos de rol por texto de los años ochenta,
-pero ha evolucionado considerablemente para adaptarse a múltiples géneros y plataformas.
+El género \textit{roguelike} tiene su origen en los juegos de rol por texto de los años
+ochenta, aunque con el tiempo se ha adaptado a múltiples estilos, plataformas y ritmos de
+juego. Su interés para este proyecto reside en que permite generar experiencias variables
+sin diseñar manualmente cada partida completa, lo que encaja con las limitaciones de
+tiempo y recursos de un trabajo académico.
 
-Un juego roguelike se caracteriza por tres pilares fundamentales:
+En términos generales, un \textit{roguelike} suele apoyarse en tres elementos:
 
 \begin{itemize}
-    \item \textbf{Generación procedural de contenido:} Los niveles, mapas y escenarios
-se generan algorítmicamente de forma aleatoria,
-asegurando que cada partida ofrezca una experiencia diferente.
-Esto maximiza la rejugabilidad,
-ya que el jugador nunca enfrenta exactamente el mismo escenario dos veces.
+    \item \textbf{Generación procedural de contenido:} los niveles se construyen mediante
+    algoritmos, de forma que cada partida presenta una disposición distinta de salas,
+    enemigos, recompensas y riesgos.
     
-    \item \textbf{Muerte permanente (permadeath):} Cuando el personaje muere,
-el progreso se reinicia completamente.
-El jugador vuelve al inicio del juego sin los ítems acumulados,
-aunque puede mantener desbloqueables de larga duración o mejoras metaprogresivas.
-Esta mecánica añade tensión y significado a cada decisión.
+    \item \textbf{Reinicio tras la derrota:} la muerte del personaje devuelve al jugador
+    al inicio del recorrido o a un estado muy anterior, lo que da importancia a cada
+    decisión y favorece la repetición de partidas.
     
-    \item \textbf{Combate táctico en tiempo real:} Las decisiones se toman durante la acción,
-sin pausas que permitan reflexión indefinida.
-El jugador debe balancear la agresividad con la prudencia,
-gestionar sus recursos limitados
-y adaptarse dinámicamente al comportamiento enemigo.
+    \item \textbf{Aprendizaje progresivo del jugador:} aunque el avance de una partida
+    pueda perderse, el jugador mejora al conocer patrones, enemigos, objetos y estrategias.
 \end{itemize}
 
-Estos tres pilares se aplican íntegramente en Via Inferni,
-creando una experiencia donde cada intento es una nueva aventura
-y el desafío constante mantiene al jugador comprometido.
+En \textit{Via Inferni}, estos elementos se adaptan a una experiencia 2D de acción. La
+generación de salas sostiene la variabilidad, el combate en tiempo real aporta tensión y
+el avance por círculos permite introducir una dificultad creciente sin depender
+únicamente de la aleatoriedad.
 
 \section{Estado del arte}
 
-A lo largo de los últimos años, ha habido una explosión de títulos roguelike
-que han redefinido el género y ganado aclamación crítica y popular.
-Estos juegos han demostrado que el género es viable comercialmente
-y que las mecánicas roguelike pueden aplicarse a múltiples géneros y temáticas.
-
-Entre los títulos más influyentes y relevantes se encuentran:
+A lo largo de los últimos años, distintos títulos han ampliado el significado práctico del
+término \textit{roguelike}. Algunos mantienen la tradición clásica, mientras que otros
+incorporan acción en tiempo real, narrativa persistente o sistemas de progresión más
+accesibles. Para este proyecto se han tomado como referencia los siguientes casos:
 
 \begin{itemize}
-    \item \textbf{Rogue} (1980): El juego que originó todo el género.
-Este roguelike de rol textual estableció los pilares fundamentales:
-generación procedural de mazmorras, muerte permanente
-y exploración de dungeons basada en turnos.
-Aunque primitivo por los estándares actuales, su influencia es incalculable
-en la estructura de todos los roguelikes posteriores.
+    \item \textbf{Rogue} (1980): título que dio nombre al género y estableció elementos
+    básicos como la exploración de mazmorras, la generación procedural y la muerte
+    permanente.
     
-    \item \textbf{NetHack} (1987-actualidad): Una evolución directa de Hack,
-continuando la tradición de roguelikes clásicos de rol por texto.
-NetHack es conocido por su profundidad extrema, variedad de clases y razas,
-y su capacidad de crear situaciones emergentes complejas.
-Representa la rama más pura del linaje roguelike tradicional.
+    \item \textbf{NetHack} (1987-actualidad): evolución de los roguelikes clásicos, útil
+    como referencia por la profundidad de sus sistemas y por la gran cantidad de
+    situaciones emergentes que permite.
     
-    \item \textbf{Dungeon Crawl: Stone Soup} (2006-actualidad): Un roguelike clásico de rol
-que enfatiza la estrategia y la exploración.
-Ofrece amplia variedad de razas, clases y estrategias,
-mostrando las posibilidades de profundidad táctica del género
-mientras mantiene accesibilidad para nuevos jugadores.
+    \item \textbf{Dungeon Crawl: Stone Soup} (2006-actualidad): ejemplo de diseño centrado
+    en estrategia, exploración y toma de decisiones, manteniendo una estructura clásica de
+    mazmorra.
     
-    \item \textbf{The Binding of Isaac} (2011): Un roguelike de acción en perspectiva cenital \cite{bindingIsaacOfficial}
-que combina mecánicas de tiro y combate con una narrativa perturbadora y oscura.
-Este juego redefinió el roguelike moderno y sigue siendo una referencia obligatoria.
-Su sistema de items, su generación procedural de dungeons
-y su dificultad desafiante son aspectos que Via Inferni toma como inspiración directa.
+    \item \textbf{The Binding of Isaac} (2011): roguelike de acción en perspectiva cenital
+    \cite{bindingIsaacOfficial}. Resulta especialmente relevante por su estructura de
+    salas, su sistema de objetos y su forma de combinar dificultad, azar y partidas
+    cortas.
     
-    \item \textbf{Hades} (2020): Un roguelike de acción que fusiona narrativa profunda \cite{hadesOfficial}
-con mecánicas de juego altamente pulidas.
-Hades demostró que es posible crear una historia significativa incluso con permadeath,
-utilizando repeticiones narrativas y revelaciones progresivas.
-Su estética visual y su banda sonora también establecieron nuevos estándares.
+    \item \textbf{Hades} (2020): roguelike de acción que integra progresión narrativa con
+    repetición de intentos \cite{hadesOfficial}. Su interés para este trabajo está en la
+    relación entre estructura cíclica, personajes y avance argumental.
 \end{itemize}
 
-Tecnológicamente, el uso de algoritmos para la generación procedural de niveles, 
-especialmente conexiones de salas en rejillas (grids) con garantías de navegabilidad, 
-representa una solución eficiente para crear contenido extenso
-sin consumir una cantidad desproporcionada de recursos artísticos.
-Via Inferni aprovecha estas técnicas consolidadas
-para ofrecer una experiencia de roguelike clásica con una temática y narrativa únicas.
+Estas referencias muestran que el género puede abordarse desde distintos niveles de
+complejidad. En el caso de \textit{Via Inferni}, se toma una aproximación acotada:
+generación de salas conectadas, progresión por zonas, enemigos diferenciados y sistemas de
+combate y recompensa suficientes para sostener la rejugabilidad del prototipo.
 
 \section{El Infierno de Dante como base narrativa}
 
-Mientras que el género roguelike proporciona la estructura de juego,
-la obra maestra de Dante Alighieri, \textit{La Divina Comedia},
-aporta la base narrativa y temática que hace único a Via Inferni.
+Mientras que el género \textit{roguelike} proporciona la estructura jugable, la
+\textit{Divina Comedia} aporta el marco simbólico y temático del proyecto. El Infierno de
+Dante se organiza en círculos asociados a distintos pecados, castigos y figuras, lo que
+permite convertir una obra literaria clásica en una estructura comprensible para el diseño
+de niveles.
 
-El juego se sitúa en la estructura de los nueve círculos del Infierno
-tal como fue descrita por Dante en el siglo XIV.
-Cada círculo representa un tipo diferente de pecado
-y está poblado por diversos condenados.
-Esta estructura clásica ofrece múltiples ventajas para el diseño del juego:
+Esta adaptación no busca reproducir la obra de forma literal. Su objetivo es utilizarla
+como inspiración para definir ambientaciones, enemigos, progresión y tono general. De este
+modo, cada círculo puede funcionar como una zona con identidad propia, manteniendo al mismo
+tiempo una coherencia global dentro del recorrido del jugador.
 
 \begin{itemize}
-    \item \textbf{Estructura de niveles:} Los nueve círculos proporcionan naturalmente
-nueve actos o zonas progresivas.
-Cada círculo puede tener su propia ambientación, enemigos temáticos y desafíos específicos,
-progresando desde el Limbo hasta la Traición en el noveno círculo.
+    \item \textbf{Estructura de niveles:} los círculos permiten estructurar el juego en
+    zonas progresivas con dificultad y ambientación diferenciadas.
     
-    \item \textbf{Narrativa integrada:} El viaje de Dante a través del Infierno
-proporciona una narrativa de trasfondo que enriquece la experiencia del jugador.
-Encuentros con personajes históricos y míticos añaden profundidad cultural.
+    \item \textbf{Identidad visual y temática:} cada pecado ofrece una base para diseñar
+    enemigos, escenarios y recompensas de forma coherente.
     
-    \item \textbf{Dualidad de personajes:} La relación entre Dante
-(el peregrino, símbolo de la acción y la fuerza)
-y Virgilio (su guía, símbolo de la sabiduría y las habilidades)
-se traduce en una mecánica de juego dual donde el jugador controla
-dos personajes complementarios con diferentes fortalezas y debilidades,
-aportando profundidad estratégica.
+    \item \textbf{Dualidad de personajes:} la relación entre Dante y Virgilio se traslada a
+    una mecánica de alternancia entre personajes con capacidades complementarias.
     
-    \item \textbf{Riqueza temática:} Los temas de pecado, redención, castigo y justicia poética
-que permean la Divina Comedia
-crean un trasfondo atmosférico y simbólico
-que diferencia a Via Inferni de otros roguelikes conocidos.
+    \item \textbf{Diferenciación del prototipo:} el uso de una referencia literaria aporta
+    una identidad concreta frente a otros roguelikes centrados únicamente en la mecánica.
 \end{itemize}
 
-La adaptación de una obra literaria clásica al formato interactivo
-representa un desafío creativo que une la riqueza cultural de Dante
-con las posibilidades técnicas y narrativas del medio videolúdico moderno.
+El valor de esta base narrativa está en que sirve como guía de diseño. Ayuda a delimitar
+decisiones artísticas y jugables, y evita que la generación procedural produzca una
+experiencia desconectada de la temática general del proyecto.
