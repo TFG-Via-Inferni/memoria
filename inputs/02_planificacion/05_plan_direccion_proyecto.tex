@@ -7,10 +7,11 @@ Plans are useless, but planning is indispensable.
 
 \begin{abstract}
 En este capítulo se define el Plan de Dirección del Proyecto de \textit{Via Inferni},
-tomando como referencia el marco PMBOK y adaptándolo a la escala de un Trabajo de Fin de
-Grado desarrollado por dos estudiantes de Ingeniería Informática. El propósito del capítulo
-es establecer el marco de dirección que integra los planes subsidiarios, las líneas base,
-los mecanismos de control y los criterios de cierre del proyecto \cite{pmbok2021}.
+tomando como referencia el marco PMBOK y seleccionando los procesos que resultan útiles
+para un Trabajo de Fin de Grado desarrollado por dos estudiantes de Ingeniería Informática.
+El propósito del capítulo es establecer el marco de dirección que integra los planes
+subsidiarios, las líneas base, los mecanismos de control y los criterios de cierre del
+proyecto \cite{pmbok2021}.
 \end{abstract}
 
 \section{Propósito del Plan de Dirección}
@@ -35,12 +36,12 @@ La planificación persigue tres objetivos principales:
 \end{itemize}
 
 \section{Enfoque de Dirección basado en PMBOK}
-El proyecto toma como referencia las áreas de conocimiento de PMBOK, aunque las adapta a un
-equipo reducido y a un entorno académico. Se desarrollan como planes subsidiarios aquellas
-áreas que tienen impacto directo en la ejecución del TFG: alcance, cronograma,
+El proyecto adopta PMBOK como marco de referencia y selecciona las áreas que aportan valor
+real a un equipo reducido y a un entorno académico. Se desarrollan como planes subsidiarios
+aquellas áreas que tienen impacto directo en la ejecución del TFG: alcance, cronograma,
 comunicaciones, riesgos, calidad y costes. Otras áreas, como interesados, recursos y
 adquisiciones, se tratan de forma integrada o se justifican como no aplicables en el
-capítulo de adaptaciones y excepciones.
+capítulo de selecciones y excepciones.
 
 La gestión de la integración se materializa en este propio Plan de Dirección. Su función es
 asegurar que las decisiones sobre alcance, calendario, calidad, riesgos, configuración y
@@ -112,15 +113,16 @@ diseñarse, implementarse, probarse e integrarse en iteraciones sucesivas.
 
 El proceso general se resume en cinco pasos: desarrollo de un modelo general, construcción
 de la lista de funcionalidades, planificación por funcionalidad, diseño por funcionalidad y
-construcción por funcionalidad. La aplicación concreta de estos pasos al alcance y al
-cronograma se desarrolla en los planes de gestión correspondientes.
+construcción por funcionalidad. Este flujo se representa en la Figura \ref{fig:fdd_flow}. La
+aplicación concreta de estos pasos al alcance y al cronograma se desarrolla en los planes de
+gestión correspondientes.
 
 \begin{figure}[htb]
     \centering
     \begin{tikzpicture}[node distance=1.2cm, auto,
         block/.style={rectangle, draw, fill=gray!5, text width=6cm, text centered, rounded corners, minimum height=1cm, font=\small},
         line/.style={draw, -latex, thick}]
-        \node [block] (step1) {\textbf{1. Desarrollo de un modelo general} \\ (análisis de arquitectura y dominio)};
+        \node [block] (step1) {\textbf{1. Desarrollo de un modelo general} \\ (agrupación de dominios funcionales)};
         \node [block, below=of step1] (step2) {\textbf{2. Construcción de la lista de funcionalidades} \\ (desglose del backlog)};
         \node [block, below=of step2] (step3) {\textbf{3. Planificación por funcionalidad} \\ (priorización e hitos)};
         \node [block, below=of step3, fill=blue!5] (step4) {\textbf{4. Diseño por funcionalidad} \\ (contratos y lógica técnica)};
@@ -174,17 +176,37 @@ valor para el núcleo jugable con el esfuerzo técnico y temporal que exige.
 \section{Herramientas y tecnologías}
 El proyecto se apoya en un conjunto reducido de herramientas técnicas y de gestión. Su
 selección responde a criterios de adecuación al tipo de videojuego, madurez técnica del
-equipo, trazabilidad y facilidad de integración con la memoria.
+equipo, trazabilidad, coste y facilidad de integración con la memoria.
 
-Unity se utiliza como motor de desarrollo por su capacidad para soportar un videojuego 2D de
-tipo \textit{roguelike}, con generación procedural, gestión de escenas, interfaz, combate y
-prototipado rápido \cite{unityLearnGettingStarted}. Git y GitHub se emplean para el control
-de versiones, la revisión de cambios, la gestión de incidencias y la trazabilidad del
-trabajo \cite{githubIssuesProjects}. GitHub Projects proporciona el tablero Kanban del
-proyecto. Discord se utiliza como canal principal de comunicación operativa. Clockify
-registra la dedicación temporal real de cada integrante \cite{clockifyOfficial}. La memoria
-se mantiene en LaTeX por su adecuación a un documento técnico extenso, modular y con
-referencias cruzadas \cite{latexProject}.
+Para el motor de desarrollo se valoraron alternativas como Godot, Unreal Engine y Unity.
+Godot ofrecía una solución ligera y de código abierto, adecuada para proyectos 2D, pero el
+equipo consideró que Unity podía ofrecer más posibilidades de desarrollo y una transición
+más natural gracias a la experiencia previa con C\#. Unreal Engine proporcionaba una
+capacidad técnica elevada, especialmente en proyectos 3D, pero su complejidad y orientación
+principal hacían menos eficiente su uso para un \textit{roguelike} 2D de alcance académico.
+Finalmente, se seleccionó Unity por su equilibrio entre capacidad técnica, documentación,
+curva de aprendizaje asumible, gestión de escenas, soporte para interfaz y velocidad de
+prototipado \cite{unityLearnGettingStarted}.
+
+Para el control de versiones se consideraron flujos basados en repositorios locales,
+GitLab, Bitbucket y GitHub. Se eligieron Git y GitHub porque eran herramientas ya conocidas
+por el equipo, ofrecían integración directa entre repositorio, incidencias, revisión de
+cambios y tablero Kanban, y facilitaban la trazabilidad del desarrollo en la memoria
+\cite{githubIssuesProjects}. GitHub Projects se utiliza como tablero de seguimiento por
+estar integrado con las tareas y los cambios del repositorio.
+
+Para la comunicación se eligió Discord frente a alternativas como Microsoft Teams, Slack o
+correo electrónico. La decisión se basó en su ligereza, disponibilidad para ambos miembros
+del equipo y utilidad para resolver bloqueos operativos de forma rápida. Para el registro de
+horas se seleccionó Clockify frente a una hoja de cálculo manual porque permite registrar
+dedicación por tarea de forma más ordenada sin introducir una carga de gestión elevada
+\cite{clockifyOfficial}.
+
+Por último, la memoria se mantiene en LaTeX frente a procesadores de texto convencionales
+porque el documento requiere modularidad, referencias cruzadas, tablas, figuras,
+bibliografía y control estructural de un texto técnico extenso. Esta elección también
+permite tratar la memoria como un artefacto versionado junto con el resto del proyecto
+\cite{latexProject}.
 
 \section{Criterios de seguimiento y cierre}
 El seguimiento del proyecto se realiza de forma iterativa. Al cierre de cada ciclo se revisa

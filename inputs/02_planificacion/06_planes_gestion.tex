@@ -7,10 +7,10 @@ For every minute spent in organizing, an hour is earned.
 
 \begin{abstract}
 En este capítulo se desarrollan los principales planes de gestión aplicados al proyecto. Su
-contenido adapta el marco PMBOK a un Trabajo de Fin de Grado de desarrollo de videojuegos,
-manteniendo un nivel de formalidad suficiente para controlar alcance, cronograma,
-comunicaciones, riesgos, calidad y costes sin introducir una carga documental
-desproporcionada \cite{pmbok2021}.
+contenido adopta PMBOK como marco de referencia y selecciona los planes útiles para un
+Trabajo de Fin de Grado de desarrollo de videojuegos, manteniendo un nivel de formalidad
+suficiente para controlar alcance, cronograma, comunicaciones, riesgos, calidad y costes sin
+introducir una carga documental desproporcionada \cite{pmbok2021}.
 \end{abstract}
 
 \section{Plan de gestión del alcance}
@@ -23,7 +23,11 @@ Las propuestas que no satisfagan este criterio, o que comprometan el calendario 
 se registran como posibles mejoras futuras y quedan fuera del alcance del TFG.
 
 \subsection{Estructura del alcance}
-El alcance se organiza en dos niveles:
+El alcance se organiza en dos niveles. En FDD, el modelo general suele entenderse como una
+primera aproximación arquitectónica del sistema. Sin embargo, en este proyecto no se plantea
+como una arquitectura inicial cerrada, ya que las decisiones de diseño técnico se desarrollan
+en las iteraciones. En \textit{Via Inferni}, el modelo general se utiliza como agrupación de
+dominios funcionales y de conjuntos de \textit{features} a alto nivel:
 
 \begin{itemize}
     \item \textbf{Modelo general:} descomposición conceptual del sistema en bloques
@@ -98,9 +102,9 @@ partida real.
 
 Cada \textit{playtest} se define mediante una serie de pasos reproducibles: preparación del
 estado inicial, ejecución de la acción o flujo a validar, observación del resultado,
-comprobación de regresiones y registro de incidencias. Este formato permite documentar las
-pruebas con suficiente rigor sin introducir una infraestructura de automatización poco
-proporcionada para el alcance del TFG.
+comprobación de regresiones y descripción de los fallos encontrados junto con su solución
+cuando proceda. Este formato permite documentar las pruebas con suficiente rigor sin
+introducir una infraestructura de automatización poco proporcionada para el alcance del TFG.
 
 \subsubsection{Seguimiento y control}
 El seguimiento y control cierra la iteración. En este apartado se compara el resultado
