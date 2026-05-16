@@ -6,391 +6,184 @@ However beautiful the strategy, you should occasionally look at the results.
 \end{quotation}
 
 \begin{abstract}
-Este capítulo describe cómo los planes de gestión definidos previamente se trasladaron a
-la ejecución real del proyecto.
+Este capítulo describe cómo los planes de gestión definidos previamente se trasladan a la
+ejecución del proyecto. Su finalidad no es redefinir la planificación, sino explicar cómo se
+aplican sus mecanismos de control durante el desarrollo de \textit{Via Inferni}.
 \end{abstract}
 
 \section{Ejecución del plan de gestión del alcance}
-La ejecución del alcance se articuló sobre FDD \cite{palmer2002fdd} mediante una descomposición del sistema en
-funcionalidades manejables. Este enfoque permitió controlar qué entraba realmente dentro
-del producto mínimo viable y qué quedaba fuera del alcance del TFG.
+La ejecución del alcance se articula mediante FDD \cite{palmer2002fdd}. El modelo general
+define los grandes dominios del videojuego y la lista de funcionalidades concreta el trabajo
+que puede planificarse, implementarse y validarse en iteraciones.
 
-\subsection{FDD: Modelo general -- Overall Model}
-Dentro de FDD, el \textit{Overall Model} no se entiende como un diseño detallado del
-sistema, sino como una representación conceptual de alto nivel que permite compartir una
-misma visión del producto antes de descomponerlo en \textit{features}. En el caso de
-\textit{Via Inferni}, este modelo general sirvió para identificar los grandes bloques
-funcionales del videojuego, su propósito dentro de la experiencia de juego y la relación
-existente entre ellos.
-
-Desde esta perspectiva, el sistema puede interpretarse como una estructura formada por
-cuatro áreas principales:
+\subsection{Modelo general}
+El modelo general proporciona una visión conceptual del producto. En \textit{Via Inferni},
+el sistema se organiza en cuatro dominios:
 
 \begin{itemize}
-    \item \textbf{Generación y estructura del mundo:} bloque encargado de construir la
-    partida, distribuir salas, establecer su conectividad y definir la progresión espacial
-    del recorrido. Este dominio constituye la base sobre la que se apoya el resto del
-    videojuego, ya que determina el espacio jugable donde se desarrollan las mecánicas.
-    \item \textbf{Jugador, enemigos y combate:} núcleo jugable del sistema. En este bloque
-    se integran la entidad controlable, los enemigos y las reglas de interacción entre
-    ambos. Aquí se sitúan tanto el desplazamiento y la dualidad de personajes como las
-    acciones ofensivas, la recepción de daño y el comportamiento enemigo.
-    \item \textbf{Interfaz y apoyo a la experiencia de uso:} conjunto de mecanismos que
-    median entre el estado interno del juego y la percepción del jugador. Incluye la
-    cámara, el minimapa, el \textit{Head-Up Display} y los menús necesarios para
-    comunicar información, facilitar la navegación y controlar la partida.
-    \item \textbf{Progresión y gestión de recursos:} bloque orientado a sostener la
-    evolución de la \textit{run} más allá del movimiento y el combate inmediato. En este
-    dominio se sitúan los objetos, el inventario y los elementos que añaden persistencia,
-    toma de decisiones y variedad a cada partida.
+    \item \textbf{Generación y estructura del mundo:} construcción de niveles, distribución
+    de salas, conectividad y progresión espacial.
+    \item \textbf{Jugador, enemigos y combate:} entidad jugable, enemigos, desplazamiento,
+    acciones ofensivas, recepción de daño y comportamiento de oposición.
+    \item \textbf{Interfaz y experiencia de uso:} cámara, minimapa, \textit{Head-Up Display}
+    y menús que comunican el estado de la partida.
+    \item \textbf{Progresión y gestión de recursos:} objetos, inventario y elementos que
+    aportan persistencia, toma de decisiones y variedad a cada partida.
 \end{itemize}
 
-La relación entre estos bloques es secuencial y dependiente. La generación del mundo crea
-el contexto de juego; sobre ese contexto actúan el jugador y los enemigos; la interfaz
-permite interpretar lo que ocurre durante la partida; y los sistemas de progresión añaden
-continuidad y profundidad a la experiencia. De este modo, el \textit{Overall Model}
-proporciona una visión estructurada del producto sin descender todavía al nivel de diseño
-de clases, algoritmos o implementaciones concretas.
+La relación entre estos dominios es dependiente: la generación crea el espacio jugable; el
+jugador y los enemigos actúan sobre él; la interfaz permite interpretar lo que ocurre; y la
+progresión aporta continuidad a la experiencia.
 
-\subsection{FDD: Lista de Funcionalidades -- Feature List}
-A partir de esta organización se construyó una lista de funcionalidades agrupadas por
-dominio. Esta descomposición hizo posible planificar por incrementos verificables y
-justificar cada avance dentro de la memoria. En este punto se define qué es cada
-\textit{feature}; el detalle de diseño e implementación se desarrolla más adelante en las
-iteraciones.
+\subsection{Lista de funcionalidades}
+A partir del modelo general se construye una lista de funcionalidades agrupadas por dominio.
+Esta lista permite seleccionar trabajo para cada iteración y mantener trazabilidad entre
+alcance, implementación y validación.
 
-\subsubsection{Dominio: generación y estructura del mundo}
+\subsubsection{Generación y estructura del mundo}
 \begin{itemize}
-    \item \textbf{Generación Procedural:} Sistema encargado de construir automáticamente la
-    estructura del nivel, definir la conectividad entre salas y distribuir los distintos
-    tipos de habitaciones que forman cada partida.
-    \item \textbf{Lógica de Círculos:} Mecanismo que gobierna la progresión del jugador por
-    los distintos niveles temáticos del Infierno, controlando el avance entre círculos y
-    su coherencia con el estado general de la partida.
-    \item \textbf{Sala Tienda:} Habitación especial integrada en la generación del mapa
-    que introduce un punto de compra y preparación dentro de la \textit{run}.
-    \item \textbf{Sala Secreta y Tesoro:} Conjunto de salas especiales orientadas a
-    ampliar la exploración y la recompensa mediante contenido oculto y botín específico.
+    \item \textbf{Generación procedural:} creación automática de niveles, salas y
+    conectividad.
+    \item \textbf{Lógica de círculos:} progresión por los niveles temáticos del Infierno.
+    \item \textbf{Sala tienda:} punto de compra y preparación dentro de la \textit{run}.
+    \item \textbf{Sala secreta y tesoro:} contenido oculto y recompensas de exploración.
 \end{itemize}
 
-\subsubsection{Dominio: jugador y sistemas base}
+\subsubsection{Jugador, enemigos y combate}
 \begin{itemize}
-    \item \textbf{Jugador:} Incorporación de una entidad jugable capaz de aparecer en
-    el nivel generado, desplazarse por las salas y servir como núcleo de interacción con
-    el resto de sistemas del juego.
-    \item \textbf{Cámara del Jugador:} Sistema de seguimiento visual que mantiene al jugador
-    como referencia principal en escena y facilita una navegación clara por el mapa
-    generado.
-    \item \textbf{Dualidad de Personajes:} Mecánica que permite trabajar con Dante y
-    Virgilio como personajes complementarios, contemplando su alternancia y la persistencia
-    de información compartida durante la partida.
+    \item \textbf{Jugador:} entidad controlable e integrada en el nivel generado.
+    \item \textbf{Cámara del jugador:} seguimiento visual para facilitar navegación.
+    \item \textbf{Dualidad de personajes:} alternancia y persistencia compartida entre
+    Dante y Virgilio.
+    \item \textbf{Enemigos:} incorporación de oposición básica en las salas.
+    \item \textbf{Sistema de combate:} reglas para atacar, recibir daño y resolver
+    enfrentamientos.
+    \item \textbf{Sistema de enemigos:} comportamiento, estados y escalado de dificultad.
 \end{itemize}
 
-\subsubsection{Dominio: enemigos y combate}
+\subsubsection{Interfaz y experiencia de uso}
 \begin{itemize}
-    \item \textbf{Enemigos:} Integración de enemigos básicos dentro de las salas para
-    convertir el desplazamiento por el nivel en una experiencia jugable con oposición real.
-    \item \textbf{Sistema de Combate:} Conjunto de reglas y mecanismos que permiten atacar,
-    recibir daño y resolver enfrentamientos entre jugador y enemigos de forma coherente.
-    \item \textbf{Sistema de Enemigos:} Lógica de comportamiento que regula el estado,
-    movimiento y respuesta de los enemigos, permitiendo definir patrones diferenciados y
-    escalar la dificultad del juego.
+    \item \textbf{Minimapa:} representación simplificada del nivel.
+    \item \textbf{Head-Up Display:} información esencial de vida, recursos y progreso.
+    \item \textbf{Menú de pausa:} interrupción controlada de la partida.
+    \item \textbf{Menú principal:} acceso inicial a partida y opciones principales.
+    \item \textbf{Actualización de sprites:} mejora visual y coherencia estética.
+    \item \textbf{Victoria y derrota:} flujos de cierre de partida.
 \end{itemize}
 
-\subsubsection{Dominio: interfaz y experiencia de uso}
+\subsubsection{Progresión y recursos}
 \begin{itemize}
-    \item \textbf{Minimapa:} Representación simplificada del nivel que permite al jugador
-    orientarse, comprender la estructura del mapa y seguir su progreso durante la partida.
-    \item \textbf{Head-Up Display:} Capa de interfaz que muestra en tiempo real la
-    información esencial de la partida, como vida, recursos, estado del personaje o
-    indicadores de progreso.
-    \item \textbf{Menú de Pausa:} Flujo de interrupción controlada de la partida que permite
-    pausar el juego y acceder a opciones de continuidad, navegación o salida.
-    \item \textbf{Menú Principal:} Pantalla de entrada al juego desde la que se organiza el
-    acceso a la partida y a las opciones principales de navegación.
-    \item \textbf{Actualizar Sprites:} Revisión y mejora de los elementos visuales del
-    proyecto para mantener coherencia estética y reforzar la identidad del videojuego.
-    \item \textbf{Victoria:} Resolución formal del cierre exitoso de la partida con su
-    correspondiente flujo de interfaz final.
-    \item \textbf{Derrota:} Resolución formal del fin de partida cuando el jugador pierde,
-    incluyendo reinicio o retorno al menú principal.
+    \item \textbf{Gestión del inventario:} almacenamiento y administración de recursos.
+    \item \textbf{Sistema de objetos:} elementos interactivos, pasivos o consumibles que
+    modifican la partida.
 \end{itemize}
-
-\subsubsection{Dominio: progresión, economía y objetos}
-\begin{itemize}
-    \item \textbf{Gestión del Inventario:} Sistema responsable de almacenar, consultar y
-    administrar los recursos y elementos obtenidos por el jugador durante una \textit{run}.
-    \item \textbf{Sistema de Objetos:} Conjunto de elementos interactivos, pasivos o consumibles que
-    modifican la partida, aportan variedad a las decisiones del jugador y refuerzan la
-    progresión interna del juego.
-\end{itemize}
-
-Cada una de estas funcionalidades define el alcance del producto a nivel de feature. El
-detalle de diseño, implementación, incidencias y resultados se desarrolla posteriormente
-en las iteraciones, donde se documenta con mayor profundidad cómo se abordó cada bloque
-de trabajo.
 
 \section{Ejecución del plan de gestión del cronograma}
-La planificación temporal se ejecutó mediante tres fases principales y una descomposición
-interna en iteraciones para la fase de desarrollo. Los hitos se utilizaron como puntos de
-control para revisar desviaciones, reajustar la carga de trabajo y decidir si una
-funcionalidad debía consolidarse, aplazarse o dividirse en entregas más pequeñas.
+El cronograma se ejecuta mediante tres fases y una fase central compuesta por iteraciones.
+Los hitos se utilizan como puntos de control para revisar desviaciones, reajustar carga de
+trabajo y decidir si una funcionalidad debe cerrarse, dividirse o posponerse.
 
-\subsection{Aplicación real de las tres fases}
-La división en Fase 1, Fase 2 y Fase 3 no se utilizó solo como una estructura formal de la
-memoria, sino como una guía real para organizar el trabajo. La Fase 1 se dedicó a dejar
-preparado el marco de desarrollo: definición de objetivos, repositorio, backlog inicial,
-estructura documental y selección de herramientas. Esta fase sirvió para evitar empezar a
-implementar sobre una base difusa o sin criterios de control.
+\subsection{Aplicación de las fases}
+La Fase 1 prepara el marco de desarrollo: objetivos, repositorio, backlog inicial,
+estructura documental y herramientas. La Fase 2 concentra el desarrollo técnico mediante
+iteraciones cerradas. La Fase 3 queda reservada para consolidar el producto, revisar la
+memoria y preparar la entrega final.
 
-La Fase 2 concentró el desarrollo técnico y el seguimiento continuo. Su ejecución se llevó a
-cabo mediante iteraciones cerradas, cada una con funcionalidades concretas, decisiones de
-diseño, implementación y validación posterior. Este reparto permitió mantener un ritmo
-regular de avance y, al mismo tiempo, documentar con claridad cómo evolucionaba el sistema.
+\subsection{Replanificación iterativa}
+Durante la ejecución, el cronograma no se trata como una secuencia rígida. Si una
+funcionalidad resulta más compleja de lo previsto, se divide en entregas menores o se
+desplaza parcialmente a una iteración posterior. Este criterio permite mantener incrementos
+verificables sin bloquear un ciclo completo por una única tarea.
 
-La Fase 3 quedó reservada para el cierre del producto y de la documentación. Aunque parte de
-su contenido depende del estado final de las últimas iteraciones, su existencia como fase
-independiente funcionó como margen de seguridad para no consumir todo el calendario en
-implementación y dejar sin tiempo suficiente la consolidación de la memoria. El desglose
-real de esta fase se presenta en el capítulo de conclusiones, al corresponder al cierre
-efectivo del proyecto.
-
-\subsection{Replanificación iterativa del cronograma}
-Durante la ejecución, el cronograma no se trató como una secuencia rígida de tareas
-inamovibles. Cuando una funcionalidad resultó más grande o más dependiente de otros sistemas
-de lo previsto, se subdividió en varias entregas distribuidas entre iteraciones. Este patrón
-se aplicó, por ejemplo, a funcionalidades como la generación procedural, la lógica de
-círculos, el minimapa o los sistemas de combate y enemigos.
-
-La utilidad de esta replanificación fue doble. Por un lado, evitó bloquear una iteración
-entera por intentar cerrar una feature excesivamente amplia en un solo ciclo. Por otro,
-permitió mantener incrementos verificables del producto en cada entrega, aunque una misma
-línea funcional necesitara más de una iteración para considerarse realmente consolidada.
-
-\subsection{Uso de hitos y buffer temporal}
-Los hitos del cronograma funcionaron como puntos de control para revisar si el proyecto
-seguía alineado con la planificación prevista. Tras cada iteración se evaluaba qué se había
-cerrado realmente, qué quedaba pendiente y si era necesario desplazar carga a ciclos
-posteriores.
-
-Además, el cronograma se ejecutó manteniendo la idea de margen de maniobra definida en el
-plan. No se ocupó el 100\% del calendario con desarrollo estricto, sino que se preservó
-espacio para absorber desviaciones, resolver incidencias y preparar el cierre documental sin
-comprometer la entrega final.
+\subsection{Uso de hitos y margen temporal}
+Al cierre de cada iteración se revisa qué se ha completado, qué queda pendiente y qué debe
+ajustarse. El margen temporal previsto en la planificación permite absorber desviaciones,
+resolver incidencias y preparar el cierre documental sin comprometer la entrega final.
 
 \section{Ejecución del plan de gestión de comunicaciones}
-La comunicación diaria se apoyó en Discord, mientras que GitHub concentró el seguimiento
-formal de incidencias, revisiones y cambios sobre el código. El tablero Kanban de GitHub
-Projects se utilizó como herramienta visual de seguimiento, permitiendo distinguir qué
-funcionalidades estaban pendientes, en curso, en revisión o cerradas \cite{githubIssuesProjects}.
+La comunicación diaria se apoya en Discord, mientras que GitHub concentra la trazabilidad
+formal del trabajo \cite{githubIssuesProjects}. El tablero Kanban permite distinguir tareas
+pendientes, en curso, en revisión y cerradas.
 
-\subsection{Comunicación operativa diaria}
-Discord se utilizó como canal principal para resolver bloqueos rápidos, consultar decisiones
-pequeñas de implementación y mantener sincronización continua sin necesidad de convocar
-reuniones formales para cada ajuste. Esta capa de comunicación ligera fue especialmente útil
-en una dinámica de trabajo iterativa, donde muchas decisiones debían tomarse con rapidez
-para no frenar el desarrollo.
+\subsection{Comunicación operativa}
+Discord se utiliza para resolver bloqueos rápidos, coordinar decisiones de bajo impacto y
+mantener continuidad entre sesiones de trabajo. Este canal evita convocar reuniones formales
+para cada ajuste operativo.
 
-\subsection{Trazabilidad formal en GitHub}
-GitHub actuó como repositorio no solo del código, sino también de la memoria del proceso de
-desarrollo. Las \textit{issues}, los commits, la evolución de las ramas de trabajo y los
-cambios en el tablero Kanban dejaron registro de qué se estaba abordando en cada momento,
-qué incidencias surgieron y cómo se resolvieron. Esta trazabilidad permitió justificar
-después la secuencia real del trabajo y alinear lo implementado con lo documentado en la
-memoria.
+\subsection{Trazabilidad formal}
+GitHub registra incidencias, commits, ramas, revisiones y evolución del backlog. Esta
+información permite reconstruir la secuencia real de trabajo y alinear lo implementado con
+lo descrito en la memoria.
 
-\subsection{Reuniones de cierre y planificación de iteración}
-Además de la comunicación cotidiana, se aplicó la cadencia de reuniones prevista en el plan.
-Al cierre de cada iteración se revisaba si las funcionalidades podían darse por validadas,
-qué problemas habían aparecido y qué lecciones debían incorporarse al siguiente ciclo.
-
-Del mismo modo, antes de iniciar una nueva iteración se utilizaban reuniones de
-planificación para seleccionar funcionalidades, revisar dependencias y acordar prioridades.
-Este mecanismo evitó que la selección del siguiente bloque de trabajo dependiera únicamente
-de intuiciones puntuales, y permitió vincular las decisiones de planificación con el estado
-técnico real del proyecto.
+\subsection{Reuniones de iteración}
+Las reuniones de planificación seleccionan funcionalidades, revisan dependencias y fijan
+criterios de aceptación. Las reuniones de cierre validan resultados, documentan incidencias,
+actualizan riesgos y preparan la siguiente iteración.
 
 \section{Ejecución del plan de gestión de riesgos}
-En la fase de planificación, la ejecución del plan de riesgos no consistió en resolver o dar
-por cerrados esos riesgos, sino en identificarlos, clasificarlos y asociarles una estrategia
-de mitigación coherente con el proyecto. El objetivo en este punto fue dejar definido qué
-incertidumbres podían comprometer el desarrollo y cómo debían vigilarse a lo largo de la
-ejecución posterior.
+El plan de riesgos se ejecuta como un instrumento vivo. Los riesgos identificados en la
+planificación se revisan durante las iteraciones y se actualizan si aparecen nuevas
+incertidumbres.
 
-\subsection{Identificación inicial de riesgos técnicos}
-Dentro de la planificación se identificaron como riesgos técnicos principales la generación
-procedural, la integración progresiva entre sistemas y la dependencia de herramientas de
-terceros como Unity. La importancia de esta identificación temprana reside en que estos
-riesgos condicionan directamente el orden de implementación y el modo en que deben diseñarse
-las iteraciones posteriores.
+\subsection{Riesgos técnicos}
+La generación procedural, la integración progresiva de sistemas y la dependencia de Unity se
+vigilan especialmente. Su control se apoya en prototipos tempranos, integración frecuente,
+validación en contexto real de juego y estabilidad de versiones.
 
-En esta fase no se mitigan todavía de forma completa, pero sí se deja previsto que los
-sistemas más inciertos deberán abordarse pronto, que la integración debe ser incremental y
-que la versión de las herramientas debe mantenerse estable para no introducir cambios
-externos durante ciclos activos de desarrollo.
-
-\subsection{Identificación inicial de riesgos de plazo}
-En cuanto al plazo, durante la planificación se señalaron como riesgos principales el
-sobre-alcance, las estimaciones excesivamente optimistas y la aparición de bloqueos por
-dependencias técnicas. La ejecución del plan en este capítulo consiste en dejar estos riesgos
-explícitamente documentados junto con su respuesta prevista: priorización estricta,
-fraccionamiento de funcionalidades y reserva de margen temporal.
-
-Esto es importante porque fija desde la propia planificación el criterio con el que se
-tomarán decisiones futuras cuando aparezcan desviaciones reales. Es decir, no se espera a
-que el problema ocurra para decidir cómo actuar, sino que se deja preparado el marco de
-respuesta desde el inicio.
-
-\subsection{Seguimiento previsto a lo largo del proyecto}
-El plan de riesgos se concibe como un instrumento vivo. Por ello, en planificación también
-se establece que la revisión de riesgos no queda agotada en este capítulo, sino que debe
-continuar durante las iteraciones mediante reuniones de seguimiento, reordenación del backlog
-y revisión de prioridades. La identificación inicial realizada aquí sirve como línea de base
-para ese control continuo posterior.
+\subsection{Riesgos de plazo}
+El sobre-alcance, las estimaciones optimistas y los bloqueos por dependencias se controlan
+mediante priorización, división de funcionalidades, uso del backlog y reserva de margen
+temporal. Las desviaciones relevantes se documentan al cierre de la iteración en la que se
+detectan.
 
 \section{Ejecución del plan de gestión de la calidad}
-En la fase de planificación, la ejecución del plan de calidad consistió en definir con
-precisión qué significa que una funcionalidad esté realmente terminada y qué controles deben
-aplicarse para considerarla aceptable. En este punto no se valida todavía la calidad del
-producto final, sino que se establecen los criterios y mecanismos con los que esa calidad se
-irá controlando durante todo el proyecto.
+La calidad se ejecuta mediante la aplicación repetida de la \textit{Definition of Done}. Una
+funcionalidad no se considera cerrada solo por existir en código; debe compilar, integrarse,
+no introducir regresiones, revisarse y validarse mediante pruebas jugables.
 
-\subsection{Definición operativa de la calidad}
-La principal materialización del plan en esta fase fue concretar la \textit{Definition of
-Done} como criterio común de aceptación. Esta definición permite dejar fijado desde la
-planificación que una funcionalidad no puede darse por cerrada solo por existir en código,
-sino que debe compilar, integrarse, evitar regresiones, revisarse técnicamente y validarse
-en contexto real de juego.
+\subsection{Control por iteración}
+Cada iteración incorpora validaciones técnicas y \textit{playtests} definidos mediante pasos
+reproducibles. Cuando una prueba detecta una incidencia, esta se registra, se corrige si es
+crítica para la iteración o se incorpora al backlog si puede abordarse posteriormente sin
+comprometer el incremento.
 
-La importancia de este paso en planificación reside en que evita ambigüedades posteriores.
-Cuando el desarrollo entre en iteraciones activas, el equipo ya dispone de un criterio de
-cierre explícito y compartido, en lugar de depender de interpretaciones cambiantes sobre qué
-significa estar ``terminado''.
-
-\subsection{Mecanismos de control previstos}
-En la planificación también se definieron los mecanismos concretos con los que la calidad se
-vigilará durante el proyecto: revisión cruzada entre los dos miembros del equipo, validación
-funcional dentro de Unity, comprobación de integración con sistemas previos y generación de
-documentación técnica asociada a cada iteración.
-
-De nuevo, la función de este capítulo no es demostrar que esos controles ya se hayan
-completado, sino dejar establecido que formarán parte del seguimiento continuo de la
-ejecución real del proyecto.
-
-\subsection{Calidad como proceso continuo}
-El plan de calidad no se agota en la fase de planificación. La propia definición del plan
-establece que la calidad se controla de forma acumulativa a lo largo de todas las
-iteraciones, mediante la aplicación repetida de la DoD, la comprobación de compilación
-estable, la revisión de integración y las sesiones de prueba dentro del juego. La ejecución
-del plan en
-este apartado consiste, por tanto, en dejar preparado ese marco de control continuo.
-
-\subsection{Criterios prácticos de seguimiento}
-Por último, en esta fase se dejaron fijadas comprobaciones prácticas para observar la
-evolución de la calidad durante el desarrollo: que el proyecto compile de forma estable, que
-las nuevas funcionalidades no rompan otras previas y que el juego siga siendo jugable y
-coherente en sesiones de prueba manual. Más que introducir métricas formales complejas, la
-planificación deja definidos estos criterios como base realista para el seguimiento del
-proyecto.
+\subsection{Calidad acumulativa}
+El control de calidad tiene carácter acumulativo. Cada nueva funcionalidad debe funcionar
+por sí misma y mantener estable lo ya implementado. De este modo, el proyecto evita acumular
+deuda técnica no visible hasta la fase de cierre.
 
 \section{Ejecución del plan de gestión de costes}
-La ejecución del plan de costes se reflejó mediante una estimación consolidada del valor
-económico del proyecto. El mayor peso recae en el tiempo de trabajo de los dos
-desarrolladores, complementado con la amortización del hardware y los costes indirectos del
-entorno de desarrollo.
+La ejecución del plan de costes se refleja mediante una estimación consolidada del valor
+económico del proyecto. El mayor peso corresponde al tiempo de trabajo de los dos
+desarrolladores, complementado con la amortización del hardware y los costes indirectos.
 
-\subsection{Aplicación del modelo de costes}
-El modelo de costes definido en la planificación se mantuvo como una estimación económica del
-esfuerzo invertido, no como una contabilidad financiera real del proyecto. Esto significa
-que durante la ejecución no se registraron pagos efectivos entre miembros del equipo, pero sí
-se conservó la estructura de valoración profesional basada en tiempo de trabajo, costes
-sociales, equipamiento e indirectos.
-
-\subsection{Desglose de costes de personal}
-La mayor parte del valor económico del proyecto se concentra en el tiempo de trabajo de los
-dos integrantes del equipo. Para su estimación se ha tomado como referencia un perfil junior
-de ingeniería de software en España con un salario bruto anual de 35.000 \euro. Dado que se
-estima una dedicación de 300 horas por integrante y se asume una jornada anual de 1.800
-horas, la imputación al proyecto equivale a una sexta parte de la anualidad laboral.
-
-Por tanto, el salario bruto imputado por desarrollador es:
+\subsection{Costes de personal}
+Se toma como referencia un perfil junior de ingeniería de software en España con un salario
+bruto anual de 35.000 \euro. Con una dedicación estimada de 300 horas por integrante y una
+jornada anual de 1.800 horas, la imputación equivale a una sexta parte de la anualidad.
 
 \begin{itemize}
     \item 35.000 \euro\ / 6 = 5.833,33 \euro\ por persona.
-\end{itemize}
-
-Como el equipo está formado por dos personas, el total de salarios brutos imputados asciende
-a:
-
-\begin{itemize}
     \item 5.833,33 \euro\ $\times$ 2 = 11.666,66 \euro.
+    \item 11.666,66 \euro\ $\times$ 0,30 = 3.500,00 \euro\ en costes sociales.
 \end{itemize}
 
-Sobre esta cantidad se aplica un 30\% adicional en concepto de costes sociales:
+El coste total de personal, incluyendo costes sociales, asciende a 15.166,66 \euro.
 
-\begin{itemize}
-    \item 11.666,66 \euro\ $\times$ 0,30 = 3.500,00 \euro.
-\end{itemize}
+\subsection{Costes materiales e indirectos}
+Se considera el uso de dos equipos informáticos valorados en 1.500 \euro\ cada uno. Con una
+amortización anual del 25\% y una imputación equivalente a una sexta parte del año, el coste
+total de amortización asciende a 125,00 \euro. El coste de software y servicios se considera
+nulo, al utilizar herramientas gratuitas, educativas o ya disponibles.
 
-De esta manera, la suma de salarios brutos y costes sociales sitúa el coste total de
-personal en 15.166,66 \euro.
+Los costes indirectos se calculan como el 10\% de los costes directos. La suma de costes
+directos es de 15.291,66 \euro, por lo que los costes indirectos ascienden a
+1.529,17 \euro.
 
-\subsection{Desglose de costes materiales}
-Los costes materiales se dividen en equipamiento y software o servicios externos.
-
-\subsubsection{Amortización del hardware}
-Para el desarrollo del proyecto se considera el uso de dos equipos informáticos con un valor
-medio de 1.500 \euro\ cada uno. Aplicando una amortización anual del 25\%, el coste anual
-por equipo es de:
-
-\begin{itemize}
-    \item 1.500 \euro\ $\times$ 0,25 = 375 \euro\ por equipo y año.
-\end{itemize}
-
-Como la dedicación al proyecto equivale a una sexta parte del uso anual, la imputación por
-equipo durante el desarrollo es:
-
-\begin{itemize}
-    \item 375 \euro\ / 6 = 62,50 \euro\ por equipo.
-\end{itemize}
-
-Para dos equipos, el coste total de amortización asciende a:
-
-\begin{itemize}
-    \item 62,50 \euro\ $\times$ 2 = 125,00 \euro.
-\end{itemize}
-
-\subsubsection{Software y servicios}
-El coste en software y servicios externos se considera nulo, ya que se han empleado
-herramientas gratuitas, educativas o ya disponibles en el entorno del proyecto. Unity,
-GitHub, Discord y el resto de herramientas utilizadas no han requerido una inversión
-económica específica imputable al desarrollo, por lo que esta partida queda en 0,00 \euro.
-
-\subsection{Desglose de costes indirectos}
-Los costes indirectos recogen gastos de entorno que no se asignan a una tarea concreta pero
-que forman parte del desarrollo, como electricidad, conectividad o espacio de trabajo. Tal
-como se estableció en el plan, se aplica un 10\% sobre los costes directos.
-
-La suma de costes directos es:
-
-\begin{itemize}
-    \item 11.666,66 \euro\ de salarios brutos;
-    \item 3.500,00 \euro\ de costes sociales;
-    \item 125,00 \euro\ de amortización de hardware;
-    \item 0,00 \euro\ de software y servicios.
-\end{itemize}
-
-Esto da un total de costes directos de 15.291,66 \euro. Aplicando el 10\%:
-
-\begin{itemize}
-    \item 15.291,66 \euro\ $\times$ 0,10 = 1.529,17 \euro.
-\end{itemize}
-
-\subsection{Resultado global de la estimación}
-Sumando costes directos e indirectos, el valor económico total estimado del proyecto
-asciende a 16.820,83 \euro. Aunque no se trata de un desembolso real en sentido estricto,
-esta cifra permite dimensionar el esfuerzo realizado con criterios profesionales y ofrece una
-referencia clara del valor del trabajo invertido en el desarrollo del TFG.
+\subsection{Resultado global}
+El valor económico total estimado del proyecto asciende a 16.820,83 \euro. Aunque no
+representa un desembolso real, permite dimensionar el esfuerzo realizado con criterios
+profesionales.
 
 \begin{table}[h!]
     \centering
@@ -407,4 +200,5 @@ referencia clara del valor del trabajo invertido en el desarrollo del TFG.
     \textbf{TOTAL DEL PROYECTO} & \textbf{16.820,83 \euro} \\
     \end{coolTable}
     \caption{Resumen detallado de la inversión económica total.}
+    \label{tab:resumen_presupuesto}
 \end{table}
