@@ -1,8 +1,161 @@
 %!TEX root = tfg.tex
 \chapter{Manual de usuario}
 
-\section{Propósito del manual}
-El manual de usuario describirá el flujo básico de interacción con \textit{Via Inferni}:
-inicio de partida, navegación por menús, control de personajes, lectura de la interfaz y
-progresión general durante una \textit{run}. Su función es servir como guía de uso del
-sistema, diferenciándola de la documentación técnica y de instalación.
+\begin{quotation}[Designer]{Shigeru Miyamoto (1952--)}
+A delayed game is eventually good, but a rushed game is forever bad.
+\end{quotation}
+
+\begin{abstract}
+Este capítulo describe el uso de \textit{Via Inferni} desde la perspectiva del jugador.
+Recoge la navegación por menús, los controles principales, la interacción con los sistemas
+jugables y las opciones adicionales disponibles al iniciar la partida en modo de desarrollo.
+\end{abstract}
+
+\section{Alcance del manual}
+El objetivo de este manual es explicar de forma práctica cómo iniciar una partida, cómo
+interactuar con la interfaz y con los sistemas principales del juego y qué funciones quedan
+disponibles en la versión actual. No se centra en la instalación del proyecto ni en su
+configuración técnica, sino en el uso directo del producto una vez ejecutado.
+
+\section{Inicio de la aplicación}
+Al arrancar el juego se muestra el menú principal. Desde este punto pueden utilizarse los
+botones disponibles en pantalla para acceder a las funciones iniciales del sistema:
+
+\begin{itemize}
+    \item \textbf{Iniciar partida:} carga la escena principal y comienza una nueva \textit{run} en modo normal.
+    \item \textbf{Dev Mode:} carga la misma escena jugable, pero activa el modo de depuración para habilitar atajos adicionales de desarrollo.
+    \item \textbf{Salir:} cierra la aplicación. En el entorno de Unity detiene el modo de juego del editor.
+\end{itemize}
+
+\section{Objetivo general de la partida}
+La partida se estructura como una exploración progresiva por círculos del Infierno. El
+jugador debe recorrer las habitaciones generadas proceduralmente, superar encuentros con
+enemigos, recoger recursos y objetos, localizar la llave del círculo actual y alcanzar la
+escalera que permite descender al siguiente nivel temático. Este flujo se repite hasta
+completar el último círculo, momento en el que se activa la condición de victoria.
+
+Durante la exploración aparecen además salas especiales, como tienda, tesoro o sala secreta,
+que introducen recompensas, compras y desvíos dentro del recorrido principal.
+
+\section{Controles principales}
+\subsection{Controles con teclado}
+La versión jugable se apoya principalmente en teclado, con algunos apoyos adicionales para
+ratón en menús e interfaz. Los controles más importantes son los siguientes:
+
+\begin{itemize}
+    \item \textbf{Movimiento:} \texttt{W}, \texttt{A}, \texttt{S}, \texttt{D}.
+    \item \textbf{Ataque:} flechas de dirección. En la configuración actual el combate queda orientado principalmente a este esquema de entrada.
+    \item \textbf{Interacción:} \texttt{E}.
+    \item \textbf{Cambio de forma:} \texttt{Tab}.
+    \item \textbf{Pausa:} \texttt{Esc}.
+    \item \textbf{Selección rápida de arma:} \texttt{1}, \texttt{2} y \texttt{3}.
+    \item \textbf{Seleccionar siguiente hueco del inventario:} \texttt{Alt}.
+    \item \textbf{Soltar objeto del hueco seleccionado:} \texttt{Q}.
+    \item \textbf{Dash:} \texttt{Shift}, siempre que el jugador posea el objeto especial correspondiente.
+\end{itemize}
+
+\section{Interfaz de usuario}
+Durante la partida la interfaz muestra el estado principal del jugador y del progreso:
+
+\begin{itemize}
+    \item La \textbf{barra de vida} permite seguir el estado actual del personaje.
+    \item El \textbf{contador de almas} indica el recurso acumulado, utilizado para compras y ciertas acciones especiales.
+    \item El \textbf{indicador de círculo} informa del nivel temático en el que se encuentra la \textit{run}.
+    \item El \textbf{inventario} muestra los huecos disponibles, el hueco activo y los objetos almacenados.
+    \item El \textbf{minimapa} representa la exploración de la planta actual y diferencia entre salas ocultas, visitadas y sala activa.
+    \item El \textbf{indicador de llave} informa de si la llave del círculo actual ya ha sido recogida.
+\end{itemize}
+
+\section{Interacción con el mundo}
+\subsection{Exploración y combate}
+Al entrar en determinadas salas se activa un encuentro. Mientras haya enemigos vivos, las
+puertas permanecen cerradas. Cuando el encuentro termina, la sala vuelve a abrirse y el
+jugador puede continuar avanzando.
+
+El personaje puede alternar entre forma de melé y forma a distancia. Esta dualidad afecta al
+tipo de arma activa, al comportamiento ofensivo y a la lectura táctica de los encuentros.
+
+\subsection{Objetos, tienda y tesoro}
+Los objetos pueden obtenerse de varias formas:
+
+\begin{itemize}
+    \item Recogiéndolos del suelo al interactuar con \texttt{E}.
+    \item Tomándolos de una sala de tesoro con \texttt{E}, siempre que exista espacio disponible en el inventario.
+    \item Comprándolos en la tienda con \texttt{E}, siempre que el jugador disponga de suficientes almas y de un hueco libre.
+\end{itemize}
+
+El inventario utiliza un número limitado de huecos desbloqueados. Si está lleno, el juego no
+permitirá recoger o comprar nuevos objetos hasta liberar espacio o aumentar la capacidad.
+
+\subsection{Llave de círculo y descenso}
+Cada círculo incorpora una llave asociada. Para progresar correctamente, el jugador debe
+recoger la llave del círculo actual y después alcanzar la escalera. Mientras la llave no se
+haya obtenido, la escalera permanece desactivada. Una vez recogida, queda habilitada y
+permite descender al siguiente círculo al entrar en contacto con ella.
+
+\subsection{Fuente bautismal}
+La fuente bautismal permite transferir almas al jugador al interactuar con \texttt{E} dentro
+de su radio de acción. Su función es ofrecer un punto de recuperación de recursos dentro de
+la exploración, siempre que todavía disponga de almas almacenadas.
+
+\section{Menús de pausa, victoria y derrota}
+\subsection{Menú de pausa}
+Durante la partida puede abrirse el menú de pausa con \texttt{Esc} o con el botón
+\textit{Start} del mando. Al activarlo, el juego detiene el tiempo, pausa el audio y oculta
+la interfaz principal de juego. Desde este menú pueden utilizarse tres botones:
+
+\begin{itemize}
+    \item \textbf{Reanudar:} vuelve a la partida actual.
+    \item \textbf{Reiniciar:} reinicia la \textit{run} desde el principio.
+    \item \textbf{Salir:} vuelve al menú principal.
+\end{itemize}
+
+\subsection{Pantalla de victoria}
+Cuando se completa el último círculo, el juego muestra una pantalla de victoria. Desde ella
+puede comenzarse una nueva partida mediante el botón de reinicio o volver al menú principal
+mediante el botón de salida.
+
+\subsection{Pantalla de derrota}
+Si la vida del jugador llega a cero, aparece la pantalla de derrota. Sus opciones son
+análogas a las de victoria:
+
+\begin{itemize}
+    \item \textbf{Reiniciar:} inicia una nueva \textit{run}.
+    \item \textbf{Salir:} vuelve al menú principal.
+\end{itemize}
+
+\section{Modo de desarrollo}
+Si la partida se inicia desde el botón \textbf{Dev Mode}, el juego activa un conjunto de
+atajos adicionales orientados a pruebas y depuración. Estas acciones no forman parte del uso
+normal previsto para un jugador final, pero resultan útiles durante demostraciones internas y
+validación de sistemas.
+
+\subsection{Atajos de depuración generales}
+\begin{itemize}
+    \item \textbf{\texttt{Z}:} añade almas al jugador.
+    \item \textbf{\texttt{X}:} resta almas al jugador.
+    \item \textbf{\texttt{Ctrl}:} si el jugador no está a vida completa y dispone de almas suficientes, consume almas para recuperar vida.
+    \item \textbf{\texttt{Ctrl + N}:} fuerza el descenso al siguiente círculo.
+\end{itemize}
+
+\subsection{Atajos de objetos de depuración}
+Si la configuración de la partida mantiene activa la inyección de objetos de prueba, el modo
+de desarrollo permite generar rápidamente varios objetos especiales:
+
+\begin{itemize}
+    \item \textbf{\texttt{F1}:} objeto especial de \textit{Dash}.
+    \item \textbf{\texttt{F2}:} objeto especial de \textit{Cloak}.
+    \item \textbf{\texttt{F3}:} objeto especial de \textit{Shield}.
+    \item \textbf{\texttt{F4}:} objeto especial de revelado completo del mapa.
+    \item \textbf{\texttt{F5}:} objeto especial \textit{Cursed Coin}.
+    \item \textbf{\texttt{F6}:} añade el siguiente objeto del \textit{pool} de depuración configurado.
+\end{itemize}
+
+\subsection{Atajos de tienda y tesoro}
+Dentro de salas de tienda o tesoro, el modo de desarrollo activa además dos accesos rápidos:
+
+\begin{itemize}
+    \item \textbf{\texttt{F7}:} repuebla la tienda o el tesoro de la sala actual.
+    \item \textbf{\texttt{F8}:} vacía el contenido de la tienda o del tesoro actual.
+\end{itemize}
+

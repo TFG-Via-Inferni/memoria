@@ -10,6 +10,34 @@ Este capítulo recoge la valoración final del proyecto, sintetizando el aprendi
 obtenido durante el desarrollo y señalando las líneas de mejora que quedan abiertas.
 \end{abstract}
 
+\section{Valoración global}
+El desarrollo de \textit{Via Inferni} ha permitido materializar una propuesta jugable
+completa a partir de una idea inicial ambiciosa pero acotada: construir un roguelike 2D con
+generación procedural, progresión por círculos, dualidad del personaje, combate, objetos e
+interfaz propia. Más allá del resultado funcional del videojuego, el proyecto ha servido
+también para recorrer de forma integrada un proceso de ingeniería del software que abarca
+planificación, diseño, implementación, validación y documentación.
+
+El valor del trabajo no reside únicamente en haber producido una versión jugable del sistema,
+sino en haberlo hecho manteniendo trazabilidad entre decisiones de planificación,
+replanificaciones, iteraciones de desarrollo y justificación académica del proceso seguido.
+En ese sentido, el proyecto ha cumplido la doble finalidad propia del TFG: producir un
+artefacto técnico real y, al mismo tiempo, demostrar capacidad para organizarlo,
+argumentarlo y evaluarlo con criterio ingenieril.
+
+\section{Cumplimiento de objetivos}
+En términos generales, los objetivos planteados al inicio del trabajo pueden considerarse
+satisfechos. Se ha conseguido desarrollar una base jugable completa sobre Unity, estructurar
+la evolución del sistema mediante funcionalidades incrementales y documentar el proceso de
+forma suficientemente detallada.
+
+Desde la perspectiva del producto, el proyecto ha alcanzado una versión que permite iniciar
+partida, recorrer mapas generados proceduralmente, combatir, progresar entre círculos,
+interactuar con inventario y objetos, utilizar salas especiales y cerrar la experiencia con
+estados de victoria y derrota. Desde la perspectiva metodológica, también se ha logrado
+mantener una relación clara entre el enfoque FDD \cite{palmer2002fdd}, las iteraciones
+realmente ejecutadas y el seguimiento del esfuerzo realizado.
+
 \section{Informe post-mortem}
 El informe post-mortem permite revisar el proyecto con perspectiva una vez finalizado,
 identificando aciertos, problemas y decisiones que podrían replantearse en un nuevo ciclo
@@ -35,6 +63,13 @@ memoria y fijar con mayor precisión la correspondencia entre features, iteracio
 capítulos. Aun así, el proceso seguido ha permitido obtener una base metodológica y
 técnica sólida sobre la que construir la versión final del TFG.
 
+También resultaría recomendable anticipar mejor qué sistemas iban a requerir más
+integración transversal. En la práctica, muchas de las desviaciones no vinieron de la
+complejidad aislada de una feature, sino de su dependencia con subsistemas ya existentes:
+interfaz, progresión, contenido procedural, enemigos, inventario o estados finales.
+Detectar antes esas dependencias habría permitido afinar mejor la granularidad de algunas
+iteraciones y reservar más tiempo al cierre funcional de las features más conectadas.
+
 \subsection{Horas reales de la fase de cierre}
 La fase de cierre concentró el esfuerzo de consolidación final de la memoria, revisión de
 coherencia entre lo implementado y lo documentado, preparación de materiales de entrega y
@@ -55,9 +90,23 @@ modo:
     \caption{Resumen de horas de la Fase 3.}
 \end{table}
 
-\section{Trabajos futuros}
-Entre las líneas de continuidad del proyecto destacan la ampliación de contenido jugable,
-la mejora del sistema de equilibrio y progresión, la profundización en la dualidad entre
-personajes y la incorporación de más herramientas de validación y \textit{playtesting}.
-Todas estas extensiones podrían desarrollarse como evolución directa del videojuego o como
-nuevos trabajos centrados en áreas concretas del sistema.
+\section{Aprendizaje adquirido}
+Uno de los aprendizajes más relevantes del proyecto ha sido la transición desde el dominio
+del lenguaje C\# hacia el trabajo efectivo dentro de Unity como motor. Buena parte del
+esfuerzo inicial no consistió en aprender a programar, sino en comprender correctamente el
+modelo de componentes, escenas, prefabs, serialización, física 2D e interacción entre capas
+de lógica y representación que el motor introduce.
+
+En paralelo, el proyecto también ha reforzado competencias relacionadas con el diseño de
+sistemas jugables modulares. La necesidad de separar responsabilidades entre generación de
+mapa, control del jugador, combate, enemigos, inventario, interfaz y progresión ha hecho
+evidente la importancia de evitar soluciones monolíticas incluso en un videojuego de escala
+contenida. Esto ha sido especialmente visible en las iteraciones intermedias, donde muchas
+decisiones de arquitectura tomadas al principio han condicionado positivamente la capacidad
+de evolucionar el sistema sin rehacerlo por completo.
+
+Por último, la elaboración de la memoria ha supuesto un aprendizaje propio y distinto del
+desarrollo del videojuego. Traducir decisiones técnicas a una narrativa académica coherente,
+mantener la trazabilidad entre planificación y ejecución y justificar replanificaciones con
+criterio han sido tareas exigentes, pero muy valiosas para cerrar el proyecto con una
+perspectiva más completa.
