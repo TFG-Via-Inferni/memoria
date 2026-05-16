@@ -147,13 +147,6 @@ de sus casos especiales.
 
 La Figura~\ref{fig:iteracion2-feature-generacion} muestra el resultado de este ajuste sobre la sala secreta.
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/04_generacion_procedural_II.png}
-\caption{Resultado de la feature Generación Procedural II en la iteración 2}
-\label{fig:iteracion2-feature-generacion}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Lógica de Círculos}
 La implementación de esta feature se apoyó en tres scripts principales. En primer lugar,
@@ -177,13 +170,6 @@ tocándola, incrementar el círculo actual, refrescar la interfaz y reconstruir 
 
 El resultado visual de esta integración puede verse en la Figura~\ref{fig:iteracion2-feature-circulos}.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/05_logica_circulos.png}
-\caption{Resultado de la feature Lógica de Círculos en la iteración 2}
-\label{fig:iteracion2-feature-circulos}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Cámara del Jugador}
 La revisión de cámara se concentró en \texttt{RoomCameraController}. El cambio más
@@ -204,13 +190,6 @@ facilitar el diagnóstico de comportamientos anómalos.
 
 La Figura~\ref{fig:iteracion2-feature-camara} recoge el resultado obtenido para la cámara del jugador.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/06_camara_jugador.png}
-\caption{Resultado de la feature Cámara del Jugador en la iteración 2}
-\label{fig:iteracion2-feature-camara}
-\end{center}
-\end{figure}
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en comprobar que la consolidación del
@@ -222,7 +201,7 @@ Estas pruebas también ayudaron a detectar incidencias concretas en el seguimien
 y en la progresión entre círculos. A partir de ellas se reajustaron transiciones, encuadres
 y cambios de estado para estabilizar el desplazamiento visual y el paso entre mazmorras.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 2}
@@ -240,25 +219,34 @@ y cambios de estado para estabilizar el desplazamiento visual y el paso entre ma
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración permitió comprobar que el alcance previsto estaba repartido
-entre una tarea de cierre técnico y dos ampliaciones funcionales nuevas. Por un lado, la
-parte pendiente de generación procedural pudo completarse correctamente, lo que permitió dar
-por cerrada una feature que en la iteración anterior todavía no estaba suficientemente madura.
-Por otro, la cámara y la progresión por círculos avanzaron de forma coherente con lo
-planificado.
+entre una tarea de cierre técnico y dos ampliaciones funcionales nuevas. La parte pendiente de
+generación procedural pudo completarse correctamente y la cámara del jugador quedó integrada
+como sistema usable dentro de la partida. También se implementó una primera versión de la
+lógica de círculos, suficiente para validar la progresión básica, de forma que la iteración
+mantuvo una buena alineación con la \textit{Definition of Done}: el proyecto siguió
+compilando con estabilidad en Unity, las nuevas piezas se conectaron con los sistemas previos
+y los \textit{playtests} de la Tabla~\ref{tab:iteracion2-pruebas}, junto con la revisión
+cruzada, confirmaron que el incremento era jugable y no introducía regresiones críticas.
 
-En cuanto al tiempo, la iteración se mantuvo dentro de un margen razonable respecto a la
-previsión inicial: frente a las 50:00 horas planificadas, se registraron 49:08 horas reales.
-Esto indica que el trabajo ejecutado fue compatible con la planificación temporal, aunque el
-seguimiento del contenido funcional mostró una cuestión importante: la lógica de círculos no
-debía considerarse cerrada todavía.
+Sin embargo, las pruebas también dejaron ver una cuestión importante. Aunque el descenso entre
+círculos funcionaba y el seguimiento de cámara era correcto, el comportamiento observado aún
+no convertía la lógica de círculos en un sistema de contenido suficientemente maduro para
+afectar de forma clara a salas y enemigos. Esto hizo visible un riesgo que ya estaba implícito
+en la planificación: infravalorar la complejidad de una \textit{feature} que pasaba de ser un
+cambio de nivel a una capa estructural del juego. La decisión tomada fue aceptar la parte ya
+estable y dividir el resto del alcance, desplazando la adaptación completa de contenido al
+backlog de la iteración 3 sin comprometer ni la arquitectura ni la calidad del incremento
+actual.
 
-La primera implementación resolvió el descenso entre círculos, pero durante la iteración se
-vio que aún faltaba convertir esa progresión en un sistema real de contenido capaz de afectar
-a salas y enemigos. Por ello, fue necesario replanificar una segunda parte de la feature para
-la iteración 3. La decisión no respondió a un descontrol de tiempos, sino a una revisión del
-alcance real a partir de la complejidad observada durante el desarrollo.
-
-El detalle temporal de la iteración puede consultarse en la Tabla~\ref{tab:iteracion2-horas}.
+En cuanto al tiempo, la iteración se mantuvo dentro de un margen favorable. El detalle puede
+consultarse en la Tabla~\ref{tab:iteracion2-horas}: frente a las 50:00 horas planificadas, se
+registraron 49:08 horas reales. Por tanto, no hubo una desviación de cronograma que obligara
+a corregir la planificación general; el único ajuste real vino del propio alcance funcional.
+El estado técnico final quedó así con una base espacial más estable, una cámara funcional y
+una progresión ya encadenada entre niveles, mientras que la entrada para la siguiente
+iteración pasó a priorizar el cierre de lógica de círculos como sistema de contenido junto con
+la incorporación de nuevas capas jugables como la dualidad de personajes y el primer
+minimapa.
 
 \begin{table}[h!]
     \centering
@@ -274,6 +262,30 @@ El detalle temporal de la iteración puede consultarse en la Tabla~\ref{tab:iter
     \caption{Resumen de horas reales de la iteración 2.}
     \label{tab:iteracion2-horas}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/04_generacion_procedural_II.png}
+\caption{Resultado de la feature Generación Procedural II en la iteración 2}
+\label{fig:iteracion2-feature-generacion}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/05_logica_circulos.png}
+\caption{Resultado de la feature Lógica de Círculos en la iteración 2}
+\label{fig:iteracion2-feature-circulos}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion2/06_camara_jugador.png}
+\caption{Resultado de la feature Cámara del Jugador en la iteración 2}
+\label{fig:iteracion2-feature-camara}
+\end{center}
+\end{figure}
 
 La Figura~\ref{fig:uml-resultado-iteracion2} resume el diagrama UML de resultado de esta iteración.
 

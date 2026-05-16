@@ -153,13 +153,6 @@ jugable en el motor.
 
 El resultado de esta primera implementación puede observarse en la Figura~\ref{fig:iteracion1-feature-generacion}.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/01_generacion_procedural.png}
-\caption{Resultado de la feature Generación Procedural en la iteración 1}
-\label{fig:iteracion1-feature-generacion}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Jugador}
 El jugador se integró mediante un controlador ligero apoyado en \texttt{Rigidbody2D}. En
@@ -174,13 +167,6 @@ en una posición coherente con la partida recién creada.
 
 La Figura~\ref{fig:iteracion1-feature-jugador} muestra el resultado visual de esta integración del jugador.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/02_anadir_jugador.png}
-\caption{Resultado de la feature Jugador en la iteración 1}
-\label{fig:iteracion1-feature-jugador}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Enemigos}
 Los enemigos se instanciaron desde las propias salas una vez configuradas. Cada sala
@@ -200,13 +186,6 @@ de exploración y combate del proyecto.
 
 El resultado obtenido para esta feature puede verse en la Figura~\ref{fig:iteracion1-feature-enemigos}.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/03_anadir_enemigo.png}
-\caption{Resultado de la feature Enemigos en la iteración 1}
-\label{fig:iteracion1-feature-enemigos}
-\end{center}
-\end{figure}
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar sobre partida real las
@@ -219,7 +198,7 @@ procedural y en la integración inicial del jugador dentro del mapa. A partir de
 ajustaron problemas de puertas, de instanciación del personaje y de colocación de ciertas
 salas especiales, reforzando la estabilidad de la primera base jugable.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 1}
@@ -237,25 +216,31 @@ salas especiales, reforzando la estabilidad de la primera base jugable.
 
 \section{Seguimiento y control}
 El seguimiento de esta primera iteración se centró en comprobar si el alcance mínimo previsto
-para arrancar el proyecto podía completarse dentro del tiempo disponible. En términos
-funcionales, el objetivo principal sí se alcanzó: se obtuvo una primera versión jugable con
-generación del mapa, jugador controlable y encuentros básicos en salas. Esto permitió validar
-que la dirección técnica elegida era viable y que el proyecto podía apoyarse ya en un bucle
-de juego verificable.
+para arrancar el proyecto podía completarse con un nivel suficiente de calidad y dentro del
+tiempo disponible. En términos funcionales, el resultado fue positivo: la iteración dejó una
+base jugable con generación del mapa, jugador controlable y primeros encuentros en salas, lo
+que permitió validar que la dirección técnica elegida era viable. Además, el incremento
+cumplía de forma razonable la \textit{Definition of Done}, ya que el proyecto compilaba en
+Unity sin errores críticos, las nuevas piezas estaban integradas en la partida y la revisión
+cruzada junto con los \textit{playtests} de la Tabla~\ref{tab:iteracion1-pruebas} confirmaron
+que el flujo principal funcionaba sin regresiones bloqueantes.
 
-Desde el punto de vista temporal, la planificación fue bastante ajustada. Frente a las 50:00
-horas previstas, la iteración consumió 50:17 horas reales, por lo que la desviación fue
-mínima. Aun así, el seguimiento del trabajo permitió detectar que algunas partes de la
-generación procedural tenían más complejidad de la estimada inicialmente, especialmente en el
-tratamiento coherente de ciertas salas especiales.
+Las pruebas ejecutadas sirvieron no solo para verificar que el mapa se generaba, que el
+jugador podía moverse y que los enemigos aparecían correctamente, sino también para detectar
+que la generación procedural todavía necesitaba más consistencia en ciertas salas especiales.
+Por ello, aunque el comportamiento observado fue satisfactorio como base funcional, se tomó la
+decisión de no dar por completamente cerrada esa \textit{feature}. El principal riesgo
+materializado en esta fase fue precisamente la complejidad real de la generación, superior a
+la prevista inicialmente, aunque sin llegar a bloquear la iteración.
 
-Por ello, aunque el alcance esencial de la iteración quedó cumplido, no resultaba conveniente
-dar por completamente cerrada toda la feature de generación procedural. La parte que todavía
-requería ajuste se replanificó para la iteración 2. Esta decisión permitió mantener una
-relación realista entre alcance, tiempo y grado de acabado, evitando cerrar artificialmente
-una funcionalidad que aún necesitaba consolidación.
-
-El resumen de horas de la iteración puede consultarse en la Tabla~\ref{tab:iteracion1-horas}.
+Desde el punto de vista temporal, la planificación fue bastante ajustada. El resumen de horas
+puede consultarse en la Tabla~\ref{tab:iteracion1-horas}: frente a las 50:00 horas previstas,
+la iteración consumió 50:17 horas reales, por lo que la desviación fue mínima y no obligó a
+replantear el cronograma general. Sí se aplicó, en cambio, un pequeño ajuste de alcance:
+aceptar el núcleo mínimo jugable y desplazar al backlog de la iteración 2 el refinamiento de
+la generación procedural. Con ello, el estado técnico final quedó suficientemente estabilizado
+para continuar el proyecto y la siguiente iteración pudo centrarse en consolidar esa base e
+introducir progresión por círculos y cámara del jugador con menor riesgo de integración.
 
 \begin{table}[h!]
     \centering
@@ -271,6 +256,30 @@ El resumen de horas de la iteración puede consultarse en la Tabla~\ref{tab:iter
     \caption{Resumen de horas reales de la iteración 1.}
     \label{tab:iteracion1-horas}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/01_generacion_procedural.png}
+\caption{Resultado de la feature Generación Procedural en la iteración 1}
+\label{fig:iteracion1-feature-generacion}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/02_anadir_jugador.png}
+\caption{Resultado de la feature Jugador en la iteración 1}
+\label{fig:iteracion1-feature-jugador}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/03_anadir_enemigo.png}
+\caption{Resultado de la feature Enemigos en la iteración 1}
+\label{fig:iteracion1-feature-enemigos}
+\end{center}
+\end{figure}
 
 La Figura~\ref{fig:uml-resultado-iteracion1} recoge el diagrama UML de resultado de la iteración.
 

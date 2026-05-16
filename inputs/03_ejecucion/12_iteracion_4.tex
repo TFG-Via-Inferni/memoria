@@ -131,13 +131,6 @@ otras capas de información que se incorporarán en iteraciones posteriores.
 
 La Figura~\ref{fig:iteracion4-feature-hud} muestra el resultado alcanzado en el HUD.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/10_HUD.png}
-\caption{Resultado de la feature Head-Up Display en la iteración 4}
-\label{fig:iteracion4-feature-hud}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Menú de Pausa}
 La implementación del menú de pausa se apoyó en \texttt{PauseMenuController}. Este script
@@ -153,13 +146,6 @@ un verdadero controlador del estado de juego.
 
 La Figura~\ref{fig:iteracion4-feature-menu-pausa} recoge el resultado visual del menú de pausa.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/11_menus_pausa.png}
-\caption{Resultado de la feature Menú de Pausa en la iteración 4}
-\label{fig:iteracion4-feature-menu-pausa}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Menú Principal}
 La implementación del menú principal se apoyó en \texttt{MainMenuController}, encargado de
@@ -173,13 +159,6 @@ encaje fuera más consistente y adaptable.
 
 La Figura~\ref{fig:iteracion4-feature-menu-principal} muestra el resultado de esta pantalla principal.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/12_menus_principal.png}
-\caption{Resultado de la feature Menú Principal en la iteración 4}
-\label{fig:iteracion4-feature-menu-principal}
-\end{center}
-\end{figure}
 
 \paragraph{Actualizar Sprites.}
 La actualización de sprites se realizó mediante la inserción de los nuevos recursos gráficos
@@ -190,13 +169,6 @@ alineados con una estética más característica del proyecto.
 
 El resultado de esta actualización puede observarse en la Figura~\ref{fig:iteracion4-feature-sprites}.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/13_actualizar_sprites.png}
-\caption{Resultado de la feature Actualizar Sprites en la iteración 4}
-\label{fig:iteracion4-feature-sprites}
-\end{center}
-\end{figure}
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar la experiencia de uso y la
@@ -209,7 +181,7 @@ interfaz. A partir de ellas se corrigieron aspectos del menú de pausa y varios 
 HUD, mejorando tanto la estabilidad de los flujos de menú como la lectura de la información
 durante la partida.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 4}
@@ -229,24 +201,31 @@ durante la partida.
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración mostró una relación bastante estable entre el alcance
-previsto y el tiempo disponible. Las líneas de trabajo definidas, HUD, menú de pausa, menú
-principal y actualización de sprites, pudieron desarrollarse dentro de la propia iteración y
-no requirieron trasladar funcionalidades a entregas posteriores. El resultado fue una mejora
-clara de la interacción con el sistema, de la legibilidad de la capa de presentación y de la
-identidad visual del juego.
+previsto y el trabajo realmente ejecutado. Las líneas definidas, HUD, menú de pausa, menú
+principal y actualización de sprites, pudieron cerrarse dentro del propio ciclo y aportaron
+una mejora clara tanto a la legibilidad del juego como a la navegación entre estados y a la
+identidad visual del proyecto. Además, el incremento cumplió adecuadamente la
+\textit{Definition of Done}: el proyecto mantuvo compilación estable en Unity, las nuevas
+capas de interfaz quedaron integradas con los sistemas previos y la revisión cruzada confirmó
+que el flujo jugable principal seguía funcionando con normalidad.
 
-En términos de tiempo sí apareció una desviación moderada: frente a las 50:00 horas
-planificadas, la iteración consumió 55:36 horas reales. Sin embargo, ese incremento no vino
-acompañado de una ruptura del alcance, sino de un mayor esfuerzo de ajuste y consolidación en
-una fase con menos incertidumbre técnica que otras anteriores.
+Los \textit{playtests} de la Tabla~\ref{tab:iteracion4-pruebas} fueron especialmente útiles
+en esta fase, porque no solo validaron que el HUD fuera legible y que los menús respondieran
+de forma estable, sino que también permitieron detectar incidencias concretas de interacción y
+presentación. Estas incidencias se resolvieron dentro de la propia iteración, lo que evitó
+arrastrar deuda visible y redujo el riesgo de que la capa de interfaz quedara cerrada solo en
+apariencia. En este sentido, no fue necesario dividir ni posponer funcionalidades: los cambios
+aceptados permanecieron dentro del alcance previsto y la separación entre menú de pausa y menú
+principal siguió respondiendo a criterios de trazabilidad y responsabilidad funcional.
 
-Por ello, desde la perspectiva de seguimiento y control, esta iteración no exigió una
-replanificación funcional relevante. Lo que se observa es más bien una sobrecarga moderada de
-esfuerzo para cerrar con mayor consistencia la experiencia de usuario. La separación entre
-menú de pausa y menú principal respondió a criterios de trazabilidad del trabajo y no a una
-fragmentación forzada por falta de tiempo.
-
-El detalle del esfuerzo temporal se resume en la Tabla~\ref{tab:iteracion4-horas}.
+En términos de cronograma sí apareció una desviación moderada. La Tabla~\ref{tab:iteracion4-horas}
+recoge que, frente a las 50:00 horas planificadas, la iteración consumió 55:36 horas reales.
+Sin embargo, ese incremento no vino acompañado de una ruptura de alcance, sino de un mayor
+esfuerzo de ajuste y consolidación propio del pulido de interfaz. El principal riesgo
+materializado fue precisamente subestimar el tiempo que requieren este tipo de mejoras, más
+sensibles a pequeños refinamientos acumulados que a grandes bloqueos técnicos. Aun así, el
+estado técnico final quedó bien estabilizado y la siguiente iteración pudo centrarse en
+combate y enemigos sobre una base visual e informativa mucho más madura.
 
 \begin{table}[h!]
     \centering
@@ -262,6 +241,38 @@ El detalle del esfuerzo temporal se resume en la Tabla~\ref{tab:iteracion4-horas
     \caption{Resumen de horas reales de la iteración 4.}
     \label{tab:iteracion4-horas}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/10_HUD.png}
+\caption{Resultado de la feature Head-Up Display en la iteración 4}
+\label{fig:iteracion4-feature-hud}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/11_menus_pausa.png}
+\caption{Resultado de la feature Menú de Pausa en la iteración 4}
+\label{fig:iteracion4-feature-menu-pausa}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/12_menus_principal.png}
+\caption{Resultado de la feature Menú Principal en la iteración 4}
+\label{fig:iteracion4-feature-menu-principal}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion4/13_actualizar_sprites.png}
+\caption{Resultado de la feature Actualizar Sprites en la iteración 4}
+\label{fig:iteracion4-feature-sprites}
+\end{center}
+\end{figure}
 
 La Figura~\ref{fig:uml-resultado-iteracion4} presenta el diagrama UML de resultado de la iteración 4.
 

@@ -134,13 +134,6 @@ la integración estructural de la sala sí queda resuelta en esta fase.
 
 La Figura~\ref{fig:iteracion7-feature-tienda} muestra el resultado visual de esta integración.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/19_sala_tienda.png}
-\caption{Resultado de la feature Sala Tienda en la iteración 7}
-\label{fig:iteracion7-feature-tienda}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Sala Secreta y Tesoro}
 La incorporación de salas especiales se apoya también en \texttt{MapGenerator}, que reserva
@@ -157,13 +150,6 @@ acabado funcional completo todavía sigue abierto.
 
 La Figura~\ref{fig:iteracion7-feature-salas-especiales} recoge el resultado obtenido para estas salas especiales.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/20_sala_secreta_y_tesoro.png}
-\caption{Resultado de la feature Sala Secreta y Tesoro en la iteración 7}
-\label{fig:iteracion7-feature-salas-especiales}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Sistema de Combate II}
 El refinamiento del combate se apoya en \texttt{PlayerCombatController},
@@ -181,13 +167,6 @@ que interpretan el impacto más allá del valor numérico del daño.
 
 La Figura~\ref{fig:iteracion7-feature-combate} muestra el resultado de este refinamiento del combate.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/21_sistema_combate_ii.png}
-\caption{Resultado de la feature Sistema de Combate II en la iteración 7}
-\label{fig:iteracion7-feature-combate}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Sistema de Enemigos II}
 La ampliación del comportamiento enemigo se apoyó sobre todo en \texttt{EnemyController},
@@ -204,13 +183,6 @@ desde la definición del círculo y del tipo de habitación.
 
 El resultado visual de esta ampliación del comportamiento enemigo puede verse en la Figura~\ref{fig:iteracion7-feature-enemigos}.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/22_sistema_enemigos_ii.png}
-\caption{Resultado de la feature Sistema de Enemigos II en la iteración 7}
-\label{fig:iteracion7-feature-enemigos}
-\end{center}
-\end{figure}
 \end{enumerate}
 
 \section{Pruebas}
@@ -224,7 +196,7 @@ las salas especiales, tanto en tienda como en tesoro y sala secreta. También pe
 detectar ajustes necesarios en algunos elementos interactivos asociados a estas habitaciones,
 mejorando su coherencia espacial y funcional dentro del recorrido.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 7}
@@ -243,27 +215,36 @@ mejorando su coherencia espacial y funcional dentro del recorrido.
 \end{table}
 
 \section{Seguimiento y control}
-El seguimiento de esta iteración estuvo muy condicionado por la naturaleza de las features
-planificadas. Dos de ellas, Sistema de Combate II y Sistema de Enemigos II, provenían de una
-replanificación deliberada tras comprobar en la iteración 5 que su complejidad real era
-mayor de la estimada inicialmente. En consecuencia, el control en esta fase no consistió solo
-en abrir trabajo nuevo, sino en cerrar con más profundidad aspectos que ya se habían validado
-como base funcional.
+El seguimiento de esta iteración estuvo muy condicionado por la naturaleza de las
+\textit{features} planificadas. Dos de ellas, sistema de combate II y sistema de enemigos II,
+provenían de una replanificación deliberada tras comprobar en la iteración 5 que su
+complejidad real era mayor de la estimada inicialmente. En este sentido, el control del
+trabajo no consistió solo en abrir nuevas funcionalidades, sino en cerrar con más profundidad
+aspectos que ya se habían validado como base funcional. El resultado fue positivo para combate
+y enemigos, que quedaron mucho más consolidados y cumplieron razonablemente la
+\textit{Definition of Done}: el proyecto siguió compilando en Unity, la integración con los
+sistemas anteriores fue estable y la revisión cruzada junto con los \textit{playtests} de la
+Tabla~\ref{tab:iteracion7-pruebas} confirmó esa mejora en contexto real de partida.
 
-Desde el punto de vista del tiempo, esta iteración sí muestra una desviación más clara:
-frente a las 50:00 horas planificadas, se registraron 57:14 horas reales. Esa diferencia
-encaja con el hecho de que el refinamiento de combate y enemigos absorbió más esfuerzo y con
-que la parte de salas especiales quedó estructuralmente resuelta, pero no completamente
-cerrada desde el punto de vista funcional.
+Sin embargo, las pruebas también revelaron que tienda y salas especiales, aunque ya estaban
+estructuralmente integradas, todavía arrastraban incidencias funcionales y de estabilidad. El
+comportamiento observado fue, por tanto, desigual: combate y enemigos alcanzaron el grado de
+madurez esperado, pero las salas especiales y la tienda necesitaron más remate del previsto.
+Aquí se materializó de nuevo un riesgo importante del proyecto, el de subestimar la
+complejidad de sistemas ya iniciados pero no completamente maduros, al que se sumaron
+incidencias reales detectadas durante las pruebas. La decisión fue aceptar combate y enemigos
+como cerrados y desplazar al backlog de la iteración 8 el cierre funcional de tienda y salas
+especiales para no degradar la calidad del incremento.
 
-Por tanto, el seguimiento y control de la iteración lleva a una conclusión clara: la división
-previa de features fue necesaria y acertada, pero aun así algunas tareas siguieron mostrando
-una complejidad superior a la esperada. El alcance principal sobre combate y enemigos sí
-puede considerarse consolidado, mientras que tienda y salas especiales justifican una
-replanificación parcial del cierre para no presentar como terminada una funcionalidad que aún
-requería remate efectivo.
-
-La Tabla~\ref{tab:iteracion7-horas} resume el esfuerzo temporal registrado en esta iteración.
+Desde el punto de vista temporal, esta iteración sí mostró una desviación clara. La
+Tabla~\ref{tab:iteracion7-horas} recoge 57:14 horas reales frente a las 50:00 horas
+planificadas, diferencia coherente con el peso del refinamiento y con el esfuerzo adicional
+de estabilización. Aun así, esa desviación no comprometió ya el núcleo jugable del proyecto,
+sino únicamente el remate de algunas funcionalidades secundarias. El estado técnico final dejó
+el combate y el comportamiento enemigo en un nivel de madurez mucho mayor que el alcanzado en
+la iteración 5, mientras que la siguiente iteración recibió como entrada el cierre funcional
+pendiente de salas especiales junto con los flujos de victoria, derrota y el último pulido
+visual del juego.
 
 \begin{table}[h!]
     \centering
@@ -279,6 +260,38 @@ La Tabla~\ref{tab:iteracion7-horas} resume el esfuerzo temporal registrado en es
     \caption{Resumen de horas reales de la iteración 7.}
     \label{tab:iteracion7-horas}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/19_sala_tienda.png}
+\caption{Resultado de la feature Sala Tienda en la iteración 7}
+\label{fig:iteracion7-feature-tienda}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/20_sala_secreta_y_tesoro.png}
+\caption{Resultado de la feature Sala Secreta y Tesoro en la iteración 7}
+\label{fig:iteracion7-feature-salas-especiales}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/21_sistema_combate_ii.png}
+\caption{Resultado de la feature Sistema de Combate II en la iteración 7}
+\label{fig:iteracion7-feature-combate}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/22_sistema_enemigos_ii.png}
+\caption{Resultado de la feature Sistema de Enemigos II en la iteración 7}
+\label{fig:iteracion7-feature-enemigos}
+\end{center}
+\end{figure}
 
 La Figura~\ref{fig:uml-resultado-iteracion7} recoge el diagrama UML de resultado de la iteración 7.
 

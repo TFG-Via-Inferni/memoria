@@ -117,13 +117,6 @@ estado residual entre una sesión y la siguiente.
 
 La Figura~\ref{fig:iteracion8-feature-victoria} muestra el resultado del flujo de victoria.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion8/23_victoria.png}
-\caption{Resultado de la feature Victoria en la iteración 8}
-\label{fig:iteracion8-feature-victoria}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Derrota}
 La derrota se implementa principalmente a través de \texttt{GameOverController},
@@ -141,14 +134,6 @@ derrota.
 
 La Figura~\ref{fig:iteracion8-feature-derrota} recoge el resultado visual del flujo de derrota.
 
-\begin{figure}[htbp]
-\begin{center}
-% \missingfigure{Sustituir por captura representativa del flujo de Derrota en la iteración 8}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion8/24_derrota.png}
-\caption{Resultado de la feature Derrota en la iteración 8}
-\label{fig:iteracion8-feature-derrota}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Actualizar Sprites (II)}
 La segunda actualización visual se apoya sobre todo en \texttt{EnemyDefinition},
@@ -167,14 +152,6 @@ proyecto.
 
 El resultado de esta actualización puede observarse en la Figura~\ref{fig:iteracion8-feature-sprites}.
 
-\begin{figure}[htbp]
-\begin{center}
-% \missingfigure{Sustituir por captura representativa de Actualizar Sprites (II) en la iteración 8}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion8/25_actualizar_sprites_II.png}
-\caption{Resultado de la feature Actualizar Sprites (II) en la iteración 8}
-\label{fig:iteracion8-feature-sprites}
-\end{center}
-\end{figure}
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar el cierre completo de la
@@ -187,7 +164,7 @@ sistemas, especialmente en la ocultación del HUD durante los estados finales y 
 elementos visuales que todavía generaban ruido en escena. Su corrección ayudó a cerrar la
 presentación final del juego con mayor consistencia.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 8}
@@ -204,26 +181,33 @@ presentación final del juego con mayor consistencia.
 \end{table}
 
 \section{Seguimiento y control}
-El seguimiento de esta iteración muestra una situación distinta a la del arranque provisional
-que se había documentado inicialmente. Aunque la iteración comenzó con parte del alcance aún
-sin cerrar, el control posterior permitió completar los flujos de victoria y derrota y
-terminar también la segunda revisión visual asociada a los sprites de enemigos y a las
-pantallas finales.
+El seguimiento de esta iteración muestra una situación distinta a la de otras fases del
+proyecto, porque aquí el objetivo ya no era abrir sistemas nuevos, sino cerrar de forma
+consistente los estados finales del juego. En términos de alcance, la iteración consiguió
+completar los flujos de victoria y derrota, cerrar la segunda revisión visual de sprites y
+pantallas finales y absorber el remate pendiente que todavía arrastraban algunas salas
+especiales desde la iteración anterior. Desde el punto de vista de calidad, el resultado fue
+coherente con la \textit{Definition of Done}: el proyecto mantuvo compilación estable en
+Unity, la integración con combate, progresión e interfaz previos fue correcta y la revisión
+cruzada junto con los \textit{playtests} de la Tabla~\ref{tab:iteracion8-pruebas} permitió
+confirmar que el cierre de partida no introducía regresiones críticas.
 
-Desde el punto de vista temporal, la iteración volvió a situarse ligeramente por encima de la
-estimación: frente a las 50:00 horas planificadas, se registraron 51:34 horas reales. No
-obstante, en esta ocasión la desviación no se traduce en un cierre incompleto, sino en un
-esfuerzo final de acabado mayor del estimado al principio. Este comportamiento encaja con la
-naturaleza de la iteración, orientada menos a abrir sistemas nuevos que a rematar de forma
-consistente los estados finales del juego.
+Las pruebas realizadas se centraron en alcanzar la victoria, forzar la derrota y revisar la
+presentación visual de las pantallas finales. El comportamiento observado fue satisfactorio
+tras varios ajustes, aunque las incidencias detectadas mostraron un riesgo esperable en esta
+fase: los flujos finales dependían de muchos sistemas ya existentes y, por tanto, requerían
+más trabajo de integración del previsto inicialmente. Aun así, esas incidencias no llegaron a
+bloquear el cierre y pudieron resolverse dentro del propio ciclo, lo que permitió aceptar el
+incremento como final efectivo de la fase de ejecución.
 
-Por ello, el seguimiento y control de esta fase resulta especialmente útil para dejar
-constancia de dos aspectos. En primer lugar, que el cierre de partida requirió más ajuste del
-previsto por su dependencia de sistemas ya existentes. En segundo lugar, que ese esfuerzo
-adicional sí permitió completar el alcance comprometido sin necesidad de trasladar trabajo
-pendiente a otra iteración.
-
-La Tabla~\ref{tab:iteracion8-horas} resume el esfuerzo temporal de esta iteración final.
+En términos temporales, la Tabla~\ref{tab:iteracion8-horas} recoge una desviación moderada:
+51:34 horas reales frente a las 50:00 planificadas. No obstante, en esta ocasión esa
+diferencia no se traduce en alcance incompleto, sino en un esfuerzo final de acabado mayor del
+estimado al principio. El estado técnico final dejó estabilizados los estados de cierre de
+partida y la última capa visual relevante del proyecto, con una deuda técnica ya menor y más
+relacionada con posibles mejoras de balance o pulido que con ausencia de sistemas clave. A
+partir de aquí, la salida natural ya no era una nueva iteración de desarrollo, sino la fase
+de cierre documental del proyecto.
 
 \begin{table}[h!]
     \centering
@@ -239,6 +223,32 @@ La Tabla~\ref{tab:iteracion8-horas} resume el esfuerzo temporal de esta iteraci�
     \caption{Resumen de horas reales de la iteración 8.}
     \label{tab:iteracion8-horas}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion8/23_victoria.png}
+\caption{Resultado de la feature Victoria en la iteración 8}
+\label{fig:iteracion8-feature-victoria}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+% \missingfigure{Sustituir por captura representativa del flujo de Derrota en la iteración 8}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion8/24_derrota.png}
+\caption{Resultado de la feature Derrota en la iteración 8}
+\label{fig:iteracion8-feature-derrota}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+% \missingfigure{Sustituir por captura representativa de Actualizar Sprites (II) en la iteración 8}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion8/25_actualizar_sprites_II.png}
+\caption{Resultado de la feature Actualizar Sprites (II) en la iteración 8}
+\label{fig:iteracion8-feature-sprites}
+\end{center}
+\end{figure}
 
 La Figura~\ref{fig:uml-resultado-iteracion8} recoge el diagrama UML de resultado de la iteración 8.
 

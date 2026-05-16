@@ -142,13 +142,6 @@ salas y enemigos que el sistema utiliza para construir la nueva planta.
 
 La Figura~\ref{fig:iteracion3-feature-circulos} muestra el resultado de esta adaptación del contenido por círculo.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/07_logica_circulos_II.png}
-\caption{Resultado de la feature Lógica de Círculos II en la iteración 3}
-\label{fig:iteracion3-feature-circulos}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Dualidad de Personajes}
 La dualidad se implementó principalmente en el script \texttt{Player}. Se introdujo una
@@ -169,13 +162,6 @@ resuelto el esqueleto funcional del sistema.
 
 El resultado visual de la dualidad puede observarse en la Figura~\ref{fig:iteracion3-feature-dualidad}.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/08_dualidad_personajes.png}
-\caption{Resultado de la feature Dualidad de Personajes en la iteración 3}
-\label{fig:iteracion3-feature-dualidad}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Minimapa}
 La primera versión del minimapa se integró directamente en \texttt{MapGenerator}. Se añadió
@@ -193,13 +179,6 @@ del recorrido del jugador por el nivel generado.
 
 La Figura~\ref{fig:iteracion3-feature-minimap} recoge el resultado de esta primera versión del minimapa.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/09_minimapa.png}
-\caption{Resultado de la feature Minimapa en la iteración 3}
-\label{fig:iteracion3-feature-minimap}
-\end{center}
-\end{figure}
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se orientaron a validar que la progresión por
@@ -212,7 +191,7 @@ círculos, en la información mostrada en interfaz y en la aparición de conteni
 la progresión. Estas correcciones ayudaron a consolidar la relación entre cambio de círculo,
 presentación visual y contenido generado.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 3}
@@ -230,26 +209,31 @@ presentación visual y contenido generado.
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración confirmó que el alcance principal podía cumplirse, aunque no
-todas las funcionalidades alcanzaron el mismo grado de madurez. La lógica de círculos sí
-quedó consolidada en el sentido previsto, porque dejó de ser una mera progresión numérica y
-pasó a organizar contenido real del juego. De forma similar, la dualidad de personajes quedó
-cerrada como primera versión jugable y suficientemente estable para apoyar iteraciones
-posteriores.
+todas las funcionalidades alcanzaron el mismo grado de madurez. La lógica de círculos sí quedó
+consolidada como sistema de contenido y la dualidad de personajes pasó a una primera versión
+jugable suficientemente estable para apoyar iteraciones posteriores. Desde el punto de vista
+de calidad, el incremento respondió bien a la \textit{Definition of Done}: el proyecto mantuvo
+compilación estable en Unity, la integración con la generación y la cámara ya existentes fue
+correcta, y la revisión cruzada junto con los \textit{playtests} de la
+Tabla~\ref{tab:iteracion3-pruebas} confirmó que el recorrido jugable seguía siendo coherente.
 
-Desde el punto de vista temporal, la iteración registró una ligera desviación respecto a la
-planificación: frente a las 50:00 horas previstas, se emplearon 51:41 horas reales. La
-diferencia es pequeña, pero el seguimiento del trabajo sí puso de manifiesto que el minimapa
-no convenía darse por terminado en esta fase si se quería mantener un cierre coherente del
-alcance.
+Las pruebas realizadas, centradas en recorrer círculos, alternar personajes y consultar el
+minimapa, mostraron que dualidad y progresión ofrecían el comportamiento esperado, pero
+también evidenciaron que el minimapa todavía debía mejorar en representación, integración con
+la cámara y encaje con el resto de la interfaz. Esa incidencia no llegó a convertirse en un
+bloqueo, pero sí confirmó un riesgo importante: algunos sistemas de interfaz dependían de una
+base previa más madura para cerrarse con calidad real. Por ello, se optó por aceptar el
+minimapa como incremento funcional mínimo y reservar una segunda iteración de mejora en lugar
+de forzar un cierre artificial.
 
-La primera versión del minimapa cumplía su función básica de orientación, pero aún dependía
-de ajustes posteriores sobre el estado real de las salas, la cámara y su integración en el
-HUD. Por ello, se optó por cerrar en esta iteración una versión funcional mínima y
-replanificar su segunda parte para la iteración 6, cuando el resto de sistemas implicados ya
-estuviera más estabilizado. Esta decisión permitió ajustar el alcance a la complejidad real
-sin perder el control de la planificación general.
-
-El resumen de horas de esta iteración se presenta en la Tabla~\ref{tab:iteracion3-horas}.
+En términos temporales, la iteración registró una desviación pequeña y asumible. La
+Tabla~\ref{tab:iteracion3-horas} recoge que, frente a las 50:00 horas previstas, se emplearon
+51:41 horas reales. Esa ligera sobrecarga no alteró el cronograma general, pero sí reforzó la
+decisión de no cargar más trabajo inmediato sobre el minimapa y desplazar su refinamiento al
+momento en que HUD e inventario estuvieran más estabilizados. Como resultado, el estado
+técnico final dejó consolidadas la progresión contextual por círculos y la alternancia entre
+personajes, mientras que la siguiente iteración pudo centrarse en interfaz y presentación
+como preparación natural para los cierres posteriores.
 
 \begin{table}[h!]
     \centering
@@ -265,6 +249,30 @@ El resumen de horas de esta iteración se presenta en la Tabla~\ref{tab:iteracio
     \caption{Resumen de horas reales de la iteración 3.}
     \label{tab:iteracion3-horas}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/07_logica_circulos_II.png}
+\caption{Resultado de la feature Lógica de Círculos II en la iteración 3}
+\label{fig:iteracion3-feature-circulos}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/08_dualidad_personajes.png}
+\caption{Resultado de la feature Dualidad de Personajes en la iteración 3}
+\label{fig:iteracion3-feature-dualidad}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion3/09_minimapa.png}
+\caption{Resultado de la feature Minimapa en la iteración 3}
+\label{fig:iteracion3-feature-minimap}
+\end{center}
+\end{figure}
 
 La Figura~\ref{fig:uml-resultado-iteracion3} recoge el diagrama UML de resultado de la iteración 3.
 

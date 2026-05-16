@@ -104,13 +104,6 @@ sistemas.
 
 La Figura~\ref{fig:iteracion5-feature-combate} muestra el resultado de esta ampliación del sistema de combate.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/14_sistema_combate.png}
-\caption{Resultado de la feature Sistema de Combate en la iteración 5}
-\label{fig:iteracion5-feature-combate}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Sistema de Enemigos}
 La consolidación del sistema de enemigos se apoyó en cambios sobre \texttt{EnemyController},
@@ -131,13 +124,6 @@ el nuevo sistema de combate.
 
 El resultado visual de esta integración puede verse en la Figura~\ref{fig:iteracion5-feature-enemigos}.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/15_sistema_enemigos.png}
-\caption{Resultado de la feature Sistema de Enemigos en la iteración 5}
-\label{fig:iteracion5-feature-enemigos}
-\end{center}
-\end{figure}
 \end{enumerate}
 
 \section{Pruebas}
@@ -151,7 +137,7 @@ encuentros, en la selección de armas a distancia y en el comportamiento de dist
 proyectiles. Su corrección fue importante para consolidar el combate como un sistema jugable
 coherente y para reducir comportamientos inconsistentes durante los enfrentamientos.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 5}
@@ -170,22 +156,28 @@ El seguimiento de esta iteración permitió comprobar que el núcleo del combate
 operativo dentro del tiempo previsto, pero también puso de manifiesto que tanto el sistema de
 combate como el sistema de enemigos tenían más recorrido del estimado inicialmente. La
 iteración cerró una base funcional sólida, con armas diferenciadas, proyectiles y enemigos
-mejor integrados, pero durante el desarrollo se vio que aún quedaban aspectos de legibilidad,
-\textit{feedback} y diferenciación táctica que no convenía forzar en el mismo ciclo.
+mejor integrados, y además mantuvo una validación de calidad satisfactoria: el proyecto siguió
+compilando con estabilidad en Unity, la integración con la base jugable existente fue correcta
+y la revisión cruzada junto con los \textit{playtests} de la Tabla~\ref{tab:iteracion5-pruebas}
+confirmó que no aparecían regresiones graves en movimiento, salas o progresión.
 
-Desde el punto de vista temporal, la iteración quedó incluso ligeramente por debajo de la
-estimación: frente a las 50:00 horas planificadas, se registraron 48:22 horas reales. Esto
-significa que el ajuste no vino dado por una falta inmediata de tiempo, sino por una mejor
-comprensión del alcance real de las features a medida que se desarrollaban.
+Las pruebas realizadas sirvieron para comprobar que el combate funcionaba y que los enemigos
+eran capaces de sostener el enfrentamiento básico esperado, pero también mostraron carencias
+de legibilidad, \textit{feedback} y diferenciación táctica. Ese comportamiento observado no
+invalidaba el incremento, pero sí dejaba claro que la calidad jugable convincente exigía una
+segunda pasada. Se materializó así un riesgo relevante del proyecto: que ciertos sistemas,
+aun siendo funcionales, necesitaran más de una entrega para alcanzar el grado de madurez
+deseado. La decisión tomada fue aceptar esta primera fase como base estable y posponer al
+backlog de la iteración 7 los refinamientos que afectaban más al pulido y a la variedad que al
+núcleo mínimo operativo.
 
-Por ello, el control del avance llevó a considerar combate y enemigos como sistemas cerrados
-en una primera fase, pero no completamente agotados. Su refinamiento posterior se
-replanificó para la iteración 7. Esta decisión encaja con la observación general del
-proyecto: algunas features se habían estimado inicialmente como menos complejas de lo que
-realmente fueron, y dividirlas entre iteraciones permitió ajustar mejor el esfuerzo al
-resultado esperado.
-
-El resumen temporal de la iteración se presenta en la Tabla~\ref{tab:iteracion5-horas}.
+Desde el punto de vista temporal, el resumen de la Tabla~\ref{tab:iteracion5-horas} muestra
+que la iteración quedó incluso ligeramente por debajo de la estimación, con 48:22 horas reales
+frente a las 50:00 horas planificadas. Esto confirma que el ajuste no vino de una falta
+inmediata de tiempo, sino de una revisión más honesta del alcance restante. El estado técnico
+final dejó estabilizados los fundamentos del combate y de la oposición enemiga, mientras que
+la siguiente iteración pudo abrir nuevas capas de progresión y recursos dejando el
+refinamiento profundo de combate y enemigos planificado para más adelante.
 
 \begin{table}[h!]
     \centering
@@ -201,6 +193,22 @@ El resumen temporal de la iteración se presenta en la Tabla~\ref{tab:iteracion5
     \caption{Resumen de horas reales de la iteración 5.}
     \label{tab:iteracion5-horas}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/14_sistema_combate.png}
+\caption{Resultado de la feature Sistema de Combate en la iteración 5}
+\label{fig:iteracion5-feature-combate}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion5/15_sistema_enemigos.png}
+\caption{Resultado de la feature Sistema de Enemigos en la iteración 5}
+\label{fig:iteracion5-feature-enemigos}
+\end{center}
+\end{figure}
 
 La Figura~\ref{fig:uml-resultado-iteracion5} recoge el diagrama UML de resultado de la iteración 5.
 

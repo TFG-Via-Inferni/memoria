@@ -122,13 +122,6 @@ tanto para depuración como para la futura comunicación con el usuario.
 
 La Figura~\ref{fig:iteracion6-feature-inventario} muestra el resultado de esta primera versión del inventario.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/16_gestion_inventario.png}
-\caption{Resultado de la feature Gestión del Inventario en la iteración 6}
-\label{fig:iteracion6-feature-inventario}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Sistema de Objetos}
 La representación de los objetos se apoyó en \texttt{InventoryItemDefinition}, que define la
@@ -144,13 +137,6 @@ interactúa con un pickup y, si la operación es válida, el objeto pasa a su in
 
 El resultado visible de esta integración puede observarse en la Figura~\ref{fig:iteracion6-feature-objetos}.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/17_objetos.png}
-\caption{Resultado de la feature Sistema de Objetos en la iteración 6}
-\label{fig:iteracion6-feature-objetos}
-\end{center}
-\end{figure}
 
 \subsection{Implementación de Minimapa II}
 La ampliación del minimapa se apoyó principalmente en \texttt{MapGenerator},
@@ -173,13 +159,6 @@ contenido mostrado, sino también a la calidad de su integración visual en pant
 
 La Figura~\ref{fig:iteracion6-feature-minimap} recoge el resultado de esta segunda iteración del minimapa.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/18_minimapa_II.png}
-\caption{Resultado de la feature Minimapa II en la iteración 6}
-\label{fig:iteracion6-feature-minimap}
-\end{center}
-\end{figure}
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se orientaron a validar la nueva capa de
@@ -192,7 +171,7 @@ inventario, en la navegación entre slots, en la gestión de objetos repetidos y
 comportamiento del minimapa. Su corrección permitió estabilizar esta nueva capa de
 progresión y mejorar su consistencia durante la exploración.
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 6}
@@ -210,25 +189,28 @@ progresión y mejorar su consistencia durante la exploración.
 
 \section{Seguimiento y control}
 El seguimiento de esta iteración mostró que el alcance previsto estaba bien dimensionado para
-el tiempo disponible. La gestión del inventario y los objetos pudieron avanzar de forma
-coordinada y, además, la iteración permitió completar la segunda parte del minimapa que había
-sido replanificada desde la iteración 3. Esto resulta relevante porque confirma que el
-aplazamiento anterior no respondió a un retraso desordenado, sino a una redistribución
-razonable del trabajo según el contexto técnico real.
+el tiempo disponible. La gestión del inventario, el sistema de objetos y la segunda parte del
+minimapa pudieron completarse dentro del propio ciclo, lo que además permitió cerrar la deuda
+funcional que había quedado pendiente desde la iteración 3. La validación de calidad fue
+positiva: el proyecto mantuvo compilación correcta en Unity, las nuevas capas se integraron
+con el HUD y la progresión ya existente, y la revisión cruzada junto con los \textit{playtests}
+de la Tabla~\ref{tab:iteracion6-pruebas} confirmó que inventario, objetos y minimapa refinado
+funcionaban correctamente dentro de la partida.
 
-En términos temporales, la planificación y la ejecución quedaron muy próximas: frente a las
-50:00 horas previstas, se dedicaron 49:27 horas reales. Ese ajuste refuerza la idea de que
-el alcance de la iteración estuvo correctamente acotado y de que la secuencia entre
-inventario, sistema de objetos y minimapa permitía cerrar entregables funcionales sin abrir nuevas
-desviaciones.
+Las pruebas realizadas mostraron el comportamiento esperado, tanto al recoger, gestionar y
+usar objetos como al consultar la representación del mapa. Las incidencias detectadas fueron
+menores y se concentraron más en ajustes de uso y balance que en problemas estructurales, por
+lo que no fue necesario dividir ni posponer ninguna de las funcionalidades principales. En
+este caso, el riesgo más importante era introducir incoherencias entre sistemas de progresión,
+interfaz y flujo de partida, pero ese riesgo no llegó a materializarse de forma crítica.
 
-Desde la perspectiva de seguimiento y control, la iteración puede considerarse bien cerrada.
-Se añadió una capa de persistencia y recompensa que el proyecto aún no tenía y, al mismo
-tiempo, se completó un refinamiento del minimapa que había quedado pendiente por complejidad
-en una iteración anterior. No fue necesario replanificar de nuevo, aunque sí quedaron
-preparadas bases para futuros ajustes de balance y contenido.
-
-El balance temporal de la iteración puede consultarse en la Tabla~\ref{tab:iteracion6-horas}.
+En términos temporales, la ejecución y la planificación quedaron muy próximas. La
+Tabla~\ref{tab:iteracion6-horas} recoge que, frente a las 50:00 horas previstas, se dedicaron
+49:27 horas reales. Esta cercanía refuerza la idea de que el alcance de la iteración estuvo
+bien acotado y de que la replanificación previa del minimapa había sido razonable. El estado
+técnico final dejó estabilizados los módulos de inventario, objetos y minimapa refinado, y la
+siguiente iteración pudo entrar ya con una capa de recursos e interfaz suficientemente madura
+para abordar salas especiales y el refinamiento de combate y enemigos.
 
 \begin{table}[h!]
     \centering
@@ -244,6 +226,30 @@ El balance temporal de la iteración puede consultarse en la Tabla~\ref{tab:iter
     \caption{Resumen de horas reales de la iteración 6.}
     \label{tab:iteracion6-horas}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/16_gestion_inventario.png}
+\caption{Resultado de la feature Gestión del Inventario en la iteración 6}
+\label{fig:iteracion6-feature-inventario}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/17_objetos.png}
+\caption{Resultado de la feature Sistema de Objetos en la iteración 6}
+\label{fig:iteracion6-feature-objetos}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.9\textwidth]{figures/resultados/iteracion6/18_minimapa_II.png}
+\caption{Resultado de la feature Minimapa II en la iteración 6}
+\label{fig:iteracion6-feature-minimap}
+\end{center}
+\end{figure}
 
 La Figura~\ref{fig:uml-resultado-iteracion6} recoge el diagrama UML de resultado de la iteración 6.
 
