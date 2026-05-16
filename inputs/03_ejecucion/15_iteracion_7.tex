@@ -205,6 +205,34 @@ desde la definición del círculo y del tipo de habitación.
 \end{figure}
 \end{enumerate}
 
+\section{Pruebas}
+Las pruebas realizadas en esta iteración se centraron en validar tanto la ampliación del
+recorrido con salas especiales como el refinamiento táctico de combate y enemigos. La tabla
+siguiente resume los playtests manuales que se ejecutaron para comprobar tienda, salas
+secreta y de tesoro, ataques cargados y nuevos patrones enemigos.
+
+Además, estas pruebas fueron útiles para encontrar errores concretos en la configuración de
+las salas especiales, tanto en tienda como en tesoro y sala secreta. También permitieron
+detectar ajustes necesarios en algunos elementos interactivos asociados a estas habitaciones,
+mejorando su coherencia espacial y funcional dentro del recorrido.
+
+\begin{table}[htbp]
+    \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 7}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Sala Tienda & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas hasta localizar la tienda. \item Entrar y observar su representación en el minimapa. \item Verificar que aparece como sala terminal diferenciada y que conserva puertas y muros coherentes.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sala Secreta y Tesoro & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas con salas especiales. \item Localizar tesoro y sala secreta. \item Verificar su iconografía propia, que la secreta no se muestre como una sala regular y que ambas no rompan la navegación.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sistema de Combate II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Probar armas normales y cargadas en combate. \item Observar trazos, indicadores y proyectiles. \item Confirmar que el \textit{feedback}, el daño y el contexto del arma se mantienen correctamente.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sistema de Enemigos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con enemigos normales, voladores y tanque. \item Provocar sus distintos patrones de ataque. \item Verificar la legibilidad de avisos, su patrón táctico y la respuesta al arma del jugador.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 7.}
+\end{table}
+
 \section{Seguimiento y control}
 El seguimiento de esta iteración estuvo muy condicionado por la naturaleza de las features
 planificadas. Dos de ellas, Sistema de Combate II y Sistema de Enemigos II, provenían de una
@@ -225,23 +253,6 @@ una complejidad superior a la esperada. El alcance principal sobre combate y ene
 puede considerarse consolidado, mientras que tienda y salas especiales justifican una
 replanificación parcial del cierre para no presentar como terminada una funcionalidad que aún
 requería remate efectivo.
-
-\begin{table}[h!]
-    \centering
-    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
-    {Pruebas de playtest realizadas en la iteración 7}
-    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
-    \midrule
-    Sala Tienda & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar varias mazmorras hasta localizar la sala de tienda. \item Acceder a ella desde el recorrido normal y observar su representación en el minimapa. \item Comprobar que aparece como sala terminal diferenciada, que su tipo se conserva en la celda y que puertas y muros se configuran de forma coherente.\end{enumerate}\end{minipage} \\
-    \midrule
-    Sala Secreta y Tesoro & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas con salas especiales activas. \item Localizar la sala de tesoro y buscar la sala secreta mediante exploración del mapa. \item Verificar que ambas usan iconografía propia, que la sala secreta no queda conectada como una habitación regular visible y que su colocación no rompe la navegación del nivel.\end{enumerate}\end{minipage} \\
-    \midrule
-    Sistema de Combate II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Probar armas con ataque normal y ataque cargado en encuentros reales. \item Observar trazos de melé, indicadores de carga, proyectiles y efectos visuales asociados. \item Confirmar que el \textit{feedback} acompaña al momento del ataque, que el daño se aplica al finalizar la acción y que el contexto del arma se mantiene durante el impacto.\end{enumerate}\end{minipage} \\
-    \midrule
-    Sistema de Enemigos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con enemigos normales, voladores y tanque. \item Mantener distintas distancias para provocar carga, disparo, persecución y recuperación tras empuje. \item Verificar que los avisos previos al ataque son legibles, que cada arquetipo mantiene su patrón táctico y que los multiplicadores de daño responden al arma usada por el jugador.\end{enumerate}\end{minipage} \\
-    \end{coolTable}
-    \caption{Pruebas de playtest realizadas en la iteración 7.}
-\end{table}
 
 \begin{table}[h!]
     \centering

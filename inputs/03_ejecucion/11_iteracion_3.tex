@@ -195,6 +195,32 @@ del recorrido del jugador por el nivel generado.
 \end{center}
 \end{figure}
 
+\section{Pruebas}
+Las pruebas realizadas en esta iteración se orientaron a validar que la progresión por
+círculos, la dualidad del jugador y el apoyo de navegación del minimapa quedaban integrados
+como parte del flujo normal de la partida. La tabla siguiente resume los playtests manuales
+ejecutados sobre estas tres features.
+
+Además, el proceso de prueba permitió identificar ajustes necesarios en la transición entre
+círculos, en la información mostrada en interfaz y en la aparición de contenido asociado a
+la progresión. Estas correcciones ayudaron a consolidar la relación entre cambio de círculo,
+presentación visual y contenido generado.
+
+\begin{table}[htbp]
+    \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 3}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Lógica de Círculos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Descender de círculo mediante la escalera de la sala del jefe. \item Explorar la nueva mazmorra generada. \item Comprobar que las salas y enemigos corresponden al contenido configurado para el círculo activo y que el cambio no mantiene contenido residual del círculo anterior.\end{enumerate}\end{minipage} \\
+    \midrule
+    Dualidad de Personajes & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar la partida con el jugador en su forma inicial. \item Ejecutar el cambio de forma y repetirlo antes y después del tiempo de reutilización. \item Verificar que cambia la representación visual, que las estadísticas compartidas se conservan y que el \textit{cooldown} impide alternancias inmediatas.\end{enumerate}\end{minipage} \\
+    \midrule
+    Minimapa & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Comenzar una nueva partida y observar el minimapa inicial. \item Entrar por primera vez en varias habitaciones. \item Confirmar que la sala inicial aparece visible desde el comienzo y que las nuevas salas se revelan progresivamente al ser descubiertas.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 3.}
+\end{table}
+
 \section{Seguimiento y control}
 El seguimiento de esta iteración confirmó que el alcance principal podía cumplirse, aunque no
 todas las funcionalidades alcanzaron el mismo grado de madurez. La lógica de círculos sí
@@ -215,21 +241,6 @@ HUD. Por ello, se optó por cerrar en esta iteración una versión funcional mí
 replanificar su segunda parte para la iteración 6, cuando el resto de sistemas implicados ya
 estuviera más estabilizado. Esta decisión permitió ajustar el alcance a la complejidad real
 sin perder el control de la planificación general.
-
-\begin{table}[h!]
-    \centering
-    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
-    {Pruebas de playtest realizadas en la iteración 3}
-    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
-    \midrule
-    Lógica de Círculos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Descender de círculo mediante la escalera de la sala del jefe. \item Explorar la nueva mazmorra generada. \item Comprobar que las salas y enemigos corresponden al contenido configurado para el círculo activo y que el cambio no mantiene contenido residual del círculo anterior.\end{enumerate}\end{minipage} \\
-    \midrule
-    Dualidad de Personajes & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar la partida con el jugador en su forma inicial. \item Ejecutar el cambio de forma y repetirlo antes y después del tiempo de reutilización. \item Verificar que cambia la representación visual, que las estadísticas compartidas se conservan y que el \textit{cooldown} impide alternancias inmediatas.\end{enumerate}\end{minipage} \\
-    \midrule
-    Minimapa & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Comenzar una nueva partida y observar el minimapa inicial. \item Entrar por primera vez en varias habitaciones. \item Confirmar que la sala inicial aparece visible desde el comienzo y que las nuevas salas se revelan progresivamente al ser descubiertas.\end{enumerate}\end{minipage} \\
-    \end{coolTable}
-    \caption{Pruebas de playtest realizadas en la iteración 3.}
-\end{table}
 
 \begin{table}[h!]
     \centering

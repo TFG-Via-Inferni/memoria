@@ -190,6 +190,34 @@ alineados con una estética más característica del proyecto.
 \end{center}
 \end{figure}
 
+\section{Pruebas}
+Las pruebas realizadas en esta iteración se centraron en validar la experiencia de uso y la
+presentación visual del juego. La tabla siguiente reúne los playtests manuales aplicados al
+HUD, al menú de pausa, al menú principal y a la actualización de sprites para comprobar que
+la interfaz y los flujos de navegación quedaban correctamente integrados.
+
+Estas pruebas también sirvieron para detectar errores de interacción y de legibilidad en la
+interfaz. A partir de ellas se corrigieron aspectos del menú de pausa y varios desajustes del
+HUD, mejorando tanto la estabilidad de los flujos de menú como la lectura de la información
+durante la partida.
+
+\begin{table}[htbp]
+    \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 4}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Head-Up Display & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar una partida y recorrer varias salas. \item Observar la información visible del HUD. \item Verificar que los elementos son legibles, mantienen una proporción adecuada y no invaden en exceso el área jugable.\end{enumerate}\end{minipage} \\
+    \midrule
+    Menú de Pausa & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Abrir el menú de pausa con teclado o mando. \item Probar reanudar, reiniciar y salir. \item Confirmar que tiempo y audio se detienen, que el HUD se oculta cuando corresponde y que la partida recupera su estado al reanudar.\end{enumerate}\end{minipage} \\
+    \midrule
+    Menú Principal & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Ejecutar el juego desde el menú principal. \item Iniciar partida y volver después al menú. \item Comprobar que la escena carga correctamente, que los botones responden y que la composición se mantiene estable.\end{enumerate}\end{minipage} \\
+    \midrule
+    Actualizar Sprites & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Recorrer una partida con los nuevos recursos visuales. \item Observar jugador, interfaz y prefabs modificados. \item Verificar que los sprites aparecen correctamente, sin recursos provisionales ni desajustes evidentes de escala o posición.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 4.}
+\end{table}
+
 \section{Seguimiento y control}
 El seguimiento de esta iteración mostró una relación bastante estable entre el alcance
 previsto y el tiempo disponible. Las líneas de trabajo definidas, HUD, menú de pausa, menú
@@ -208,23 +236,6 @@ replanificación funcional relevante. Lo que se observa es más bien una sobreca
 esfuerzo para cerrar con mayor consistencia la experiencia de usuario. La separación entre
 menú de pausa y menú principal respondió a criterios de trazabilidad del trabajo y no a una
 fragmentación forzada por falta de tiempo.
-
-\begin{table}[h!]
-    \centering
-    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
-    {Pruebas de playtest realizadas en la iteración 4}
-    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
-    \midrule
-    Head-Up Display & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar una partida y recorrer varias salas con combate y exploración. \item Observar la información visible del HUD durante el movimiento y los encuentros. \item Verificar que los elementos son legibles, no invaden de forma excesiva el área jugable y mantienen una proporción adecuada.\end{enumerate}\end{minipage} \\
-    \midrule
-    Menú de Pausa & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Abrir el menú de pausa durante la partida con teclado o mando. \item Probar las acciones de reanudar, reiniciar y salir. \item Confirmar que el tiempo de juego y el audio se detienen durante la pausa, que el HUD se oculta cuando corresponde y que la partida recupera su estado al reanudar.\end{enumerate}\end{minipage} \\
-    \midrule
-    Menú Principal & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Ejecutar el juego desde la escena de menú principal. \item Activar la opción de iniciar partida y volver posteriormente al menú. \item Comprobar que la escena de juego carga correctamente, que los botones responden y que la composición del logotipo y las acciones se mantiene estable.\end{enumerate}\end{minipage} \\
-    \midrule
-    Actualizar Sprites & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Recorrer una partida con los nuevos recursos visuales integrados. \item Observar jugador, elementos principales, interfaz y prefabs modificados. \item Verificar que los sprites aparecen correctamente referenciados, sin recursos provisionales visibles ni desajustes evidentes de escala o posición.\end{enumerate}\end{minipage} \\
-    \end{coolTable}
-    \caption{Pruebas de playtest realizadas en la iteración 4.}
-\end{table}
 
 \begin{table}[h!]
     \centering

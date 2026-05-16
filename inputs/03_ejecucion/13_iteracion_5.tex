@@ -136,6 +136,30 @@ el nuevo sistema de combate.
 \end{figure}
 \end{enumerate}
 
+\section{Pruebas}
+Las pruebas realizadas en esta iteración se centraron en validar el núcleo jugable del
+combate y la respuesta de los enemigos en encuentros reales. La tabla siguiente recoge los
+playtests manuales con los que se comprobó el funcionamiento de las armas, los proyectiles,
+la aplicación de daño y la activación de los distintos comportamientos enemigos.
+
+Además, estas pruebas permitieron encontrar errores concretos en el \textit{spawn} de
+encuentros, en la selección de armas a distancia y en el comportamiento de distintos
+proyectiles. Su corrección fue importante para consolidar el combate como un sistema jugable
+coherente y para reducir comportamientos inconsistentes durante los enfrentamientos.
+
+\begin{table}[htbp]
+    \centering
+    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
+    {Pruebas de playtest realizadas en la iteración 5}
+    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
+    \midrule
+    Sistema de Combate & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Alternar entre forma de melé y forma a distancia. \item Ejecutar ataques cuerpo a cuerpo, disparos y ataques cargados con distintas armas. \item Comprobar que cada arma respeta su alcance, \textit{cooldown}, generación de hitbox o proyectil y aplicación de daño sobre enemigos válidos.\end{enumerate}\end{minipage} \\
+    \midrule
+    Sistema de Enemigos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con distintos tipos de enemigos. \item Provocar persecución, ataque cuerpo a cuerpo y ataques a distancia. \item Verificar que los enemigos se activan con la sala, que sus proyectiles dañan al jugador, que reciben daño según el contexto del arma y que las puertas se liberan al terminar el encuentro.\end{enumerate}\end{minipage} \\
+    \end{coolTable}
+    \caption{Pruebas de playtest realizadas en la iteración 5.}
+\end{table}
+
 \section{Seguimiento y control}
 El seguimiento de esta iteración permitió comprobar que el núcleo del combate podía quedar
 operativo dentro del tiempo previsto, pero también puso de manifiesto que tanto el sistema de
@@ -155,19 +179,6 @@ replanificó para la iteración 7. Esta decisión encaja con la observación gen
 proyecto: algunas features se habían estimado inicialmente como menos complejas de lo que
 realmente fueron, y dividirlas entre iteraciones permitió ajustar mejor el esfuerzo al
 resultado esperado.
-
-\begin{table}[h!]
-    \centering
-    \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
-    {Pruebas de playtest realizadas en la iteración 5}
-    \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
-    \midrule
-    Sistema de Combate & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Alternar entre forma de melé y forma a distancia. \item Ejecutar ataques cuerpo a cuerpo, disparos y ataques cargados con distintas armas. \item Comprobar que cada arma respeta su alcance, \textit{cooldown}, generación de hitbox o proyectil y aplicación de daño sobre enemigos válidos.\end{enumerate}\end{minipage} \\
-    \midrule
-    Sistema de Enemigos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con distintos tipos de enemigos. \item Provocar persecución, ataque cuerpo a cuerpo y ataques a distancia. \item Verificar que los enemigos se activan con la sala, que sus proyectiles dañan al jugador, que reciben daño según el contexto del arma y que las puertas se liberan al terminar el encuentro.\end{enumerate}\end{minipage} \\
-    \end{coolTable}
-    \caption{Pruebas de playtest realizadas en la iteración 5.}
-\end{table}
 
 \begin{table}[h!]
     \centering
