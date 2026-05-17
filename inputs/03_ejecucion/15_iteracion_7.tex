@@ -136,6 +136,13 @@ la integración estructural de la sala sí queda resuelta en esta fase.
 
 La Figura~\ref{fig:iteracion7-feature-tienda} muestra el resultado visual de esta integración.
 
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/resultados/iteracion7/19_sala_tienda.png}
+\caption{Resultado de la feature Sala Tienda en la iteración 7}
+\label{fig:iteracion7-feature-tienda}
+\end{center}
+\end{figure}
 
 \subsection{Implementación de Sala Secreta y Tesoro}
 La incorporación de salas especiales se apoya también en \texttt{MapGenerator}, que reserva
@@ -152,6 +159,13 @@ acabado funcional completo quedó pendiente para la iteración siguiente.
 
 La Figura~\ref{fig:iteracion7-feature-salas-especiales} recoge el resultado obtenido para estas salas especiales.
 
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/resultados/iteracion7/20_sala_secreta_y_tesoro.png}
+\caption{Resultado de la feature Sala Secreta y Tesoro en la iteración 7}
+\label{fig:iteracion7-feature-salas-especiales}
+\end{center}
+\end{figure}
 
 \subsection{Implementación de Sistema de Combate II}
 El refinamiento del combate se apoya en \texttt{PlayerCombatController},
@@ -169,6 +183,13 @@ que interpretan el impacto más allá del valor numérico del daño.
 
 La Figura~\ref{fig:iteracion7-feature-combate} muestra el resultado de este refinamiento del combate.
 
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/resultados/iteracion7/21_sistema_combate_ii.png}
+\caption{Resultado de la feature Sistema de Combate II en la iteración 7}
+\label{fig:iteracion7-feature-combate}
+\end{center}
+\end{figure}
 
 \subsection{Implementación de Sistema de Enemigos II}
 La ampliación del comportamiento enemigo se apoyó sobre todo en \texttt{EnemyController},
@@ -185,6 +206,14 @@ desde la definición del círculo y del tipo de habitación.
 
 El resultado visual de esta ampliación del comportamiento enemigo puede verse en la Figura~\ref{fig:iteracion7-feature-enemigos}.
 
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/resultados/iteracion7/22_sistema_enemigos_ii.png}
+\caption{Resultado de la feature Sistema de Enemigos II en la iteración 7}
+\label{fig:iteracion7-feature-enemigos}
+\end{center}
+\end{figure}
+
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar tanto la ampliación del
 recorrido con salas especiales como el refinamiento táctico de combate y enemigos. La Tabla~\ref{tab:iteracion7-pruebas}
@@ -196,7 +225,7 @@ las salas especiales, tanto en tienda como en tesoro y sala secreta. También pe
 detectar ajustes necesarios en algunos elementos interactivos asociados a estas habitaciones,
 mejorando su coherencia espacial y funcional dentro del recorrido.
 
-\begin{table}[H]
+\begin{table}[!htbp]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 7}
@@ -246,7 +275,7 @@ la iteración 5, mientras que la siguiente iteración recibió como entrada el c
 pendiente de salas especiales junto con los flujos de victoria, derrota y el último pulido
 visual del juego.
 
-\begin{table}[h!]
+\begin{table}[!htbp]
     \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 7}
@@ -261,41 +290,9 @@ visual del juego.
     \label{tab:iteracion7-horas}
 \end{table}
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/19_sala_tienda.png}
-\caption{Resultado de la feature Sala Tienda en la iteración 7}
-\label{fig:iteracion7-feature-tienda}
-\end{center}
-\end{figure}
+La Figura~\ref{fig:uml-resultado-iteracion7} resume el diagrama UML de resultado de la iteración 7.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/20_sala_secreta_y_tesoro.png}
-\caption{Resultado de la feature Sala Secreta y Tesoro en la iteración 7}
-\label{fig:iteracion7-feature-salas-especiales}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/21_sistema_combate_ii.png}
-\caption{Resultado de la feature Sistema de Combate II en la iteración 7}
-\label{fig:iteracion7-feature-combate}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion7/22_sistema_enemigos_ii.png}
-\caption{Resultado de la feature Sistema de Enemigos II en la iteración 7}
-\label{fig:iteracion7-feature-enemigos}
-\end{center}
-\end{figure}
-
-La Figura~\ref{fig:uml-resultado-iteracion7} recoge el diagrama UML de resultado de la iteración 7.
-
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \begin{center}
 % \missingfigure{Sustituir por el diagrama UML de resultado de la iteración 7}
 \includegraphics[width=\textwidth]{figures/iteracion7_resultado_uml.pdf}

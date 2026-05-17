@@ -153,6 +153,13 @@ jugable en el motor.
 
 El resultado de esta primera implementación puede observarse en la Figura~\ref{fig:iteracion1-feature-generacion}.
 
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/resultados/iteracion1/01_generacion_procedural.png}
+\caption{Resultado de la feature Generación Procedural en la iteración 1}
+\label{fig:iteracion1-feature-generacion}
+\end{center}
+\end{figure}
 
 \subsection{Implementación de Jugador}
 El jugador se integró mediante un controlador ligero apoyado en \texttt{Rigidbody2D}. En
@@ -167,6 +174,13 @@ en una posición coherente con la partida recién creada.
 
 La Figura~\ref{fig:iteracion1-feature-jugador} muestra el resultado visual de esta integración del jugador.
 
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/resultados/iteracion1/02_anadir_jugador.png}
+\caption{Resultado de la feature Jugador en la iteración 1}
+\label{fig:iteracion1-feature-jugador}
+\end{center}
+\end{figure}
 
 \subsection{Implementación de Enemigos}
 Los enemigos se instanciaron desde las propias salas una vez configuradas. Cada sala
@@ -186,6 +200,13 @@ de exploración y combate del proyecto.
 
 El resultado obtenido para esta feature puede verse en la Figura~\ref{fig:iteracion1-feature-enemigos}.
 
+\begin{figure}[!htbp]
+\begin{center}
+\includegraphics[width=.7\textwidth]{figures/resultados/iteracion1/03_anadir_enemigo.png}
+\caption{Resultado de la feature Enemigos en la iteración 1}
+\label{fig:iteracion1-feature-enemigos}
+\end{center}
+\end{figure}
 
 \section{Pruebas}
 Las pruebas realizadas en esta iteración se centraron en validar sobre partida real las
@@ -198,7 +219,7 @@ procedural y en la integración inicial del jugador dentro del mapa. A partir de
 ajustaron problemas de puertas, de instanciación del personaje y de colocación de ciertas
 salas especiales, reforzando la estabilidad de la primera base jugable.
 
-\begin{table}[H]
+\begin{table}[!htbp]
     \centering
     \begin{coolTable}{p{.27\textwidth}p{.62\textwidth}}{2}
     {Pruebas de playtest realizadas en la iteración 1}
@@ -242,7 +263,7 @@ la generación procedural. Con ello, el estado técnico final quedó suficientem
 para continuar el proyecto y la siguiente iteración pudo centrarse en consolidar esa base e
 introducir progresión por círculos y cámara del jugador con menor riesgo de integración.
 
-\begin{table}[h!]
+\begin{table}[!htbp]
     \centering
     \begin{coolTable}{lr}{2}
     {Horas de la iteración 1}
@@ -257,33 +278,9 @@ introducir progresión por círculos y cámara del jugador con menor riesgo de i
     \label{tab:iteracion1-horas}
 \end{table}
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/01_generacion_procedural.png}
-\caption{Resultado de la feature Generación Procedural en la iteración 1}
-\label{fig:iteracion1-feature-generacion}
-\end{center}
-\end{figure}
+La Figura~\ref{fig:uml-resultado-iteracion1} resume el diagrama UML de resultado de la iteración 1.
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/02_anadir_jugador.png}
-\caption{Resultado de la feature Jugador en la iteración 1}
-\label{fig:iteracion1-feature-jugador}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=.9\textwidth]{figures/resultados/iteracion1/03_anadir_enemigo.png}
-\caption{Resultado de la feature Enemigos en la iteración 1}
-\label{fig:iteracion1-feature-enemigos}
-\end{center}
-\end{figure}
-
-La Figura~\ref{fig:uml-resultado-iteracion1} recoge el diagrama UML de resultado de la iteración.
-
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
 \begin{center}
 \includegraphics[width=\textwidth]{figures/iteracion1_resultado_uml.pdf}
 \caption{Diagrama UML de resultado de la iteración 1}
