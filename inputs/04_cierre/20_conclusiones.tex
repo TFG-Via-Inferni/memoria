@@ -2,7 +2,7 @@
 \chapter{Conclusiones}
 
 \begin{quotation}[Poet]{Dante Alighieri (1265--1321)}
-Consider your origin: you were not made to live as brutes, but to follow virtue and knowledge.
+Consider ye the seed from which ye sprang; ye were not made to live like unto brutes, but for pursuit of virtue and of knowledge.
 \end{quotation}
 
 \begin{abstract}
@@ -73,8 +73,9 @@ iteraciones y reservar más tiempo al cierre funcional de las features más cone
 \subsection{Horas reales de la fase de cierre}
 La fase de cierre concentró el esfuerzo de consolidación final de la memoria, revisión de
 coherencia entre lo implementado y lo documentado, preparación de materiales de entrega y
-redacción de conclusiones. El registro horario de esta fase quedó reflejado del siguiente
-modo:
+redacción de conclusiones. Además, se incluye en esta fase el tiempo dedicado a preparar la
+entrega final, generar los artefactos necesarios, elaborar la presentación de defensa y
+preparar su exposición. El registro horario de esta fase quedó reflejado del siguiente modo:
 
 \begin{table}[h!]
     \centering
@@ -89,6 +90,71 @@ modo:
     \end{coolTable}
     \caption{Resumen de horas de la Fase 3.}
 \end{table}
+
+\section{Trabajo futuro}
+Aunque \textit{Via Inferni} alcanza los objetivos planteados para el TFG, el prototipo deja
+abiertas varias líneas de evolución razonables para una versión posterior. Desde el punto
+de vista jugable, una de las mejoras principales sería ampliar el sistema de objetos para
+introducir efectos más variados y sinergias entre ellos. Actualmente los objetos permiten
+modificar la partida y reforzar la progresión, pero una capa de combinaciones entre efectos
+aumentaría la profundidad estratégica y la rejugabilidad de cada \textit{run}.
+
+Otra mejora natural sería incorporar jefes al final de cada círculo. En la versión actual,
+la sala del jefe actúa principalmente como punto de transición hacia el siguiente nivel, pero
+podría convertirse en un encuentro propio, con patrones de ataque, fases y mecánicas únicas
+asociadas al pecado o temática del círculo correspondiente. Esta línea permitiría reforzar
+tanto la identidad narrativa de cada zona como la sensación de cierre antes del descenso.
+
+También sería interesante profundizar en el comportamiento de los enemigos. El sistema
+actual diferencia estados, ataques y algunos patrones básicos, pero podría evolucionar hacia
+comportamientos más avanzados: coordinación entre enemigos, reacción al entorno, selección
+de tácticas según distancia o salud, y variaciones específicas por círculo. Esto permitiría
+que los encuentros fueran menos previsibles sin romper la claridad del combate.
+
+La generación procedural ofrece otra línea clara de mejora. Gracias al diseño modular de
+salas, el proyecto podría incorporar nuevas variantes de habitaciones, más configuraciones
+de obstáculos, salas especiales adicionales y reglas de aparición más ricas. Esta ampliación
+aprovecharía la base ya construida sin exigir rehacer el generador desde cero.
+
+El apartado audiovisual y la experiencia de usuario también podrían evolucionar en una
+versión futura mediante animaciones más completas, efectos de impacto, señales visuales más
+legibles, música y sonido diferenciados por círculo, opciones de accesibilidad y mayor
+soporte para configuración de controles. Estas mejoras no eran imprescindibles para validar
+el prototipo académico, pero ayudarían a acercarlo a una experiencia de juego más completa.
+
+Desde el punto de vista técnico, una evolución razonable sería incorporar pruebas
+automatizadas para sistemas críticos como la generación procedural, el inventario, la
+progresión por círculos o los estados de victoria y derrota. Aunque el proyecto se ha
+validado mediante \textit{playtests}, una batería de pruebas unitarias o de integración
+ayudaría a detectar regresiones de forma más temprana.
+
+Otra línea técnica sería configurar un flujo de integración continua que compile el
+proyecto, ejecute comprobaciones básicas y genere \textit{builds} reproducibles. Esto
+permitiría formalizar mejor el paso desde una versión de desarrollo en Unity hasta
+artefactos listos para entrega, demostración o distribución.
+
+También resultaría útil reforzar el enfoque \textit{data-driven} del proyecto. Parte de la
+configuración ya se apoya en recursos como \textit{ScriptableObjects}, pero una versión más
+madura podría desplazar todavía más parámetros de enemigos, salas, objetos, dificultad y
+progresión hacia datos editables. Esto facilitaría el balanceo y reduciría la necesidad de
+modificar código para ajustar contenido.
+
+En la misma línea, podrían desarrollarse herramientas internas de edición y validación:
+utilidades para revisar \textit{pools} de salas y enemigos, comprobar que cada círculo tiene
+contenido suficiente, detectar configuraciones incompletas o generar informes sobre la
+distribución procedural. Estas herramientas serían especialmente valiosas si el volumen de
+contenido creciera.
+
+Una evolución técnica más avanzada podría incorporar telemetría y análisis de partidas.
+Registrar información como duración de las \textit{runs}, salas visitadas, muertes, objetos
+utilizados o enemigos que causan más daño permitiría tomar decisiones de balanceo con datos
+reales. Este trabajo podría complementarse con sesiones de \textit{profiling} para
+identificar cuellos de botella en la generación de mapas, la instanciación de salas, el
+minimapa o la gestión de enemigos activos.
+
+En conjunto, estas líneas futuras permitirían transformar el prototipo en una base más
+madura tanto a nivel de producto como de ingeniería: con más contenido, mayor capacidad de
+balanceo, mejor control técnico y un proceso de entrega más robusto.
 
 \section{Aprendizaje adquirido}
 Uno de los aprendizajes más relevantes del proyecto ha sido la transición desde el dominio
