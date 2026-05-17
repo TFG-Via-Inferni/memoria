@@ -15,8 +15,9 @@ por salas.
 La segunda iteración se centró en consolidar la base jugable obtenida en la entrega
 anterior y en resolver tres necesidades que aparecieron de forma natural tras validar el
 primer prototipo. Por un lado, era necesario cerrar correctamente una parte pendiente de la
-feature de generación procedural, ya que la sala secreta todavía presentaba problemas de
-cerramiento y consistencia espacial. Por otro, el juego necesitaba introducir una primera
+feature de generación procedural, ya que la primera versión del sistema todavía presentaba
+problemas de consistencia entre prefabs de habitaciones, puertas, offsets y colisiones. Por
+otro, el juego necesitaba introducir una primera
 lógica real de progresión entre círculos para que la partida no terminara simplemente al
 recorrer el mapa generado. Por último, el sistema de cámara requería una revisión porque el
 seguimiento del jugador y la transición entre salas seguían produciendo comportamientos
@@ -25,17 +26,22 @@ incorrectos o poco estables.
 \begin{enumerate}
 \item \textbf{Generación Procedural II.} Esta funcionalidad corresponde a una continuación del
 trabajo ya iniciado sobre el sistema de generación. Su objetivo no fue crear una
-nueva mecánica de generación, sino consolidar una parte del sistema que todavía no estaba
-resuelta de forma satisfactoria: la sala secreta. El funcionamiento real introducido en
-esta iteración consistió en completar el cerramiento físico de dicha sala, ajustando su
-composición de muros y su colisión para que se comportara como un espacio efectivamente
-aislado y coherente con su condición de habitación especial. Esto era importante porque la
-feature de generación procedural no puede darse por terminada simplemente cuando el mapa se
-construye y conecta, sino cuando todos los tipos de sala incluidos en la topología resultan
-jugables y visualmente consistentes. En este caso, la segunda parte de la feature sirvió
-para corregir una debilidad concreta detectada tras la validación de la primera iteración:
-la sala secreta existía en la estructura lógica del mapa, pero su representación espacial
-todavía no estaba completamente bien resuelta.
+nueva mecánica de generación, sino consolidar la capa física y configurable de las salas
+instanciadas por el generador. El trabajo real de esta iteración se centró en corregir los
+prefabs de habitaciones para normalizar su tamaño de referencia a 16x9 tiles, añadir o
+ajustar colisiones en paredes, corregir offsets tanto de \textit{rooms} como de puertas,
+cerrar con pared los lados donde no hubiera puertas y dejar preparada la \textit{boss room}
+para integrar la escalera de descenso. Junto con ello, también se empezó a ordenar la
+estructura de prefabs y referencias para facilitar la incorporación futura de nuevas salas
+sin tener que rehacer manualmente cada variante.
+
+Esto era importante porque la feature de generación procedural no puede darse por terminada
+simplemente cuando el mapa se construye y conecta, sino cuando los tipos de sala y sus
+elementos de transición se materializan con consistencia visual, física y de montaje dentro
+de la escena. En este caso, la segunda parte de la feature sirvió para corregir una
+debilidad concreta detectada tras la validación de la primera iteración: el generador ya
+producía topologías válidas, pero sus prefabs todavía no ofrecían una base suficientemente
+robusta para soportar el crecimiento del contenido.
 
 \item \textbf{Lógica de Círculos.} Esta funcionalidad introdujo por primera vez una
 progresión explícita entre niveles temáticos del Infierno dentro de la partida. Hasta ese
@@ -85,14 +91,21 @@ los ya existentes y conectarlos entre sí de manera más coherente.
 
 \subsection{Diseño de Generación Procedural II}
 La segunda parte de la feature de generación procedural se abordó como una tarea de
-consistencia espacial. La decisión importante aquí fue asumir que no bastaba con que una
-sala secreta existiera como tipo lógico dentro del generador; también debía comportarse
-físicamente como una habitación cerrada y legible dentro del escenario instanciado.
+consistencia espacial y de modularización inicial del contenido. La decisión importante aquí
+fue asumir que no bastaba con que las salas existieran como tipos lógicos dentro del
+generador; también debían comportarse físicamente como habitaciones cerradas, bien
+alineadas y fáciles de mantener dentro del escenario instanciado.
 
-Por ello, esta iteración trató la sala secreta no como un detalle estético aislado, sino
-como una pieza estructural que debía respetar los mismos criterios de coherencia que el
-resto del mapa: límites claros, colisión consistente y un contorno que no generara lecturas
-ambiguas del espacio.
+Por ello, esta iteración trató los prefabs de habitaciones y puertas no como recursos
+estáticos aislados, sino como piezas estructurales que debían respetar los mismos criterios
+de coherencia que el resto del mapa: dimensiones previsibles, límites claros, colisión
+consistente, offsets correctos y cerramientos que no generaran lecturas ambiguas del
+espacio.
+
+Además, se adoptó como criterio de diseño que la ampliación futura del generador debía ser
+menos artesanal. Esto llevó a empezar a ordenar referencias, nombres y piezas reutilizables
+de puertas y muros, de forma que añadir nuevas \textit{rooms} en iteraciones posteriores
+resultara más directo y menos propenso a errores de configuración.
 
 \subsection{Diseño de Lógica de Círculos}
 La lógica de círculos se diseñó como un sistema persistente y centralizado. El criterio
@@ -134,18 +147,34 @@ no todo el peso recae en la lógica del mapa o del jugador, sino en cómo se con
 subsistemas ya existentes para producir una experiencia más robusta.
 
 \subsection{Implementación de Generación Procedural II}
-La consolidación de la sala secreta se materializó directamente sobre su prefab. El cambio
-consistió en añadir y reorganizar tiles de muro, así como en redefinir el contorno de la
-colisión compuesta de la habitación. Esta intervención no alteraba la lógica del generador,
-pero sí corregía la representación física de una de sus salidas posibles.
+La consolidación de esta parte del sistema se materializó sobre todo en los prefabs de
+habitaciones, puertas y muros. El primer bloque de trabajo consistió en incorporar un nuevo
+conjunto base de habitaciones de 16x9 tiles, junto con variantes 1x1, 1x2, 2x1 y en L, de
+modo que la representación espacial del generador partiera ya de una escala homogénea. A
+partir de esa base se revisaron referencias y nombres de prefabs para que los
+\textit{ScriptableObjects} del sistema apuntaran a las versiones correctas.
 
-Desde el punto de vista práctico, el efecto de este cambio fue que la sala secreta pasó a
-quedar mejor cerrada, con límites más consistentes y sin huecos o lecturas espaciales
-ambiguas en sus bordes. Se trata, por tanto, de una implementación pequeña en volumen de
-código, pero relevante para dar por estabilizada la feature de generación procedural en uno
-de sus casos especiales.
+El segundo bloque se centró en el cerramiento físico de las salas. Para ello se añadieron
+prefabs de puertas específicos, un prefab de muro reutilizable y variantes con pared para
+los lados donde no hubiera conexión. Esto permitió colocar pared donde no existiera puerta y
+evitar huecos abiertos artificialmente por la mera reutilización del mismo marco de acceso
+en todos los lados.
 
-La Figura~\ref{fig:iteracion2-feature-generacion} muestra el resultado de este ajuste sobre la sala secreta.
+El tercer bloque abordó los ajustes finos de integración: corrección de offsets en la
+instanciación de habitaciones y puertas, reposicionamiento de tiles en prefabs de puertas y
+ajuste de colisiones para que el jugador interactuara correctamente con los límites del
+escenario. Sobre esa misma línea, la \textit{boss room} quedó preparada con el espacio y la
+estructura necesarios para alojar la escalera que articularía la progresión entre círculos
+en la feature siguiente.
+
+Desde el punto de vista práctico, el efecto conjunto de estos cambios fue que el mapa pasó a
+instanciar salas más consistentes, con límites mejor definidos, menos errores de alineación
+y una base más razonable para seguir añadiendo contenido procedural. Aunque una parte del
+trabajo recayó en prefabs y configuración más que en scripts complejos, esta implementación
+fue relevante para estabilizar la feature de generación procedural como infraestructura del
+resto del proyecto.
+
+La Figura~\ref{fig:iteracion2-feature-generacion} muestra el resultado de este ajuste sobre los prefabs del sistema procedural.
 
 \begin{figure}[!htbp]
 \begin{center}
@@ -218,9 +247,10 @@ prototipo inicial funcionaba correctamente en contexto de partida. La Tabla~\ref
 los playtests manuales aplicados sobre la segunda fase de la generación procedural, la
 progresión entre círculos y el comportamiento de la cámara por salas.
 
-Estas pruebas también ayudaron a detectar incidencias concretas en el seguimiento de cámara
-y en la progresión entre círculos. A partir de ellas se reajustaron transiciones, encuadres
-y cambios de estado para estabilizar el desplazamiento visual y el paso entre mazmorras.
+Estas pruebas también ayudaron a detectar incidencias concretas en offsets, cerramientos,
+transiciones de cámara y progresión entre círculos. A partir de ellas se reajustaron
+encuadres, posiciones y cambios de estado para estabilizar tanto el montaje espacial de las
+salas como el desplazamiento visual y el paso entre mazmorras.
 
 \begin{table}[!htbp]
     \centering
@@ -228,7 +258,7 @@ y cambios de estado para estabilizar el desplazamiento visual y el paso entre ma
     {Pruebas de playtest realizadas en la iteración 2}
     \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
     \midrule
-    Generación Procedural II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas hasta localizar una sala secreta. \item Entrar o aproximarse a sus límites desde las salas cercanas. \item Comprobar que el cerramiento visual y físico no deja huecos, bordes atravesables ni lecturas ambiguas del espacio.\end{enumerate}\end{minipage} \\
+    Generación Procedural II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar varias partidas recorriendo salas normales, especiales y sala de jefe. \item Observar la colocación de habitaciones de 16x9, puertas, paredes sin salida y límites físicos al atravesar distintas transiciones. \item Comprobar que no hay offsets visibles entre \textit{rooms} y puertas, que las paredes bloquean correctamente, que no quedan huecos donde no debería haber acceso y que la \textit{boss room} queda preparada de forma coherente para integrar la escalera.\end{enumerate}\end{minipage} \\
     \midrule
     Lógica de Círculos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Avanzar por el mapa hasta la sala del jefe. \item Activar la escalera entrando en su zona de disparo. \item Verificar que aumenta el círculo actual, que la interfaz muestra el nuevo nombre y que la mazmorra se regenera para continuar la partida.\end{enumerate}\end{minipage} \\
     \midrule
@@ -241,13 +271,14 @@ y cambios de estado para estabilizar el desplazamiento visual y el paso entre ma
 \section{Seguimiento y control}
 El seguimiento de esta iteración permitió comprobar que el alcance previsto estaba repartido
 entre una tarea de cierre técnico y dos ampliaciones funcionales nuevas. La parte pendiente de
-generación procedural pudo completarse correctamente y la cámara del jugador quedó integrada
-como sistema usable dentro de la partida. También se implementó una primera versión de la
-lógica de círculos, suficiente para validar la progresión básica, de forma que la iteración
-mantuvo una buena alineación con la \textit{Definition of Done}: el proyecto siguió
-compilando con estabilidad en Unity, las nuevas piezas se conectaron con los sistemas previos
-y los \textit{playtests} de la Tabla~\ref{tab:iteracion2-pruebas}, junto con la revisión
-cruzada, confirmaron que el incremento era jugable y no introducía regresiones críticas.
+generación procedural pudo completarse correctamente como una revisión amplia de prefabs,
+offsets, cerramientos y colisiones, y la cámara del jugador quedó integrada como sistema
+usable dentro de la partida. También se implementó una primera versión de la lógica de
+círculos, suficiente para validar la progresión básica, de forma que la iteración mantuvo
+una buena alineación con la \textit{Definition of Done}: el proyecto siguió compilando con
+estabilidad en Unity, las nuevas piezas se conectaron con los sistemas previos y los
+\textit{playtests} de la Tabla~\ref{tab:iteracion2-pruebas}, junto con la revisión cruzada,
+confirmaron que el incremento era jugable y no introducía regresiones críticas.
 
 Sin embargo, las pruebas también dejaron ver una cuestión importante. Aunque el descenso entre
 círculos funcionaba y el seguimiento de cámara era correcto, el comportamiento observado aún
@@ -262,12 +293,13 @@ actual.
 En cuanto al tiempo, la iteración se mantuvo dentro de un margen favorable. El detalle puede
 consultarse en la Tabla~\ref{tab:iteracion2-horas}: frente a las 50:00 horas planificadas, se
 registraron 49:08 horas reales. Por tanto, no hubo una desviación de cronograma que obligara
-a corregir la planificación general; el único ajuste real vino del propio alcance funcional.
-El estado técnico final quedó así con una base espacial más estable, una cámara funcional y
-una progresión ya encadenada entre niveles, mientras que la entrada para la siguiente
-iteración pasó a priorizar el cierre de lógica de círculos como sistema de contenido junto con
-la incorporación de nuevas capas jugables como la dualidad de personajes y el primer
-minimapa.
+a corregir la planificación general; el único ajuste real vino del propio alcance funcional,
+que acabó materializándose menos como un cambio aislado en una sala concreta y más como una
+revisión transversal de la capa de prefabs del generador. El estado técnico final quedó así
+con una base espacial más estable, una cámara funcional y una progresión ya encadenada entre
+niveles, mientras que la entrada para la siguiente iteración pasó a priorizar el cierre de
+lógica de círculos como sistema de contenido junto con la incorporación de nuevas capas
+jugables como la dualidad de personajes y el primer minimapa.
 
 \begin{table}[!htbp]
     \centering

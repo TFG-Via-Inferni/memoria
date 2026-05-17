@@ -38,13 +38,21 @@ existir una estructura persistente de almacenamiento asociada al jugador.
 entidades consistentes tanto en datos como en mundo. Su funcionamiento real se articula en
 dos niveles. El primero es la definición del objeto como recurso configurable, con
 identificador normalizado, nombre visible, icono, tipo y parámetros asociados a su efecto.
-El segundo es su presencia dentro del mundo mediante pickups capaces de mostrar ese objeto,
-permitir su recogida por parte del jugador y desaparecer cuando la operación tiene éxito.
+Dentro de esa estructura no solo entran objetos genéricos recogibles, sino también objetos
+especiales de comportamiento único y objetos de aumento de estadísticas del jugador, con
+efectos sobre atributos como daño, vida máxima, probabilidad crítica, esquiva o velocidad de
+movimiento. El segundo es su presencia dentro del mundo mediante pickups capaces de mostrar
+ese objeto, permitir su recogida por parte del jugador y desaparecer cuando la operación
+tiene éxito.
+
 La feature contempla además la validación de definiciones para evitar inconsistencias en los
-datos y fuerza un modelo de objetos únicos no apilables, simplificando la lógica inicial del
-inventario. En conjunto, esta funcionalidad conecta por primera vez el contenido recogible
-del escenario con una representación interna estructurada y con la interfaz del inventario,
-haciendo posible que los objetos se conviertan en una unidad real de progresión jugable.
+datos, un modelo de objetos únicos no apilables dentro del inventario y un gestor específico
+para controlar la unicidad de los objetos especiales. Sobre esa base, el sistema no se limita
+a almacenar objetos, sino que también activa sus efectos cuando corresponde: algunos se
+traducen en mejoras persistentes de estadísticas, otros alteran directamente capacidades del
+jugador o el estado de la partida. En conjunto, esta funcionalidad conecta por primera vez el
+contenido recogible del escenario con una representación interna estructurada, con la
+interfaz del inventario y con efectos reales sobre la progresión jugable.
 
 \item \textbf{Minimapa II.} Esta funcionalidad completó una segunda mejora del minimapa sobre la
 base ya introducida anteriormente. Su alcance real consistió en hacer que la representación
@@ -86,10 +94,13 @@ representa en el mundo. Esta separación era importante porque evita mezclar con
 representación visual, permitiendo que un mismo tipo de objeto pueda existir como recurso
 abstracto, como icono de inventario o como entidad recogible.
 
-También se tomó la decisión de imponer, en esta primera fase, una política de objetos
-únicos no apilables. Esto reduce la complejidad inicial del sistema y hace que cada slot
-tenga una interpretación directa, algo útil mientras el inventario aún se encuentra en una
-fase relativamente temprana.
+También se tomó la decisión de distinguir dos grandes familias funcionales dentro del propio
+sistema: objetos de estadística, que modifican parámetros persistentes del jugador, y objetos
+especiales, que aportan efectos singulares y no deberían duplicarse sin control. Por ello se
+introdujo una política de objetos únicos no apilables y un criterio de unicidad específica
+para los especiales. Esto reduce la complejidad inicial del sistema, mantiene cada slot con
+una interpretación directa y evita que la progresión quede rota por acumulaciones no deseadas
+de efectos excepcionales.
 
 \subsection{Diseño de Minimapa II}
 La segunda fase del minimapa se diseñó alrededor de una idea sencilla: la información del
@@ -136,13 +147,24 @@ La Figura~\ref{fig:iteracion6-feature-inventario} muestra el resultado de esta p
 La representación de los objetos se apoyó en \texttt{InventoryItemDefinition}, que define la
 identidad del objeto, su icono, su tipo y los datos asociados a sus posibles efectos.
 Además, \texttt{InventoryItemValidationUtility} se encarga de validar estas definiciones y
-de normalizar identificadores para evitar inconsistencias.
+de normalizar identificadores para evitar inconsistencias. Sobre esta base se incorporaron
+objetos de aumento de estadísticas y varios objetos especiales con lógica propia, de modo que
+el sistema ya no se limita a conservar un icono en inventario, sino que enlaza recogida y
+efecto jugable.
 
 La presencia física del objeto en el mundo se resolvió mediante \texttt{WorldInventoryPickup},
 un componente encargado de mostrar el icono del ítem, ofrecer una operación de recogida
 contra el inventario del jugador y destruir o mantener el pickup según el resultado. Esto
 permite que el vínculo entre mundo e inventario quede resuelto de manera directa: el jugador
 interactúa con un pickup y, si la operación es válida, el objeto pasa a su inventario.
+
+Para los objetos especiales se añadió además \texttt{SpecialItemManager}, responsable de
+controlar su unicidad y de coordinar su aplicación. A través de esta capa, el inventario y el
+jugador pueden activar comportamientos diferenciados como \textit{dash}, \textit{cloak},
+\textit{shield}, revelado completo del mapa o \textit{cursed coin}. En paralelo, los objetos
+de estadística quedaron integrados como definiciones configurables que modifican atributos de
+\texttt{PlayerStats}, y el sistema de círculos pasó a soportar \textit{drops} con distintas
+probabilidades según el contexto de la partida.
 
 El resultado visible de esta integración puede observarse en la Figura~\ref{fig:iteracion6-feature-objetos}.
 
@@ -189,9 +211,9 @@ los playtests manuales aplicados para comprobar tanto la gestión de slots y pic
 lectura visual del mapa durante la exploración.
 
 Estas pruebas también ayudaron a detectar incidencias concretas en la capacidad inicial del
-inventario, en la navegación entre slots, en la gestión de objetos repetidos y en el
-comportamiento del minimapa. Su corrección permitió estabilizar esta nueva capa de
-progresión y mejorar su consistencia durante la exploración.
+inventario, en la navegación entre slots, en la gestión de objetos repetidos, en la
+aplicación de efectos especiales y en el comportamiento del minimapa. Su corrección permitió
+estabilizar esta nueva capa de progresión y mejorar su consistencia durante la exploración.
 
 \begin{table}[!htbp]
     \centering
@@ -201,7 +223,7 @@ progresión y mejorar su consistencia durante la exploración.
     \midrule
     Gestión del Inventario & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar una partida con el inventario vacío. \item Seleccionar distintos slots, intentar usar slots bloqueados y llenar progresivamente los espacios disponibles. \item Comprobar que la selección activa se actualiza, que los objetos se almacenan en slots válidos y que los casos de inventario lleno, slot vacío o slot bloqueado se comportan de forma predecible.\end{enumerate}\end{minipage} \\
     \midrule
-    Sistema de Objetos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Localizar pickups dentro del mundo. \item Recoger objetos con espacio disponible en el inventario y repetir la acción con el inventario lleno o con definiciones inválidas preparadas para prueba. \item Verificar que el pickup desaparece solo cuando la recogida tiene éxito y que el objeto queda representado en el inventario con su icono y datos correctos.\end{enumerate}\end{minipage} \\
+    Sistema de Objetos & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Localizar pickups dentro del mundo, incluyendo objetos de estadística y objetos especiales. \item Recoger objetos con espacio disponible en el inventario y repetir la acción con el inventario lleno, con objetos especiales ya adquiridos o con definiciones inválidas preparadas para prueba. \item Verificar que el pickup desaparece solo cuando la recogida tiene éxito, que el objeto queda representado en el inventario con su icono y datos correctos y que, cuando corresponde, sus efectos modifican estadísticas o activan correctamente la funcionalidad especial asociada.\end{enumerate}\end{minipage} \\
     \midrule
     Minimapa II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Explorar una mazmorra generada entrando en salas nuevas y regresando a salas ya visitadas. \item Observar el minimapa durante cada transición. \item Confirmar que distingue salas ocultas, visitadas y sala actual, que centra la cámara del minimapa en la posición del jugador y que el contenedor del HUD mantiene marco, máscara y tamaño correctos.\end{enumerate}\end{minipage} \\
     \end{coolTable}
@@ -221,10 +243,11 @@ funcionaban correctamente dentro de la partida.
 
 Las pruebas realizadas mostraron el comportamiento esperado, tanto al recoger, gestionar y
 usar objetos como al consultar la representación del mapa. Las incidencias detectadas fueron
-menores y se concentraron más en ajustes de uso y balance que en problemas estructurales, por
-lo que no fue necesario dividir ni posponer ninguna de las funcionalidades principales. En
-este caso, el riesgo más importante era introducir incoherencias entre sistemas de progresión,
-interfaz y flujo de partida, pero ese riesgo no llegó a materializarse de forma crítica.
+menores y se concentraron más en ajustes de uso, balance y unicidad de algunos objetos que en
+problemas estructurales, por lo que no fue necesario dividir ni posponer ninguna de las
+funcionalidades principales. En este caso, el riesgo más importante era introducir
+incoherencias entre sistemas de progresión, interfaz, efectos especiales y flujo de partida,
+pero ese riesgo no llegó a materializarse de forma crítica.
 
 En términos temporales, la ejecución y la planificación quedaron muy próximas. La
 Tabla~\ref{tab:iteracion6-horas} recoge que, frente a las 50:00 horas previstas, se dedicaron
