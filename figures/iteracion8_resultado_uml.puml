@@ -7,7 +7,7 @@ skinparam linetype ortho
 skinparam nodesep 45
 skinparam ranksep 40
 
-title Iteracion 8 - Vista simplificada actualizada
+title Iteracion 8 - Vista simplificada
 
 class CircleUI {
   +UpdateCircleDisplay()

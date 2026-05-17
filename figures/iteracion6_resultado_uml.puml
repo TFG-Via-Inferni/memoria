@@ -51,6 +51,12 @@ class InventoryItemValidationUtility {
   +ValidateDefinition()
 }
 
+class SpecialItemManager {
+  +IsSpecialTypeActive()
+  +RegisterSpecial()
+  +UnregisterSpecial()
+}
+
 class WorldInventoryPickup {
   +TryPickup()
   +Spawn()
@@ -74,11 +80,14 @@ PlayerCombatController --> PlayerStats : calcula dano
 PlayerCombatController --> WeaponDefinition : selecciona arma
 
 PlayerInventory --> PlayerStats : consulta capacidad
+PlayerInventory --> SpecialItemManager : controla unicidad special
 PlayerInventory "1" o-- "*" InventoryItemDefinition : almacena slots
 InventoryItemDefinition --> InventoryItemValidationUtility : valida definicion
 
 WorldInventoryPickup --> InventoryItemDefinition : referencia item
 WorldInventoryPickup --> PlayerInventory : intenta recoger
+
+SpecialItemManager --> InventoryItemDefinition : identifica efectos special
 
 EnemyController --> Player : mantiene combate
 EnemyController --> Room : notifica muerte

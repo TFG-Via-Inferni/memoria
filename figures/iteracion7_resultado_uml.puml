@@ -7,7 +7,7 @@ skinparam linetype ortho
 skinparam nodesep 45
 skinparam ranksep 40
 
-title Iteracion 7 - Vista simplificada actualizada
+title Iteracion 7 - Vista simplificada
 
 class Player
 
@@ -75,6 +75,15 @@ class BreakableWall {
   +TakeDamage()
 }
 
+class BaptismalFont {
+  +TryTransferSoul()
+}
+
+class PlayerStats {
+  +SpendSoul()
+  +AddSoul()
+}
+
 PlayerCombatController --> Player : obtiene forma / direccion
 PlayerCombatController --> WeaponDefinition : selecciona arma
 PlayerCombatController --> MeleeHitbox : genera ataque melee
@@ -95,8 +104,13 @@ MapGenerator --> Room : instancia recorrido
 Room --> ShopManager : integra sala tienda
 Room --> TreasureManager : integra sala tesoro
 Room --> BreakableWall : habilita acceso secreto
+Room --> BaptismalFont : integra recuperacion de alma
 
 ShopManager --> ShopStand : asigna objetos y precios
+ShopStand --> PlayerStats : cobra con alma
 TreasureManager --> TreasureStand : asigna recompensas
+TreasureStand --> Player : entrega item gratis
+BreakableWall --> PlayerCombatController : recibe dano de ataque
+BaptismalFont --> PlayerStats : transfiere alma
 
 @enduml
