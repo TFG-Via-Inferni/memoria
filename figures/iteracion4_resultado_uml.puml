@@ -28,6 +28,7 @@ class CircleUI {
   +UpdateCircleDisplay()
   +UpdateSelectionHudDisplay()
   +UpdateVitalsHudDisplay()
+  +UpdateInventoryHudDisplay()
 }
 
 class MainMenuController {
@@ -49,8 +50,16 @@ class MapGenerator {
   +SetupDungeon()
 }
 
-class Player
-class PlayerStats
+class Player {
+  +TrySwapForm()
+}
+
+class PlayerStats {
+  +AddSoul()
+  +SpendSoul()
+  +RestoreHealth()
+  +GetSelectedWeaponId()
+}
 
 CircleManager --> CircleDatabase : consulta definicion
 CircleManager --> CircleDefinition : mantiene circulo activo
@@ -59,7 +68,7 @@ CircleManager --> MapGenerator : regenera mazmorra
 
 CircleUI --> CircleManager : muestra circulo
 CircleUI --> Player : muestra forma activa
-CircleUI --> PlayerStats : muestra vida/atributos
+CircleUI --> PlayerStats : muestra vida/alma/arma
 
 MainMenuController --> SceneManager : carga partida / salida
 

@@ -22,18 +22,20 @@ cuatro funcionalidades: el ajuste del \textit{Head-Up Display}, la incorporació
 de pausa, la consolidación del menú principal y la actualización de sprites y prefabs.
 
 \begin{enumerate}
-\item \textbf{Head-Up Display.} Esta funcionalidad se centró en mejorar la legibilidad y el
-encaje visual de la información en pantalla. En esta fase, el HUD ya existía como soporte
-de ciertos elementos informativos del juego, pero todavía necesitaba una mejor adaptación al
-espacio visible para resultar realmente útil durante la partida. El trabajo realizado en
-esta iteración consistió en ajustar el tamaño y la disposición de los elementos visibles del
-HUD para que su lectura fuera más clara y para que no compitieran de forma incómoda con el
-espacio de juego. En términos funcionales, esta feature no introduce una nueva capa de
-información, sino que refina la forma en la que el jugador recibe la información existente,
-mejorando la proporción, el equilibrio visual y la integración de la interfaz sobre la
-escena. Esto era importante porque, a medida que el proyecto iba incorporando más sistemas,
-la interfaz dejaba de ser un añadido accesorio y pasaba a convertirse en una herramienta
-necesaria para que el estado del juego se percibiera con claridad.
+\item \textbf{Head-Up Display.} Esta funcionalidad se centró en consolidar la interfaz de
+partida como una capa informativa y funcional completa. En esta fase, el HUD ya existía como
+soporte de ciertos elementos del juego, pero todavía necesitaba una mejor adaptación al
+espacio visible y una integración más clara con sistemas que ya estaban emergiendo como
+relevantes para la experiencia real. El trabajo realizado en esta iteración no consistió solo
+en ajustar tamaño y disposición, sino también en incorporar y estabilizar la presentación de
+la vida del jugador, el contador de alma, la recuperación de vida mediante alma y la lectura
+del arma seleccionada según el personaje activo.
+
+En términos funcionales, esta feature convierte el HUD en la superficie desde la que el
+jugador puede leer tanto su supervivencia como su capacidad ofensiva y su recurso utilitario
+principal. Esto era importante porque, a medida que el proyecto iba incorporando más
+sistemas, la interfaz dejaba de ser un añadido accesorio y pasaba a convertirse en una
+herramienta necesaria para que el estado del juego se percibiera y se utilizara con claridad.
 
 \item \textbf{Menú de Pausa.} Esta funcionalidad incorporó un flujo de interrupción controlada
 dentro de la partida. Su comportamiento real consistió en detener temporalmente la
@@ -75,15 +77,17 @@ interacción global con la aplicación.
 
 \subsection{Diseño de Head-Up Display}
 La decisión principal respecto al HUD fue asumir que su valor no depende solo de la
-información que muestra, sino también de cómo se integra visualmente con la escena. Un HUD
-mal proporcionado puede ser tan problemático como la ausencia de información, ya que invade
-espacio de juego o dificulta la lectura rápida del estado actual de la partida.
+información que muestra, sino también de cómo se integra visual y funcionalmente con la
+escena. Un HUD mal proporcionado puede ser tan problemático como la ausencia de información,
+ya que invade espacio de juego o dificulta la lectura rápida del estado actual de la partida.
 
 Por ello, el trabajo de diseño en esta iteración se centró en el ajuste de escala y
 proporciones, buscando que los elementos visibles mantuvieran presencia suficiente para ser
-útiles, pero sin romper el equilibrio del encuadre. La intención no era rediseñar por
-completo la interfaz, sino llevarla a un punto en el que pudiera convivir mejor con el
-resto del sistema.
+útiles, pero sin romper el equilibrio del encuadre. A esa base se añadió una segunda decisión
+relevante: el HUD debía expresar la relación entre vida, alma y arma activa como parte del
+bucle jugable. Esto implicaba mostrar de forma legible la reserva de salud, hacer visible el
+recurso de alma y asociar el arma seleccionada al personaje actual, de manera que la
+interfaz acompañara la dualidad ya introducida en la iteración 3.
 
 \subsection{Diseño de Menú de Pausa}
 El menú de pausa se concibió como una capa superpuesta que interrumpe temporalmente la
@@ -118,16 +122,19 @@ meramente cosmético, ya que varios de los cambios introducen comportamiento fun
 directo sobre el flujo del juego.
 
 \subsection{Implementación de Head-Up Display}
-La feature de HUD se materializó principalmente mediante ajustes sobre la escena de juego,
-modificando el tamaño de los elementos de interfaz ya presentes para mejorar su legibilidad
-durante la partida. Aunque esta intervención no requirió la creación de un gran controlador
-nuevo, sí tuvo un efecto funcional claro: mejorar la forma en la que el jugador percibe la
-información ya disponible.
+La feature de HUD se materializó principalmente sobre \texttt{CircleUI}, \texttt{Player} y
+\texttt{PlayerStats}. Además de reajustar la escala y la disposición de los elementos en
+pantalla, se consolidó una interfaz capaz de mostrar la vida del jugador mediante corazones,
+el depósito de alma, la superposición de estadísticas relevantes y el arma actualmente
+seleccionada según el personaje activo.
 
-Este tipo de refinamiento es relevante en un proyecto de videojuego porque la utilidad del
-HUD depende tanto de su contenido como de su presencia visual. Con este ajuste, la interfaz
-de partida quedó mejor adaptada al espacio real de uso y más preparada para convivir con
-otras capas de información que se incorporarán en iteraciones posteriores.
+Desde el punto de vista funcional, esta capa también quedó vinculada a la recuperación de
+vida con alma. De este modo, el HUD dejó de ser solo un contenedor visual y pasó a reflejar
+de forma inmediata la relación entre daño recibido, salud restante, alma acumulada y arma
+utilizada. Este tipo de refinamiento es relevante en un proyecto de videojuego porque la
+utilidad del HUD depende tanto de su contenido como de su presencia visual. Con este ajuste,
+la interfaz de partida quedó mejor adaptada al espacio real de uso y más preparada para
+convivir con otras capas de información posteriores.
 
 La Figura~\ref{fig:iteracion4-feature-hud} muestra el resultado alcanzado en el HUD.
 
@@ -205,9 +212,9 @@ HUD, al menú de pausa, al menú principal y a la actualización de sprites para
 la interfaz y los flujos de navegación quedaban correctamente integrados.
 
 Estas pruebas también sirvieron para detectar errores de interacción y de legibilidad en la
-interfaz. A partir de ellas se corrigieron aspectos del menú de pausa y varios desajustes del
-HUD, mejorando tanto la estabilidad de los flujos de menú como la lectura de la información
-durante la partida.
+interfaz. A partir de ellas se corrigieron aspectos del menú de pausa, del comportamiento del
+HUD y de la presentación de vida, alma y arma activa, mejorando tanto la estabilidad de los
+flujos de menú como la lectura de la información durante la partida.
 
 \begin{table}[!htbp]
     \centering
@@ -215,7 +222,7 @@ durante la partida.
     {Pruebas de playtest realizadas en la iteración 4}
     \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
     \midrule
-    Head-Up Display & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar una partida y recorrer varias salas. \item Observar la información visible del HUD. \item Verificar que los elementos son legibles, mantienen una proporción adecuada y no invaden en exceso el área jugable.\end{enumerate}\end{minipage} \\
+    Head-Up Display & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar una partida, recorrer varias salas y alternar entre personajes y armas. \item Observar la información visible del HUD, recibir daño y usar alma para recuperar vida. \item Verificar que los elementos son legibles, mantienen una proporción adecuada, no invaden en exceso el área jugable, reflejan correctamente vida y alma y muestran el arma activa del personaje en uso.\end{enumerate}\end{minipage} \\
     \midrule
     Menú de Pausa & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Abrir el menú de pausa con teclado o mando. \item Probar reanudar, reiniciar y salir. \item Confirmar que tiempo y audio se detienen, que el HUD se oculta cuando corresponde y que la partida recupera su estado al reanudar.\end{enumerate}\end{minipage} \\
     \midrule
@@ -239,12 +246,13 @@ que el flujo jugable principal seguía funcionando con normalidad.
 
 Los \textit{playtests} de la Tabla~\ref{tab:iteracion4-pruebas} fueron especialmente útiles
 en esta fase, porque no solo validaron que el HUD fuera legible y que los menús respondieran
-de forma estable, sino que también permitieron detectar incidencias concretas de interacción y
-presentación. Estas incidencias se resolvieron dentro de la propia iteración, lo que evitó
-arrastrar deuda visible y redujo el riesgo de que la capa de interfaz quedara cerrada solo en
-apariencia. En este sentido, no fue necesario dividir ni posponer funcionalidades: los cambios
-aceptados permanecieron dentro del alcance previsto y la separación entre menú de pausa y menú
-principal siguió respondiendo a criterios de trazabilidad y responsabilidad funcional.
+de forma estable, sino que también permitieron detectar incidencias concretas de interacción,
+presentación y acoplamiento entre vida, alma, recuperación y arma activa. Estas incidencias
+se resolvieron dentro de la propia iteración, lo que evitó arrastrar deuda visible y redujo
+el riesgo de que la capa de interfaz quedara cerrada solo en apariencia. En este sentido, no
+fue necesario dividir ni posponer funcionalidades: los cambios aceptados permanecieron dentro
+del alcance previsto y la separación entre menú de pausa y menú principal siguió respondiendo
+a criterios de trazabilidad y responsabilidad funcional.
 
 En términos de cronograma sí apareció una desviación moderada. La Tabla~\ref{tab:iteracion4-horas}
 recoge que, frente a las 50:00 horas planificadas, la iteración consumió 55:36 horas reales.

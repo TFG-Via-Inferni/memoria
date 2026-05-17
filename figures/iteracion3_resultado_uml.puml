@@ -66,6 +66,7 @@ class Player {
 class PlayerStats {
   +GetSelectedWeaponIndex()
   +GetSelectedWeaponId()
+  +GetFinalDamage()
 }
 
 class MinimapUIController
@@ -98,7 +99,7 @@ RoomCameraController --> Player : sigue objetivo
 
 Player --> PlayerStats : comparte estado
 CircleUI --> Player : muestra forma activa
-CircleUI --> PlayerStats : muestra arma activa
+CircleUI --> PlayerStats : muestra arma activa / stats
 
 MinimapUIController --> MapGenerator : consulta salas
 MinimapUIController --> Cell : representa descubrimiento

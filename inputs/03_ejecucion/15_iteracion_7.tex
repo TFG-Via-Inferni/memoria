@@ -31,7 +31,7 @@ salas terminales, sino que incorpora también el comportamiento jugable de compr
 La sala cuenta con tipo de sala diferenciado, soportes de tienda configurados e interacción
 directa con el jugador para adquirir contenido usando alma como recurso. Con ello, la tienda
 pasa a comportarse como una categoría espacial y económica propia dentro de la estructura
-procedural del nivel.
+procedural del nivel, con precios diferenciados según la rareza de los objetos ofrecidos.
 
 \item \textbf{Sala Secreta y Tesoro.} Esta funcionalidad amplía la distribución de salas
 especiales con espacios que no siguen exactamente las mismas reglas de acceso que las salas
@@ -49,9 +49,13 @@ iteración introduce ataques cargados para armas que lo requieren, proyectiles c
 comportamiento más sofisticado y apoyo visual específico tanto en ataques cuerpo a cuerpo
 como en proyectiles. Además, el sistema mantiene el contexto del arma y de la forma activa
 del jugador durante el ataque, lo que facilita que otros componentes interpreten el impacto
-con mayor precisión. En la práctica, esta ampliación hace que el combate se perciba como un
-sistema más expresivo, con mejor retroalimentación y con una conexión más sólida entre
-entrada, ataque y efecto producido en pantalla.
+con mayor precisión. Junto a ello se introduce la recuperación de alma al golpear enemigos,
+de manera que el combate pasa a alimentar directamente un recurso que funciona tanto como
+medio de compra en la tienda como mecanismo para recuperar vida del jugador.
+
+En la práctica, esta ampliación hace que el combate se perciba como un sistema más expresivo,
+con mejor retroalimentación y con una conexión más sólida entre entrada, ataque, obtención de
+alma y efecto producido en pantalla.
 
 \item \textbf{Sistema de Enemigos II.} Esta funcionalidad profundiza en el comportamiento
 enemigo sobre la base ya creada anteriormente. Su alcance real consiste en diferenciar con
@@ -87,7 +91,9 @@ Este enfoque hace que la tienda forme parte natural del reparto del recorrido y 
 su identidad visual, estructural y funcional quede resuelta desde el propio generador de
 mapa. La decisión adicional fue tratar la compra como una interacción localizada sobre
 soportes concretos, de manera que el coste en alma y la obtención del objeto no dependieran
-de una interfaz abstracta separada de la propia sala.
+de una interfaz abstracta separada de la propia sala. También se decidió que el precio no
+fuera uniforme, sino que variara según la rareza del objeto, reforzando así la dimensión
+económica de la exploración y del combate.
 
 \subsection{Diseño de Sala Secreta y Tesoro}
 La lógica de estas salas se diseñó para reforzar la exploración y la recompensa. La sala de
@@ -114,6 +120,12 @@ También se dio importancia al \textit{feedback} visual del ataque. Si el sistem
 ser más expresivo, la respuesta en pantalla debía acompañar ese aumento de complejidad. Por
 eso, el diseño no se limita a parámetros de daño o alcance, sino que contempla también
 trazos, partículas y apoyos visuales ligados a la ejecución del ataque \cite{swink2008gamefeel}.
+
+Además, se decidió vincular el combate con la economía de alma de forma explícita. Esto
+permite que cada impacto exitoso contribuya al bucle de progresión, ya que el alma deja de
+ser solo un contador pasivo y pasa a sostener decisiones tácticas y económicas: recuperar
+vida o reservar recursos para comprar objetos en tienda, donde los precios varían según la
+rareza del contenido ofrecido.
 
 \subsection{Diseño de Sistema de Enemigos II}
 La decisión principal fue reforzar la identidad táctica de cada tipo de enemigo mediante
@@ -145,8 +157,9 @@ categoría distinta. Sobre esa base, \texttt{ShopManager} instancia los soportes
 selecciona los objetos disponibles priorizando contenido especial en la posición central y
 gestiona la compra con la tecla de interacción, descontando alma y entregando el objeto
 correspondiente. \texttt{ShopStand} encapsula el comportamiento de cada soporte, su
-colisionador y su vínculo con el ítem mostrado. Con ello, la tienda queda integrada no solo
-como sala diferenciada, sino como un espacio funcional de intercambio dentro de la partida.
+colisionador, su vínculo con el ítem mostrado y el precio asociado. Con ello, la tienda queda
+integrada no solo como sala diferenciada, sino como un espacio funcional de intercambio
+dentro de la partida, con costes ajustados a la rareza del contenido.
 
 La Figura~\ref{fig:iteracion7-feature-tienda} muestra el resultado visual de esta integración.
 
@@ -199,6 +212,12 @@ desplazamiento de proyectiles. El sistema conserva además el contexto completo 
 mediante \texttt{DamageSourceContext}, lo que permite conectar el golpe con otros sistemas
 que interpretan el impacto más allá del valor numérico del daño.
 
+Sobre esta misma base, la interacción entre combate y recursos se reforzó haciendo que el
+jugador recupere alma al golpear enemigos. Esa lógica enlaza el impacto con \texttt{PlayerStats}
+y convierte el alma en un recurso central del bucle jugable: sirve para recuperar vida y
+también para comprar objetos en la tienda. En ese sistema económico, los objetos no tienen un
+coste uniforme, sino que presentan precios distintos según su rareza.
+
 La Figura~\ref{fig:iteracion7-feature-combate} muestra el resultado de este refinamiento del combate.
 
 \begin{figure}[!htbp]
@@ -240,9 +259,9 @@ secreta y de tesoro, ataques cargados y nuevos patrones enemigos.
 
 Además, estas pruebas fueron útiles para encontrar errores concretos en la configuración de
 las salas especiales, tanto en tienda como en tesoro y sala secreta. También permitieron
-detectar ajustes necesarios en compras, soportes, muros rompibles, recuperación de alma y
-presentación de recompensas, mejorando su coherencia espacial y funcional dentro del
-recorrido.
+detectar ajustes necesarios en compras, precios por rareza, soportes, muros rompibles,
+recuperación de alma y presentación de recompensas, mejorando su coherencia espacial y
+funcional dentro del recorrido.
 
 \begin{table}[!htbp]
     \centering
@@ -250,11 +269,11 @@ recorrido.
     {Pruebas de playtest realizadas en la iteración 7}
     \textbf{Feature bajo Test} & \textbf{Descripción de la prueba realizada} \\
     \midrule
-    Sala Tienda & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas hasta localizar la tienda. \item Entrar, comprobar los soportes de objetos e intentar comprar usando alma mediante la tecla de interacción. \item Verificar que aparece como sala terminal diferenciada, que conserva puertas y muros coherentes, que descuenta el recurso correctamente y que entrega el objeto comprado sin romper el flujo de la partida.\end{enumerate}\end{minipage} \\
+    Sala Tienda & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas hasta localizar la tienda. \item Entrar, comprobar los soportes de objetos e intentar comprar usando alma mediante la tecla de interacción. \item Verificar que aparece como sala terminal diferenciada, que conserva puertas y muros coherentes, que descuenta el recurso correctamente, que aplica precios acordes a la rareza del objeto y que entrega la compra sin romper el flujo de la partida.\end{enumerate}\end{minipage} \\
     \midrule
     Sala Secreta y Tesoro & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Generar partidas con salas especiales. \item Localizar tesoro y sala secreta, romper el acceso oculto cuando corresponda e interactuar con sus elementos internos. \item Verificar su iconografía propia, que la secreta no se muestre como una sala regular, que los muros rompibles permiten el acceso, que la pila bautismal recupera alma y que la sala de tesoro entrega un objeto gratuito sin romper la navegación.\end{enumerate}\end{minipage} \\
     \midrule
-    Sistema de Combate II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Probar armas normales y cargadas en combate. \item Observar trazos, indicadores y proyectiles. \item Confirmar que el \textit{feedback}, el daño y el contexto del arma se mantienen correctamente.\end{enumerate}\end{minipage} \\
+    Sistema de Combate II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Probar armas normales y cargadas en combate golpeando distintos enemigos. \item Observar trazos, indicadores, proyectiles y la ganancia de alma asociada a los impactos. \item Confirmar que el \textit{feedback}, el daño, el contexto del arma y la recuperación de alma se mantienen correctamente, y que ese recurso puede emplearse después en curación o en compras de tienda con precios distintos según rareza.\end{enumerate}\end{minipage} \\
     \midrule
     Sistema de Enemigos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Entrar en salas con enemigos normales, voladores y tanque. \item Provocar sus distintos patrones de ataque. \item Verificar la legibilidad de avisos, su patrón táctico y la respuesta al arma del jugador.\end{enumerate}\end{minipage} \\
     \end{coolTable}

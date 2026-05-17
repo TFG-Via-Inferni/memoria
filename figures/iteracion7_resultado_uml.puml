@@ -61,6 +61,7 @@ class ShopManager {
 
 class ShopStand {
   +SetItem()
+  +TryPurchase()
 }
 
 class TreasureManager {
@@ -95,6 +96,7 @@ MeleeHitbox --> EnemyHealth : aplica dano
 Projectile --> EnemyHealth : aplica dano
 
 EnemyHealth --> EnemyController : notifica dano / muerte
+EnemyHealth --> PlayerStats : concede alma al golpear
 EnemyController --> CircleDefinition : consulta aparicion
 EnemyController --> Room : notifica limpieza
 
@@ -106,7 +108,7 @@ Room --> TreasureManager : integra sala tesoro
 Room --> BreakableWall : habilita acceso secreto
 Room --> BaptismalFont : integra recuperacion de alma
 
-ShopManager --> ShopStand : asigna objetos y precios
+ShopManager --> ShopStand : asigna objetos y precios por rareza
 ShopStand --> PlayerStats : cobra con alma
 TreasureManager --> TreasureStand : asigna recompensas
 TreasureStand --> Player : entrega item gratis

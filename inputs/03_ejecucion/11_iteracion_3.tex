@@ -42,15 +42,21 @@ se encuentra el jugador.
 
 \item \textbf{Dualidad de Personajes.} Esta funcionalidad introdujo la primera versión
 realmente jugable del sistema de dualidad, modelándolo como un cambio entre dos formas de
-combate complementarias: una forma cuerpo a cuerpo y una forma a distancia. Su
-comportamiento real no consistía en duplicar personajes independientes, sino en permitir
-que el mismo jugador alterne entre dos estados con identidad visual propia, manteniendo
-estadísticas compartidas y sujeto a un tiempo de reutilización para evitar cambios
-instantáneos sin coste. La feature integra, por tanto, tres piezas: la representación de la
-forma actual, la lógica de intercambio con \textit{cooldown} y la persistencia del estado
-compartido entre ambas variantes. Con ello se consigue que la dualidad deje de ser una idea
-de diseño y pase a actuar como una mecánica concreta de juego sobre la que podrán apoyarse
-futuras habilidades, sistemas de combate y decisiones tácticas.
+combate complementarias: Dante, orientado al cuerpo a cuerpo, y Virgilio, orientado al
+combate a distancia. Su comportamiento real no consistía en duplicar personajes
+independientes, sino en permitir que el mismo jugador alterne entre dos estados con
+identidad visual propia, manteniendo estadísticas compartidas y sujeto a un tiempo de
+reutilización para evitar cambios instantáneos sin coste.
+
+La feature integra, por tanto, cuatro piezas: la representación de la forma actual, la
+lógica de intercambio con \textit{cooldown}, la persistencia del estado compartido entre
+ambas variantes y la selección entre tres armas distintas para cada personaje. En esa
+distribución, Dante queda definido como una forma puramente de melé, mientras que Virgilio
+queda asociado a armas de rango. Las estadísticas compartidas entre ambas formas son vida,
+daño, probabilidad de esquiva, probabilidad de crítico y velocidad de movimiento. Con ello
+se consigue que la dualidad deje de ser una idea de diseño y pase a actuar como una mecánica
+concreta de juego sobre la que podrán apoyarse futuras habilidades, sistemas de combate y
+decisiones tácticas.
 
 \item \textbf{Minimapa.} Esta funcionalidad incorporó una primera versión muy simple del
 minimapa orientada a cubrir una necesidad básica de orientación. Su funcionamiento real se
@@ -97,12 +103,14 @@ completamente independientes. Esta decisión resultaba más coherente con el est
 proyecto, porque permitía introducir la mecánica sin duplicar toda la lógica del jugador ni
 forzar todavía un sistema complejo de persistencia externa.
 
-Sobre esa base se definieron dos principios. El primero, que ambas formas debían compartir
-el estado fundamental del personaje, especialmente la salud, los recursos y la capacidad
-básica de movimiento. El segundo, que el intercambio debía tener una restricción temporal,
-de modo que el cambio no se convierta en una acción sin coste ni ritmo. También se decidió
-dar a cada forma una representación visual diferenciada para que el cambio fuera legible de
-inmediato dentro de la partida.
+Sobre esa base se definieron tres principios. El primero, que ambas formas debían compartir
+el estado fundamental del personaje, especialmente vida, daño, probabilidad de esquiva,
+probabilidad de crítico y velocidad de movimiento. El segundo, que el intercambio debía
+tener una restricción temporal, de modo que el cambio no se convierta en una acción sin
+coste ni ritmo. El tercero, que cada personaje debía disponer de su propio conjunto de tres
+armas seleccionables, reforzando la identidad de Dante como forma de melé y de Virgilio como
+forma de rango. También se decidió dar a cada forma una representación visual diferenciada
+para que el cambio fuera legible de inmediato dentro de la partida.
 
 \subsection{Diseño de Minimapa}
 El minimapa se planteó como una proyección simplificada del propio modelo del nivel. La
@@ -158,9 +166,15 @@ independientes para cada estado.
 
 La lógica de cambio se articula en torno a una acción específica de entrada que solicita el
 intercambio, comprueba si el \textit{cooldown} ha expirado y, si procede, activa la forma
-contraria. Paralelamente, el jugador mantiene estadísticas compartidas, como salud,
-recurso máximo y daño base, de modo que el cambio de forma altera la representación y el
-estado táctico, pero no rompe la continuidad del personaje.
+contraria. Paralelamente, el jugador mantiene estadísticas compartidas, como vida, daño,
+probabilidad de esquiva, probabilidad de crítico y velocidad de movimiento, de modo que el
+cambio de forma altera la representación y el estado táctico, pero no rompe la continuidad
+del personaje.
+
+Sobre esta misma base, \texttt{PlayerStats} pasó a gestionar la selección de arma activa para
+cada personaje, habilitando tres armas diferenciadas por forma. En la práctica, esto permite
+que Dante opere siempre dentro del espacio de combate cuerpo a cuerpo y que Virgilio lo haga
+desde la distancia, sin convertir el cambio de personaje en una mera variación cosmética.
 
 También se añadió un evento de cambio de forma, lo que deja preparada la posibilidad de que
 otros sistemas reaccionen a la dualidad en iteraciones posteriores. Aunque en esta fase la
@@ -220,7 +234,7 @@ presentación visual y contenido generado.
     \midrule
     Lógica de Círculos II & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Descender de círculo mediante la escalera de la sala del jefe. \item Explorar la nueva mazmorra generada. \item Comprobar que las salas y enemigos corresponden al contenido configurado para el círculo activo y que el cambio no mantiene contenido residual del círculo anterior.\end{enumerate}\end{minipage} \\
     \midrule
-    Dualidad de Personajes & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar la partida con el jugador en su forma inicial. \item Ejecutar el cambio de forma y repetirlo antes y después del tiempo de reutilización. \item Verificar que cambia la representación visual, que las estadísticas compartidas se conservan y que el \textit{cooldown} impide alternancias inmediatas.\end{enumerate}\end{minipage} \\
+    Dualidad de Personajes & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Iniciar la partida con el jugador en su forma inicial y probar la selección de sus tres armas disponibles. \item Ejecutar el cambio de forma y repetirlo antes y después del tiempo de reutilización, comprobando también la selección de armas en la segunda forma. \item Verificar que cambia la representación visual, que Dante mantiene un enfoque puramente de melé, que Virgilio actúa a distancia, que las estadísticas compartidas se conservan y que el \textit{cooldown} impide alternancias inmediatas.\end{enumerate}\end{minipage} \\
     \midrule
     Minimapa & \begin{minipage}[t]{\linewidth}\begin{enumerate}\item Comenzar una nueva partida y observar el minimapa inicial. \item Entrar por primera vez en varias habitaciones. \item Confirmar que la sala inicial aparece visible desde el comienzo y que las nuevas salas se revelan progresivamente al ser descubiertas.\end{enumerate}\end{minipage} \\
     \end{coolTable}
@@ -238,14 +252,14 @@ compilación estable en Unity, la integración con la generación y la cámara y
 correcta, y la revisión cruzada junto con los \textit{playtests} de la
 Tabla~\ref{tab:iteracion3-pruebas} confirmó que el recorrido jugable seguía siendo coherente.
 
-Las pruebas realizadas, centradas en recorrer círculos, alternar personajes y consultar el
-minimapa, mostraron que dualidad y progresión ofrecían el comportamiento esperado, pero
-también evidenciaron que el minimapa todavía debía mejorar en representación, integración con
-la cámara y encaje con el resto de la interfaz. Esa incidencia no llegó a convertirse en un
-bloqueo, pero sí confirmó un riesgo importante: algunos sistemas de interfaz dependían de una
-base previa más madura para cerrarse con calidad real. Por ello, se optó por aceptar el
-minimapa como incremento funcional mínimo y reservar una segunda iteración de mejora en lugar
-de forzar un cierre artificial.
+Las pruebas realizadas, centradas en recorrer círculos, alternar personajes, seleccionar sus
+armas y consultar el minimapa, mostraron que dualidad y progresión ofrecían el comportamiento
+esperado, pero también evidenciaron que el minimapa todavía debía mejorar en representación,
+integración con la cámara y encaje con el resto de la interfaz. Esa incidencia no llegó a
+convertirse en un bloqueo, pero sí confirmó un riesgo importante: algunos sistemas de
+interfaz dependían de una base previa más madura para cerrarse con calidad real. Por ello,
+se optó por aceptar el minimapa como incremento funcional mínimo y reservar una segunda
+iteración de mejora en lugar de forzar un cierre artificial.
 
 En términos temporales, la iteración registró una desviación pequeña y asumible. La
 Tabla~\ref{tab:iteracion3-horas} recoge que, frente a las 50:00 horas previstas, se emplearon
